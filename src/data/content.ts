@@ -67,7 +67,7 @@ export const stories: Article[] = [
     readTime: "5 min",
     format: "texto",
     image:
-      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop",
+      "/images/gallon-vias-seguridad.jpg",
     featured: true,
   },
   {
@@ -80,7 +80,7 @@ export const stories: Article[] = [
     readTime: "7 min",
     format: "fotografia",
     image:
-      "https://images.unsplash.com/photo-1504567961542-e24d9439a724?w=800&h=600&fit=crop",
+      "/images/gallon-conversacion-rural.jpg",
     featured: false,
   },
   {
@@ -93,7 +93,7 @@ export const stories: Article[] = [
     readTime: "4 min",
     format: "video",
     image:
-      "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?w=800&h=600&fit=crop",
+      "/images/gallon-caminando-obra.jpg",
     featured: false,
   },
   {
@@ -106,7 +106,7 @@ export const stories: Article[] = [
     readTime: "6 min",
     format: "audio",
     image:
-      "https://images.unsplash.com/photo-1447933601403-0c6227db76b6e?w=800&h=600&fit=crop",
+      "/images/gallon-evento-banderas.jpg",
     featured: false,
   },
   {
@@ -119,7 +119,7 @@ export const stories: Article[] = [
     readTime: "8 min",
     format: "texto",
     image:
-      "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&h=600&fit=crop",
+      "/images/gallon-tunel-moso.jpg",
     featured: false,
   },
   {
@@ -132,7 +132,7 @@ export const stories: Article[] = [
     readTime: "5 min",
     format: "fotografia",
     image:
-      "https://images.unsplash.com/photo-1531983412531-1f49a365ffed?w=800&h=600&fit=crop",
+      "/images/gallon-discurso.jpg",
     featured: false,
   },
 ];
@@ -163,7 +163,7 @@ export const featuredReflection: BlogPost = {
   date: "2025-03-15",
   readTime: "6 min",
   image:
-    "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&h=600&fit=crop",
+    "/images/gallon-entrevista-medellin.jpg",
 };
 
 // ---------------------------------------------------------------------------
@@ -180,7 +180,7 @@ export const blogPosts: BlogPost[] = [
     date: "2025-03-15",
     readTime: "6 min",
     image:
-      "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&h=600&fit=crop",
+      "/images/gallon-entrevista-medellin.jpg",
   },
   {
     slug: "gobernar-tambien-es-saber-esperar",
@@ -191,7 +191,7 @@ export const blogPosts: BlogPost[] = [
     date: "2025-02-28",
     readTime: "5 min",
     image:
-      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=600&fit=crop",
+      "/images/gallon-discurso.jpg",
   },
   {
     slug: "las-carreteras-conectan-suenos",
@@ -202,7 +202,7 @@ export const blogPosts: BlogPost[] = [
     date: "2025-02-10",
     readTime: "4 min",
     image:
-      "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&h=600&fit=crop",
+      "/images/gallon-vias-seguridad.jpg",
   },
   {
     slug: "hacer-lo-impensable",
@@ -213,7 +213,7 @@ export const blogPosts: BlogPost[] = [
     date: "2025-01-20",
     readTime: "7 min",
     image:
-      "https://images.unsplash.com/photo-1474487548417-781cb71495f3?w=800&h=600&fit=crop",
+      "/images/gallon-tunel-mar.jpg",
   },
   {
     slug: "recorrer-antioquia-a-pie",
@@ -224,7 +224,7 @@ export const blogPosts: BlogPost[] = [
     date: "2024-12-15",
     readTime: "5 min",
     image:
-      "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=600&fit=crop",
+      "/images/gallon-conversacion-rural.jpg",
   },
 ];
 
@@ -301,7 +301,7 @@ export const episodes: Episode[] = [
       "Conversamos con María Eugenia sobre las realidades del campo antioqueño: la lucha por la conectividad, el acceso a mercados y las oportunidades que se abren cuando la infraestructura llega a las veredas.",
     format: ["Video", "Podcast"],
     image:
-      "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&h=600&fit=crop",
+      "/images/gallon-conversacion-rural.jpg",
   },
   {
     number: 2,
@@ -312,7 +312,7 @@ export const episodes: Episode[] = [
       "Carolina nos comparte su experiencia como alcaldesa joven, los retos de gobernar con recursos limitados y cómo una nueva generación de líderes está transformando la política local en Antioquia.",
     format: ["Video", "Podcast", "Resumen escrito"],
     image:
-      "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=800&h=600&fit=crop",
+      "/images/gallon-reunion-biblioteca.jpg",
   },
   {
     number: 3,
@@ -323,7 +323,7 @@ export const episodes: Episode[] = [
       "Jorge Alberto habla sobre la relación directa entre infraestructura y competitividad empresarial, y cómo los corredores viales están abriendo nuevas oportunidades de negocio en las subregiones.",
     format: ["Video", "Podcast"],
     image:
-      "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&h=600&fit=crop",
+      "/images/gallon-caminando-obra.jpg",
   },
   {
     number: 4,
@@ -334,7 +334,7 @@ export const episodes: Episode[] = [
       "Ana María analiza las tendencias de desarrollo territorial en Antioquia, el impacto del Tren Multipropósito y los desafíos que enfrenta el departamento para lograr un crecimiento equilibrado entre sus subregiones.",
     format: ["Podcast", "Resumen escrito"],
     image:
-      "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800&h=600&fit=crop",
+      "/images/gallon-evento-banderas.jpg",
   },
 ];
 
@@ -349,7 +349,7 @@ export const guestColumns: GuestColumn[] = [
     authorRole: "Empresario agroindustrial",
     authorCategory: "Empresario",
     authorImage:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop",
+      "/images/gallon-evento-banderas.jpg",
     title: "El camino del emprendedor rural",
     excerpt:
       "En Urabá aprendimos que el desarrollo económico no nace en las oficinas de Medellín, sino en las fincas, los caminos destapados y las cooperativas que mueven el banano hasta el puerto. La infraestructura es el habilitador silencioso de todo lo que hacemos.",
@@ -363,7 +363,7 @@ export const guestColumns: GuestColumn[] = [
     authorRole: "Presidenta JAC vereda El Carmelo, Urrao",
     authorCategory: "Líder Social",
     authorImage:
-      "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&h=200&fit=crop",
+      "/images/gallon-familia-grande.jpg",
     title: "La comunidad que no espera",
     excerpt:
       "Cuando el Estado tarda, la comunidad se organiza. Pero cuando el Estado llega de verdad — con obras, con presencia, con escucha — todo cambia. En nuestra vereda pasamos de juntar piedras para tapar huecos a tener una placa huella que nos conecta con el pueblo.",
@@ -377,7 +377,7 @@ export const guestColumns: GuestColumn[] = [
     authorRole: "Rectora I.E. Rural Nutibara, Frontino",
     authorCategory: "Rectora",
     authorImage:
-      "https://images.unsplash.com/photo-1594824476967-48c8b964f212?w=200&h=200&fit=crop",
+      "/images/gallon-reunion-biblioteca.jpg",
     title: "Educación sin aislamiento",
     excerpt:
       "Cada invierno perdíamos semanas enteras de clase porque los niños no podían cruzar el río. Hoy, con el puente nuevo y la vía mejorada, la asistencia subió un 30 %. La infraestructura no es un lujo — es una condición para que la educación funcione.",
@@ -392,7 +392,7 @@ export const guestColumns: GuestColumn[] = [
       "Investigador en desarrollo territorial, Universidad de Antioquia",
     authorCategory: "Investigador",
     authorImage:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop",
+      "/images/gallon-familia-intima.jpg",
     title: "Datos para decidir mejor",
     excerpt:
       "Antioquia necesita más que buenas intenciones: necesita datos, indicadores y seguimiento riguroso. La inversión en infraestructura debe medirse no solo en kilómetros construidos, sino en vidas transformadas, tiempos de desplazamiento reducidos y oportunidades económicas creadas.",

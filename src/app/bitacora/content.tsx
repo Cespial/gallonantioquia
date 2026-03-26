@@ -14,7 +14,7 @@ export default function BitacoraContent() {
       <PageHero
         title="Bit&aacute;cora de Camino"
         subtitle="Reflexiones de Horacio Gall&oacute;n sobre liderazgo, servicio p&uacute;blico y el camino que se hace al andar."
-        backgroundImage="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1920&h=600&fit=crop"
+        backgroundImage="/images/gallon-caminando-obra.jpg"
       />
 
       <SectionWrapper>

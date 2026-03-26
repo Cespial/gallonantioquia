@@ -65,8 +65,8 @@ export default function Home() {
         <div className="w-full lg:w-5/12 relative min-h-[50vh] lg:min-h-full">
           <div className="absolute inset-0 bg-verde-antioquia/10 lg:clip-path-editorial">
             <img
-              src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=1600&fit=crop"
-              alt="Montañas de Antioquia"
+              src="/images/gallon-tunel-mar.jpg"
+              alt="Túnel Más cerca del mar de Antioquia"
               className="object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-1000 ease-in-out"
             />
           </div>
@@ -221,7 +221,7 @@ export default function Home() {
                 <div className="absolute inset-0 bg-verde-antioquia mix-blend-multiply opacity-0 group-hover:opacity-20 transition-opacity duration-500 z-10" />
                 <div className="aspect-video overflow-hidden border-editorial-thin shadow-2xl">
                   <img
-                    src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=1200&h=675&fit=crop"
+                    src="/images/gallon-conversacion-rural.jpg"
                     alt={episodes[0].title}
                     className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-110 group-hover:scale-100"
                   />

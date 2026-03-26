@@ -87,7 +87,7 @@ export default function SobreContent() {
           <FadeIn direction="left">
             <div className="w-full max-w-md aspect-[3/4] rounded-card overflow-hidden mx-auto lg:mx-0">
               <img
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop"
+                src="/images/gallon-retrato-casco.jpg"
                 alt="Luis Horacio Gallon Arango"
                 className="w-full h-full object-cover"
               />
