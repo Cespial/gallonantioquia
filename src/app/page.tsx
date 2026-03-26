@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ChevronDown, ArrowRight, Coffee } from "lucide-react";
+import { ArrowRight, Coffee } from "lucide-react";
 
 import SectionWrapper from "@/components/layout/SectionWrapper";
-import ArticleCard from "@/components/content/ArticleCard";
 import AuthorCard from "@/components/content/AuthorCard";
 import StatCounter from "@/components/content/StatCounter";
 import NewsletterForm from "@/components/content/NewsletterForm";
@@ -17,7 +16,6 @@ import {
   guestColumns,
   ideas,
 } from "@/data/content";
-import { formatDate } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Gallón Antioquia — Conversaciones para Antioquia",
@@ -255,7 +253,7 @@ export default function Home() {
 
                 <div className="flex gap-4">
                   <Button variant="outline" href="/un-cafe/1">Ver Entrevista</Button>
-                  <Button variant="ghost" href="/un-cafe" className="font-ui text-xs uppercase tracking-widest font-bold">Ver todos &rarr;</Button>
+                  <Button variant="outline" href="/un-cafe" className="font-ui text-xs uppercase tracking-widest font-bold">Ver todos &rarr;</Button>
                 </div>
               </div>
             </div>
