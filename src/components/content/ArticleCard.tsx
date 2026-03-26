@@ -38,7 +38,6 @@ export default function ArticleCard({
   readTime,
   format,
   image,
-  featured,
   basePath,
 }: ArticleCardProps) {
   const FormatIcon = formatIcons[format];
@@ -48,56 +47,50 @@ export default function ArticleCard({
     <Link href={href} className="block group">
       <article
         className={cn(
-          "bg-blanco-calido rounded-card overflow-hidden border border-borde/50 shadow-sm",
-          "transition-all duration-300",
-          "hover:shadow-md hover:-translate-y-0.5"
+          "bg-blanco-calido overflow-hidden border-editorial-thin shadow-sm",
+          "transition-all duration-500",
+          "hover:shadow-editorial hover:-translate-y-1"
         )}
       >
-        {/* Image */}
-        <div className="overflow-hidden rounded-t-card relative">
+        {/* Image with subtle zoom and overlay */}
+        <div className="overflow-hidden relative aspect-[16/10]">
           <img
             src={image}
             alt={title}
-            className={cn(
-              "w-full object-cover transition-transform duration-500 group-hover:scale-105",
-              featured ? "aspect-[16/9]" : "aspect-[16/10]"
-            )}
+            className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 group-hover:rotate-1"
           />
-          {/* Format badge */}
-          <span className="absolute top-3 right-3 flex items-center gap-1.5 bg-oscuro/70 backdrop-blur-sm text-white text-xs font-ui font-semibold px-2.5 py-1 rounded-full">
-            <FormatIcon className="w-3.5 h-3.5" />
+          <div className="absolute inset-0 bg-verde-antioquia/5 group-hover:bg-transparent transition-colors duration-500" />
+          
+          {/* Format badge - more minimal */}
+          <span className="absolute top-4 left-4 flex items-center gap-1.5 bg-blanco-calido/90 backdrop-blur-sm text-oscuro text-[10px] uppercase tracking-widest font-ui font-bold px-3 py-1.5 border border-borde">
+            <FormatIcon className="w-3 h-3" />
             {formatLabels[format]}
           </span>
         </div>
 
         {/* Content */}
-        <div className="p-5">
-          <span className="uppercase text-xs font-ui tracking-label text-verde-antioquia font-semibold">
-            {category}
-          </span>
+        <div className="p-8">
+          <div className="flex items-center gap-2 mb-4">
+            <span className="w-8 h-px bg-dorado-tierra/40" />
+            <span className="uppercase text-[10px] font-ui tracking-widest-editorial text-dorado-tierra font-bold">
+              {category}
+            </span>
+          </div>
 
-          <h3
-            className={cn(
-              "font-heading font-bold mt-2 text-texto-principal transition-colors duration-200 group-hover:text-verde-antioquia",
-              featured ? "text-xl md:text-2xl" : "text-lg"
-            )}
-          >
+          <h3 className="font-display text-2xl mb-4 text-texto-principal group-hover:text-verde-antioquia transition-colors duration-300 leading-tight">
             {title}
           </h3>
 
-          <p
-            className={cn(
-              "font-body text-sm text-texto-secundario mt-2 line-clamp-2",
-              featured && "md:text-base md:line-clamp-3"
-            )}
-          >
+          <p className="font-body text-sm text-texto-secundario mb-6 line-clamp-2 leading-relaxed italic">
             {excerpt}
           </p>
 
-          <div className="flex items-center gap-3 mt-4 text-xs text-texto-terciario font-ui">
-            <time>{date}</time>
-            <span aria-hidden="true" className="w-1 h-1 rounded-full bg-texto-terciario/50" />
-            <span>{readTime}</span>
+          <div className="pt-6 border-t border-borde/50 flex items-center justify-between text-[10px] text-texto-terciario font-ui uppercase tracking-widest">
+            <div className="flex items-center gap-4">
+               <time>{date}</time>
+               <span>{readTime}</span>
+            </div>
+            <span className="text-verde-antioquia font-bold group-hover:translate-x-1 transition-transform inline-block">LEER &rarr;</span>
           </div>
         </div>
       </article>

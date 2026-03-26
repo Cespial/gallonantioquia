@@ -64,7 +64,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    opacity: 0.03;
+    opacity: 0.04;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
     background-repeat: repeat;
     background-size: 256px 256px;
@@ -72,11 +72,45 @@
     z-index: 1;
   }
 
+  /* Editorial Borders */
+  .border-editorial-thin {
+    border: 1px solid var(--borde);
+  }
+
+  .border-editorial-double {
+    position: relative;
+    border-top: 3px solid var(--texto-principal);
+    padding-top: 4px;
+  }
+
+  .border-editorial-double::before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: var(--texto-principal);
+  }
+
+  /* Typography */
+  .drop-cap::first-letter {
+    font-family: var(--font-playfair);
+    font-weight: 900;
+    float: left;
+    font-size: 4.5rem;
+    line-height: 0.8;
+    margin-right: 0.75rem;
+    margin-top: 0.5rem;
+    color: var(--verde-antioquia);
+  }
+
   .prose-editorial {
     font-family: var(--font-source-serif);
     font-size: 1.125rem;
-    line-height: 1.85;
+    line-height: 1.9;
     color: var(--texto-principal);
+    max-width: 65ch;
   }
 
   .prose-editorial p {
@@ -124,6 +158,22 @@
   .prose-editorial a:hover {
     color: var(--verde-claro);
   }
+
+  /* Grainy Gradients */
+  .grainy-dark {
+    background: linear-gradient(135deg, var(--oscuro-verde), var(--oscuro));
+    position: relative;
+  }
+
+  .grainy-dark::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.05;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+  }
 }
 
 @layer utilities {
@@ -131,8 +181,12 @@
     text-wrap: balance;
   }
 
-  .tracking-label {
-    letter-spacing: 0.05em;
+  .tracking-widest-editorial {
+    letter-spacing: 0.25em;
+  }
+
+  .shadow-editorial {
+    box-shadow: 20px 20px 60px rgba(0, 0, 0, 0.05), -20px -20px 60px rgba(255, 255, 255, 0.8);
   }
 }
 
