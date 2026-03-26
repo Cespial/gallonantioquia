@@ -67,15 +67,15 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="group flex flex-col items-center lg:items-start">
             <div className="flex items-baseline gap-1">
-              <span className="font-display font-black text-2xl tracking-tighter text-verde-antioquia group-hover:text-oscuro transition-colors">
-                GALLON
+              <span className="font-brand font-black text-2xl tracking-tighter text-verde-antioquia group-hover:text-oscuro transition-colors">
+                GALLÓN
               </span>
-              <span className="font-display font-black text-2xl tracking-tighter text-dorado-tierra group-hover:text-verde-antioquia transition-colors">
+              <span className="font-brand font-black text-2xl tracking-tighter text-dorado-tierra group-hover:text-verde-antioquia transition-colors">
                 ANTIOQUIA
               </span>
             </div>
             {!shrink && (
-              <span className="hidden lg:block font-ui text-[8px] uppercase tracking-[0.4em] text-texto-terciario -mt-1 pl-0.5">
+              <span className="hidden lg:block font-accent text-[8px] uppercase tracking-[0.4em] text-texto-terciario -mt-1 pl-0.5">
                 Territorio & Liderazgo
               </span>
             )}
@@ -146,10 +146,10 @@ export default function Header() {
             className="flex items-baseline gap-1"
             onClick={() => setMobileOpen(false)}
           >
-            <span className="font-display font-black text-lg text-verde-antioquia">
-              GALLON
+            <span className="font-brand font-black text-lg text-verde-antioquia">
+              GALLÓN
             </span>
-            <span className="font-display font-black text-lg text-dorado-tierra">
+            <span className="font-brand font-black text-lg text-dorado-tierra">
               ANTIOQUIA
             </span>
           </Link>

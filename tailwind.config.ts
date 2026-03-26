@@ -25,9 +25,12 @@ const config: Config = {
       },
       fontFamily: {
         display: ["var(--font-playfair)"],
-        heading: ["var(--font-dm-sans)"],
+        heading: ["var(--font-myriad)"],
         body: ["var(--font-source-serif)"],
-        ui: ["var(--font-dm-sans)"],
+        ui: ["var(--font-myriad)"],
+        brand: ["var(--font-jacked)"],
+        accent: ["var(--font-thorce)"],
+        sans: ["var(--font-myriad)"],
       },
       fontSize: {
         hero: ["clamp(2.5rem, 5vw, 4.5rem)", { lineHeight: "1.1", fontWeight: "900" }],

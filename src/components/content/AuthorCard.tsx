@@ -24,6 +24,14 @@ export default function AuthorCard({
   slug,
   pullQuote,
 }: AuthorCardProps) {
+  // Extract initials from author name (first + last)
+  const initials = authorName
+    .split(" ")
+    .map((n) => n[0])
+    .filter((_, i, arr) => i === 0 || i === arr.length - 1)
+    .join("")
+    .toUpperCase();
+
   const content = (
     <article
       className={cn(
@@ -34,11 +42,17 @@ export default function AuthorCard({
     >
       {/* Author section */}
       <div className="flex items-center gap-4">
-        <img
-          src={authorImage}
-          alt={authorName}
-          className="w-16 h-16 rounded-full object-cover border-2 border-borde/30"
-        />
+        {authorImage && !authorImage.includes("gallon-") ? (
+          <img
+            src={authorImage}
+            alt={authorName}
+            className="w-16 h-16 rounded-full object-cover border-2 border-borde/30"
+          />
+        ) : (
+          <div className="w-16 h-16 rounded-full bg-verde-antioquia flex items-center justify-center flex-shrink-0">
+            <span className="font-brand text-white text-lg">{initials}</span>
+          </div>
+        )}
         <div>
           <h4 className="font-heading font-bold text-texto-principal">{authorName}</h4>
           <p className="text-sm text-texto-terciario font-ui">{authorRole}</p>

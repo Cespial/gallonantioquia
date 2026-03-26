@@ -13,9 +13,9 @@ const legalLinks = [
 ];
 
 const socialLinks = [
-  { label: "Twitter / X", href: "https://twitter.com" },
-  { label: "Instagram", href: "https://instagram.com" },
-  { label: "YouTube", href: "https://youtube.com" },
+  { label: "Twitter / X", href: "https://twitter.com/GallonHoracio" },
+  { label: "Instagram", href: "https://instagram.com/gallonantioquia" },
+  { label: "YouTube", href: "https://youtube.com/@gallonantioquia" },
 ];
 
 export default function Footer() {
@@ -44,10 +44,10 @@ export default function Footer() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 pb-12 border-b border-white/10">
             <div>
               <div className="flex items-baseline gap-1.5 mb-4">
-                <span className="font-display font-black text-xl text-white">
-                  GALLON
+                <span className="font-brand font-black text-xl text-white">
+                  GALLÓN
                 </span>
-                <span className="font-display font-black text-xl text-dorado-tierra">
+                <span className="font-brand font-black text-xl text-dorado-tierra">
                   ANTIOQUIA
                 </span>
               </div>
@@ -162,7 +162,7 @@ export default function Footer() {
           {/* Bottom: Copyright */}
           <div className="pt-8 border-t border-white/10 text-center">
             <p className="font-ui text-xs text-white/50">
-              &copy; 2025 Gallon Antioquia. Hecho con amor por Antioquia.
+              &copy; 2024&ndash;2026 Gallón Antioquia. Hecho con amor por Antioquia.
             </p>
           </div>
         </div>

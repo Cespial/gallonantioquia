@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Playfair_Display, DM_Sans, Source_Serif_4 } from "next/font/google";
+import { Playfair_Display, Source_Serif_4 } from "next/font/google";
+import localFont from "next/font/local";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import "./globals.css";
@@ -11,17 +12,28 @@ const playfair = Playfair_Display({
   display: "swap",
 });
 
-const dmSans = DM_Sans({
-  subsets: ["latin"],
-  variable: "--font-dm-sans",
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
-
 const sourceSerif = Source_Serif_4({
   subsets: ["latin"],
   variable: "--font-source-serif",
   weight: ["400", "600"],
+  display: "swap",
+});
+
+const jacked = localFont({
+  src: "../fonts/Jacked_Font.ttf",
+  variable: "--font-jacked",
+  display: "swap",
+});
+
+const thorce = localFont({
+  src: "../fonts/Thorce.otf",
+  variable: "--font-thorce",
+  display: "swap",
+});
+
+const myriadPro = localFont({
+  src: "../fonts/MyriadPro-Regular.otf",
+  variable: "--font-myriad",
   display: "swap",
 });
 
@@ -71,7 +83,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body
-        className={`${playfair.variable} ${dmSans.variable} ${sourceSerif.variable} font-body antialiased bg-arena text-texto-principal`}
+        className={`${playfair.variable} ${sourceSerif.variable} ${jacked.variable} ${thorce.variable} ${myriadPro.variable} font-body antialiased bg-arena text-texto-principal`}
       >
         <Header />
         <main>{children}</main>

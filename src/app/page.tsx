@@ -26,6 +26,23 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: "Gallón Antioquia",
+            url: "https://www.gallonantioquia.com",
+            description: "Una plataforma de pensamiento, territorio y liderazgo para Antioquia.",
+            author: {
+              "@type": "Person",
+              name: "Luis Horacio Gallón Arango",
+              jobTitle: "Secretario de Infraestructura Física de Antioquia",
+            },
+          }),
+        }}
+      />
       {/* ------------------------------------------------------------------ */}
       {/* 1. Premium Editorial Hero                                           */}
       {/* ------------------------------------------------------------------ */}
