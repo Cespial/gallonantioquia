@@ -46,30 +46,20 @@ export default function Home() {
       {/* ================================================================== */}
       {/* 1. HERO — Full-bleed, candidato como protagonista absoluto         */}
       {/* ================================================================== */}
-      <section className="relative min-h-screen overflow-hidden">
-        {/* Background: video/image full-bleed */}
+      <section className="relative h-[100svh] overflow-hidden">
+        {/* Background: static image (animate with Google Flow later) */}
         <div className="absolute inset-0">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            poster="/images/hero-gallon-montanas.jpg"
+          <img
+            src="/images/hero-gallon-montanas.jpg"
+            alt="Luis Horacio Gallón contemplando las montañas y vías de Antioquia"
             className="w-full h-full object-cover"
-          >
-            <source src="/images/hero-gallon-video.mp4" type="video/mp4" />
-            <img
-              src="/images/hero-gallon-montanas.jpg"
-              alt="Luis Horacio Gallón contemplando las montañas de Antioquia"
-              className="w-full h-full object-cover"
-            />
-          </video>
+          />
           {/* Gradient overlay — heavy at bottom for text */}
           <div className="absolute inset-0 bg-gradient-to-t from-[#0D3B0F] via-[#0D3B0F]/40 to-transparent" />
         </div>
 
         {/* Content — pinned to bottom-left */}
-        <div className="relative z-10 min-h-screen flex flex-col justify-end px-6 md:px-16 lg:px-24 pb-16 md:pb-24">
+        <div className="relative z-10 h-full flex flex-col justify-end px-6 md:px-16 lg:px-24 pb-16 md:pb-24">
           <FadeIn>
             <p className="font-ui uppercase tracking-[0.3em] text-dorado-tierra text-[10px] md:text-xs mb-6">
               Territorio &middot; Liderazgo &middot; Antioquia
