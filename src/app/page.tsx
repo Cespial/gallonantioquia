@@ -46,7 +46,7 @@ export default function Home() {
       {/* ================================================================== */}
       {/* 1. HERO — Full-bleed, candidato como protagonista absoluto         */}
       {/* ================================================================== */}
-      <section className="relative h-[100svh] overflow-hidden">
+      <section className="relative h-[100dvh] max-h-[100dvh] overflow-hidden -mt-[72px] md:-mt-[88px]">
         {/* Background: static image (animate with Google Flow later) */}
         <div className="absolute inset-0">
           <img
