@@ -232,8 +232,8 @@ export default function Home() {
             <p className="font-ui uppercase tracking-[0.3em] text-dorado-tierra text-[10px] mb-4">
               Antioquia en cifras
             </p>
-            <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] leading-[0.95] tracking-tight mb-16">
-              Antioquia en Datos
+            <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] leading-[0.95] tracking-tight text-white mb-16">
+              Antioquia en <span className="text-dorado-tierra italic">Datos</span>
             </h2>
           </FadeIn>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-16 md:gap-y-20">
@@ -268,15 +268,15 @@ export default function Home() {
             </div>
           </FadeIn>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border-t border-borde/50">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border-t border-borde/50 overflow-hidden">
             {stories.slice(0, 3).map((story, index) => (
               <FadeIn key={story.slug} delay={index * 100}>
                 <Link
                   href={`/territorio-vivo/${story.slug}`}
-                  className="group block py-8 md:px-8 first:md:pl-0 last:md:pr-0 border-b md:border-b-0 md:border-r border-borde/50 last:border-0"
+                  className="group block py-8 md:px-8 first:md:pl-0 last:md:pr-0 border-b md:border-b-0 md:border-r border-borde/50 last:border-0 overflow-hidden"
                 >
                   <p className="font-ui uppercase tracking-[0.2em] text-dorado-tierra text-[10px] mb-3">{story.category}</p>
-                  <h3 className="font-display text-xl leading-snug group-hover:text-verde-antioquia transition-colors">{story.title}</h3>
+                  <h3 className="font-display text-lg leading-snug group-hover:text-verde-antioquia transition-colors">{story.title}</h3>
                   <p className="font-body text-sm text-texto-terciario mt-3 line-clamp-2">{story.excerpt}</p>
                 </Link>
               </FadeIn>
