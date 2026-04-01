@@ -20,6 +20,59 @@ export const metadata: Metadata = {
     "Una plataforma de pensamiento, territorio y liderazgo para Antioquia. Historias, ideas, conversaciones y liderazgo regional.",
 };
 
+/* -------------------------------------------------------------------------- */
+/* Section grid data — the 6 entry-point cards from the PPTX mockup           */
+/* -------------------------------------------------------------------------- */
+const sectionGrid = [
+  {
+    title: "Territorio Vivo",
+    subtitle: "Historias de Antioquia",
+    href: "/territorio-vivo",
+    image: "/images/gallon-conversacion-rural.jpg",
+  },
+  {
+    title: "Bitácora de Camino",
+    subtitle: "Reflexiones de Horacio",
+    href: "/bitacora",
+    image: "/images/gallon-entrevista-medellin.jpg",
+  },
+  {
+    title: "Antioquia Piensa",
+    subtitle: "Ideas y Proyectos",
+    href: "/antioquia-piensa",
+    image: "/images/fondo-mapa-antioquia.jpg",
+  },
+  {
+    title: "Un Café para Antioquia",
+    subtitle: "Entrevistas y Diálogos",
+    href: "/un-cafe",
+    image: "/images/gallon-reunion-biblioteca.jpg",
+  },
+  {
+    title: "Voces de Antioquia",
+    subtitle: "Columnas Invitadas",
+    href: "/voces",
+    image: "/images/gallon-vias-seguridad.jpg",
+  },
+  {
+    title: "Antioquia en Datos",
+    subtitle: "Cifras y Análisis",
+    href: "#datos",
+    image: "/images/hero-montanas-panoramico.jpg",
+  },
+];
+
+/* -------------------------------------------------------------------------- */
+/* Quick nav — the 5-column bar from the PPTX mockup                          */
+/* -------------------------------------------------------------------------- */
+const quickNav = [
+  { label: "Última Reflexión", excerpt: featuredReflection.title, href: `/bitacora/${featuredReflection.slug}` },
+  { label: "Historia Destacada", excerpt: stories[0].title, href: `/territorio-vivo/${stories[0].slug}` },
+  { label: "Entrevista", excerpt: episodes[0].title, href: "/un-cafe" },
+  { label: "Ideas para el Futuro", excerpt: ideas[0].title, href: `/antioquia-piensa/${ideas[0].slug}` },
+  { label: "Voces Invitadas", excerpt: guestColumns[0].title, href: "/voces" },
+];
+
 export default function Home() {
   return (
     <>
@@ -36,106 +89,131 @@ export default function Home() {
             author: {
               "@type": "Person",
               name: "Luis Horacio Gallón Arango",
-              jobTitle:
-                "Secretario de Infraestructura Física de Antioquia",
+              jobTitle: "Secretario de Infraestructura Física de Antioquia",
             },
           }),
         }}
       />
 
       {/* ================================================================== */}
-      {/* 1. HERO — Full-bleed, candidato como protagonista absoluto         */}
+      {/* 1. HERO — Gallón + montañas + manifiesto                           */}
       {/* ================================================================== */}
       <section className="relative h-[100dvh] max-h-[100dvh] overflow-hidden -mt-[72px] md:-mt-[88px]">
-        {/* Background: static image (animate with Google Flow later) */}
         <div className="absolute inset-0">
           <img
             src="/images/hero-gallon-montanas.jpg"
             alt="Luis Horacio Gallón contemplando las montañas y vías de Antioquia"
             className="w-full h-full object-cover"
           />
-          {/* Gradient overlay — heavy at bottom for text */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0D3B0F] via-[#0D3B0F]/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0B3B24] via-[#0B3B24]/50 to-transparent" />
         </div>
 
-        {/* Content — pinned to bottom-left */}
-        <div className="relative z-10 h-full flex flex-col justify-end px-6 md:px-16 lg:px-24 pb-16 md:pb-24">
+        <div className="relative z-10 h-full flex flex-col justify-end px-6 md:px-16 lg:px-24 pb-20 md:pb-28">
           <FadeIn>
-            <p className="font-ui uppercase tracking-[0.3em] text-dorado-tierra text-[10px] md:text-xs mb-6">
-              Territorio &middot; Liderazgo &middot; Antioquia
+            <p className="font-ui uppercase tracking-[0.3em] text-dorado-tierra text-[10px] md:text-xs mb-4">
+              Con Horacio Gallón
             </p>
-
-            <h1 className="font-display text-[clamp(3rem,10vw,8rem)] leading-[0.85] tracking-tight text-white max-w-5xl">
-              El camino<br />
-              <span className="italic text-dorado-tierra">se hace</span><br />
-              al andar.
+            <h1 className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9] tracking-tight text-white max-w-4xl mb-6">
+              Antioquia en<br />
+              <span className="italic text-dorado-tierra">Conversación</span>
             </h1>
-
-            <div className="mt-10 flex flex-col sm:flex-row gap-8 items-start sm:items-center">
-              <Link
-                href="/territorio-vivo"
-                className="group inline-flex items-center gap-3 font-ui text-sm uppercase tracking-[0.15em] text-white border-b border-white/30 pb-2 hover:border-dorado-tierra hover:text-dorado-tierra transition-all duration-300"
-              >
-                Explorar historias
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-              <Link
-                href="/sobre"
-                className="font-ui text-sm uppercase tracking-[0.15em] text-white/50 hover:text-white transition-colors"
-              >
-                Conocer el proyecto
-              </Link>
-            </div>
+            <p className="font-body text-white/70 text-lg md:text-xl max-w-xl leading-relaxed">
+              &ldquo;Antioquia se construye escuchando, recorriendo y aprendiendo de su gente.&rdquo;
+            </p>
           </FadeIn>
-        </div>
-
-        {/* Scroll indicator */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10">
-          <div className="w-px h-12 bg-gradient-to-b from-transparent to-white/40" />
         </div>
       </section>
 
       {/* ================================================================== */}
-      {/* 2. REFLEXIÓN — Magazine layout, borderless                         */}
+      {/* 2. QUICK NAV — 5 columnas horizontales                             */}
       {/* ================================================================== */}
-      <section className="py-24 md:py-32 lg:py-40">
+      <section className="bg-[#0B3B24] border-t border-white/10">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-5 divide-x divide-white/10">
+            {quickNav.map((item, index) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                className={`group block px-4 md:px-5 py-5 md:py-6 hover:bg-white/5 transition-colors ${
+                  index >= 4 ? "hidden md:block" : ""
+                }`}
+              >
+                <p className="font-ui uppercase tracking-[0.15em] text-dorado-tierra text-[9px] md:text-[10px] mb-2">
+                  {item.label}
+                </p>
+                <p className="font-display text-white text-sm md:text-base leading-snug line-clamp-2 group-hover:text-dorado-tierra transition-colors">
+                  {item.excerpt}
+                </p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ================================================================== */}
+      {/* 3. GRID DE 6 SECCIONES — Portada de revista                        */}
+      {/* ================================================================== */}
+      <section className="py-12 md:py-16">
+        <div className="max-w-7xl mx-auto px-4 md:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
+            {sectionGrid.map((section, index) => (
+              <FadeIn key={section.href} delay={index * 80}>
+                <Link
+                  href={section.href}
+                  className="group relative block aspect-[4/3] overflow-hidden"
+                >
+                  <img
+                    src={section.image}
+                    alt={section.title}
+                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B3B24]/90 via-[#0B3B24]/30 to-transparent" />
+                  <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-8">
+                    <h3 className="font-display text-xl md:text-2xl text-white leading-tight group-hover:text-dorado-tierra transition-colors">
+                      {section.title}
+                    </h3>
+                    <p className="font-ui text-[10px] uppercase tracking-[0.2em] text-white/60 mt-2">
+                      {section.subtitle}
+                    </p>
+                  </div>
+                </Link>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ================================================================== */}
+      {/* 4. REFLEXIÓN DESTACADA — Contenido principal                       */}
+      {/* ================================================================== */}
+      <section className="py-16 md:py-24 border-t border-borde/50">
         <div className="max-w-7xl mx-auto px-6 md:px-16 lg:px-24">
           <FadeIn>
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-0">
-              {/* Text — narrow column for intimate reading */}
               <div className="lg:col-span-5 lg:pr-16 flex flex-col justify-center order-2 lg:order-1">
-                <p className="font-ui uppercase tracking-[0.25em] text-dorado-tierra text-[10px] mb-8">
-                  Reflexión destacada
+                <p className="font-ui uppercase tracking-[0.25em] text-dorado-tierra text-[10px] mb-6">
+                  Bitácora de Camino
                 </p>
-
-                <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] leading-[0.95] tracking-tight text-texto-principal mb-8">
+                <h2 className="font-display text-[clamp(1.75rem,3.5vw,3rem)] leading-[0.95] tracking-tight text-texto-principal mb-6">
                   {featuredReflection.title}
                 </h2>
-
-                <p className="font-body text-texto-secundario text-lg leading-relaxed mb-10">
+                <p className="font-body text-texto-secundario text-base leading-relaxed mb-8">
                   {featuredReflection.excerpt}
                 </p>
-
                 <Link
                   href={`/bitacora/${featuredReflection.slug}`}
                   className="group inline-flex items-center gap-3 font-ui text-xs uppercase tracking-[0.15em] text-texto-principal border-b border-texto-principal/20 pb-2 hover:border-verde-antioquia hover:text-verde-antioquia transition-all duration-300 w-fit"
                 >
                   Seguir leyendo
-                  <span className="text-lg group-hover:translate-x-1 transition-transform">&#8594;</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
-
-              {/* Image — full-bleed right */}
               <div className="lg:col-span-7 order-1 lg:order-2">
-                <div className="relative overflow-hidden">
-                  <img
-                    src={featuredReflection.image}
-                    alt={featuredReflection.title}
-                    className="w-full aspect-[4/3] lg:aspect-[3/4] object-cover hover:scale-[1.02] transition-transform duration-1000"
-                  />
-                  {/* Subtle gradient for depth */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-arena/20 via-transparent to-transparent pointer-events-none" />
-                </div>
+                <img
+                  src={featuredReflection.image}
+                  alt={featuredReflection.title}
+                  className="w-full aspect-[4/3] lg:aspect-[3/4] object-cover"
+                />
               </div>
             </div>
           </FadeIn>
@@ -143,44 +221,28 @@ export default function Home() {
       </section>
 
       {/* ================================================================== */}
-      {/* 3. CIFRAS — Clean, massive numbers, map background                 */}
+      {/* 5. CIFRAS — Con mapa de fondo                                      */}
       {/* ================================================================== */}
-      <section className="relative py-24 md:py-32 bg-[#0B3B24] text-white overflow-hidden">
-        {/* Map background */}
+      <section id="datos" className="relative py-24 md:py-32 bg-[#0B3B24] text-white overflow-hidden">
         <div className="absolute inset-0 opacity-15">
-          <img
-            src="/images/fondo-mapa-antioquia.jpg"
-            alt=""
-            className="w-full h-full object-cover"
-            aria-hidden="true"
-          />
+          <img src="/images/fondo-mapa-antioquia.jpg" alt="" className="w-full h-full object-cover" aria-hidden="true" />
         </div>
-
         <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-16 lg:px-24">
           <FadeIn>
             <p className="font-ui uppercase tracking-[0.3em] text-dorado-tierra text-[10px] mb-4">
               Antioquia en cifras
             </p>
-            <div className="h-px w-16 bg-dorado-tierra/40 mb-16" />
+            <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] leading-[0.95] tracking-tight mb-16">
+              Antioquia en Datos
+            </h2>
           </FadeIn>
-
           <div className="grid grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-16 md:gap-y-20">
             {impactStats.map((stat, index) => (
               <FadeIn key={stat.label} delay={index * 100}>
-                <div>
-                  <StatCounter
-                    value={stat.value}
-                    suffix={stat.suffix}
-                    label={stat.label}
-                  />
-                  <p className="font-ui text-[9px] uppercase tracking-[0.2em] text-white/30 mt-3">
-                    Gestión territorial
-                  </p>
-                </div>
+                <StatCounter value={stat.value} suffix={stat.suffix} label={stat.label} />
               </FadeIn>
             ))}
           </div>
-
           <FadeIn>
             <p className="font-ui text-[10px] text-white/25 mt-16 tracking-wide">
               Cifras de gestión como Secretario de Infraestructura de Antioquia y trayectoria acumulada.
@@ -190,68 +252,32 @@ export default function Home() {
       </section>
 
       {/* ================================================================== */}
-      {/* 4. HISTORIAS — Borderless editorial grid                           */}
+      {/* 6. HISTORIAS — Destacada + lista                                    */}
       {/* ================================================================== */}
-      <section className="py-24 md:py-32">
+      <section className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-6 md:px-16 lg:px-24">
           <FadeIn>
-            <div className="flex justify-between items-end mb-16">
+            <div className="flex justify-between items-end mb-12">
               <div>
-                <p className="font-ui uppercase tracking-[0.25em] text-dorado-tierra text-[10px] mb-3">
-                  Territorio vivo
-                </p>
-                <h2 className="font-display text-[clamp(2.5rem,5vw,4.5rem)] leading-[0.9] tracking-tight">
-                  Historias
-                </h2>
+                <p className="font-ui uppercase tracking-[0.25em] text-dorado-tierra text-[10px] mb-3">Territorio Vivo</p>
+                <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] leading-[0.95] tracking-tight">Historias</h2>
               </div>
-              <Link
-                href="/territorio-vivo"
-                className="hidden md:inline-flex font-ui text-[10px] uppercase tracking-[0.2em] text-texto-terciario hover:text-verde-antioquia transition-colors"
-              >
+              <Link href="/territorio-vivo" className="hidden md:inline-flex font-ui text-[10px] uppercase tracking-[0.2em] text-texto-terciario hover:text-verde-antioquia transition-colors">
                 Ver todas &#8594;
               </Link>
             </div>
           </FadeIn>
 
-          {/* Featured story — full width, image dominant */}
-          <FadeIn>
-            <Link href={`/territorio-vivo/${stories[0].slug}`} className="group block mb-16">
-              <div className="relative overflow-hidden">
-                <img
-                  src={stories[0].image}
-                  alt={stories[0].title}
-                  className="w-full aspect-[21/9] object-cover group-hover:scale-[1.02] transition-transform duration-1000"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0D3B0F]/80 via-transparent to-transparent" />
-                <div className="absolute bottom-0 left-0 p-8 md:p-12">
-                  <p className="font-ui uppercase tracking-[0.2em] text-dorado-tierra text-[10px] mb-3">
-                    {stories[0].category}
-                  </p>
-                  <h3 className="font-display text-3xl md:text-4xl text-white leading-tight max-w-2xl">
-                    {stories[0].title}
-                  </h3>
-                </div>
-              </div>
-            </Link>
-          </FadeIn>
-
-          {/* Secondary stories — minimal, text-only with thin separator */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
-            {stories.slice(1, 4).map((story, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border-t border-borde/50">
+            {stories.slice(0, 3).map((story, index) => (
               <FadeIn key={story.slug} delay={index * 100}>
                 <Link
                   href={`/territorio-vivo/${story.slug}`}
                   className="group block py-8 md:px-8 first:md:pl-0 last:md:pr-0 border-b md:border-b-0 md:border-r border-borde/50 last:border-0"
                 >
-                  <p className="font-ui uppercase tracking-[0.2em] text-texto-terciario text-[10px] mb-3">
-                    {story.category}
-                  </p>
-                  <h3 className="font-display text-xl leading-snug group-hover:text-verde-antioquia transition-colors duration-300">
-                    {story.title}
-                  </h3>
-                  <p className="font-body text-sm text-texto-terciario mt-3 line-clamp-2">
-                    {story.excerpt}
-                  </p>
+                  <p className="font-ui uppercase tracking-[0.2em] text-dorado-tierra text-[10px] mb-3">{story.category}</p>
+                  <h3 className="font-display text-xl leading-snug group-hover:text-verde-antioquia transition-colors">{story.title}</h3>
+                  <p className="font-body text-sm text-texto-terciario mt-3 line-clamp-2">{story.excerpt}</p>
                 </Link>
               </FadeIn>
             ))}
@@ -260,206 +286,65 @@ export default function Home() {
       </section>
 
       {/* ================================================================== */}
-      {/* 5. UN CAFÉ — Clean, no collision, image + text separated           */}
+      {/* 7. SOBRE HORACIO + PARTICIPA — Bottom bar                          */}
       {/* ================================================================== */}
-      <section className="py-24 md:py-32 border-t border-borde/50">
-        <div className="max-w-7xl mx-auto px-6 md:px-16 lg:px-24">
-          <FadeIn>
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-              {/* Image — clean, no overlapping buttons */}
-              <div className="lg:col-span-7">
-                <div className="relative overflow-hidden">
-                  <img
-                    src="/images/gallon-conversacion-rural.jpg"
-                    alt={episodes[0].title}
-                    className="w-full aspect-video object-cover"
-                  />
+      <section className="border-t border-borde/50">
+        <div className="max-w-7xl mx-auto px-4 md:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
+            {/* Sobre Horacio */}
+            <FadeIn>
+              <Link href="/sobre" className="group relative block aspect-[16/9] md:aspect-[2/1] overflow-hidden">
+                <img
+                  src="/images/gallon-retrato-obra-hd.jpg"
+                  alt="Horacio Gallón"
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0B3B24]/90 via-[#0B3B24]/30 to-transparent" />
+                <div className="absolute bottom-0 left-0 p-8">
+                  <h3 className="font-display text-2xl text-white group-hover:text-dorado-tierra transition-colors">Sobre Horacio</h3>
+                  <p className="font-ui text-[10px] uppercase tracking-[0.2em] text-white/60 mt-2">Mi historia y camino por Antioquia</p>
                 </div>
-              </div>
-
-              {/* Text — clean hierarchy */}
-              <div className="lg:col-span-5">
-                <p className="font-ui uppercase tracking-[0.25em] text-dorado-tierra text-[10px] mb-6">
-                  Un café para Antioquia &middot; Ep. 01
-                </p>
-
-                <h2 className="font-display text-[clamp(2rem,4vw,3rem)] leading-[0.95] tracking-tight mb-6">
-                  {episodes[0].title}
-                </h2>
-
-                <p className="font-body text-sm text-verde-antioquia mb-6">
-                  Con {episodes[0].guest} &mdash; {episodes[0].guestRole}
-                </p>
-
-                <p className="font-body text-texto-secundario leading-relaxed mb-8">
-                  {episodes[0].description}
-                </p>
-
-                <div className="flex flex-col sm:flex-row gap-6">
-                  <Link
-                    href="/un-cafe"
-                    className="group inline-flex items-center gap-3 font-ui text-xs uppercase tracking-[0.15em] text-texto-principal border-b border-texto-principal/20 pb-2 hover:border-verde-antioquia hover:text-verde-antioquia transition-all duration-300"
-                  >
-                    Ver entrevista
-                    <span className="group-hover:translate-x-1 transition-transform">&#8594;</span>
-                  </Link>
-                  <Link
-                    href="/un-cafe"
-                    className="font-ui text-xs uppercase tracking-[0.15em] text-texto-terciario hover:text-texto-principal transition-colors"
-                  >
-                    Todos los episodios
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </FadeIn>
-        </div>
-      </section>
-
-      {/* ================================================================== */}
-      {/* 6. VOCES — Borderless, quote-driven, no cards                      */}
-      {/* ================================================================== */}
-      <section className="py-24 md:py-32 border-t border-borde/50">
-        <div className="max-w-7xl mx-auto px-6 md:px-16 lg:px-24">
-          <FadeIn>
-            <p className="font-ui uppercase tracking-[0.25em] text-dorado-tierra text-[10px] mb-3">
-              Columnas de opinión
-            </p>
-            <h2 className="font-display text-[clamp(2.5rem,5vw,4.5rem)] leading-[0.9] tracking-tight mb-16">
-              Voces de Antioquia
-            </h2>
-          </FadeIn>
-
-          <div className="space-y-16 md:space-y-20">
-            {guestColumns.slice(0, 2).map((column, index) => (
-              <FadeIn key={column.slug} delay={index * 150}>
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
-                  {/* Number */}
-                  <div className="md:col-span-1">
-                    <span className="font-display text-6xl md:text-7xl font-black text-borde/50 leading-none">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                  </div>
-
-                  {/* Author info */}
-                  <div className="md:col-span-3">
-                    <p className="font-heading font-bold text-sm text-texto-principal">
-                      {column.authorName}
-                    </p>
-                    <p className="font-ui text-xs text-texto-terciario mt-1">
-                      {column.authorRole}
-                    </p>
-                  </div>
-
-                  {/* Quote — the protagonist */}
-                  <div className="md:col-span-8">
-                    {column.pullQuote && (
-                      <blockquote className="font-display italic text-2xl md:text-3xl leading-snug text-texto-principal mb-6">
-                        &ldquo;{column.pullQuote}&rdquo;
-                      </blockquote>
-                    )}
-                    <p className="font-body text-texto-secundario text-sm leading-relaxed max-w-2xl">
-                      {column.excerpt}
-                    </p>
-                  </div>
-                </div>
-
-                {index < 1 && (
-                  <div className="h-px bg-borde/40 mt-16 md:mt-20" />
-                )}
-              </FadeIn>
-            ))}
-          </div>
-
-          <FadeIn>
-            <div className="mt-16">
-              <Link
-                href="/voces"
-                className="group inline-flex items-center gap-3 font-ui text-xs uppercase tracking-[0.15em] text-texto-principal border-b border-texto-principal/20 pb-2 hover:border-verde-antioquia hover:text-verde-antioquia transition-all duration-300"
-              >
-                Todas las voces
-                <span className="group-hover:translate-x-1 transition-transform">&#8594;</span>
               </Link>
-            </div>
-          </FadeIn>
-        </div>
-      </section>
+            </FadeIn>
 
-      {/* ================================================================== */}
-      {/* 7. IDEAS — Dark, clean, already minimal                            */}
-      {/* ================================================================== */}
-      <section className="relative py-24 md:py-32 bg-[#0B3B24] text-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 md:px-16 lg:px-24">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-            <div className="lg:col-span-4">
-              <FadeIn>
-                <p className="font-ui uppercase tracking-[0.25em] text-dorado-tierra text-[10px] mb-6">
-                  Think tank
-                </p>
-                <h2 className="font-display text-[clamp(2.5rem,5vw,4.5rem)] leading-[0.9] tracking-tight mb-8">
-                  Ideas para<br />
-                  <span className="italic text-dorado-tierra">Antioquia</span>
-                </h2>
-                <p className="font-body text-white/50 leading-relaxed mb-10 text-sm">
-                  Propuestas concretas y visiones estratégicas para el desarrollo
-                  regional, la conectividad y la equidad social.
-                </p>
-                <Link
-                  href="/antioquia-piensa"
-                  className="group inline-flex items-center gap-3 font-ui text-xs uppercase tracking-[0.15em] text-white/60 border-b border-white/20 pb-2 hover:border-dorado-tierra hover:text-dorado-tierra transition-all duration-300"
-                >
-                  Ver proyecto completo
-                  <span className="group-hover:translate-x-1 transition-transform">&#8594;</span>
-                </Link>
-              </FadeIn>
-            </div>
-
-            <div className="lg:col-span-8">
-              {ideas.slice(0, 4).map((idea, index) => (
-                <FadeIn key={idea.slug} delay={index * 100}>
-                  <Link
-                    href={`/antioquia-piensa/${idea.slug}`}
-                    className="group flex gap-8 items-center py-8 border-b border-white/10 last:border-0"
-                  >
-                    <span className="font-display text-xl font-black text-white/15 group-hover:text-dorado-tierra transition-colors duration-300 w-10 shrink-0">
-                      {idea.number}
-                    </span>
-                    <h3 className="font-heading font-bold text-lg group-hover:translate-x-2 transition-transform duration-300 flex-1">
-                      {idea.title}
-                    </h3>
-                    <ArrowRight className="w-5 h-5 text-white/15 group-hover:text-white transition-colors shrink-0" />
-                  </Link>
-                </FadeIn>
-              ))}
-            </div>
+            {/* Participa */}
+            <FadeIn delay={100}>
+              <Link href="/participa" className="group relative block aspect-[16/9] md:aspect-[2/1] overflow-hidden bg-arena">
+                <div className="absolute inset-0 opacity-10">
+                  <img src="/images/fondo-mapa-antioquia.jpg" alt="" className="w-full h-full object-cover" aria-hidden="true" />
+                </div>
+                <div className="relative h-full flex flex-col justify-center items-center text-center p-8">
+                  <p className="font-ui uppercase tracking-[0.25em] text-dorado-tierra text-[10px] mb-4">Participa</p>
+                  <h3 className="font-display text-2xl md:text-3xl text-texto-principal group-hover:text-verde-antioquia transition-colors mb-4">
+                    Envía tus Ideas<br />
+                    <span className="italic">y Propuestas</span>
+                  </h3>
+                  <span className="inline-flex items-center gap-2 font-ui text-xs uppercase tracking-[0.15em] text-texto-terciario group-hover:text-verde-antioquia transition-colors">
+                    Participar <ArrowRight className="w-4 h-4" />
+                  </span>
+                </div>
+              </Link>
+            </FadeIn>
           </div>
         </div>
       </section>
 
       {/* ================================================================== */}
-      {/* 8. NEWSLETTER — Cafetal background, clean                          */}
+      {/* 8. NEWSLETTER                                                       */}
       {/* ================================================================== */}
-      <section className="relative py-24 md:py-32 overflow-hidden">
+      <section className="relative py-20 md:py-28 overflow-hidden">
         <div className="absolute inset-0">
-          <img
-            src="/images/fondo-cafetal.jpg"
-            alt=""
-            className="w-full h-full object-cover"
-            aria-hidden="true"
-          />
+          <img src="/images/fondo-cafetal.jpg" alt="" className="w-full h-full object-cover" aria-hidden="true" />
           <div className="absolute inset-0 bg-[#0B3B24]/85" />
         </div>
-
         <div className="relative z-10 max-w-xl mx-auto px-6 text-center">
           <FadeIn>
-            <p className="font-ui uppercase tracking-[0.3em] text-dorado-tierra text-[10px] mb-6">
-              Newsletter mensual
-            </p>
-            <h2 className="font-display text-[clamp(2rem,5vw,3.5rem)] leading-[0.95] tracking-tight text-white mb-4">
+            <p className="font-ui uppercase tracking-[0.3em] text-dorado-tierra text-[10px] mb-6">Newsletter</p>
+            <h2 className="font-display text-[clamp(2rem,4vw,3rem)] leading-[0.95] tracking-tight text-white mb-4">
               Carta para Antioquia
             </h2>
-            <p className="font-body text-white/60 text-sm leading-relaxed mb-10">
-              Reflexiones, historias, aprendizajes y conversaciones. Una vez al mes en tu correo.
+            <p className="font-body text-white/60 text-sm leading-relaxed mb-8">
+              Una carta mensual con reflexiones, historias y conversaciones.
             </p>
             <NewsletterForm variant="dark" />
           </FadeIn>
