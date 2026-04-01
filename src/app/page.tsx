@@ -288,12 +288,12 @@ export default function Home() {
       {/* ================================================================== */}
       {/* 7. SOBRE HORACIO + PARTICIPA — Bottom bar                          */}
       {/* ================================================================== */}
-      <section className="border-t border-borde/50">
+      <section className="border-t border-borde/50 mb-12 md:mb-16">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 pt-3 md:pt-4">
             {/* Sobre Horacio */}
             <FadeIn>
-              <Link href="/sobre" className="group relative block aspect-[16/9] md:aspect-[2/1] overflow-hidden">
+              <Link href="/sobre" className="group relative block aspect-[16/9] overflow-hidden">
                 <img
                   src="/images/gallon-retrato-obra-hd.jpg"
                   alt="Horacio Gallón"
@@ -309,7 +309,7 @@ export default function Home() {
 
             {/* Participa */}
             <FadeIn delay={100}>
-              <Link href="/participa" className="group relative block aspect-[16/9] md:aspect-[2/1] overflow-hidden bg-arena">
+              <Link href="/participa" className="group relative block aspect-[16/9] overflow-hidden bg-arena">
                 <div className="absolute inset-0 opacity-10">
                   <img src="/images/fondo-mapa-antioquia.jpg" alt="" className="w-full h-full object-cover" aria-hidden="true" />
                 </div>
