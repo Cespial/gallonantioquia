@@ -44,10 +44,10 @@ export default function Footer() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 pb-12 border-b border-white/10">
             <div>
               <div className="flex items-baseline gap-1.5 mb-4">
-                <span className="font-brand font-black text-xl text-white">
+                <span className="font-display font-black text-xl text-white">
                   GALLÓN
                 </span>
-                <span className="font-brand font-black text-xl text-dorado-tierra">
+                <span className="font-display font-black text-xl text-dorado-tierra">
                   ANTIOQUIA
                 </span>
               </div>
