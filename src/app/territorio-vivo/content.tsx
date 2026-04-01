@@ -21,7 +21,7 @@ export default function TerritorioVivoContent() {
       <PageHero
         title="Territorio Vivo"
         subtitle="Historias humanas de una Antioquia que se transforma"
-        backgroundImage="/images/gallon-vias-seguridad.jpg"
+        backgroundImage="/images/hero-montanas-panoramico.jpg"
       />
 
       <SectionWrapper>

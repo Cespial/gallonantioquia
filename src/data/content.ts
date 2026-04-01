@@ -67,7 +67,7 @@ export const stories: Article[] = [
     readTime: "5 min",
     format: "texto",
     image:
-      "/images/gallon-vias-seguridad.jpg",
+      "/images/hero-gallon-montanas.jpg",
     featured: true,
   },
   {
@@ -163,7 +163,7 @@ export const featuredReflection: BlogPost = {
   date: "2025-03-15",
   readTime: "6 min",
   image:
-    "/images/gallon-entrevista-medellin.jpg",
+    "/images/gallon-retrato-montanas-wide.jpg",
 };
 
 // ---------------------------------------------------------------------------
@@ -180,7 +180,7 @@ export const blogPosts: BlogPost[] = [
     date: "2025-03-15",
     readTime: "6 min",
     image:
-      "/images/gallon-entrevista-medellin.jpg",
+      "/images/gallon-retrato-montanas-wide.jpg",
   },
   {
     slug: "gobernar-tambien-es-saber-esperar",
@@ -213,7 +213,7 @@ export const blogPosts: BlogPost[] = [
     date: "2025-01-20",
     readTime: "7 min",
     image:
-      "/images/gallon-tunel-mar.jpg",
+      "/images/hero-montanas-panoramico.jpg",
   },
   {
     slug: "recorrer-antioquia-a-pie",

@@ -80,12 +80,22 @@ export default function Home() {
 
         {/* Right Side: Hero Image with Asymmetrical Mask */}
         <div className="w-full lg:w-5/12 relative min-h-[50vh] lg:min-h-full">
-          <div className="absolute inset-0 bg-verde-antioquia/10 lg:clip-path-editorial">
-            <img
-              src="/images/gallon-tunel-mar.jpg"
-              alt="Túnel Más cerca del mar de Antioquia"
-              className="object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-1000 ease-in-out"
-            />
+          <div className="absolute inset-0 bg-verde-antioquia/10 lg:clip-path-editorial grayscale hover:grayscale-0 transition-all duration-1000 ease-in-out">
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              poster="/images/hero-gallon-montanas.jpg"
+              className="object-cover w-full h-full"
+            >
+              <source src="/images/hero-gallon-video.mp4" type="video/mp4" />
+              <img
+                src="/images/hero-gallon-montanas.jpg"
+                alt="Luis Horacio Gallón contemplando las montañas de Antioquia"
+                className="object-cover w-full h-full"
+              />
+            </video>
           </div>
           {/* Floating Detail */}
           <div className="absolute bottom-12 -left-12 hidden xl:block bg-blanco-calido p-6 shadow-editorial border-editorial-thin max-w-xs animate-fade-up">
@@ -143,8 +153,11 @@ export default function Home() {
       {/* ------------------------------------------------------------------ */}
       {/* 3. Stats (Re-designed for Premium feel)                            */}
       {/* ------------------------------------------------------------------ */}
-      <section className="grainy-dark py-24 text-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="grainy-dark py-24 text-white overflow-hidden relative">
+        <div className="absolute inset-0 opacity-20">
+          <img src="/images/fondo-mapa-antioquia.jpg" alt="" className="w-full h-full object-cover" aria-hidden="true" />
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
             {impactStats.map((stat, index) => (
               <FadeIn key={stat.label} delay={index * 150} className="text-center md:text-left border-l border-white/10 pl-8">
@@ -361,6 +374,10 @@ export default function Home() {
       {/* 8. Newsletter CTA                                                   */}
       {/* ------------------------------------------------------------------ */}
       <div className="bg-verde-antioquia relative overflow-hidden noise-texture">
+        <div className="absolute inset-0">
+          <img src="/images/fondo-cafetal.jpg" alt="" className="w-full h-full object-cover opacity-30" aria-hidden="true" />
+          <div className="absolute inset-0 bg-verde-antioquia/80" />
+        </div>
         <SectionWrapper>
           <div className="max-w-xl mx-auto text-center relative z-10">
             <h2 className="font-display text-section-title text-white">
