@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import ParticipaContent from "./content";
 
 export const metadata: Metadata = {
-  title: "Participa — Tu voz construye Antioquia",
-  description: "Envia tu idea, propon un tema o comparte tu historia.",
+  title: "Participa — Quiero escucharte",
+  description: "Cuéntame tu idea, propón un tema o comparte la historia de tu comunidad.",
 };
 
 export default function ParticipaPage() {

@@ -111,14 +111,14 @@ export default function Home() {
         <div className="relative z-10 h-full flex flex-col justify-end px-6 md:px-16 lg:px-24 pb-20 md:pb-28">
           <FadeIn>
             <p className="font-ui uppercase tracking-[0.3em] text-dorado-tierra text-[10px] md:text-xs mb-4">
-              Con Horacio Gallón
+              Horacio Gallón &middot; Antioquia
             </p>
             <h1 className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9] tracking-tight text-white max-w-4xl mb-6">
               Antioquia en<br />
               <span className="italic text-dorado-tierra">Conversación</span>
             </h1>
             <p className="font-body text-white/70 text-lg md:text-xl max-w-xl leading-relaxed">
-              &ldquo;Antioquia se construye escuchando, recorriendo y aprendiendo de su gente.&rdquo;
+              &ldquo;Yo creo que Antioquia se construye escuchando, recorriendo y aprendiendo de su gente.&rdquo;
             </p>
           </FadeIn>
         </div>
@@ -192,7 +192,7 @@ export default function Home() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-0">
               <div className="lg:col-span-5 lg:pr-16 flex flex-col justify-center order-2 lg:order-1">
                 <p className="font-ui uppercase tracking-[0.25em] text-dorado-tierra text-[10px] mb-6">
-                  Bitácora de Camino
+                  Mis reflexiones
                 </p>
                 <h2 className="font-display text-[clamp(1.75rem,3.5vw,3rem)] leading-[0.95] tracking-tight text-texto-principal mb-6">
                   {featuredReflection.title}
@@ -301,8 +301,8 @@ export default function Home() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0B3B24]/90 via-[#0B3B24]/30 to-transparent" />
                 <div className="absolute bottom-0 left-0 p-8">
-                  <h3 className="font-display text-2xl text-white group-hover:text-dorado-tierra transition-colors">Sobre Horacio</h3>
-                  <p className="font-ui text-[10px] uppercase tracking-[0.2em] text-white/60 mt-2">Mi historia y camino por Antioquia</p>
+                  <h3 className="font-display text-2xl text-white group-hover:text-dorado-tierra transition-colors">Mi historia</h3>
+                  <p className="font-ui text-[10px] uppercase tracking-[0.2em] text-white/60 mt-2">El camino que me trajo hasta aquí</p>
                 </div>
               </Link>
             </FadeIn>
@@ -316,8 +316,8 @@ export default function Home() {
                 <div className="relative h-full flex flex-col justify-center items-center text-center p-8">
                   <p className="font-ui uppercase tracking-[0.25em] text-dorado-tierra text-[10px] mb-4">Participa</p>
                   <h3 className="font-display text-2xl md:text-3xl text-texto-principal group-hover:text-verde-antioquia transition-colors mb-4">
-                    Envía tus Ideas<br />
-                    <span className="italic">y Propuestas</span>
+                    Cuéntame tus ideas<br />
+                    <span className="italic">para Antioquia</span>
                   </h3>
                   <span className="inline-flex items-center gap-2 font-ui text-xs uppercase tracking-[0.15em] text-texto-terciario group-hover:text-verde-antioquia transition-colors">
                     Participar <ArrowRight className="w-4 h-4" />
@@ -344,7 +344,7 @@ export default function Home() {
               Carta para Antioquia
             </h2>
             <p className="font-body text-white/60 text-sm leading-relaxed mb-8">
-              Una carta mensual con reflexiones, historias y conversaciones.
+              Una vez al mes te escribo con reflexiones, historias y conversaciones sobre Antioquia.
             </p>
             <NewsletterForm variant="dark" />
           </FadeIn>

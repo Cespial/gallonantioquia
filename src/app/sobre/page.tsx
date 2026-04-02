@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import SobreContent from "./content";
 
 export const metadata: Metadata = {
-  title: "Sobre Horacio Gallón — Constructor de caminos para Antioquia",
+  title: "Mi historia — Horacio Gallón",
   description:
-    "Hijo de Andes. Servidor público. Constructor de caminos. Más de tres décadas al servicio de Antioquia.",
+    "Nací en Andes. Llevo más de treinta años caminando este departamento y construyendo caminos para Antioquia.",
 };
 
 export default function SobrePage() {

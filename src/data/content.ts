@@ -474,19 +474,19 @@ export const timelineEvents: TimelineEvent[] = [
 // ---------------------------------------------------------------------------
 
 export const bioShort: string =
-  "Hijo de Andes, Suroeste antioqueño. Más de tres décadas al servicio de Antioquia. Actual Secretario de Infraestructura Física de la Gobernación de Antioquia.";
+  "Nací en Andes, en el Suroeste antioqueño. Llevo más de treinta años caminando este departamento, y hoy tengo el honor de servir como Secretario de Infraestructura Física de Antioquia.";
 
 export const bioLong: string =
-  "Hijo de Andes, en el corazón cafetero del Suroeste antioqueño. Desde muy joven se vinculó al sector financiero y al servicio público. Inició su carrera en Bancafé, donde comprendió de primera mano las necesidades del campo colombiano. Fue concejal de Andes, gerente de sucursal bancaria en Jardín y empresario. En 2008 fue elegido alcalde de Andes con la mayor votación en la historia del municipio — 9.984 votos — liderando un gobierno cercano a la gente, enfocado en obras, educación y desarrollo rural. Como Representante a la Cámara por Antioquia (2014–2018), impulsó proyectos legislativos clave, entre ellos la Ley que convirtió a Turbo en Distrito Especial, un hito para Urabá y la costa antioqueña. Posteriormente dirigió la Unidad Territorial Antioquia–Chocó de la Agencia de Desarrollo Rural (ADR), llevando la política agropecuaria directamente a las comunidades. Hoy, como Secretario de Infraestructura Física de la Gobernación de Antioquia, lidera la mayor inversión vial en la historia del departamento: más de 10,1 billones de pesos destinados a pavimentar vías, construir placa huella en más de 100 municipios y hacer realidad el Tren Multipropósito del río Magdalena. Más de 35 años de trayectoria en el sector público y privado lo respaldan como un líder que conoce a Antioquia, la ha recorrido y la sigue construyendo.";
+  "Nací en Andes, en el corazón cafetero del Suroeste antioqueño. Desde muy joven me vinculé al sector financiero y al servicio público. Empecé mi carrera en Bancafé, donde entendí de primera mano lo que necesita el campo colombiano. Fui concejal de Andes, gerente de sucursal bancaria en Jardín y empresario. En 2008 me eligieron alcalde de Andes con la mayor votación en la historia del municipio — 9.984 votos — y lideré un gobierno cercano a la gente, enfocado en obras, educación y desarrollo rural. Como Representante a la Cámara por Antioquia (2014–2018), impulsé proyectos legislativos clave, entre ellos la Ley que convirtió a Turbo en Distrito Especial, un hito para Urabá y la costa antioqueña. Después dirigí la Unidad Territorial Antioquia–Chocó de la Agencia de Desarrollo Rural, llevando la política agropecuaria directamente a las comunidades. Hoy, como Secretario de Infraestructura Física de la Gobernación de Antioquia, tengo la responsabilidad de liderar la mayor inversión vial en la historia del departamento: más de 10,1 billones de pesos destinados a pavimentar vías, construir placa huella en más de 100 municipios y hacer realidad el Tren Multipropósito del río Magdalena. Más de 35 años de camino me respaldan — conozco a Antioquia, la he recorrido, y la sigo construyendo.";
 
 // ---------------------------------------------------------------------------
 // Manifesto Quotes
 // ---------------------------------------------------------------------------
 
 export const manifestoQuotes: string[] = [
-  "Antioquia se construye escuchando, recorriendo y aprendiendo de su gente.",
-  "La infraestructura no es solo asfalto, es dignidad, oportunidad y futuro para los territorios.",
-  "Gobernar es servir, y servir es caminar al lado de la gente.",
-  "Los caminos no solo acortan distancias — abren futuros.",
-  "Un departamento que escucha a sus comunidades es un departamento que avanza.",
+  "Yo creo que Antioquia se construye escuchando, recorriendo y aprendiendo de su gente.",
+  "Para mí, la infraestructura no es solo asfalto — es dignidad, oportunidad y futuro para los territorios.",
+  "Gobernar es servir. Y servir es caminar al lado de la gente, no por encima de ella.",
+  "He aprendido que los caminos no solo acortan distancias — abren futuros.",
+  "Cuando uno escucha a las comunidades, el departamento avanza. Así de sencillo.",
 ];

@@ -121,14 +121,14 @@ export default function SobreContent() {
           {/* Text */}
           <FadeIn direction="right">
             <div>
-              <h1 className="font-display text-page-title text-white">
-                Luis Horacio Gallón Arango
-              </h1>
-              <p className="font-body text-xl text-dorado-tierra mt-4">
-                Hijo de Andes. Servidor público. Constructor de caminos.
+              <p className="font-ui uppercase tracking-[0.25em] text-dorado-tierra text-[10px] mb-4">
+                Sobre mí
               </p>
-              <p className="font-body text-white/80 mt-6 text-lg italic">
-                &ldquo;{manifestoQuotes[0]}&rdquo;
+              <h1 className="font-display text-page-title text-white">
+                Horacio Gallón
+              </h1>
+              <p className="font-body text-xl text-white/70 mt-4 leading-relaxed">
+                Nací en Andes. Llevo más de treinta años sirviendo a Antioquia. Y cada día estoy más convencido de que este departamento tiene todo para ser el mejor del país.
               </p>
             </div>
           </FadeIn>
@@ -183,13 +183,13 @@ export default function SobreContent() {
                 />
               </div>
               <div>
-                <p className="font-accent text-dorado-tierra text-lg mb-2">La persona</p>
-                <h3 className="font-display text-subtitle mb-4">Detrás del cargo, un paisa de corazón</h3>
+                <p className="font-ui uppercase tracking-[0.25em] text-dorado-tierra text-[10px] mb-2">La persona</p>
+                <h3 className="font-display text-subtitle mb-4">Más allá del cargo</h3>
                 <p className="font-body text-texto-secundario leading-relaxed">
-                  Hincha del fútbol, hijo de Andes, esposo, padre y abuelo. Horacio Gallón no es solo
-                  un servidor público — es un antioqueño que vive con la pasión de su tierra. Cuando
-                  no está recorriendo las vías del departamento, está con su familia, su café y sus
-                  montañas.
+                  Soy hincha del fútbol, hijo de Andes, esposo, padre y abuelo. Cuando no estoy
+                  recorriendo las vías del departamento, estoy con mi familia, con mi café y con
+                  mis montañas. Al final del día, todo lo que hago es para que la gente de Antioquia
+                  viva mejor.
                 </p>
               </div>
             </div>
