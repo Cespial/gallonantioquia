@@ -98,17 +98,19 @@ export default function Home() {
       {/* ================================================================== */}
       {/* 1. HERO — Gallón + montañas + manifiesto                           */}
       {/* ================================================================== */}
-      <section className="relative h-[100dvh] max-h-[100dvh] overflow-hidden -mt-[72px] md:-mt-[88px]">
+      <section className="relative min-h-[100dvh] md:min-h-[110dvh] overflow-hidden -mt-[72px] md:-mt-[88px]">
         <div className="absolute inset-0">
           <img
             src="/images/gallon-retrato-obra-hd.jpg"
             alt="Horacio Gallón mirando de frente"
-            className="w-full h-full object-cover object-top"
+            className="w-full h-full object-cover"
+            style={{ objectPosition: "60% 15%" }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0B3B24]/90 via-[#0B3B24]/25 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0B3B24]/90 via-[#0B3B24]/30 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0B3B24]/60 via-transparent to-transparent" />
         </div>
 
-        <div className="relative z-10 h-full flex flex-col justify-end px-6 md:px-16 lg:px-24 pb-20 md:pb-28">
+        <div className="relative z-10 min-h-[100dvh] md:min-h-[110dvh] flex flex-col justify-end px-6 md:px-16 lg:px-24 pb-20 md:pb-28">
           <FadeIn>
             <p className="font-ui uppercase tracking-[0.3em] text-dorado-tierra text-[10px] md:text-xs mb-4">
               Horacio Gallón
