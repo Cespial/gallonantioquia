@@ -39,37 +39,36 @@ const myriadPro = localFont({
 
 export const metadata: Metadata = {
   title: {
-    default: "Gallón Antioquia — Conversaciones para Antioquia",
-    template: "%s | Gallón Antioquia",
+    default: "Gallón Memorias — Memorias de Antioquia",
+    template: "%s | Gallón Memorias",
   },
   description:
-    "Una plataforma de pensamiento, territorio y liderazgo para Antioquia. Historias, ideas, conversaciones y liderazgo regional.",
+    "Memorias, reflexiones y conversaciones sobre Antioquia. Columnas, historias, ideas y diálogos desde el territorio.",
   keywords: [
     "Antioquia",
-    "infraestructura Antioquia",
-    "vías Antioquia",
+    "memorias Antioquia",
+    "columnas opinión",
+    "conversaciones",
     "desarrollo rural",
     "Suroeste antioqueño",
-    "Tren Multipropósito",
-    "conectividad rural",
     "líderes Antioquia",
     "Horacio Gallón",
     "Andes Antioquia",
   ],
   openGraph: {
-    title: "Gallón Antioquia — Conversaciones para Antioquia",
+    title: "Gallón Memorias — Memorias de Antioquia",
     description:
-      "Una plataforma de pensamiento, territorio y liderazgo para Antioquia.",
-    url: "https://www.gallonantioquia.com",
-    siteName: "Gallón Antioquia",
+      "Memorias, reflexiones y conversaciones sobre Antioquia.",
+    url: "https://gallonantioquia.vercel.app",
+    siteName: "Gallón Memorias",
     locale: "es_CO",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Gallón Antioquia — Conversaciones para Antioquia",
+    title: "Gallón Memorias — Memorias de Antioquia",
     description:
-      "Una plataforma de pensamiento, territorio y liderazgo para Antioquia.",
+      "Memorias, reflexiones y conversaciones sobre Antioquia.",
     creator: "@GallonHoracio",
   },
   robots: { index: true, follow: true },

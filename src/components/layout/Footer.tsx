@@ -48,12 +48,11 @@ export default function Footer() {
                   GALLÓN
                 </span>
                 <span className="font-display font-black text-xl text-dorado-tierra">
-                  ANTIOQUIA
+                  MEMORIAS
                 </span>
               </div>
               <p className="font-body text-white/70 max-w-md leading-relaxed">
-                Una plataforma de pensamiento, territorio y liderazgo para
-                Antioquia.
+                Memorias, reflexiones y conversaciones sobre Antioquia.
               </p>
             </div>
 
@@ -162,7 +161,7 @@ export default function Footer() {
           {/* Bottom: Copyright */}
           <div className="pt-8 border-t border-white/10 text-center">
             <p className="font-ui text-xs text-white/50">
-              &copy; 2024&ndash;2026 Gallón Antioquia. Hecho con amor por Antioquia.
+              &copy; 2024&ndash;2026 Gallón Memorias. Hecho con amor por Antioquia.
             </p>
           </div>
         </div>

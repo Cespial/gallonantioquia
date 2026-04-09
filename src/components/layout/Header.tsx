@@ -48,7 +48,7 @@ export default function Header() {
               })}
             </div>
             <div className="font-ui text-[10px] uppercase tracking-widest-editorial text-texto-terciario">
-              Antioquia, Colombia &mdash; Edición Digital
+              Memorias de Antioquia
             </div>
           </div>
         </div>
@@ -71,12 +71,12 @@ export default function Header() {
                 GALLÓN
               </span>
               <span className="font-display font-black text-2xl tracking-tighter text-dorado-tierra group-hover:text-verde-antioquia transition-colors">
-                ANTIOQUIA
+                MEMORIAS
               </span>
             </div>
             {!shrink && (
               <span className="hidden lg:block font-accent text-[8px] uppercase tracking-[0.4em] text-texto-terciario -mt-1 pl-0.5">
-                Territorio & Liderazgo
+                Memorias & Territorio
               </span>
             )}
           </Link>
@@ -150,7 +150,7 @@ export default function Header() {
               GALLÓN
             </span>
             <span className="font-display font-black text-lg text-dorado-tierra">
-              ANTIOQUIA
+              MEMORIAS
             </span>
           </Link>
           <button

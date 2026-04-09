@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Gallón Antioquia — Conversaciones para Antioquia";
+export const alt = "Gallón Memorias — Memorias de Antioquia";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -64,7 +64,7 @@ export default function OGImage() {
               letterSpacing: "-2px",
             }}
           >
-            ANTIOQUIA
+            MEMORIAS
           </span>
         </div>
 
@@ -78,7 +78,7 @@ export default function OGImage() {
             lineHeight: 1.5,
           }}
         >
-          Una plataforma de pensamiento, territorio y liderazgo para Antioquia.
+          Memorias, reflexiones y conversaciones sobre Antioquia.
         </p>
 
         {/* Bottom label */}
@@ -108,7 +108,7 @@ export default function OGImage() {
               textTransform: "uppercase",
             }}
           >
-            Conversaciones para Antioquia
+            Memorias de Antioquia
           </span>
         </div>
 

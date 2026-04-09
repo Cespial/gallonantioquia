@@ -15,9 +15,9 @@ import {
 } from "@/data/content";
 
 export const metadata: Metadata = {
-  title: "Gallón Antioquia — Conversaciones para Antioquia",
+  title: "Gallón Memorias — Memorias de Antioquia",
   description:
-    "Una plataforma de pensamiento, territorio y liderazgo para Antioquia. Historias, ideas, conversaciones y liderazgo regional.",
+    "Memorias, reflexiones y conversaciones sobre Antioquia. Columnas, historias, ideas y diálogos desde el territorio.",
 };
 
 /* -------------------------------------------------------------------------- */
@@ -82,14 +82,14 @@ export default function Home() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebSite",
-            name: "Gallón Antioquia",
-            url: "https://www.gallonantioquia.com",
+            name: "Gallón Memorias",
+            url: "https://gallonantioquia.vercel.app",
             description:
-              "Una plataforma de pensamiento, territorio y liderazgo para Antioquia.",
+              "Memorias, reflexiones y conversaciones sobre Antioquia.",
             author: {
               "@type": "Person",
               name: "Luis Horacio Gallón Arango",
-              jobTitle: "Secretario de Infraestructura Física de Antioquia",
+              description: "Andino. Más de 35 años al servicio de Antioquia.",
             },
           }),
         }}
