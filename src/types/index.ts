@@ -67,3 +67,14 @@ export interface NavItem {
   label: string;
   href: string;
 }
+
+export interface ColumnaArticle {
+  slug: string;
+  title: string;
+  excerpt: string;
+  date: string;
+  readTime: string;
+  image: string;
+  sourceUrl: string;
+  body: string[];
+}
