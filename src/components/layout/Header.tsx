@@ -76,7 +76,7 @@ export default function Header() {
             </div>
             {!shrink && (
               <span className="hidden lg:block font-accent text-[8px] uppercase tracking-[0.4em] text-texto-terciario -mt-1 pl-0.5">
-                Memorias & Territorio
+                Historias & Reflexiones
               </span>
             )}
           </Link>
