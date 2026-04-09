@@ -101,24 +101,24 @@ export default function Home() {
       <section className="relative h-[100dvh] max-h-[100dvh] overflow-hidden -mt-[72px] md:-mt-[88px]">
         <div className="absolute inset-0">
           <img
-            src="/images/hero-gallon-montanas.jpg"
-            alt="Luis Horacio Gallón contemplando las montañas y vías de Antioquia"
-            className="w-full h-full object-cover"
+            src="/images/gallon-retrato-obra-hd.jpg"
+            alt="Horacio Gallón mirando de frente"
+            className="w-full h-full object-cover object-top"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0B3B24] via-[#0B3B24]/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0B3B24] via-[#0B3B24]/60 to-[#0B3B24]/20" />
         </div>
 
         <div className="relative z-10 h-full flex flex-col justify-end px-6 md:px-16 lg:px-24 pb-20 md:pb-28">
           <FadeIn>
-            <p className="font-ui uppercase tracking-[0.3em] text-dorado-tierra text-[10px] md:text-xs mb-4">
-              Horacio Gallón &middot; Memorias
-            </p>
-            <h1 className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9] tracking-tight text-white max-w-4xl mb-6">
-              Memorias de<br />
-              <span className="italic text-dorado-tierra">Antioquia</span>
+            <h1 className="font-display text-[clamp(3rem,8vw,6.5rem)] leading-[0.85] tracking-tight text-white max-w-4xl mb-4">
+              Horacio<br />
+              <span className="italic text-dorado-tierra">Gallón</span>
             </h1>
-            <p className="font-body text-white/70 text-lg md:text-xl max-w-xl leading-relaxed">
-              &ldquo;Yo creo que Antioquia se construye escuchando, recorriendo y aprendiendo de su gente.&rdquo;
+            <p className="font-display text-[clamp(1.25rem,3vw,2rem)] leading-[1.1] tracking-tight text-white/90 max-w-xl mb-3">
+              Mi historia
+            </p>
+            <p className="font-body text-white/60 text-lg md:text-xl max-w-xl leading-relaxed">
+              El camino que me trajo hasta aquí
             </p>
           </FadeIn>
         </div>
