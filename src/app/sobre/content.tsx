@@ -166,6 +166,45 @@ export default function SobreContent() {
       <Scrollytelling chapters={chapters} />
 
       {/* ================================================================== */}
+      {/* 2.5. Photo Gallery — Galería de imágenes                           */}
+      {/* ================================================================== */}
+      <section className="py-16 md:py-20">
+        <div className="max-w-7xl mx-auto px-4 md:px-8">
+          <FadeIn>
+            <p className="font-ui uppercase tracking-[0.25em] text-dorado-tierra text-[10px] mb-3">
+              En imágenes
+            </p>
+            <h2 className="font-display text-[clamp(1.75rem,3.5vw,2.5rem)] leading-[0.95] tracking-tight mb-10">
+              Antioquia en persona
+            </h2>
+          </FadeIn>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
+            {[
+              { src: "/images/gallon-conversacion-rural.jpg", alt: "Conversación con comunidades rurales", span: "md:col-span-2 md:row-span-2" },
+              { src: "/images/gallon-discurso.jpg", alt: "Hablando con la comunidad", span: "" },
+              { src: "/images/gallon-retrato-casco.jpg", alt: "En obra", span: "" },
+              { src: "/images/gallon-evento-banderas.jpg", alt: "Evento comunitario", span: "" },
+              { src: "/images/gallon-reunion-biblioteca.jpg", alt: "Reunión en biblioteca", span: "" },
+              { src: "/images/gallon-caminando-obra.jpg", alt: "Recorriendo las obras", span: "md:col-span-2" },
+              { src: "/images/gallon-tunel-moso.jpg", alt: "En el túnel", span: "" },
+              { src: "/images/gallon-familia-grande.jpg", alt: "Con la comunidad", span: "" },
+            ].map((photo) => (
+              <FadeIn key={photo.src}>
+                <div className={`overflow-hidden ${photo.span}`}>
+                  <img
+                    src={photo.src}
+                    alt={photo.alt}
+                    className="w-full h-full object-cover aspect-square hover:scale-105 transition-transform duration-700"
+                  />
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ================================================================== */}
       {/* 3. Personal — Más allá del cargo                                    */}
       {/* ================================================================== */}
       <section className="py-20 md:py-28 bg-dorado-claro/20 border-t border-borde/50">

@@ -247,6 +247,26 @@ export default function Home() {
       </section>
 
       {/* ================================================================== */}
+      {/* 5.5. PHOTO BAND — Full-width images                                */}
+      {/* ================================================================== */}
+      <section className="overflow-hidden">
+        <div className="grid grid-cols-3 md:grid-cols-6 gap-0">
+          {[
+            "/images/gallon-retrato-casco.jpg",
+            "/images/gallon-conversacion-rural.jpg",
+            "/images/gallon-tunel-moso.jpg",
+            "/images/gallon-familia-intima.jpg",
+            "/images/gallon-caminando-obra.jpg",
+            "/images/gallon-pareja-futbol.jpg",
+          ].map((src) => (
+            <div key={src} className="aspect-square overflow-hidden">
+              <img src={src} alt="" className="w-full h-full object-cover" />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ================================================================== */}
       {/* 6. HISTORIAS — Destacada + lista                                    */}
       {/* ================================================================== */}
       <section className="py-16 md:py-24">
