@@ -66,11 +66,11 @@ export default function Header() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="group flex flex-col items-center lg:items-start">
-            <div className="flex items-baseline gap-1">
-              <span className="font-display font-black text-2xl tracking-tighter text-verde-antioquia group-hover:text-oscuro transition-colors">
-                GALLÓN
+            <div className="flex items-baseline gap-2">
+              <span className="font-brand text-2xl tracking-wide text-verde-antioquia group-hover:text-oscuro transition-colors">
+                GALLON
               </span>
-              <span className="font-display font-black text-2xl tracking-tighter text-dorado-tierra group-hover:text-verde-antioquia transition-colors">
+              <span className="font-brand text-2xl tracking-wide text-dorado-tierra group-hover:text-verde-antioquia transition-colors">
                 MEMORIAS
               </span>
             </div>
@@ -146,10 +146,10 @@ export default function Header() {
             className="flex items-baseline gap-1"
             onClick={() => setMobileOpen(false)}
           >
-            <span className="font-display font-black text-lg text-verde-antioquia">
-              GALLÓN
+            <span className="font-brand text-lg text-verde-antioquia">
+              GALLON
             </span>
-            <span className="font-display font-black text-lg text-dorado-tierra">
+            <span className="font-brand text-lg text-dorado-tierra">
               MEMORIAS
             </span>
           </Link>

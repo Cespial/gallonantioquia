@@ -53,7 +53,7 @@ export default function OGImage() {
               letterSpacing: "-2px",
             }}
           >
-            GALLÓN
+            GALLON
           </span>
           <span
             style={{

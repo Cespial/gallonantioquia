@@ -43,11 +43,11 @@ export default function Footer() {
           {/* Top: Logo + Tagline + Newsletter */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 pb-12 border-b border-white/10">
             <div>
-              <div className="flex items-baseline gap-1.5 mb-4">
-                <span className="font-display font-black text-xl text-white">
-                  GALLÓN
+              <div className="flex items-baseline gap-2 mb-4">
+                <span className="font-brand text-xl text-white">
+                  GALLON
                 </span>
-                <span className="font-display font-black text-xl text-dorado-tierra">
+                <span className="font-brand text-xl text-dorado-tierra">
                   MEMORIAS
                 </span>
               </div>
