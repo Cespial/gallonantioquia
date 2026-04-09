@@ -74,8 +74,8 @@ const chapters = [
     id: "infraestructura",
     label: "Capítulo 7 — La gran obra",
     year: "2024",
-    title: "La mayor inversión vial de la historia",
-    text: "Hoy como Secretario de Infraestructura de Antioquia tengo la responsabilidad más grande de mi vida: liderar inversiones por más de $45 billones. El Túnel del Toyo al 98% — el más largo de Latinoamérica. La segunda calzada del Túnel de Oriente. El Tren Multipropósito con 190 km y 19 estaciones. Más de 1.040 km de vías y placa huella en 100+ municipios.",
+    title: "El capítulo más grande",
+    text: "Hoy tengo la responsabilidad más grande de mi vida: contribuir a la mayor inversión en infraestructura en la historia de Antioquia. El Túnel del Toyo al 98% — el más largo de Latinoamérica. La segunda calzada del Túnel de Oriente. El Tren Multipropósito con 190 km y 19 estaciones. Más de 1.040 km de vías y placa huella en 100+ municipios. Antioquia avanza.",
     image: "/images/gallon-tunel-mar.jpg",
     stat: { value: 1040, suffix: "+", label: "km de vías pavimentadas" },
     quote: "Antioquia no se construyó con miedo.",
@@ -96,12 +96,12 @@ const chapters = [
 /* -------------------------------------------------------------------------- */
 
 const roles = [
-  { icon: Building2, title: "Miembro de la Junta Directiva del Metro de Medellín" },
-  { icon: TreePine, title: "Miembro del Consejo Directivo de Corantioquia" },
-  { icon: Droplets, title: "Miembro del Consejo Directivo del Plan Departamental de Aguas" },
+  { icon: Building2, title: "Exalcalde de Andes, Antioquia (2008–2011)" },
+  { icon: TreePine, title: "Exrepresentante a la Cámara por Antioquia (2014–2018)" },
+  { icon: Droplets, title: "Impulsor de la Ley que convirtió a Turbo en Distrito Especial" },
   { icon: Coffee, title: "Delegado de la Cooperativa de Caficultores de Andes" },
   { icon: Heart, title: "Presidente de la Junta Directiva del Centro de Bienestar del Anciano, Jardín" },
-  { icon: PenLine, title: "Columnista en Al Poniente — 20+ columnas publicadas" },
+  { icon: PenLine, title: "Columnista en Al Poniente — 29+ columnas publicadas" },
 ];
 
 /* -------------------------------------------------------------------------- */
@@ -118,7 +118,7 @@ export default function SobreContent() {
             "@context": "https://schema.org",
             "@type": "Person",
             name: "Luis Horacio Gallón Arango",
-            jobTitle: "Secretario de Infraestructura Física de Antioquia",
+            description: "Andino. Más de 35 años al servicio de Antioquia.",
             birthDate: "1969-11-06",
             birthPlace: { "@type": "Place", name: "Andes, Antioquia, Colombia" },
             alumniOf: [

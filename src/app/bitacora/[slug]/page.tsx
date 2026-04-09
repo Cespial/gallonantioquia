@@ -142,10 +142,8 @@ export default async function BlogPostPage({ params }: Props) {
             </h3>
             <p className="font-body text-sm text-texto-secundario leading-relaxed mb-4">
               Hijo de Andes, Suroeste antioque&ntilde;o. M&aacute;s de tres
-              d&eacute;cadas al servicio de Antioquia. Actual Secretario de
-              Infraestructura F&iacute;sica de la Gobernaci&oacute;n de
-              Antioquia, liderando la mayor inversi&oacute;n vial en la historia
-              del departamento.
+              d&eacute;cadas al servicio de Antioquia. Exalcalde, exrepresentante
+              a la C&aacute;mara y columnista en Al Poniente.
             </p>
             <Button href="/sobre" variant="secondary" size="sm">
               Conocer m&aacute;s

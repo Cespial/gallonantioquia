@@ -15,12 +15,13 @@ import {
 
 export const navItems: NavItem[] = [
   { label: "Inicio", href: "/" },
+  { label: "Columnas", href: "/columnas" },
   { label: "Territorio Vivo", href: "/territorio-vivo" },
   { label: "Bitácora", href: "/bitacora" },
   { label: "Antioquia Piensa", href: "/antioquia-piensa" },
   { label: "Un Café", href: "/un-cafe" },
   { label: "Voces", href: "/voces" },
-  { label: "Participa", href: "/participa" },
+  { label: "Sobre", href: "/sobre" },
 ];
 
 // ---------------------------------------------------------------------------
@@ -28,28 +29,12 @@ export const navItems: NavItem[] = [
 // ---------------------------------------------------------------------------
 
 export const impactStats: ImpactStat[] = [
-  { value: 1040, suffix: "+", label: "km de vías pavimentadas" },
-  { value: 10, suffix: ",1 billones", label: "en inversión vial 2024–2027" },
-  {
-    value: 100,
-    suffix: "+",
-    label: "municipios con convenios de placa huella",
-  },
-  {
-    value: 1,
-    suffix: ",7 billones",
-    label: "aprobados para el Tren Multipropósito",
-  },
-  {
-    value: 45000,
-    suffix: "+",
-    label: "personas movilizadas (fase 1 del tren)",
-  },
-  {
-    value: 35,
-    suffix: "+",
-    label: "años de experiencia en sector público y privado",
-  },
+  { value: 35, suffix: "+", label: "años al servicio de Antioquia" },
+  { value: 125, suffix: "", label: "municipios recorridos" },
+  { value: 9, suffix: "", label: "subregiones de Antioquia" },
+  { value: 29, suffix: "+", label: "columnas publicadas en Al Poniente" },
+  { value: 3, suffix: "", label: "décadas de liderazgo regional" },
+  { value: 1, suffix: "", label: "convicción: Antioquia primero" },
 ];
 
 // ---------------------------------------------------------------------------
@@ -463,9 +448,9 @@ export const timelineEvents: TimelineEvent[] = [
   },
   {
     year: "2024",
-    title: "Secretario de Infraestructura Física de Antioquia",
+    title: "De vuelta al servicio de Antioquia",
     description:
-      "Es nombrado Secretario de Infraestructura Física de la Gobernación de Antioquia, liderando la mayor inversión vial en la historia del departamento.",
+      "Regresa al servicio público en Antioquia, contribuyendo a la mayor inversión en infraestructura en la historia del departamento.",
   },
 ];
 
@@ -474,10 +459,10 @@ export const timelineEvents: TimelineEvent[] = [
 // ---------------------------------------------------------------------------
 
 export const bioShort: string =
-  "Nací en Andes, en el Suroeste antioqueño. Llevo más de treinta años caminando este departamento, y hoy tengo el honor de servir como Secretario de Infraestructura Física de Antioquia.";
+  "Nací en Andes, en el Suroeste antioqueño. Llevo más de treinta años caminando este departamento, conociéndolo vereda a vereda, municipio a municipio.";
 
 export const bioLong: string =
-  "Nací en Andes, en el corazón cafetero del Suroeste antioqueño. Desde muy joven me vinculé al sector financiero y al servicio público. Empecé mi carrera en Bancafé, donde entendí de primera mano lo que necesita el campo colombiano. Fui concejal de Andes, gerente de sucursal bancaria en Jardín y empresario. En 2008 me eligieron alcalde de Andes con la mayor votación en la historia del municipio — 9.984 votos — y lideré un gobierno cercano a la gente, enfocado en obras, educación y desarrollo rural. Como Representante a la Cámara por Antioquia (2014–2018), impulsé proyectos legislativos clave, entre ellos la Ley que convirtió a Turbo en Distrito Especial, un hito para Urabá y la costa antioqueña. Después dirigí la Unidad Territorial Antioquia–Chocó de la Agencia de Desarrollo Rural, llevando la política agropecuaria directamente a las comunidades. Hoy, como Secretario de Infraestructura Física de la Gobernación de Antioquia, tengo la responsabilidad de liderar la mayor inversión vial en la historia del departamento: más de 10,1 billones de pesos destinados a pavimentar vías, construir placa huella en más de 100 municipios y hacer realidad el Tren Multipropósito del río Magdalena. Más de 35 años de camino me respaldan — conozco a Antioquia, la he recorrido, y la sigo construyendo.";
+  "Nací en Andes, en el corazón cafetero del Suroeste antioqueño. Desde muy joven me vinculé al sector financiero y al servicio público. Empecé mi carrera en Bancafé, donde entendí de primera mano lo que necesita el campo colombiano. Fui concejal de Andes, gerente de sucursal bancaria en Jardín y empresario. En 2008 me eligieron alcalde de Andes con la mayor votación en la historia del municipio — 9.984 votos — y lideré un gobierno cercano a la gente, enfocado en obras, educación y desarrollo rural. Como Representante a la Cámara por Antioquia (2014–2018), impulsé proyectos legislativos clave, entre ellos la Ley que convirtió a Turbo en Distrito Especial, un hito para Urabá y la costa antioqueña. Después dirigí la Unidad Territorial Antioquia–Chocó de la Agencia de Desarrollo Rural, llevando la política agropecuaria directamente a las comunidades. Más de 35 años de camino me respaldan — conozco a Antioquia, la he recorrido, y la sigo construyendo.";
 
 // ---------------------------------------------------------------------------
 // Manifesto Quotes
@@ -485,8 +470,8 @@ export const bioLong: string =
 
 export const manifestoQuotes: string[] = [
   "Yo creo que Antioquia se construye escuchando, recorriendo y aprendiendo de su gente.",
-  "Para mí, la infraestructura no es solo asfalto — es dignidad, oportunidad y futuro para los territorios.",
-  "Gobernar es servir. Y servir es caminar al lado de la gente, no por encima de ella.",
+  "La infraestructura no es solo asfalto — es dignidad, oportunidad y futuro para los territorios.",
+  "Servir es caminar al lado de la gente, no por encima de ella.",
   "He aprendido que los caminos no solo acortan distancias — abren futuros.",
-  "Cuando uno escucha a las comunidades, el departamento avanza. Así de sencillo.",
+  "Cuando uno escucha a las comunidades, todo avanza. Así de sencillo.",
 ];

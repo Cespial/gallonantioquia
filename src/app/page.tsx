@@ -25,6 +25,12 @@ export const metadata: Metadata = {
 /* -------------------------------------------------------------------------- */
 const sectionGrid = [
   {
+    title: "Columnas",
+    subtitle: "Opinión en Al Poniente",
+    href: "/columnas",
+    image: "/images/gallon-entrevista-medellin.jpg",
+  },
+  {
     title: "Territorio Vivo",
     subtitle: "Historias de Antioquia",
     href: "/territorio-vivo",
@@ -32,9 +38,9 @@ const sectionGrid = [
   },
   {
     title: "Bitácora de Camino",
-    subtitle: "Reflexiones de Horacio",
+    subtitle: "Reflexiones personales",
     href: "/bitacora",
-    image: "/images/gallon-entrevista-medellin.jpg",
+    image: "/images/gallon-retrato-montanas-portrait.jpg",
   },
   {
     title: "Antioquia Piensa",
@@ -52,13 +58,7 @@ const sectionGrid = [
     title: "Voces de Antioquia",
     subtitle: "Columnas Invitadas",
     href: "/voces",
-    image: "/images/gallon-vias-seguridad.jpg",
-  },
-  {
-    title: "Antioquia en Datos",
-    subtitle: "Cifras y Análisis",
-    href: "#datos",
-    image: "/images/hero-montanas-panoramico.jpg",
+    image: "/images/gallon-familia-grande.jpg",
   },
 ];
 
@@ -66,11 +66,11 @@ const sectionGrid = [
 /* Quick nav — the 5-column bar from the PPTX mockup                          */
 /* -------------------------------------------------------------------------- */
 const quickNav = [
+  { label: "Última Columna", excerpt: "Concesiones viales, necesarias para el desarrollo", href: "/columnas/concesiones-viales-necesarias-para-el-desarrollo-y-la-competitividad" },
   { label: "Última Reflexión", excerpt: featuredReflection.title, href: `/bitacora/${featuredReflection.slug}` },
   { label: "Historia Destacada", excerpt: stories[0].title, href: `/territorio-vivo/${stories[0].slug}` },
   { label: "Entrevista", excerpt: episodes[0].title, href: "/un-cafe" },
   { label: "Ideas para el Futuro", excerpt: ideas[0].title, href: `/antioquia-piensa/${ideas[0].slug}` },
-  { label: "Voces Invitadas", excerpt: guestColumns[0].title, href: "/voces" },
 ];
 
 export default function Home() {
@@ -111,11 +111,11 @@ export default function Home() {
         <div className="relative z-10 h-full flex flex-col justify-end px-6 md:px-16 lg:px-24 pb-20 md:pb-28">
           <FadeIn>
             <p className="font-ui uppercase tracking-[0.3em] text-dorado-tierra text-[10px] md:text-xs mb-4">
-              Horacio Gallón &middot; Antioquia
+              Horacio Gallón &middot; Memorias
             </p>
             <h1 className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9] tracking-tight text-white max-w-4xl mb-6">
-              Antioquia en<br />
-              <span className="italic text-dorado-tierra">Conversación</span>
+              Memorias de<br />
+              <span className="italic text-dorado-tierra">Antioquia</span>
             </h1>
             <p className="font-body text-white/70 text-lg md:text-xl max-w-xl leading-relaxed">
               &ldquo;Yo creo que Antioquia se construye escuchando, recorriendo y aprendiendo de su gente.&rdquo;
@@ -230,10 +230,10 @@ export default function Home() {
         <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-16 lg:px-24">
           <FadeIn>
             <p className="font-ui uppercase tracking-[0.3em] text-dorado-tierra text-[10px] mb-4">
-              Antioquia en cifras
+              El camino en números
             </p>
             <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] leading-[0.95] tracking-tight text-white mb-16">
-              Antioquia en <span className="text-dorado-tierra italic">Datos</span>
+              Un camino de <span className="text-dorado-tierra italic">toda una vida</span>
             </h2>
           </FadeIn>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-16 md:gap-y-20">
@@ -243,11 +243,6 @@ export default function Home() {
               </FadeIn>
             ))}
           </div>
-          <FadeIn>
-            <p className="font-ui text-[10px] text-white/25 mt-16 tracking-wide">
-              Cifras de gestión como Secretario de Infraestructura de Antioquia y trayectoria acumulada.
-            </p>
-          </FadeIn>
         </div>
       </section>
 
