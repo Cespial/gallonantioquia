@@ -105,7 +105,7 @@ export default function Home() {
             alt="Horacio Gallón mirando de frente"
             className="w-full h-full object-cover object-top"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0B3B24] via-[#0B3B24]/60 to-[#0B3B24]/20" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0B3B24]/90 via-[#0B3B24]/25 to-transparent" />
         </div>
 
         <div className="relative z-10 h-full flex flex-col justify-end px-6 md:px-16 lg:px-24 pb-20 md:pb-28">
