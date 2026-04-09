@@ -1,17 +1,19 @@
 import type { MetadataRoute } from "next";
 import { stories, blogPosts, ideas } from "@/data/content";
+import { columnas } from "@/data/columnas";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://www.gallonantioquia.com";
+  const baseUrl = "https://gallonantioquia.vercel.app";
 
   const staticPages = [
     { url: baseUrl, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 1 },
     { url: `${baseUrl}/territorio-vivo`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.9 },
     { url: `${baseUrl}/bitacora`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.9 },
+    { url: `${baseUrl}/columnas`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.9 },
     { url: `${baseUrl}/antioquia-piensa`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.8 },
     { url: `${baseUrl}/un-cafe`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.8 },
     { url: `${baseUrl}/voces`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.7 },
-    { url: `${baseUrl}/participa`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.7 },
+    { url: `${baseUrl}/participa`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.5 },
     { url: `${baseUrl}/sobre`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.8 },
   ];
 
@@ -36,5 +38,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticPages, ...storyPages, ...blogPages, ...ideaPages];
+  const columnaPages = columnas.map((col) => ({
+    url: `${baseUrl}/columnas/${col.slug}`,
+    lastModified: new Date(col.date),
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }));
+
+  return [...staticPages, ...storyPages, ...blogPages, ...ideaPages, ...columnaPages];
 }
