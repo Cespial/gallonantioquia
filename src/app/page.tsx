@@ -66,7 +66,7 @@ const sectionGrid = [
 /* Quick nav — the 5-column bar from the PPTX mockup                          */
 /* -------------------------------------------------------------------------- */
 const quickNav = [
-  { label: "Última Columna", excerpt: "Concesiones viales, necesarias para el desarrollo", href: "/columnas/concesiones-viales-necesarias-para-el-desarrollo-y-la-competitividad" },
+  { label: "Columna Inaugural", excerpt: "Las memorias que no quiero guardar en silencio", href: "/columnas/las-memorias-que-no-quiero-guardar-en-silencio" },
   { label: "Última Reflexión", excerpt: featuredReflection.title, href: `/bitacora/${featuredReflection.slug}` },
   { label: "Historia Destacada", excerpt: stories[0].title, href: `/territorio-vivo/${stories[0].slug}` },
   { label: "Entrevista", excerpt: episodes[0].title, href: "/un-cafe" },
@@ -110,16 +110,23 @@ export default function Home() {
 
         <div className="relative z-10 h-full flex flex-col justify-end px-6 md:px-16 lg:px-24 pb-20 md:pb-28">
           <FadeIn>
-            <h1 className="font-display text-[clamp(3rem,8vw,6.5rem)] leading-[0.85] tracking-tight text-white max-w-4xl mb-4">
-              Horacio<br />
-              <span className="italic text-dorado-tierra">Gallón</span>
+            <p className="font-ui uppercase tracking-[0.3em] text-dorado-tierra text-[10px] md:text-xs mb-4">
+              Horacio Gallón
+            </p>
+            <h1 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.9] tracking-tight text-white max-w-3xl mb-6">
+              Las memorias que no quiero<br />
+              <span className="italic text-dorado-tierra">guardar en silencio</span>
             </h1>
-            <p className="font-display text-[clamp(1.25rem,3vw,2rem)] leading-[1.1] tracking-tight text-white/90 max-w-xl mb-3">
-              Mi historia
+            <p className="font-body text-white/60 text-lg md:text-xl max-w-xl leading-relaxed mb-8">
+              Mi historia. El camino que me trajo hasta aquí.
             </p>
-            <p className="font-body text-white/60 text-lg md:text-xl max-w-xl leading-relaxed">
-              El camino que me trajo hasta aquí
-            </p>
+            <Link
+              href="/columnas/las-memorias-que-no-quiero-guardar-en-silencio"
+              className="group inline-flex items-center gap-3 bg-dorado-tierra text-oscuro rounded-full px-6 py-3 font-heading font-bold text-sm hover:brightness-110 transition"
+            >
+              Leer columna
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
           </FadeIn>
         </div>
       </section>

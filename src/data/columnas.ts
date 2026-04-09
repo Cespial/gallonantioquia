@@ -9,6 +9,25 @@ export const columnaCategories: string[] = [
 
 export const columnas: ColumnaArticle[] = [
   {
+    slug: "las-memorias-que-no-quiero-guardar-en-silencio",
+    title: "Las memorias que no quiero guardar en silencio",
+    excerpt:
+      "Cada día en esta responsabilidad pública es una suma de encuentros que dejan huella. No hay jornada que no esté atravesada por conversaciones con alcaldes, concejales, líderes sociales y, sobre todo, con la gente de nuestros municipios.",
+    date: "2026-04-09",
+    readTime: "4 min",
+    image: "/images/gallon-retrato-obra-hd.jpg",
+    sourceUrl: "",
+    body: [
+      "Cada día en esta responsabilidad pública es una suma de encuentros que dejan huella. No hay jornada que no esté atravesada por conversaciones con alcaldes, concejales, líderes sociales y, sobre todo, con la gente de nuestros municipios. En esos diálogos se cruzan los sueños de progreso, las urgencias del territorio y la esperanza profunda de quienes creen que sí es posible vivir mejor.",
+      "He tenido el privilegio de entregar obras que transforman vidas. Ver la alegría en los rostros de una comunidad cuando una vía se abre, cuando un puente conecta, cuando un proyecto se hace realidad, es una de las mayores recompensas que puede tener un servidor público. Son momentos que confirman que vale la pena insistir, persistir y trabajar sin descanso.",
+      "Pero también hay otro lado de esta labor que pocas veces se cuenta. Las decisiones difíciles, la necesidad de priorizar en medio de recursos limitados, las tensiones entre lo urgente y lo importante, y la responsabilidad de cuidar la vida por encima de cualquier obra. Esos momentos dejan preguntas, dudas y, muchas veces, frustraciones que no se ven, pero que también hacen parte del camino.",
+      "He entendido que todo esto —las alegrías y los sin sabores— no debería quedarse solo en mi memoria. Porque en cada experiencia hay un aprendizaje, y en cada aprendizaje hay una oportunidad de hacerlo mejor. Por eso nace este proyecto personal: un espacio para compartir lo que deja el día a día en el ejercicio de servir.",
+      "Quiero abrir estas memorias, estos pensamientos y reflexiones, no como verdades absolutas, sino como conversaciones honestas. Como una forma de construir, junto a otros, una mirada más humana de lo público. Porque gobernar también es sentir, escuchar, aprender y transformarse.",
+      "Si algo tengo claro es que Antioquia se construye entre todos. Y que cada historia, cada decisión y cada lección vivida pueden convertirse en insumos para seguir retándonos a ser mejores. A conectar más nuestros territorios, pero también a conectarnos más como sociedad. A buscar no solo desarrollo, sino bienestar real.",
+      "Este proyecto es, en esencia, una invitación: a pensar juntos, a aprender juntos y a no dejar que lo vivido se pierda en el olvido, sino que se convierta en motor para seguir avanzando hacia una Antioquia con más oportunidades, más conexión y mejor calidad de vida.",
+    ],
+  },
+  {
     slug: "concesiones-viales-necesarias-para-el-desarrollo-y-la-competitividad",
     title:
       "Concesiones viales, necesarias para el desarrollo y la competitividad",
