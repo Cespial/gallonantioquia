@@ -43,12 +43,17 @@ export default function Footer() {
           {/* Top: Logo + Tagline + Newsletter */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 pb-12 border-b border-white/10">
             <div>
-              <div className="flex items-baseline gap-2 mb-4">
-                <span className="font-brand text-xl text-white">
-                  GALLON
-                </span>
-                <span className="font-brand text-xl text-dorado-tierra">
-                  MEMORIAS
+              <div className="flex flex-col items-start mb-4">
+                <div className="flex items-baseline gap-2">
+                  <span className="font-brand text-xl text-white">
+                    GALL<span className="relative">O<span className="absolute -top-[0.35em] left-1/2 -translate-x-1/2 text-dorado-tierra text-[0.45em] leading-none">&#9670;</span></span>N
+                  </span>
+                  <span className="font-brand text-xl text-dorado-tierra">
+                    MEMORIAS
+                  </span>
+                </div>
+                <span className="font-accent text-[7px] uppercase tracking-[0.4em] text-white/40 mt-0.5 self-center">
+                  Historias & Reflexiones
                 </span>
               </div>
               <p className="font-body text-white/70 max-w-md leading-relaxed">

@@ -50,6 +50,7 @@ export default async function ColumnaDetailPage({ params }: Props) {
         title={col.title}
         label="Columna de Opinión"
         backgroundImage={col.image}
+        backgroundPosition={col.image.includes("retrato") ? "top" : "center"}
       />
 
       <SectionWrapper>

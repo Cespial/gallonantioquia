@@ -6,6 +6,7 @@ interface PageHeroProps {
   title: string;
   subtitle?: string;
   backgroundImage?: string;
+  backgroundPosition?: string;
   overlay?: boolean;
   compact?: boolean;
   label?: string;
@@ -15,6 +16,7 @@ export default function PageHero({
   title,
   subtitle,
   backgroundImage,
+  backgroundPosition = "center",
   overlay = true,
   compact = false,
   label,
@@ -32,8 +34,8 @@ export default function PageHero({
       {hasImage && (
         <>
           <div
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: `url(${backgroundImage})` }}
+            className="absolute inset-0 bg-cover bg-no-repeat"
+            style={{ backgroundImage: `url(${backgroundImage})`, backgroundPosition }}
           />
           {overlay && (
             <div className="absolute inset-0 bg-gradient-to-b from-oscuro-verde/60 to-oscuro-verde/85" />

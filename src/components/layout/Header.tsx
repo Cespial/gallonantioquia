@@ -65,20 +65,18 @@ export default function Header() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="group flex flex-col items-center lg:items-start">
+          <Link href="/" className="group flex flex-col items-center">
             <div className="flex items-baseline gap-2">
               <span className="font-brand text-2xl tracking-wide text-verde-antioquia group-hover:text-oscuro transition-colors">
-                GALLON
+                GALL<span className="relative">O<span className="absolute -top-[0.35em] left-1/2 -translate-x-1/2 text-dorado-tierra text-[0.45em] leading-none">&#9670;</span></span>N
               </span>
               <span className="font-brand text-2xl tracking-wide text-dorado-tierra group-hover:text-verde-antioquia transition-colors">
                 MEMORIAS
               </span>
             </div>
-            {!shrink && (
-              <span className="hidden lg:block font-accent text-[8px] uppercase tracking-[0.4em] text-texto-terciario -mt-1 pl-0.5">
-                Historias & Reflexiones
-              </span>
-            )}
+            <span className={`font-accent text-[8px] uppercase tracking-[0.4em] text-texto-terciario ${shrink ? "-mt-0.5" : "mt-0.5"}`}>
+              Historias & Reflexiones
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -147,7 +145,7 @@ export default function Header() {
             onClick={() => setMobileOpen(false)}
           >
             <span className="font-brand text-lg text-verde-antioquia">
-              GALLON
+              GALL<span className="relative">O<span className="absolute -top-[0.35em] left-1/2 -translate-x-1/2 text-dorado-tierra text-[0.45em] leading-none">&#9670;</span></span>N
             </span>
             <span className="font-brand text-lg text-dorado-tierra">
               MEMORIAS
