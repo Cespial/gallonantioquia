@@ -146,7 +146,7 @@ export const featuredReflection: BlogPost = {
   date: "2025-03-15",
   readTime: "6 min",
   image:
-    "/images/gallon-hablando-comunidad.jpg",
+    "/images/gallon-conversacion-rural.jpg",
 };
 
 // ---------------------------------------------------------------------------
@@ -163,7 +163,7 @@ export const blogPosts: BlogPost[] = [
     date: "2025-03-15",
     readTime: "6 min",
     image:
-      "/images/gallon-hablando-comunidad.jpg",
+      "/images/gallon-conversacion-rural.jpg",
   },
   {
     slug: "gobernar-tambien-es-saber-esperar",

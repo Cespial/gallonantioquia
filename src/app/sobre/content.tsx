@@ -132,35 +132,70 @@ export default function SobreContent() {
       />
 
       {/* ================================================================== */}
-      {/* 1. Hero                                                             */}
+      {/* 1. Hero — Split layout                                              */}
       {/* ================================================================== */}
       <section className="relative bg-[#0B3B24] overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="/images/gallon-retrato-obra-hd.jpg"
-            alt="Horacio Gallón"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover opacity-30"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0B3B24] via-[#0B3B24]/80 to-transparent" />
+        {/* Mobile: overlay */}
+        <div className="md:hidden relative">
+          <div className="absolute inset-0">
+            <Image
+              src="/images/gallon-retrato-obra-hd.jpg"
+              alt="Horacio Gallón"
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover object-top"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0B3B24] via-[#0B3B24]/60 to-[#0B3B24]/30" />
+          </div>
+          <div className="relative z-10 px-6 py-24">
+            <FadeIn>
+              <p className="font-ui uppercase tracking-[0.3em] text-dorado-tierra text-[10px] mb-6">
+                Mi historia
+              </p>
+              <h1 className="font-display text-4xl leading-[0.9] tracking-tight text-white mb-6">
+                El camino que<br />
+                <span className="italic text-dorado-tierra">me trajo</span><br />
+                hasta aquí.
+              </h1>
+              <p className="font-body text-white/60 text-base leading-relaxed">
+                Nací en Andes. Llevo más de treinta años caminando este departamento.
+                Esta es mi historia.
+              </p>
+            </FadeIn>
+          </div>
         </div>
-        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-16 lg:px-24 py-24 md:py-32">
-          <FadeIn>
-            <p className="font-ui uppercase tracking-[0.3em] text-dorado-tierra text-[10px] mb-6">
-              Mi historia
-            </p>
-            <h1 className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9] tracking-tight text-white max-w-3xl mb-6">
-              El camino que<br />
-              <span className="italic text-dorado-tierra">me trajo</span><br />
-              hasta aquí.
-            </h1>
-            <p className="font-body text-white/60 text-lg max-w-xl leading-relaxed">
-              Nací en Andes. Llevo más de treinta años caminando este departamento.
-              Esta es mi historia — contada en primera persona, como debe ser.
-            </p>
-          </FadeIn>
+
+        {/* Desktop: split layout */}
+        <div className="hidden md:grid md:grid-cols-2 min-h-[60vh]">
+          <div className="flex flex-col justify-center px-16 lg:px-24 py-24">
+            <FadeIn>
+              <p className="font-ui uppercase tracking-[0.3em] text-dorado-tierra text-[10px] mb-6">
+                Mi historia
+              </p>
+              <h1 className="font-display text-[clamp(2.5rem,5vw,4.5rem)] leading-[0.9] tracking-tight text-white max-w-lg mb-6">
+                El camino que<br />
+                <span className="italic text-dorado-tierra">me trajo</span><br />
+                hasta aquí.
+              </h1>
+              <div className="w-16 h-px bg-dorado-tierra mb-8" />
+              <p className="font-body text-white/50 text-lg max-w-md leading-relaxed">
+                Nací en Andes. Llevo más de treinta años caminando este departamento.
+                Esta es mi historia — contada en primera persona, como debe ser.
+              </p>
+            </FadeIn>
+          </div>
+          <div className="relative overflow-hidden">
+            <Image
+              src="/images/gallon-retrato-obra-hd.jpg"
+              alt="Horacio Gallón"
+              fill
+              priority
+              sizes="50vw"
+              className="object-cover object-top"
+            />
+            <div className="absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-[#0B3B24] to-transparent" />
+          </div>
         </div>
       </section>
 
