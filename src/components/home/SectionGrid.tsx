@@ -13,7 +13,7 @@ const sectionGrid = [
     title: "Territorio Vivo",
     subtitle: "Historias de Antioquia",
     href: "/territorio-vivo",
-    image: "/images/gallon-conversacion-rural.jpg",
+    image: "/images/gallon-parque-pueblo.jpg",
   },
   {
     title: "Huellas en el Camino",
@@ -47,7 +47,7 @@ export default function SectionGrid() {
                   sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0B3B24]/90 via-[#0B3B24]/30 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0B3B24]/90 via-[#0B3B24]/30 to-transparent group-hover:from-[#0B3B24]/70 transition-all duration-500" />
                 <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-8">
                   <h3 className="font-display text-xl md:text-2xl text-white leading-tight group-hover:text-dorado-tierra transition-colors">
                     {section.title}

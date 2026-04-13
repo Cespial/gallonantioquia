@@ -26,7 +26,7 @@ export default function StoriesSection() {
                 className="group block py-8 md:px-8 first:md:pl-0 last:md:pr-0 border-b md:border-b-0 md:border-r border-borde/50 last:border-0 overflow-hidden"
               >
                 <p className="font-ui uppercase tracking-[0.2em] text-dorado-tierra text-[10px] mb-3">{story.category}</p>
-                <h3 className="font-display text-lg leading-snug group-hover:text-verde-antioquia transition-colors">{story.title}</h3>
+                <h3 className="font-display text-lg leading-snug hover-line-editorial group-hover:text-verde-antioquia transition-colors">{story.title}</h3>
                 <p className="font-body text-sm text-texto-terciario mt-3 line-clamp-2">{story.excerpt}</p>
               </Link>
             </FadeIn>

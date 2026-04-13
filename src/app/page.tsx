@@ -3,7 +3,6 @@ import HeroSection from "@/components/home/HeroSection";
 import QuickNavBar from "@/components/home/QuickNavBar";
 import SectionGrid from "@/components/home/SectionGrid";
 import FeaturedReflection from "@/components/home/FeaturedReflection";
-import StatsSection from "@/components/home/StatsSection";
 import PhotoBand from "@/components/home/PhotoBand";
 import StoriesSection from "@/components/home/StoriesSection";
 import SobreSection from "@/components/home/SobreSection";
@@ -40,9 +39,10 @@ export default function Home() {
       <HeroSection />
       <QuickNavBar />
       <SectionGrid />
+      <div className="section-divider max-w-5xl mx-auto" />
       <FeaturedReflection />
-      <StatsSection />
       <PhotoBand />
+      <div className="section-divider max-w-5xl mx-auto" />
       <StoriesSection />
       <SobreSection />
       <NewsletterSection />

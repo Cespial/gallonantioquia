@@ -10,7 +10,7 @@ export default function SobreSection() {
           <FadeIn>
             <Link href="/sobre" className="group relative block aspect-[21/9] overflow-hidden">
               <Image
-                src="/images/gallon-retrato-obra-hd.jpg"
+                src="/images/gallon-hablando-comunidad.jpg"
                 alt="Horacio Gallón"
                 fill
                 sizes="100vw"
