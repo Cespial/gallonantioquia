@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 import PageHero from "@/components/layout/PageHero";
 import SectionWrapper from "@/components/layout/SectionWrapper";
-import NewsletterForm from "@/components/content/NewsletterForm";
-import Button from "@/components/ui/Button";
+import AuthorBioBox from "@/components/content/AuthorBioBox";
+import ArticleNavigation from "@/components/content/ArticleNavigation";
+import NewsletterCTA from "@/components/content/NewsletterCTA";
 import { columnas } from "@/data/columnas";
 import { columnasBodies } from "@/data/columnas-bodies";
 import { formatDate } from "@/lib/utils";
@@ -125,68 +125,18 @@ export default async function ColumnaDetailPage({ params }: Props) {
             </a>
           </div>
 
-          {/* Author box */}
-          <div className="mt-12 p-6 bg-verde-suave rounded-card border border-borde/50">
-            <h3 className="font-heading font-bold text-lg text-texto-principal mb-2">
-              Sobre Horacio Gall&oacute;n
-            </h3>
-            <p className="font-body text-sm text-texto-secundario leading-relaxed mb-4">
-              Hijo de Andes, Suroeste antioque&ntilde;o. M&aacute;s de tres
-              d&eacute;cadas al servicio de Antioquia. Exalcalde, exrepresentante
-              a la C&aacute;mara y columnista en Al Poniente.
-            </p>
-            <Button href="/sobre" variant="secondary" size="sm">
-              Conocer m&aacute;s
-            </Button>
-          </div>
+          <AuthorBioBox />
 
-          {/* Prev / Next navigation */}
-          <nav className="flex justify-between items-center mt-12 pt-8 border-t border-borde">
-            {prevCol ? (
-              <Link
-                href={`/columnas/${prevCol.slug}`}
-                className="group font-ui text-sm text-texto-secundario hover:text-verde-antioquia transition-colors"
-              >
-                <span className="block text-xs uppercase tracking-label text-texto-terciario mb-1">
-                  Anterior
-                </span>
-                <span className="group-hover:underline">
-                  &larr; {prevCol.title}
-                </span>
-              </Link>
-            ) : (
-              <div />
-            )}
-            {nextCol ? (
-              <Link
-                href={`/columnas/${nextCol.slug}`}
-                className="group font-ui text-sm text-texto-secundario hover:text-verde-antioquia transition-colors text-right"
-              >
-                <span className="block text-xs uppercase tracking-label text-texto-terciario mb-1">
-                  Siguiente
-                </span>
-                <span className="group-hover:underline">
-                  {nextCol.title} &rarr;
-                </span>
-              </Link>
-            ) : (
-              <div />
-            )}
-          </nav>
+          <ArticleNavigation
+            basePath="/columnas"
+            prev={prevCol}
+            next={nextCol}
+          />
 
-          {/* Newsletter CTA */}
-          <div className="mt-16 p-8 bg-oscuro-verde rounded-card text-center">
-            <h3 className="font-display text-2xl text-white mb-2">
-              Recibe las columnas de Horacio
-            </h3>
-            <p className="font-body text-sm text-white/70 mb-6">
-              Suscr&iacute;bete y recibir&aacute;s cada nueva columna
-              directamente en tu correo.
-            </p>
-            <div className="max-w-md mx-auto">
-              <NewsletterForm variant="dark" />
-            </div>
-          </div>
+          <NewsletterCTA
+            title="Recibe las columnas de Horacio"
+            subtitle="Suscr&iacute;bete y recibir&aacute;s cada nueva columna directamente en tu correo."
+          />
         </article>
       </SectionWrapper>
     </>

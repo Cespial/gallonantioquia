@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import PageHero from "@/components/layout/PageHero";
 import SectionWrapper from "@/components/layout/SectionWrapper";
 import PullQuote from "@/components/content/PullQuote";
-import NewsletterForm from "@/components/content/NewsletterForm";
-import Button from "@/components/ui/Button";
+import AuthorBioBox from "@/components/content/AuthorBioBox";
+import ArticleNavigation from "@/components/content/ArticleNavigation";
+import NewsletterCTA from "@/components/content/NewsletterCTA";
 import { blogPosts } from "@/data/content";
 import { formatDate } from "@/lib/utils";
 
@@ -135,68 +135,17 @@ export default async function BlogPostPage({ params }: Props) {
             </p>
           </div>
 
-          {/* Author box */}
-          <div className="mt-12 p-6 bg-verde-suave rounded-card border border-borde/50">
-            <h3 className="font-heading font-bold text-lg text-texto-principal mb-2">
-              Sobre Horacio Gall&oacute;n
-            </h3>
-            <p className="font-body text-sm text-texto-secundario leading-relaxed mb-4">
-              Hijo de Andes, Suroeste antioque&ntilde;o. M&aacute;s de tres
-              d&eacute;cadas al servicio de Antioquia. Exalcalde, exrepresentante
-              a la C&aacute;mara y columnista en Al Poniente.
-            </p>
-            <Button href="/sobre" variant="secondary" size="sm">
-              Conocer m&aacute;s
-            </Button>
-          </div>
+          <AuthorBioBox />
 
-          {/* Prev / Next navigation */}
-          <nav className="flex justify-between items-center mt-12 pt-8 border-t border-borde">
-            {prevPost ? (
-              <Link
-                href={`/bitacora/${prevPost.slug}`}
-                className="group font-ui text-sm text-texto-secundario hover:text-verde-antioquia transition-colors"
-              >
-                <span className="block text-xs uppercase tracking-label text-texto-terciario mb-1">
-                  Anterior
-                </span>
-                <span className="group-hover:underline">
-                  &larr; {prevPost.title}
-                </span>
-              </Link>
-            ) : (
-              <div />
-            )}
-            {nextPost ? (
-              <Link
-                href={`/bitacora/${nextPost.slug}`}
-                className="group font-ui text-sm text-texto-secundario hover:text-verde-antioquia transition-colors text-right"
-              >
-                <span className="block text-xs uppercase tracking-label text-texto-terciario mb-1">
-                  Siguiente
-                </span>
-                <span className="group-hover:underline">
-                  {nextPost.title} &rarr;
-                </span>
-              </Link>
-            ) : (
-              <div />
-            )}
-          </nav>
+          <ArticleNavigation
+            basePath="/bitacora"
+            prev={prevPost}
+            next={nextPost}
+          />
 
-          {/* Newsletter CTA */}
-          <div className="mt-16 p-8 bg-oscuro-verde rounded-card text-center">
-            <h3 className="font-display text-2xl text-white mb-2">
-              Recibe las reflexiones de Horacio
-            </h3>
-            <p className="font-body text-sm text-white/70 mb-6">
-              Suscr&iacute;bete y recibir&aacute;s cada nueva entrada de la
-              Bit&aacute;cora directamente en tu correo.
-            </p>
-            <div className="max-w-md mx-auto">
-              <NewsletterForm variant="dark" />
-            </div>
-          </div>
+          <NewsletterCTA
+            subtitle="Suscr&iacute;bete y recibir&aacute;s cada nueva entrada de la Bit&aacute;cora directamente en tu correo."
+          />
         </article>
       </SectionWrapper>
     </>

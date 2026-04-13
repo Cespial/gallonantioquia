@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import PageHero from "@/components/layout/PageHero";
 import SectionWrapper from "@/components/layout/SectionWrapper";
 import PullQuote from "@/components/content/PullQuote";
-import NewsletterForm from "@/components/content/NewsletterForm";
+import AuthorBioBox from "@/components/content/AuthorBioBox";
+import ArticleNavigation from "@/components/content/ArticleNavigation";
+import NewsletterCTA from "@/components/content/NewsletterCTA";
 import Badge from "@/components/ui/Badge";
-import Button from "@/components/ui/Button";
 import { stories } from "@/data/content";
 import { formatDate } from "@/lib/utils";
 
@@ -138,70 +138,20 @@ export default async function StoryPage({ params }: Props) {
             </p>
           </div>
 
-          {/* Author box */}
-          <div className="mt-12 p-6 bg-verde-suave rounded-card border border-borde/50">
-            <h3 className="font-heading font-bold text-lg text-texto-principal mb-2">
-              Sobre Horacio Gall&oacute;n
-            </h3>
-            <p className="font-body text-sm text-texto-secundario leading-relaxed mb-4">
-              Hijo de Andes, Suroeste antioque&ntilde;o. M&aacute;s de tres
-              d&eacute;cadas al servicio de Antioquia. Actual Secretario de
-              Infraestructura F&iacute;sica de la Gobernaci&oacute;n de
-              Antioquia, liderando la mayor inversi&oacute;n vial en la historia
-              del departamento.
-            </p>
-            <Button href="/sobre" variant="secondary" size="sm">
-              Conocer m&aacute;s
-            </Button>
-          </div>
+          <AuthorBioBox
+            description="Hijo de Andes, Suroeste antioque&ntilde;o. M&aacute;s de tres d&eacute;cadas al servicio de Antioquia. Actual Secretario de Infraestructura F&iacute;sica de la Gobernaci&oacute;n de Antioquia, liderando la mayor inversi&oacute;n vial en la historia del departamento."
+          />
 
-          {/* Prev / Next navigation */}
-          <nav className="flex justify-between items-center mt-12 pt-8 border-t border-borde">
-            {prevStory ? (
-              <Link
-                href={`/territorio-vivo/${prevStory.slug}`}
-                className="group font-ui text-sm text-texto-secundario hover:text-verde-antioquia transition-colors"
-              >
-                <span className="block text-xs uppercase tracking-label text-texto-terciario mb-1">
-                  Anterior
-                </span>
-                <span className="group-hover:underline">
-                  &larr; {prevStory.title}
-                </span>
-              </Link>
-            ) : (
-              <div />
-            )}
-            {nextStory ? (
-              <Link
-                href={`/territorio-vivo/${nextStory.slug}`}
-                className="group font-ui text-sm text-texto-secundario hover:text-verde-antioquia transition-colors text-right"
-              >
-                <span className="block text-xs uppercase tracking-label text-texto-terciario mb-1">
-                  Siguiente
-                </span>
-                <span className="group-hover:underline">
-                  {nextStory.title} &rarr;
-                </span>
-              </Link>
-            ) : (
-              <div />
-            )}
-          </nav>
+          <ArticleNavigation
+            basePath="/territorio-vivo"
+            prev={prevStory}
+            next={nextStory}
+          />
 
-          {/* Newsletter CTA */}
-          <div className="mt-16 p-8 bg-oscuro-verde rounded-card text-center">
-            <h3 className="font-display text-2xl text-white mb-2">
-              Recibe m&aacute;s historias de Antioquia
-            </h3>
-            <p className="font-body text-sm text-white/70 mb-6">
-              Suscr&iacute;bete y te enviaremos las nuevas historias de
-              Territorio Vivo directamente a tu correo.
-            </p>
-            <div className="max-w-md mx-auto">
-              <NewsletterForm variant="dark" />
-            </div>
-          </div>
+          <NewsletterCTA
+            title="Recibe m&aacute;s historias de Antioquia"
+            subtitle="Suscr&iacute;bete y te enviaremos las nuevas historias de Territorio Vivo directamente a tu correo."
+          />
         </article>
       </SectionWrapper>
     </>
