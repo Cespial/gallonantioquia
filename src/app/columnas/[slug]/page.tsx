@@ -6,6 +6,7 @@ import SectionWrapper from "@/components/layout/SectionWrapper";
 import AuthorBioBox from "@/components/content/AuthorBioBox";
 import ArticleNavigation from "@/components/content/ArticleNavigation";
 import NewsletterCTA from "@/components/content/NewsletterCTA";
+import Breadcrumb from "@/components/content/Breadcrumb";
 import { columnas } from "@/data/columnas";
 import { columnasBodies } from "@/data/columnas-bodies";
 import { formatDate } from "@/lib/utils";
@@ -27,6 +28,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${col.title} — Columnas de Opinión`,
     description: col.excerpt,
+    openGraph: {
+      images: [{ url: col.image }],
+    },
   };
 }
 
@@ -48,6 +52,25 @@ export default async function ColumnaDetailPage({ params }: Props) {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: col.title,
+            datePublished: col.date,
+            description: col.excerpt,
+            image: `https://gallonantioquia.vercel.app${col.image}`,
+            author: {
+              "@type": "Person",
+              name: "Luis Horacio Gallón Arango",
+              url: "https://gallonantioquia.vercel.app/sobre",
+            },
+            publisher: { "@type": "Organization", name: "Gallón Memorias" },
+          }),
+        }}
+      />
       <PageHero
         title={col.title}
         label="Columna de Opinión"
@@ -56,6 +79,11 @@ export default async function ColumnaDetailPage({ params }: Props) {
       />
 
       <SectionWrapper>
+        <Breadcrumb items={[
+          { label: "Inicio", href: "/" },
+          { label: "Columnas", href: "/columnas" },
+          { label: col.title },
+        ]} />
         <article className="max-w-3xl mx-auto">
           {/* Meta */}
           <div className="flex flex-wrap items-center gap-3 mb-8">

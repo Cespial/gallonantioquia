@@ -6,6 +6,7 @@ import PullQuote from "@/components/content/PullQuote";
 import AuthorBioBox from "@/components/content/AuthorBioBox";
 import ArticleNavigation from "@/components/content/ArticleNavigation";
 import NewsletterCTA from "@/components/content/NewsletterCTA";
+import Breadcrumb from "@/components/content/Breadcrumb";
 import { blogPosts } from "@/data/content";
 import { formatDate } from "@/lib/utils";
 
@@ -26,6 +27,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${post.title} — Bitácora de Camino`,
     description: post.excerpt,
+    openGraph: {
+      images: [{ url: post.image }],
+    },
   };
 }
 
@@ -45,6 +49,25 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: post.title,
+            datePublished: post.date,
+            description: post.excerpt,
+            image: `https://gallonantioquia.vercel.app${post.image}`,
+            author: {
+              "@type": "Person",
+              name: "Luis Horacio Gallón Arango",
+              url: "https://gallonantioquia.vercel.app/sobre",
+            },
+            publisher: { "@type": "Organization", name: "Gallón Memorias" },
+          }),
+        }}
+      />
       <PageHero
         title={post.title}
         label={post.tag}
@@ -52,6 +75,11 @@ export default async function BlogPostPage({ params }: Props) {
       />
 
       <SectionWrapper>
+        <Breadcrumb items={[
+          { label: "Inicio", href: "/" },
+          { label: "Huellas en el Camino", href: "/bitacora" },
+          { label: post.title },
+        ]} />
         <article className="max-w-3xl mx-auto">
           {/* Meta */}
           <div className="flex flex-wrap items-center gap-3 mb-8">
