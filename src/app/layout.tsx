@@ -38,6 +38,7 @@ const myriadPro = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://gallonantioquia.vercel.app"),
   title: {
     default: "Gallón Memorias — Memorias de Antioquia",
     template: "%s | Gallón Memorias",
