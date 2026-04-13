@@ -17,10 +17,8 @@ export const navItems: NavItem[] = [
   { label: "Inicio", href: "/" },
   { label: "Columnas", href: "/columnas" },
   { label: "Territorio Vivo", href: "/territorio-vivo" },
-  { label: "Bitácora", href: "/bitacora" },
+  { label: "Huellas en el Camino", href: "/bitacora" },
   { label: "Antioquia Piensa", href: "/antioquia-piensa" },
-  { label: "Un Café", href: "/un-cafe" },
-  { label: "Voces", href: "/voces" },
   { label: "Sobre", href: "/sobre" },
 ];
 

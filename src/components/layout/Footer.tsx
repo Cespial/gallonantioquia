@@ -4,7 +4,6 @@ import { navItems } from "@/data/content";
 const contentLinks = [
   { label: "Ultima reflexion", href: "/bitacora" },
   { label: "Cifras de impacto", href: "/territorio-vivo#impacto" },
-  { label: "Newsletter", href: "/participa" },
 ];
 
 const legalLinks = [

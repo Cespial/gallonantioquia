@@ -11,9 +11,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/bitacora`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.9 },
     { url: `${baseUrl}/columnas`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.9 },
     { url: `${baseUrl}/antioquia-piensa`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.8 },
-    { url: `${baseUrl}/un-cafe`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.8 },
-    { url: `${baseUrl}/voces`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.7 },
-    { url: `${baseUrl}/participa`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.5 },
     { url: `${baseUrl}/sobre`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.8 },
   ];
 

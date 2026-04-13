@@ -9,8 +9,6 @@ import {
   featuredReflection,
   impactStats,
   stories,
-  episodes,
-  guestColumns,
   ideas,
 } from "@/data/content";
 
@@ -26,7 +24,7 @@ export const metadata: Metadata = {
 const sectionGrid = [
   {
     title: "Columnas",
-    subtitle: "Opinión en Al Poniente",
+    subtitle: "Opinión y reflexión",
     href: "/columnas",
     image: "/images/gallon-entrevista-medellin.jpg",
   },
@@ -37,28 +35,16 @@ const sectionGrid = [
     image: "/images/gallon-conversacion-rural.jpg",
   },
   {
-    title: "Bitácora de Camino",
+    title: "Huellas en el Camino",
     subtitle: "Reflexiones personales",
     href: "/bitacora",
     image: "/images/gallon-retrato-montanas-portrait.jpg",
   },
   {
     title: "Antioquia Piensa",
-    subtitle: "Ideas y Proyectos",
+    subtitle: "Ideas y conversaciones",
     href: "/antioquia-piensa",
     image: "/images/fondo-mapa-antioquia.jpg",
-  },
-  {
-    title: "Un Café para Antioquia",
-    subtitle: "Entrevistas y Diálogos",
-    href: "/un-cafe",
-    image: "/images/gallon-reunion-biblioteca.jpg",
-  },
-  {
-    title: "Voces de Antioquia",
-    subtitle: "Columnas Invitadas",
-    href: "/voces",
-    image: "/images/gallon-familia-grande.jpg",
   },
 ];
 
@@ -69,7 +55,6 @@ const quickNav = [
   { label: "Columna Inaugural", excerpt: "Las memorias que no quiero guardar en silencio", href: "/columnas/las-memorias-que-no-quiero-guardar-en-silencio" },
   { label: "Última Reflexión", excerpt: featuredReflection.title, href: `/bitacora/${featuredReflection.slug}` },
   { label: "Historia Destacada", excerpt: stories[0].title, href: `/territorio-vivo/${stories[0].slug}` },
-  { label: "Entrevista", excerpt: episodes[0].title, href: "/un-cafe" },
   { label: "Ideas para el Futuro", excerpt: ideas[0].title, href: `/antioquia-piensa/${ideas[0].slug}` },
 ];
 
@@ -138,14 +123,12 @@ export default function Home() {
       {/* ================================================================== */}
       <section className="bg-[#0B3B24] border-t border-white/10">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-5 divide-x divide-white/10">
+          <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10">
             {quickNav.map((item, index) => (
               <Link
                 key={item.label}
                 href={item.href}
-                className={`group block px-4 md:px-5 py-5 md:py-6 hover:bg-white/5 transition-colors ${
-                  index >= 4 ? "hidden md:block" : ""
-                }`}
+                className="group block px-4 md:px-5 py-5 md:py-6 hover:bg-white/5 transition-colors"
               >
                 <p className="font-ui uppercase tracking-[0.15em] text-dorado-tierra text-[9px] md:text-[10px] mb-2">
                   {item.label}
@@ -164,7 +147,7 @@ export default function Home() {
       {/* ================================================================== */}
       <section className="py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
             {sectionGrid.map((section, index) => (
               <FadeIn key={section.href} delay={index * 80}>
                 <Link
@@ -310,42 +293,22 @@ export default function Home() {
       </section>
 
       {/* ================================================================== */}
-      {/* 7. SOBRE HORACIO + PARTICIPA — Bottom bar                          */}
+      {/* 7. SOBRE HORACIO — Bottom bar                                      */}
       {/* ================================================================== */}
       <section className="border-t border-borde/50 mb-12 md:mb-16">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 pt-3 md:pt-4">
-            {/* Sobre Horacio */}
+          <div className="pt-3 md:pt-4">
             <FadeIn>
-              <Link href="/sobre" className="group relative block aspect-[16/9] overflow-hidden">
+              <Link href="/sobre" className="group relative block aspect-[21/9] overflow-hidden">
                 <img
                   src="/images/gallon-retrato-obra-hd.jpg"
                   alt="Horacio Gallón"
-                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0B3B24]/90 via-[#0B3B24]/30 to-transparent" />
                 <div className="absolute bottom-0 left-0 p-8">
                   <h3 className="font-display text-2xl text-white group-hover:text-dorado-tierra transition-colors">Mi historia</h3>
                   <p className="font-ui text-[10px] uppercase tracking-[0.2em] text-white/60 mt-2">El camino que me trajo hasta aquí</p>
-                </div>
-              </Link>
-            </FadeIn>
-
-            {/* Participa */}
-            <FadeIn delay={100}>
-              <Link href="/participa" className="group relative block aspect-[16/9] overflow-hidden bg-arena">
-                <div className="absolute inset-0 opacity-10">
-                  <img src="/images/fondo-mapa-antioquia.jpg" alt="" className="w-full h-full object-cover" aria-hidden="true" />
-                </div>
-                <div className="relative h-full flex flex-col justify-center items-center text-center p-8">
-                  <p className="font-ui uppercase tracking-[0.25em] text-dorado-tierra text-[10px] mb-4">Participa</p>
-                  <h3 className="font-display text-2xl md:text-3xl text-texto-principal group-hover:text-verde-antioquia transition-colors mb-4">
-                    Cuéntame tus ideas<br />
-                    <span className="italic">para Antioquia</span>
-                  </h3>
-                  <span className="inline-flex items-center gap-2 font-ui text-xs uppercase tracking-[0.15em] text-texto-terciario group-hover:text-verde-antioquia transition-colors">
-                    Participar <ArrowRight className="w-4 h-4" />
-                  </span>
                 </div>
               </Link>
             </FadeIn>
