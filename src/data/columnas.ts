@@ -15,7 +15,7 @@ export const columnas: ColumnaArticle[] = [
       "Cada día en esta responsabilidad pública es una suma de encuentros que dejan huella. No hay jornada que no esté atravesada por conversaciones con alcaldes, concejales, líderes sociales y, sobre todo, con la gente de nuestros municipios.",
     date: "2026-04-09",
     readTime: "4 min",
-    image: "/images/gallon-retrato-obra-hd.jpg",
+    image: "/images/gallon-hablando-comunidad.jpg",
     sourceUrl: "",
     body: [],
   },
