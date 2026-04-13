@@ -38,7 +38,7 @@ export default function AuthorCard({
       className={cn(
         "bg-blanco-calido rounded-card p-6 border border-borde/50",
         "transition-all duration-300",
-        slug && "hover:shadow-md hover:-translate-y-0.5 cursor-pointer"
+        slug && "hover:shadow-lg hover:-translate-y-1 cursor-pointer"
       )}
     >
       {/* Author section */}

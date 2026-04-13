@@ -32,11 +32,11 @@ export default function EpisodeCard({
       className={cn(
         "group bg-blanco-calido rounded-card overflow-hidden border border-borde/50 shadow-sm",
         "transition-all duration-300",
-        "hover:shadow-md hover:-translate-y-0.5"
+        "hover:shadow-lg hover:-translate-y-1"
       )}
     >
       {/* Thumbnail with play overlay */}
-      <div className="relative overflow-hidden rounded-t-card aspect-video">
+      <div className="relative overflow-hidden rounded-t-card aspect-[16/10]">
         <Image
           src={image}
           alt={`${title} - ${guest}`}

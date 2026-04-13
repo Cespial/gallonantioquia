@@ -49,8 +49,8 @@ export default function ArticleCard({
       <article
         className={cn(
           "bg-blanco-calido overflow-hidden border-editorial-thin shadow-sm",
-          "transition-all duration-500",
-          "hover:shadow-editorial hover:-translate-y-1"
+          "transition-all duration-300",
+          "hover:shadow-lg hover:-translate-y-1"
         )}
       >
         {/* Image with subtle zoom and overlay */}
