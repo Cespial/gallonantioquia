@@ -45,7 +45,7 @@ export default function Footer() {
               <div className="flex flex-col items-start mb-4">
                 <div className="flex items-baseline gap-2">
                   <span className="font-brand text-xl text-white">
-                    GALL<span className="relative">O<span className="absolute -top-[0.35em] left-1/2 -translate-x-1/2 text-dorado-tierra text-[0.45em] leading-none">&#9670;</span></span>N
+                    GALL<span className="relative inline-block">O<span className="absolute -top-[0.22em] left-1/2 -translate-x-1/2 text-dorado-tierra text-[0.7em] leading-none" style={{fontFamily: "serif"}}>&#769;</span></span>N
                   </span>
                   <span className="font-brand text-xl text-dorado-tierra">
                     MEMORIAS
