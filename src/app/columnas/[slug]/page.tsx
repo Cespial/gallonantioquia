@@ -7,6 +7,7 @@ import SectionWrapper from "@/components/layout/SectionWrapper";
 import NewsletterForm from "@/components/content/NewsletterForm";
 import Button from "@/components/ui/Button";
 import { columnas } from "@/data/columnas";
+import { columnasBodies } from "@/data/columnas-bodies";
 import { formatDate } from "@/lib/utils";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -42,7 +43,8 @@ export default async function ColumnaDetailPage({ params }: Props) {
   const nextCol =
     colIndex < columnas.length - 1 ? columnas[colIndex + 1] : null;
   const { full: dateFormatted } = formatDate(col.date);
-  const hasBody = col.body.length > 0;
+  const body = columnasBodies[col.slug] || [];
+  const hasBody = body.length > 0;
 
   return (
     <>
@@ -79,7 +81,7 @@ export default async function ColumnaDetailPage({ params }: Props) {
           {/* Article body */}
           {hasBody ? (
             <div className="prose-editorial">
-              {col.body.map((paragraph, i) => (
+              {body.map((paragraph, i) => (
                 <p
                   key={i}
                   className="font-body text-texto-principal text-lg leading-relaxed mb-6"
