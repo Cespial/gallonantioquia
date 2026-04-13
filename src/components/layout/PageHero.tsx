@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 interface PageHeroProps {
@@ -33,9 +34,13 @@ export default function PageHero({
       {/* Background Image */}
       {hasImage && (
         <>
-          <div
-            className="absolute inset-0 bg-cover bg-no-repeat"
-            style={{ backgroundImage: `url(${backgroundImage})`, backgroundPosition }}
+          <Image
+            src={backgroundImage}
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover"
+            style={backgroundPosition !== "center" ? { objectPosition: backgroundPosition } : undefined}
           />
           {overlay && (
             <div className="absolute inset-0 bg-gradient-to-b from-oscuro-verde/60 to-oscuro-verde/85" />
