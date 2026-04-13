@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import PageHero from "@/components/layout/PageHero";
 import SectionWrapper from "@/components/layout/SectionWrapper";
@@ -53,11 +54,13 @@ export default function BitacoraContent() {
                   </div>
 
                   {/* Image */}
-                  <div className="hidden sm:block flex-shrink-0">
-                    <img
+                  <div className="hidden sm:block flex-shrink-0 relative w-48 h-32">
+                    <Image
                       src={post.image}
                       alt={post.title}
-                      className="rounded-card w-48 h-32 object-cover"
+                      fill
+                      sizes="192px"
+                      className="rounded-card object-cover"
                     />
                   </div>
                 </Link>

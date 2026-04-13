@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import CountUp from "@/components/animations/CountUp";
 
@@ -80,10 +81,12 @@ export default function Scrollytelling({ chapters }: ScrollytellingProps) {
                   index === activeIndex ? "opacity-100" : "opacity-0"
                 )}
               >
-                <img
+                <Image
                   src={chapter.image}
                   alt={chapter.title}
-                  className="w-full h-full object-cover"
+                  fill
+                  sizes="50vw"
+                  className="object-cover"
                 />
                 {/* Dark overlay for legibility */}
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#0B3B24]/40" />
@@ -147,10 +150,12 @@ export default function Scrollytelling({ chapters }: ScrollytellingProps) {
             >
               {/* Mobile image — only visible on small screens */}
               <div className="lg:hidden mb-8 relative overflow-hidden aspect-video">
-                <img
+                <Image
                   src={chapter.image}
                   alt={chapter.title}
-                  className="w-full h-full object-cover"
+                  fill
+                  sizes="100vw"
+                  className="object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0B3B24]/60 to-transparent" />
                 <span className="absolute bottom-4 left-4 font-display text-4xl font-black text-white/20">

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Play, Video, Headphones, FileText } from "lucide-react";
 
@@ -35,11 +36,13 @@ export default function EpisodeCard({
       )}
     >
       {/* Thumbnail with play overlay */}
-      <div className="relative overflow-hidden rounded-t-card">
-        <img
+      <div className="relative overflow-hidden rounded-t-card aspect-video">
+        <Image
           src={image}
           alt={`${title} - ${guest}`}
-          className="w-full aspect-video object-cover transition-transform duration-500 group-hover:scale-105"
+          fill
+          sizes="(max-width: 768px) 100vw, 33vw"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
 
         {/* Play button overlay */}

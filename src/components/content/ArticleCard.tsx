@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Video, Headphones, Camera, FileText } from "lucide-react";
@@ -54,10 +55,12 @@ export default function ArticleCard({
       >
         {/* Image with subtle zoom and overlay */}
         <div className="overflow-hidden relative aspect-[16/10]">
-          <img
+          <Image
             src={image}
             alt={title}
-            className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 group-hover:rotate-1"
+            fill
+            sizes="(max-width: 768px) 100vw, 33vw"
+            className="object-cover transition-transform duration-1000 group-hover:scale-110 group-hover:rotate-1"
           />
           <div className="absolute inset-0 bg-verde-antioquia/5 group-hover:bg-transparent transition-colors duration-500" />
           

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
@@ -43,11 +44,15 @@ export default function AuthorCard({
       {/* Author section */}
       <div className="flex items-center gap-4">
         {authorImage && !authorImage.includes("gallon-") ? (
-          <img
-            src={authorImage}
-            alt={authorName}
-            className="w-16 h-16 rounded-full object-cover border-2 border-borde/30"
-          />
+          <div className="relative w-16 h-16 flex-shrink-0">
+            <Image
+              src={authorImage}
+              alt={authorName}
+              fill
+              sizes="64px"
+              className="rounded-full object-cover border-2 border-borde/30"
+            />
+          </div>
         ) : (
           <div className="w-16 h-16 rounded-full bg-verde-antioquia flex items-center justify-center flex-shrink-0">
             <span className="font-brand text-white text-lg">{initials}</span>

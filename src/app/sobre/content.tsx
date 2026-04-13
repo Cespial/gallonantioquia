@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import {
   Building2,
   TreePine,
@@ -135,10 +136,13 @@ export default function SobreContent() {
       {/* ================================================================== */}
       <section className="relative bg-[#0B3B24] overflow-hidden">
         <div className="absolute inset-0">
-          <img
+          <Image
             src="/images/gallon-retrato-obra-hd.jpg"
             alt="Horacio Gallón"
-            className="w-full h-full object-cover opacity-30"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover opacity-30"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[#0B3B24] via-[#0B3B24]/80 to-transparent" />
         </div>
@@ -191,11 +195,13 @@ export default function SobreContent() {
               { src: "/images/gallon-familia-grande.jpg", alt: "Con la comunidad", span: "" },
             ].map((photo) => (
               <FadeIn key={photo.src}>
-                <div className={`overflow-hidden ${photo.span}`}>
-                  <img
+                <div className={`relative overflow-hidden aspect-square ${photo.span}`}>
+                  <Image
                     src={photo.src}
                     alt={photo.alt}
-                    className="w-full h-full object-cover aspect-square hover:scale-105 transition-transform duration-700"
+                    fill
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                    className="object-cover hover:scale-105 transition-transform duration-700"
                   />
                 </div>
               </FadeIn>
@@ -211,11 +217,13 @@ export default function SobreContent() {
         <div className="max-w-4xl mx-auto px-6 md:px-16">
           <FadeIn>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-              <div className="overflow-hidden">
-                <img
+              <div className="relative overflow-hidden aspect-[4/3]">
+                <Image
                   src="/images/gallon-pareja-futbol.jpg"
                   alt="Horacio Gallón con su esposa"
-                  className="w-full aspect-[4/3] object-cover"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover"
                 />
               </div>
               <div>

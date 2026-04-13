@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
@@ -85,10 +86,13 @@ export default function Home() {
       {/* ================================================================== */}
       <section className="relative min-h-[100dvh] md:min-h-[110dvh] overflow-hidden -mt-[72px] md:-mt-[88px]">
         <div className="absolute inset-0">
-          <img
+          <Image
             src="/images/gallon-retrato-obra-hd.jpg"
             alt="Horacio Gallón mirando de frente"
-            className="w-full h-full object-cover"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
             style={{ objectPosition: "60% 15%" }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0B3B24]/90 via-[#0B3B24]/30 to-transparent" />
@@ -154,10 +158,12 @@ export default function Home() {
                   href={section.href}
                   className="group relative block aspect-[4/3] overflow-hidden"
                 >
-                  <img
+                  <Image
                     src={section.image}
                     alt={section.title}
-                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover group-hover:scale-105 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0B3B24]/90 via-[#0B3B24]/30 to-transparent" />
                   <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-8">
@@ -201,11 +207,15 @@ export default function Home() {
                 </Link>
               </div>
               <div className="lg:col-span-7 order-1 lg:order-2">
-                <img
-                  src={featuredReflection.image}
-                  alt={featuredReflection.title}
-                  className="w-full aspect-[4/3] lg:aspect-[3/4] object-cover"
-                />
+                <div className="relative w-full aspect-[4/3] lg:aspect-[3/4]">
+                  <Image
+                    src={featuredReflection.image}
+                    alt={featuredReflection.title}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 58vw"
+                    className="object-cover"
+                  />
+                </div>
               </div>
             </div>
           </FadeIn>
@@ -217,7 +227,7 @@ export default function Home() {
       {/* ================================================================== */}
       <section id="datos" className="relative py-24 md:py-32 bg-[#0B3B24] text-white overflow-hidden">
         <div className="absolute inset-0 opacity-15">
-          <img src="/images/fondo-mapa-antioquia.jpg" alt="" className="w-full h-full object-cover" aria-hidden="true" />
+          <Image src="/images/fondo-mapa-antioquia.jpg" alt="" fill sizes="100vw" className="object-cover" aria-hidden="true" />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-16 lg:px-24">
           <FadeIn>
@@ -251,8 +261,8 @@ export default function Home() {
             "/images/gallon-caminando-obra.jpg",
             "/images/gallon-pareja-futbol.jpg",
           ].map((src) => (
-            <div key={src} className="aspect-square overflow-hidden">
-              <img src={src} alt="" className="w-full h-full object-cover" />
+            <div key={src} className="relative aspect-square overflow-hidden">
+              <Image src={src} alt="" fill sizes="(max-width: 768px) 33vw, 16vw" className="object-cover" />
             </div>
           ))}
         </div>
@@ -300,10 +310,12 @@ export default function Home() {
           <div className="pt-3 md:pt-4">
             <FadeIn>
               <Link href="/sobre" className="group relative block aspect-[21/9] overflow-hidden">
-                <img
+                <Image
                   src="/images/gallon-retrato-obra-hd.jpg"
                   alt="Horacio Gallón"
-                  className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                  fill
+                  sizes="100vw"
+                  className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0B3B24]/90 via-[#0B3B24]/30 to-transparent" />
                 <div className="absolute bottom-0 left-0 p-8">
@@ -321,7 +333,7 @@ export default function Home() {
       {/* ================================================================== */}
       <section className="relative py-20 md:py-28 overflow-hidden">
         <div className="absolute inset-0">
-          <img src="/images/fondo-cafetal.jpg" alt="" className="w-full h-full object-cover" aria-hidden="true" />
+          <Image src="/images/fondo-cafetal.jpg" alt="" fill sizes="100vw" className="object-cover" aria-hidden="true" />
           <div className="absolute inset-0 bg-[#0B3B24]/85" />
         </div>
         <div className="relative z-10 max-w-xl mx-auto px-6 text-center">

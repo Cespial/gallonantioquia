@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { columnas, columnaCategories } from "@/data/columnas";
 import CategoryTag from "@/components/content/CategoryTag";
@@ -82,11 +83,13 @@ export default function ColumnasContent() {
                   </div>
 
                   {/* Image */}
-                  <div className="hidden sm:block flex-shrink-0">
-                    <img
+                  <div className="hidden sm:block flex-shrink-0 relative w-48 h-32">
+                    <Image
                       src={col.image}
                       alt={col.title}
-                      className="rounded-card w-48 h-32 object-cover aspect-video"
+                      fill
+                      sizes="192px"
+                      className="rounded-card object-cover"
                     />
                   </div>
                 </Link>
