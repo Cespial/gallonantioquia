@@ -9,6 +9,7 @@ import PageHero from "@/components/layout/PageHero";
 import SectionWrapper from "@/components/layout/SectionWrapper";
 import FadeIn from "@/components/animations/FadeIn";
 import { formatDate } from "@/lib/utils";
+import { getFacePosition } from "@/lib/image-positions";
 
 export default function ColumnasContent() {
   const [activeYear, setActiveYear] = useState("Todas");
@@ -90,6 +91,7 @@ export default function ColumnasContent() {
                       fill
                       sizes="192px"
                       className="rounded-card object-cover"
+                      style={{ objectPosition: getFacePosition(col.image) }}
                     />
                   </div>
                 </Link>

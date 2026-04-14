@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { getFacePosition } from "@/lib/image-positions";
 
 interface PageHeroProps {
   title: string;
@@ -17,12 +18,13 @@ export default function PageHero({
   title,
   subtitle,
   backgroundImage,
-  backgroundPosition = "center",
+  backgroundPosition,
   overlay = true,
   compact = false,
   label,
 }: PageHeroProps) {
   const hasImage = !!backgroundImage;
+  const position = backgroundPosition || (hasImage ? getFacePosition(backgroundImage!) : "center");
 
   return (
     <section
@@ -31,7 +33,6 @@ export default function PageHero({
         compact ? "py-16 md:py-24" : "py-24 md:py-36"
       )}
     >
-      {/* Background Image */}
       {hasImage && (
         <>
           <Image
@@ -40,7 +41,7 @@ export default function PageHero({
             fill
             sizes="100vw"
             className="object-cover"
-            style={backgroundPosition !== "center" ? { objectPosition: backgroundPosition } : undefined}
+            style={{ objectPosition: position }}
           />
           {overlay && (
             <div className="absolute inset-0 bg-gradient-to-b from-oscuro-verde/60 to-oscuro-verde/85" />
@@ -48,19 +49,12 @@ export default function PageHero({
         </>
       )}
 
-      {/* Content */}
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {label && (
-          <span
-            className={cn(
-              "inline-block font-ui text-sm uppercase tracking-label mb-4",
-              hasImage ? "text-dorado-tierra" : "text-dorado-tierra"
-            )}
-          >
+          <span className="inline-block font-ui text-sm uppercase tracking-label mb-4 text-dorado-tierra">
             {label}
           </span>
         )}
-
         <h1
           className={cn(
             "font-display text-page-title text-balance",
@@ -69,7 +63,6 @@ export default function PageHero({
         >
           {title}
         </h1>
-
         {subtitle && (
           <p
             className={cn(
