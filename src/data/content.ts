@@ -19,7 +19,7 @@ export const navItems: NavItem[] = [
   { label: "Territorio Vivo", href: "/territorio-vivo" },
   { label: "Huellas en el Camino", href: "/bitacora" },
   { label: "Antioquia Piensa", href: "/antioquia-piensa" },
-  { label: "Sobre", href: "/sobre" },
+  { label: "Sobre Mí", href: "/sobre" },
 ];
 
 // ---------------------------------------------------------------------------
