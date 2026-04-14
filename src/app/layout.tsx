@@ -83,10 +83,13 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body
-        className={`${playfair.variable} ${sourceSerif.variable} ${jacked.variable} ${thorce.variable} ${myriadPro.variable} font-body antialiased bg-arena text-texto-principal`}
+        className={`${playfair.variable} ${sourceSerif.variable} ${jacked.variable} ${thorce.variable} ${myriadPro.variable} font-body antialiased bg-arena text-texto-principal grain-overlay`}
       >
+        <a href="#main-content" className="skip-link">
+          Saltar al contenido
+        </a>
         <Header />
-        <main>{children}</main>
+        <main id="main-content">{children}</main>
         <Footer />
       </body>
     </html>
