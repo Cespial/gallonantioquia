@@ -87,7 +87,7 @@ const chapters = [
     year: "Hoy",
     title: "El camino sigue",
     text: "Más de 35 años de camino me respaldan. Conozco a Antioquia, la he recorrido, y la sigo construyendo. Cada vereda que visito, cada puente que inauguramos, cada familia que se conecta con el mundo me confirma lo mismo: este departamento tiene todo para ser el mejor del país. Y yo voy a seguir caminándolo.",
-    image: "/images/hero-gallon-montanas.jpg",
+    image: "/images/gallon-hablando-comunidad.jpg",
     quote: "Yo creo que Antioquia se construye escuchando, recorriendo y aprendiendo de su gente.",
   },
 ];

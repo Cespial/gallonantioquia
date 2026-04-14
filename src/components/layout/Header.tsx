@@ -68,7 +68,7 @@ export default function Header() {
           <Link href="/" className="group flex flex-col items-center">
             <div className="flex items-baseline gap-2">
               <span className="font-brand text-2xl tracking-wide text-verde-antioquia group-hover:text-oscuro transition-colors">
-                GALL<span className="relative inline-block">O<span className="absolute -top-[0.22em] left-1/2 -translate-x-1/2 text-dorado-tierra text-[0.7em] leading-none" style={{fontFamily: "serif"}}>&#769;</span></span>N
+                GALL<span className="relative inline-block">O<span className="absolute -top-[0.32em] left-1/2 -translate-x-1/2 text-dorado-tierra text-[1.1em] leading-none" style={{fontFamily: "serif"}}>&#769;</span></span>N
               </span>
               <span className="font-brand text-2xl tracking-wide text-dorado-tierra group-hover:text-verde-antioquia transition-colors">
                 MEMORIAS
@@ -145,7 +145,7 @@ export default function Header() {
             onClick={() => setMobileOpen(false)}
           >
             <span className="font-brand text-lg text-verde-antioquia">
-              GALL<span className="relative inline-block">O<span className="absolute -top-[0.22em] left-1/2 -translate-x-1/2 text-dorado-tierra text-[0.7em] leading-none" style={{fontFamily: "serif"}}>&#769;</span></span>N
+              GALL<span className="relative inline-block">O<span className="absolute -top-[0.32em] left-1/2 -translate-x-1/2 text-dorado-tierra text-[1.1em] leading-none" style={{fontFamily: "serif"}}>&#769;</span></span>N
             </span>
             <span className="font-brand text-lg text-dorado-tierra">
               MEMORIAS

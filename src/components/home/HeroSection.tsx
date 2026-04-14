@@ -28,7 +28,7 @@ export default function HeroSection() {
             </h1>
             <div className="w-12 h-px bg-dorado-tierra mb-4" />
             <p className="font-body text-white/60 text-base leading-relaxed mb-6">
-              Mi historia. El camino que me trajo hasta aquí.
+              Reflexiones en alta voz.
             </p>
             <Link
               href="/columnas/las-memorias-que-no-quiero-guardar-en-silencio"
@@ -55,7 +55,7 @@ export default function HeroSection() {
             </h1>
             <div className="w-16 h-px bg-dorado-tierra mb-8" />
             <p className="font-body text-white/50 text-lg max-w-md leading-relaxed mb-10">
-              Mi historia. El camino que me trajo hasta aquí.
+              Reflexiones en alta voz.
             </p>
             <Link
               href="/columnas/las-memorias-que-no-quiero-guardar-en-silencio"
