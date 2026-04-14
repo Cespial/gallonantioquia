@@ -29,8 +29,10 @@ export default function PageHero({
   return (
     <section
       className={cn(
-        "relative w-full flex items-center justify-center text-center overflow-hidden",
-        compact ? "py-16 md:py-24" : "py-36 md:py-48"
+        "relative w-full flex items-end text-center overflow-hidden",
+        compact
+          ? "py-16 md:py-24"
+          : "min-h-[50vh] md:min-h-[60vh]"
       )}
     >
       {hasImage && (
@@ -44,12 +46,12 @@ export default function PageHero({
             style={{ objectPosition: position }}
           />
           {overlay && (
-            <div className="absolute inset-0 bg-gradient-to-b from-oscuro-verde/60 to-oscuro-verde/85" />
+            <div className="absolute inset-0 bg-gradient-to-t from-oscuro-verde/90 via-oscuro-verde/40 to-oscuro-verde/20" />
           )}
         </>
       )}
 
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 md:pb-16 pt-32 md:pt-40">
         {label && (
           <span className="inline-block font-ui text-sm uppercase tracking-label mb-4 text-dorado-tierra">
             {label}
