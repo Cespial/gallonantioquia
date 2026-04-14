@@ -8,6 +8,7 @@ import ArticleNavigation from "@/components/content/ArticleNavigation";
 import NewsletterCTA from "@/components/content/NewsletterCTA";
 import Badge from "@/components/ui/Badge";
 import Breadcrumb from "@/components/content/Breadcrumb";
+import ReadingProgress from "@/components/layout/ReadingProgress";
 import { stories } from "@/data/content";
 import { formatDate } from "@/lib/utils";
 
@@ -50,6 +51,7 @@ export default async function StoryPage({ params }: Props) {
 
   return (
     <>
+      <ReadingProgress />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

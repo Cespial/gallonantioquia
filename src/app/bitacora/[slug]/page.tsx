@@ -7,6 +7,7 @@ import AuthorBioBox from "@/components/content/AuthorBioBox";
 import ArticleNavigation from "@/components/content/ArticleNavigation";
 import NewsletterCTA from "@/components/content/NewsletterCTA";
 import Breadcrumb from "@/components/content/Breadcrumb";
+import ReadingProgress from "@/components/layout/ReadingProgress";
 import { blogPosts } from "@/data/content";
 import { formatDate } from "@/lib/utils";
 
@@ -49,6 +50,7 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <>
+      <ReadingProgress />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

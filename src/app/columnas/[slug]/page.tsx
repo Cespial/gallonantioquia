@@ -7,6 +7,7 @@ import AuthorBioBox from "@/components/content/AuthorBioBox";
 import ArticleNavigation from "@/components/content/ArticleNavigation";
 import NewsletterCTA from "@/components/content/NewsletterCTA";
 import Breadcrumb from "@/components/content/Breadcrumb";
+import ReadingProgress from "@/components/layout/ReadingProgress";
 import { columnas } from "@/data/columnas";
 import { columnasBodies } from "@/data/columnas-bodies";
 import { formatDate } from "@/lib/utils";
@@ -52,6 +53,7 @@ export default async function ColumnaDetailPage({ params }: Props) {
 
   return (
     <>
+      <ReadingProgress />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
