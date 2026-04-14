@@ -13,9 +13,9 @@ export default function BitacoraContent() {
   return (
     <>
       <PageHero
-        title="Bit&aacute;cora de Camino"
+        title="Huellas en el Camino"
         subtitle="Mis reflexiones sobre liderazgo, servicio p&uacute;blico y lo que me ense&ntilde;a recorrer Antioquia."
-        backgroundImage="/images/gallon-retrato-montanas-wide.jpg"
+        backgroundImage="/images/gallon-hablando-comunidad.jpg"
       />
 
       <SectionWrapper>

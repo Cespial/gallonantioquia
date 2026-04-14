@@ -139,14 +139,15 @@ export default function SobreContent() {
         <div className="md:hidden relative">
           <div className="absolute inset-0">
             <Image
-              src="/images/gallon-retrato-obra-hd.jpg"
+              src="/images/gallon-close-up.jpg"
               alt="Horacio Gallón"
               fill
               priority
               sizes="100vw"
-              className="object-cover object-top"
+              className="object-cover"
+              style={{ objectPosition: "center 30%" }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0B3B24] via-[#0B3B24]/60 to-[#0B3B24]/30" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0B3B24] via-[#0B3B24]/50 to-[#0B3B24]/20" />
           </div>
           <div className="relative z-10 px-6 py-24">
             <FadeIn>
@@ -187,12 +188,13 @@ export default function SobreContent() {
           </div>
           <div className="relative overflow-hidden">
             <Image
-              src="/images/gallon-retrato-obra-hd.jpg"
+              src="/images/gallon-close-up.jpg"
               alt="Horacio Gallón"
               fill
               priority
               sizes="50vw"
-              className="object-cover object-top"
+              className="object-cover"
+              style={{ objectPosition: "center 30%" }}
             />
             <div className="absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-[#0B3B24] to-transparent" />
           </div>
