@@ -30,7 +30,7 @@ export default function PageHero({
     <section
       className={cn(
         "relative w-full flex items-center justify-center text-center overflow-hidden",
-        compact ? "py-16 md:py-24" : "py-24 md:py-36"
+        compact ? "py-16 md:py-24" : "py-36 md:py-48"
       )}
     >
       {hasImage && (
