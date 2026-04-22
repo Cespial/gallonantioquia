@@ -1,22 +1,15 @@
 import Link from "next/link";
-import {
-  featuredReflection,
-  stories,
-  ideas,
-} from "@/data/content";
 
 const quickNav = [
   { label: "Columna Inaugural", excerpt: "Las memorias que no quiero guardar en silencio", href: "/columnas/las-memorias-que-no-quiero-guardar-en-silencio" },
-  { label: "Última Reflexión", excerpt: featuredReflection.title, href: `/bitacora/${featuredReflection.slug}` },
-  { label: "Historia Destacada", excerpt: stories[0].title, href: `/territorio-vivo/${stories[0].slug}` },
-  { label: "Ideas para el Futuro", excerpt: ideas[0].title, href: `/antioquia-piensa/${ideas[0].slug}` },
+  { label: "Mi Historia", excerpt: "El camino que me trajo hasta aquí", href: "/sobre" },
 ];
 
 export default function QuickNavBar() {
   return (
     <section className="bg-[#0B3B24] border-t border-white/10">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10">
+        <div className="grid grid-cols-2 md:grid-cols-2 divide-x divide-white/10">
           {quickNav.map((item, index) => (
             <Link
               key={item.label}

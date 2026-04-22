@@ -4,28 +4,16 @@ import FadeIn from "@/components/animations/FadeIn";
 
 const sectionGrid = [
   {
-    title: "Columnas",
-    subtitle: "Opinión y reflexión",
+    title: "Huellas en Antioquia",
+    subtitle: "Columnas y reflexiones",
     href: "/columnas",
-    image: "/images/gallon-entrevista-medellin.jpg",
+    image: "/images/gallon-cafe.jpg",
   },
   {
-    title: "Territorio Vivo",
-    subtitle: "Historias de Antioquia",
-    href: "/territorio-vivo",
-    image: "/images/gallon-parque-pueblo.jpg",
-  },
-  {
-    title: "Huellas en el Camino",
-    subtitle: "Reflexiones personales",
-    href: "/bitacora",
-    image: "/images/gallon-retrato-montanas-portrait.jpg",
-  },
-  {
-    title: "Antioquia Piensa",
-    subtitle: "Ideas y conversaciones",
-    href: "/antioquia-piensa",
-    image: "/images/fondo-mapa-antioquia.jpg",
+    title: "Sobre Mí",
+    subtitle: "Mi historia",
+    href: "/sobre",
+    image: "/images/gallon-portada.jpg",
   },
 ];
 

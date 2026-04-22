@@ -22,8 +22,8 @@ export default function ColumnasContent() {
   return (
     <>
       <PageHero
-        title="Columnas de Opini&oacute;n"
-        subtitle="Reflexiones publicadas en Al Poniente sobre Antioquia, competitividad, infraestructura y sociedad."
+        title="Huellas en Antioquia"
+        subtitle="Reflexiones, columnas y pensamientos sobre Antioquia."
         backgroundImage="/images/gallon-discurso.jpg"
       />
 

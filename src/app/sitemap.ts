@@ -1,5 +1,4 @@
 import type { MetadataRoute } from "next";
-import { stories, blogPosts, ideas } from "@/data/content";
 import { columnas } from "@/data/columnas";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -7,33 +6,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const staticPages = [
     { url: baseUrl, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 1 },
-    { url: `${baseUrl}/territorio-vivo`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.9 },
-    { url: `${baseUrl}/bitacora`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.9 },
     { url: `${baseUrl}/columnas`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.9 },
-    { url: `${baseUrl}/antioquia-piensa`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.8 },
     { url: `${baseUrl}/sobre`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.8 },
   ];
-
-  const storyPages = stories.map((story) => ({
-    url: `${baseUrl}/territorio-vivo/${story.slug}`,
-    lastModified: new Date(story.date),
-    changeFrequency: "monthly" as const,
-    priority: 0.6,
-  }));
-
-  const blogPages = blogPosts.map((post) => ({
-    url: `${baseUrl}/bitacora/${post.slug}`,
-    lastModified: new Date(post.date),
-    changeFrequency: "monthly" as const,
-    priority: 0.6,
-  }));
-
-  const ideaPages = ideas.map((idea) => ({
-    url: `${baseUrl}/antioquia-piensa/${idea.slug}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly" as const,
-    priority: 0.6,
-  }));
 
   const columnaPages = columnas.map((col) => ({
     url: `${baseUrl}/columnas/${col.slug}`,
@@ -42,5 +17,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticPages, ...storyPages, ...blogPages, ...ideaPages, ...columnaPages];
+  return [...staticPages, ...columnaPages];
 }

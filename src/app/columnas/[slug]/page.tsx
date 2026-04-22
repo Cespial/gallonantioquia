@@ -75,14 +75,14 @@ export default async function ColumnaDetailPage({ params }: Props) {
       />
       <PageHero
         title={col.title}
-        label="Columna de Opinión"
+        label="Huellas en Antioquia"
         backgroundImage={col.image}
       />
 
       <SectionWrapper>
         <Breadcrumb items={[
           { label: "Inicio", href: "/" },
-          { label: "Columnas", href: "/columnas" },
+          { label: "Huellas en Antioquia", href: "/columnas" },
           { label: col.title },
         ]} />
         <article className="max-w-3xl mx-auto">

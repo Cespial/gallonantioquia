@@ -2,7 +2,7 @@ import Link from "next/link";
 import { navItems } from "@/data/content";
 
 const contentLinks = [
-  { label: "Ultima reflexion", href: "/bitacora" },
+  { label: "Huellas en Antioquia", href: "/columnas" },
   { label: "Columna inaugural", href: "/columnas/las-memorias-que-no-quiero-guardar-en-silencio" },
 ];
 
