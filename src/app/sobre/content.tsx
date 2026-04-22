@@ -292,7 +292,7 @@ export default function SobreContent() {
               Otros roles
             </p>
             <h2 className="font-display text-[clamp(1.75rem,3.5vw,2.5rem)] leading-[0.95] tracking-tight mb-12">
-              También sirvo en
+              También serví en
             </h2>
           </FadeIn>
 
