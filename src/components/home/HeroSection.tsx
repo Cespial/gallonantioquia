@@ -9,7 +9,7 @@ export default function HeroSection() {
       {/* Mobile: image background + text overlay */}
       <div className="md:hidden relative min-h-[100dvh]">
         <Image
-          src="/images/gallon-retrato-obra-hd.jpg"
+          src="/images/gallon-portada.jpg"
           alt="Horacio Gallón"
           fill
           priority
@@ -74,14 +74,13 @@ export default function HeroSection() {
         {/* Right: image */}
         <div className="relative overflow-hidden">
           <Image
-            src="/images/gallon-retrato-obra-hd.jpg"
+            src="/images/gallon-portada.jpg"
             alt="Horacio Gallón mirando de frente"
             fill
             priority
             sizes="50vw"
             className="object-cover object-top"
           />
-          <div className="absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-[#0B3B24] to-transparent" />
         </div>
       </div>
     </section>

@@ -17,6 +17,8 @@ const facePositions: Record<string, string> = {
   "gallon-discurso-microphone.jpg": "center 20%",
   "gallon-pareja-futbol.jpg": "center 25%",
   "gallon-close-up.jpg": "center 20%",
+  "gallon-alcalde.jpg": "center 20%",
+  "gallon-portada.jpg": "center 15%",
 
   // HORIZONTAL/SQUARE images — face more centered, moderate %
   "gallon-retrato-montanas-wide.jpg": "center 25%",
@@ -28,6 +30,9 @@ const facePositions: Record<string, string> = {
   "gallon-reunion-biblioteca.jpg": "center 25%",
   "gallon-familia-grande.jpg": "center 25%",
   "gallon-familia-intima.jpg": "center 25%",
+  "gallon-cafe.jpg": "center 25%",
+  "gallon-congreso.jpg": "center 20%",
+  "gallon-mascota.jpg": "center 25%",
   "gallon-parque-pueblo.jpg": "center 35%",
 
   // LANDSCAPE/PAISAJES — centrar normalmente

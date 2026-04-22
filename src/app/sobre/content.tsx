@@ -33,7 +33,7 @@ const chapters = [
     year: "1988",
     title: "Empecé vendiendo café",
     text: "A los 19 años entré a Bancafé como asesor comercial. Recorrí fincas, cooperativas y pueblos del Suroeste. Ahí entendí de primera mano lo que necesita el campo colombiano: caminos, crédito y alguien que escuche. Después fui gerente de la sucursal en Jardín y luego monté mi propia empresa.",
-    image: "/images/gallon-vias-seguridad.jpg",
+    image: "/images/gallon-cafe.jpg",
   },
   {
     id: "derrota",
@@ -51,7 +51,7 @@ const chapters = [
     year: "2008",
     title: "Volví con todo",
     text: "Cuatro años después, Andes me dio su confianza con 9.984 votos — el 60,82% — la mayor votación en la historia del municipio. Como alcalde lideré un gobierno cercano, enfocado en obras, educación y desarrollo rural. Aprendí que gobernar es escuchar antes de decidir.",
-    image: "/images/gallon-discurso.jpg",
+    image: "/images/gallon-alcalde.jpg",
     stat: { value: 9984, suffix: "", label: "votos — récord histórico de Andes" },
   },
   {
@@ -60,7 +60,7 @@ const chapters = [
     year: "2014",
     title: "Llegué al Congreso por Antioquia",
     text: "En 2014 Antioquia me eligió Representante a la Cámara. Fui vicepresidente de la Comisión de Presupuesto y presidí la Comisión de Descentralización. Pero mi mayor orgullo fue la Ley 1883 de 2018: convertir a Turbo en Distrito Especial — el primero de Antioquia y el sexto de Colombia. Un hito para Urabá.",
-    image: "/images/gallon-caminando-obra.jpg",
+    image: "/images/gallon-congreso.jpg",
     quote: "Turbo merece ser la puerta de Colombia al mundo. Con esa ley abrimos ese camino.",
   },
   {
@@ -87,7 +87,7 @@ const chapters = [
     year: "Hoy",
     title: "El camino sigue",
     text: "Más de 35 años de camino me respaldan. Conozco a Antioquia, la he recorrido, y la sigo construyendo. Cada vereda que visito, cada puente que inauguramos, cada familia que se conecta con el mundo me confirma lo mismo: este departamento tiene todo para ser el mejor del país. Y yo voy a seguir caminándolo.",
-    image: "/images/gallon-hablando-comunidad.jpg",
+    image: "/images/gallon-portada.jpg",
     quote: "Yo creo que Antioquia se construye escuchando, recorriendo y aprendiendo de su gente.",
   },
 ];
@@ -256,8 +256,8 @@ export default function SobreContent() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
               <div className="relative overflow-hidden aspect-[4/3]">
                 <Image
-                  src="/images/gallon-pareja-futbol.jpg"
-                  alt="Horacio Gallón con su esposa"
+                  src="/images/gallon-mascota.jpg"
+                  alt="Horacio Gallón con su bulldog francés"
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover"
