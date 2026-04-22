@@ -9,6 +9,17 @@ export const columnaCategories: string[] = [
 
 export const columnas: ColumnaArticle[] = [
   {
+    slug: "antioquia-necesitaba-una-gobernacion-que-priorizara-la-palabra-acabativa",
+    title: "Antioquia necesitaba una Gobernación que priorizara la palabra acabativa",
+    excerpt:
+      "Cuando llegamos al gobierno, el 1 de enero de 2024, encontramos una realidad que no podíamos maquillar: Antioquia arrastraba necesidades históricas en infraestructura vial.",
+    date: "2026-04-22",
+    readTime: "5 min",
+    image: "/images/gallon-cafe.jpg",
+    sourceUrl: "https://alponiente.com/antioquia-necesitaba-una-gobernacion-que-priorizara-la-palabra-acabativa/",
+    body: [],
+  },
+  {
     slug: "las-memorias-que-no-quiero-guardar-en-silencio",
     title: "Las memorias que no quiero guardar en silencio",
     excerpt:

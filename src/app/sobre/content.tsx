@@ -271,8 +271,8 @@ export default function SobreContent() {
                   Más allá del cargo
                 </h3>
                 <p className="font-body text-texto-secundario leading-relaxed">
-                  Soy hincha del fútbol, hijo de Andes, esposo, padre de Carlos Andrés y Juan Esteban,
-                  y abuelo. Cuando no estoy recorriendo las vías del departamento, estoy con mi familia,
+                  Soy hincha del fútbol, hijo de Andes, esposo y padre de Carlos Andrés y Juan Esteban.
+                  Cuando no estoy recorriendo Antioquia, estoy con mi familia,
                   con mi café y con mis montañas. Al final del día, todo lo que hago es para que la gente
                   de Antioquia viva mejor.
                 </p>

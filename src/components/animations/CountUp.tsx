@@ -28,7 +28,7 @@ export default function CountUp({
       const elapsed = now - startTime;
       const t = Math.min(elapsed / duration, 1);
       const eased = easeOutExpo(t);
-      const value = Math.round(eased * end);
+      const value = t >= 1 ? end : Math.round(eased * end);
 
       setCurrent(value);
 
