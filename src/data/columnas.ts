@@ -9,6 +9,17 @@ export const columnaCategories: string[] = [
 
 export const columnas: ColumnaArticle[] = [
   {
+    slug: "en-lo-publico-el-amor-por-un-territorio-se-demuestra-con-presupuesto",
+    title: "En lo público, el amor por un territorio se demuestra con presupuesto",
+    excerpt:
+      "En la vida pública se habla mucho de compromiso, de presencia institucional y de amor por las regiones, pero cuando se administra, ese amor no puede quedarse en discursos ni en visitas ocasionales.",
+    date: "2026-04-24",
+    readTime: "5 min",
+    image: "/images/gallon-parque-pueblo.jpg",
+    sourceUrl: "https://alponiente.com/en-lo-publico-el-amor-por-un-territorio-se-demuestra-con-presupuesto/",
+    body: [],
+  },
+  {
     slug: "antioquia-necesitaba-una-gobernacion-que-priorizara-la-palabra-acabativa",
     title: "Antioquia necesitaba una Gobernación que priorizara la palabra acabativa",
     excerpt:
