@@ -5,6 +5,12 @@ import SectionGrid from "@/components/home/SectionGrid";
 import PhotoBand from "@/components/home/PhotoBand";
 import SobreSection from "@/components/home/SobreSection";
 import NewsletterSection from "@/components/home/NewsletterSection";
+import ConstructionScreen from "@/components/home/ConstructionScreen";
+
+// ── "En construcción" ──────────────────────────────────────────────
+// Pon esto en `false` (o borra esta constante y el bloque de abajo)
+// para que la página principal vuelva a mostrarse normal.
+const UNDER_CONSTRUCTION = true;
 
 export const metadata: Metadata = {
   title: "Gallón Memorias — Memorias de Antioquia",
@@ -13,6 +19,10 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
+  if (UNDER_CONSTRUCTION) {
+    return <ConstructionScreen />;
+  }
+
   return (
     <>
       <script
