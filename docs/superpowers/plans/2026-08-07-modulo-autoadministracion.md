@@ -1223,6 +1223,23 @@ import { and, eq, isNull } from "drizzle-orm";
 import { crearDbPrueba } from "../ayuda/db";
 import { contenidos, medios, ajustes } from "@/db/esquema";
 import { migrarContenido } from "@/lib/admin/migracion";
+import { columnasBodies } from "@/data/columnas-bodies";
+
+/**
+ * Devuelve el texto que el lector vería, con los párrafos separados por saltos.
+ * Deshace el escapado de entidades que aplica `sanitize-html`, para poder
+ * comparar contra la fuente sin falsos negativos por `&`, comillas o `<`.
+ */
+function textoPlano(html: string): string {
+  return html
+    .replace(/<\/p><p>/g, "\n")
+    .replace(/<\/?p>/g, "")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'");
+}
 
 describe("migración del contenido existente", () => {
   it("migra las cantidades exactas del spec", async () => {
@@ -1277,6 +1294,29 @@ describe("migración del contenido existente", () => {
       expect(col.cuerpoHtml, `la columna ${col.slug} quedó sin cuerpo`).toBeTruthy();
       expect(col.cuerpoHtml!.startsWith("<p>")).toBe(true);
       expect(col.cuerpoHtml).not.toContain("<script");
+    }
+    await cerrar();
+  });
+
+  it("conserva íntegro el texto de las 32 columnas, párrafo por párrafo", async () => {
+    const { db, cerrar } = await crearDbPrueba();
+    await migrarContenido(db);
+
+    const todas = await db.select().from(contenidos).where(eq(contenidos.tipo, "columna"));
+    expect(todas).toHaveLength(32);
+
+    for (const col of todas) {
+      const parrafos = (columnasBodies[col.slug] ?? []).map((p) => p.trim());
+      const cuerpo = col.cuerpoHtml ?? "";
+
+      expect(
+        (cuerpo.match(/<p>/g) ?? []).length,
+        `${col.slug}: cambió el número de párrafos`
+      ).toBe(parrafos.length);
+
+      expect(textoPlano(cuerpo), `${col.slug}: se perdió o se alteró texto`).toBe(
+        parrafos.join("\n")
+      );
     }
     await cerrar();
   });
