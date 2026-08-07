@@ -30,7 +30,7 @@ export const usuarios = pgTable("usuarios", {
 export const medios = pgTable("medios", {
   id: uuid("id").primaryKey().defaultRandom(),
   // Blob remoto (https://…) o ruta heredada del repositorio (/images/…).
-  url: text("url").notNull(),
+  url: text("url").notNull().unique(),
   nombre: text("nombre").notNull(),
   alt: text("alt"),
   ancho: integer("ancho"),
