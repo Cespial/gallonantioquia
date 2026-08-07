@@ -884,7 +884,9 @@ export function esquemaContenido(tipo: TipoContenido) {
 
   const categoria = config.taxonomia
     ? z.enum(config.taxonomia.valores as [string, ...string[]], {
-        errorMap: () => ({ message: `Elige un valor válido de ${config.taxonomia!.etiqueta}` }),
+        // Zod 4 renombró `errorMap` a `error` y espera la cadena directa,
+        // no un objeto `{ message }`. El proyecto usa zod@4.4.3.
+        error: () => `Elige un valor válido de ${config.taxonomia!.etiqueta}`,
       })
     : z.null().or(z.undefined());
 
