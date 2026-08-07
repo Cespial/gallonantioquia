@@ -10,9 +10,9 @@ export type TipoContenido =
 export interface CampoExtra {
   nombre: string;
   etiqueta: string;
-  control: "texto" | "url" | "numero" | "textarea" | "imagen" | "multiple";
+  control: "texto" | "url" | "numero" | "textarea" | "imagen" | "opcion" | "multiple";
   obligatorio: boolean;
-  /** Solo para control "multiple". */
+  /** Solo para control "opcion" o "multiple". */
   opciones?: string[];
   ayuda?: string;
 }
@@ -90,9 +90,12 @@ export const TIPOS: Record<TipoContenido, ConfigTipo> = {
     camposExtra: [
       { nombre: "readTime", etiqueta: "Tiempo de lectura", control: "texto", obligatorio: false },
       {
+        // Una historia tiene UN formato. Los datos reales traen `format: "texto"`
+        // como valor suelto, y /territorio-vivo pinta una sola insignia cuyo
+        // color depende de él. No confundir con `episodio.format`, que sí es lista.
         nombre: "format",
         etiqueta: "Formato",
-        control: "multiple",
+        control: "opcion",
         obligatorio: true,
         opciones: ["texto", "video", "audio", "fotografia"],
       },

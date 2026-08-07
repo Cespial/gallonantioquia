@@ -90,6 +90,48 @@ describe("validación por tipo", () => {
     expect(r.success).toBe(false);
   });
 
+  it("acepta un formato único en una historia y rechaza el arreglo", () => {
+    const historia = {
+      ...base,
+      categoria: "Comunidades",
+      extra: { readTime: "5 min", format: "texto" },
+    };
+    expect(esquemaContenido("historia").safeParse(historia).success).toBe(true);
+    expect(
+      esquemaContenido("historia").safeParse({ ...historia, extra: { readTime: "", format: ["texto"] } })
+        .success
+    ).toBe(false);
+  });
+
+  it("rechaza un formato de historia que no está en la lista", () => {
+    const r = esquemaContenido("historia").safeParse({
+      ...base,
+      categoria: "Comunidades",
+      extra: { readTime: "5 min", format: "infografia" },
+    });
+    expect(r.success).toBe(false);
+  });
+
+  it("exige el número en una idea y no admite taxonomía", () => {
+    const idea = { ...base, categoria: null, extra: { number: "01" } };
+    expect(esquemaContenido("idea").safeParse(idea).success).toBe(true);
+    expect(
+      esquemaContenido("idea").safeParse({ ...idea, extra: { number: "" } }).success
+    ).toBe(false);
+  });
+
+  it("exige nombre y cargo del autor en una voz", () => {
+    const voz = {
+      ...base,
+      categoria: null,
+      extra: { authorName: "Ana Restrepo", authorRole: "Alcaldesa", authorCategory: "", authorImage: "", pullQuote: "" },
+    };
+    expect(esquemaContenido("voz").safeParse(voz).success).toBe(true);
+    expect(
+      esquemaContenido("voz").safeParse({ ...voz, extra: { ...voz.extra, authorName: "" } }).success
+    ).toBe(false);
+  });
+
   it("rechaza una categoría que no está en la taxonomía del tipo", () => {
     const r = esquemaContenido("bitacora").safeParse({
       ...base,

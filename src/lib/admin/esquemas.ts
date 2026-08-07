@@ -19,12 +19,19 @@ function campoAZod(campo: CampoExtra): z.ZodTypeAny {
     case "numero":
       base = z.coerce.number().int().min(0);
       break;
+    case "opcion":
+      // Una sola opción de la lista.
+      base = z.enum(campo.opciones as [string, ...string[]]);
+      break;
     case "multiple":
+      // Varias opciones a la vez.
       base = z.array(z.enum(campo.opciones as [string, ...string[]]));
       if (campo.obligatorio) {
         return (base as z.ZodArray<z.ZodTypeAny>).min(1, `Elige al menos un valor en ${campo.etiqueta}`);
       }
-      return base;
+      // `.optional()` explícito: esta rama sale del switch con `return` y no
+      // alcanza el bloque común del final, donde los demás controles lo reciben.
+      return base.optional();
     case "imagen":
       base = z.union([z.literal(""), z.string()]);
       break;
