@@ -1027,7 +1027,10 @@ Crear `src/lib/admin/slug.ts`:
 export function generarSlug(texto: string): string {
   return texto
     .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")  // marcas diacríticas
+    // Marcas diacríticas combinantes. Se escriben con escapes unicode a
+    // propósito: los caracteres en crudo son invisibles y se corrompen al
+    // copiarse entre archivos.
+    .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
