@@ -22,7 +22,8 @@ Estas reglas aplican a **todas** las tareas. No se repiten en cada una.
 - **Toda Server Action verifica sesión y rol en el servidor**, con `await requerirSesion()` o `await requerirAdmin()` como primera línea. Ocultar un botón en la interfaz nunca es el control de acceso.
 - **Toda entrada de usuario se valida con Zod** antes de llegar a la base de datos.
 - **Ninguna contraseña ni hash aparece en logs, respuestas ni props de cliente.**
-- **Un commit por tarea**, con mensaje en español y en imperativo (`feat:`, `test:`, `fix:`, `docs:`, `chore:`).
+- **Un commit por tarea**, con mensaje descriptivo en español y prefijo de convención (`feat:`, `test:`, `fix:`, `docs:`, `chore:`). La frase nominal (`feat: esquema de base de datos`) es la forma que usa este plan y es válida; no hace falta el imperativo.
+- **La salida de `npm test` debe estar limpia**, sin avisos. Un aviso recurrente se multiplica por 19 tareas y entrena al equipo a ignorar la salida.
 - **Rama de trabajo:** `feat/modulo-autoadministracion`, ya creada.
 - **Sin atribución a Claude** en los mensajes de commit.
 
@@ -101,7 +102,7 @@ tests/                        Pruebas Vitest.
 Sin esto no hay TDD. Se monta Vitest con PGlite, un Postgres real compilado a WebAssembly que corre en memoria: da semántica de Postgres de verdad (jsonb, índices parciales, `gen_random_uuid()`) sin Docker ni una base remota.
 
 **Files:**
-- Create: `vitest.config.ts`
+- Create: `vitest.config.mts`
 - Create: `tests/ayuda/db.ts`
 - Create: `tests/ayuda/db.test.ts`
 - Modify: `package.json` (dependencias y script `test`)
@@ -113,21 +114,22 @@ Sin esto no hay TDD. Se monta Vitest con PGlite, un Postgres real compilado a We
 - [ ] **Step 1: Instalar dependencias**
 
 ```bash
-npm i -D vitest vite-tsconfig-paths @electric-sql/pglite
+npm i -D vitest @electric-sql/pglite
 npm i drizzle-orm
 npm i -D drizzle-kit
 ```
 
 - [ ] **Step 2: Configurar Vitest**
 
-Crear `vitest.config.ts`:
+Crear `vitest.config.mts`:
 
 ```ts
 import { defineConfig } from "vitest/config";
-import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
-  plugins: [tsconfigPaths()],
+  // Resuelve el alias `@/` de tsconfig.json dentro de las pruebas. Vite lo
+  // soporta de forma nativa; el plugin vite-tsconfig-paths ya no hace falta.
+  resolve: { tsconfigPaths: true },
   test: {
     environment: "node",
     include: ["tests/**/*.test.ts"],
@@ -137,7 +139,7 @@ export default defineConfig({
 });
 ```
 
-`vite-tsconfig-paths` hace que el alias `@/` de `tsconfig.json` funcione dentro de las pruebas.
+**La extensión `.mts` es obligatoria.** El archivo usa sintaxis ESM y `package.json` no declara `"type": "module"`; con extensión `.ts`, Vite lo carga como CommonJS y emite un aviso en **cada** corrida de pruebas. Renombrarlo es más barato que declarar el proyecto entero como módulo ESM, que afectaría a Next.
 
 Agregar a `package.json`, en `scripts`:
 
