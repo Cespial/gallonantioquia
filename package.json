@@ -21,6 +21,7 @@
     "next": "14.2.35",
     "react": "^18",
     "react-dom": "^18",
+    "sanitize-html": "^2.17.6",
     "zod": "^4.4.3"
   },
   "devDependencies": {
@@ -28,6 +29,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/sanitize-html": "^2.16.1",
     "drizzle-kit": "^0.31.10",
     "eslint": "^8",
     "eslint-config-next": "14.2.35",
