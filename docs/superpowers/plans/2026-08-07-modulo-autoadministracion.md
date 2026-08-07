@@ -1393,7 +1393,9 @@ function recolectarImagenes(): string[] {
   // Portada de respaldo para los tipos que no traen imagen propia.
   agregar("/images/gallon-retrato-obra-hd.jpg");
 
-  return [...rutas];
+  // `Array.from` y no `[...rutas]`: el tsconfig del proyecto no fija `target`,
+  // así que desestructurar un Set no compila.
+  return Array.from(rutas);
 }
 
 function nombreDesdeRuta(ruta: string): string {
@@ -1536,7 +1538,9 @@ export async function migrarContenido(db: any): Promise<ResumenMigracion> {
         clave: "portada.cifras",
         valor: impactStats.map((s) => ({ valor: s.value, sufijo: s.suffix, etiqueta: s.label })),
       },
-      { clave: "portada.reflexionDestacada", valor: null },
+      // `'null'::jsonb` y no `null`: la columna `ajustes.valor` es NOT NULL.
+      // Lo que queremos guardar es el valor JSON null, no la ausencia de fila.
+      { clave: "portada.reflexionDestacada", valor: sql`'null'::jsonb` },
       { clave: "portada.franjaFotos", valor: [] },
       {
         clave: "sobre.trayectoria",
