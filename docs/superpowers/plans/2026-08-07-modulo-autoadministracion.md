@@ -24,6 +24,7 @@ Estas reglas aplican a **todas** las tareas. No se repiten en cada una.
 - **Ninguna contraseña ni hash aparece en logs, respuestas ni props de cliente.**
 - **Un commit por tarea**, con mensaje descriptivo en español y prefijo de convención (`feat:`, `test:`, `fix:`, `docs:`, `chore:`). La frase nominal (`feat: esquema de base de datos`) es la forma que usa este plan y es válida; no hace falta el imperativo.
 - **La salida de `npm test` debe estar limpia**, sin avisos. Un aviso recurrente se multiplica por 19 tareas y entrena al equipo a ignorar la salida.
+- **`npm run typecheck` (`tsc --noEmit`) debe pasar al cerrar cada tarea, incluidas las pruebas.** `tsconfig.json` incluye `**/*.ts`, así que `next build` type-chequea también `tests/`: un error de tipos en una prueba tumba el despliegue. Ojo con los objetos de fixture reutilizados — TypeScript infiere `tipo: string` en vez del literal del enum y Drizzle los rechaza. Declararlos con `as const` en el campo del enum, o tipar el fixture con `satisfies NuevoContenido`.
 - **Rama de trabajo:** `feat/modulo-autoadministracion`, ya creada.
 - **Sin atribución a Claude** en los mensajes de commit.
 
@@ -262,7 +263,7 @@ describe("esquema", () => {
 
   it("rechaza dos contenidos del mismo tipo con el mismo slug", async () => {
     const { db, cerrar } = await crearDbPrueba();
-    const base = { tipo: "columna", slug: "puerto-pisisi", titulo: "Puerto Pisisí", fecha: "2026-01-10" };
+    const base = { tipo: "columna" as const, slug: "puerto-pisisi", titulo: "Puerto Pisisí", fecha: "2026-01-10" };
 
     await db.insert(contenidos).values(base);
     await expect(db.insert(contenidos).values(base)).rejects.toThrow();
@@ -271,7 +272,7 @@ describe("esquema", () => {
 
   it("permite reusar el slug si el anterior está borrado", async () => {
     const { db, cerrar } = await crearDbPrueba();
-    const base = { tipo: "columna", slug: "puerto-pisisi", titulo: "Puerto Pisisí", fecha: "2026-01-10" };
+    const base = { tipo: "columna" as const, slug: "puerto-pisisi", titulo: "Puerto Pisisí", fecha: "2026-01-10" };
 
     const [primero] = await db.insert(contenidos).values(base).returning();
     await db
@@ -437,8 +438,11 @@ Agregar a `scripts` de `package.json`:
 
 ```json
 "db:generar": "drizzle-kit generate",
-"db:aplicar": "drizzle-kit migrate"
+"db:aplicar": "drizzle-kit migrate",
+"typecheck": "tsc --noEmit"
 ```
+
+`typecheck` no es un extra: `tsconfig.json` incluye `**/*.ts`, así que `next build` type-chequea también `tests/`. Sin este script, un error de tipos en una prueba pasa desapercibido hasta que el despliegue falla.
 
 Generar la migración inicial:
 
