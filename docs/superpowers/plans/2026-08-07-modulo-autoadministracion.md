@@ -217,7 +217,7 @@ Expected: PASS, 2 pruebas.
 - [ ] **Step 7: Commit**
 
 ```bash
-git add vitest.config.ts tests/ package.json package-lock.json
+git add vitest.config.mts tests/ package.json package-lock.json
 git commit -m "test: banco de pruebas con Vitest y PGlite"
 ```
 
