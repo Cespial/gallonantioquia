@@ -19,7 +19,7 @@ describe("esquema", () => {
 
   it("rechaza dos contenidos del mismo tipo con el mismo slug", async () => {
     const { db, cerrar } = await crearDbPrueba();
-    const base = { tipo: "columna", slug: "puerto-pisisi", titulo: "Puerto Pisisí", fecha: "2026-01-10" };
+    const base = { tipo: "columna" as const, slug: "puerto-pisisi", titulo: "Puerto Pisisí", fecha: "2026-01-10" };
 
     await db.insert(contenidos).values(base);
     await expect(db.insert(contenidos).values(base)).rejects.toThrow();
@@ -28,7 +28,7 @@ describe("esquema", () => {
 
   it("permite reusar el slug si el anterior está borrado", async () => {
     const { db, cerrar } = await crearDbPrueba();
-    const base = { tipo: "columna", slug: "puerto-pisisi", titulo: "Puerto Pisisí", fecha: "2026-01-10" };
+    const base = { tipo: "columna" as const, slug: "puerto-pisisi", titulo: "Puerto Pisisí", fecha: "2026-01-10" };
 
     const [primero] = await db.insert(contenidos).values(base).returning();
     await db
