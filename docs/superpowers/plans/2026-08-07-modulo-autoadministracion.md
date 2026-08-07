@@ -629,6 +629,48 @@ describe("validación por tipo", () => {
     expect(r.success).toBe(false);
   });
 
+  it("acepta un formato único en una historia y rechaza el arreglo", () => {
+    const historia = {
+      ...base,
+      categoria: "Comunidades",
+      extra: { readTime: "5 min", format: "texto" },
+    };
+    expect(esquemaContenido("historia").safeParse(historia).success).toBe(true);
+    expect(
+      esquemaContenido("historia").safeParse({ ...historia, extra: { readTime: "", format: ["texto"] } })
+        .success
+    ).toBe(false);
+  });
+
+  it("rechaza un formato de historia que no está en la lista", () => {
+    const r = esquemaContenido("historia").safeParse({
+      ...base,
+      categoria: "Comunidades",
+      extra: { readTime: "5 min", format: "infografia" },
+    });
+    expect(r.success).toBe(false);
+  });
+
+  it("exige el número en una idea y no admite taxonomía", () => {
+    const idea = { ...base, categoria: null, extra: { number: "01" } };
+    expect(esquemaContenido("idea").safeParse(idea).success).toBe(true);
+    expect(
+      esquemaContenido("idea").safeParse({ ...idea, extra: { number: "" } }).success
+    ).toBe(false);
+  });
+
+  it("exige nombre y cargo del autor en una voz", () => {
+    const voz = {
+      ...base,
+      categoria: null,
+      extra: { authorName: "Ana Restrepo", authorRole: "Alcaldesa", authorCategory: "", authorImage: "", pullQuote: "" },
+    };
+    expect(esquemaContenido("voz").safeParse(voz).success).toBe(true);
+    expect(
+      esquemaContenido("voz").safeParse({ ...voz, extra: { ...voz.extra, authorName: "" } }).success
+    ).toBe(false);
+  });
+
   it("rechaza una categoría que no está en la taxonomía del tipo", () => {
     const r = esquemaContenido("bitacora").safeParse({
       ...base,
@@ -666,7 +708,7 @@ export type TipoContenido =
 export interface CampoExtra {
   nombre: string;
   etiqueta: string;
-  control: "texto" | "url" | "numero" | "textarea" | "imagen" | "multiple";
+  control: "texto" | "url" | "numero" | "textarea" | "imagen" | "opcion" | "multiple";
   obligatorio: boolean;
   /** Solo para control "multiple". */
   opciones?: string[];
@@ -746,9 +788,12 @@ export const TIPOS: Record<TipoContenido, ConfigTipo> = {
     camposExtra: [
       { nombre: "readTime", etiqueta: "Tiempo de lectura", control: "texto", obligatorio: false },
       {
+        // Una historia tiene UN formato. Los datos reales traen `format: "texto"`
+        // como valor suelto, y /territorio-vivo pinta una sola insignia cuyo
+        // color depende de él. No confundir con `episodio.format`, que sí es lista.
         nombre: "format",
         etiqueta: "Formato",
-        control: "multiple",
+        control: "opcion",
         obligatorio: true,
         opciones: ["texto", "video", "audio", "fotografia"],
       },
@@ -848,12 +893,19 @@ function campoAZod(campo: CampoExtra): z.ZodTypeAny {
     case "numero":
       base = z.coerce.number().int().min(0);
       break;
+    case "opcion":
+      // Una sola opción de la lista.
+      base = z.enum(campo.opciones as [string, ...string[]]);
+      break;
     case "multiple":
+      // Varias opciones a la vez.
       base = z.array(z.enum(campo.opciones as [string, ...string[]]));
       if (campo.obligatorio) {
         return (base as z.ZodArray<z.ZodTypeAny>).min(1, `Elige al menos un valor en ${campo.etiqueta}`);
       }
-      return base;
+      // `.optional()` explícito: esta rama sale del switch con `return` y no
+      // alcanza el bloque común del final, donde los demás controles lo reciben.
+      return base.optional();
     case "imagen":
       base = z.union([z.literal(""), z.string()]);
       break;
@@ -1352,7 +1404,7 @@ export async function migrarContenido(db: any): Promise<ResumenMigracion> {
         fecha: s.date,
         categoria: s.category,
         estado: "borrador",
-        extra: { readTime: s.readTime ?? "", format: [s.format] },
+        extra: { readTime: s.readTime ?? "", format: s.format },
       });
     });
 
