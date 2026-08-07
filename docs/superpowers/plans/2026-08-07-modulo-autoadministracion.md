@@ -4233,18 +4233,19 @@ describe("sitemap", () => {
 
 Reescribir `src/app/sitemap.ts` extrayendo la construcción a `construirSitemap(columnas)` —pura, probable— y dejando el `export default` como la función asíncrona que llama `listarPublicados("columna")` y delega en ella.
 
-- [ ] **Step 7: Eliminar los archivos de datos**
+- [ ] **Step 7: NO eliminar todavía los archivos de datos**
 
-Solo cuando `grep -rn "@/data" src/` no devuelva nada:
+Verifica que la aplicación ya no los use:
 
 ```bash
-git rm src/data/columnas.ts src/data/columnas-bodies.ts src/data/content.ts
-npm run build
+grep -rn "@/data" src/app src/components
 ```
 
-`src/types/index.ts` se conserva: `NavItem` y los demás tipos siguen describiendo la forma de los ajustes.
+No debe devolver nada. Pero **`src/data/*.ts` se queda en el repositorio en esta tarea**, y con él `src/lib/admin/migracion.ts`, `scripts/migrar-contenido.ts` y `tests/admin/migracion.test.ts`.
 
-**Atención:** `src/lib/admin/migracion.ts` importa de `@/data`. Como la migración ya se corrió y no volverá a correrse, se elimina junto con `scripts/migrar-contenido.ts`, su prueba y el script de `package.json`. Dejar código que importa archivos borrados rompe la compilación.
+La razón es de orden: la migración **todavía no se ha corrido contra la base real**. Hasta ahora solo se ejecutó contra PGlite en pruebas. Quien la ejecuta contra Neon es la tarea 18. Borrar aquí el script dejaría al despliegue sin la herramienta que necesita, y borrar `src/data` dejaría a la prueba de fidelidad sin la fuente contra la cual comparar — que es justamente la red que garantiza que las 32 columnas lleguen completas a producción.
+
+El borrado ocurre en la tarea 18, después de migrar y verificar. `src/types/index.ts` se conserva siempre: `NavItem` y los demás tipos siguen describiendo la forma de los ajustes.
 
 - [ ] **Step 8: Verificación completa**
 
@@ -4305,11 +4306,30 @@ Verificar en producción, en este orden:
 5. Se publica un cambio de prueba y se ve reflejado en el sitio en menos de un minuto, sin despliegue nuevo.
 6. `/robots.txt` contiene `Disallow: /admin`.
 
-- [ ] **Step 4: Documentar el despliegue**
+- [ ] **Step 4: Retirar los datos quemados y la migración**
 
-Crear `docs/despliegue-modulo-admin.md` con las variables de entorno, los comandos de migración y qué hacer si un despliegue falla.
+**Solo después de que el paso 3 haya verificado las 32 columnas en producción.** Ahora sí, el contenido vive en la base y estos archivos ya no tienen función:
 
-- [ ] **Step 5: Commit**
+```bash
+git rm src/data/columnas.ts src/data/columnas-bodies.ts src/data/content.ts
+git rm src/lib/admin/migracion.ts scripts/migrar-contenido.ts tests/admin/migracion.test.ts
+```
+
+Quitar también el script `db:migrar-contenido` de `package.json`. `src/lib/admin/migracion.ts` importa de `@/data`, así que dejarlo tras borrar los datos rompería la compilación.
+
+Con la prueba de fidelidad se va la única verificación automatizada de que las columnas migraron enteras — por eso se retira **después** de haberlo comprobado en producción y no antes.
+
+```bash
+npm test && npm run typecheck && npm run build
+```
+
+Las tres deben pasar. Comitear por separado del despliegue: `chore: retirar los datos quemados tras migrar a producción`.
+
+- [ ] **Step 5: Documentar el despliegue**
+
+Crear `docs/despliegue-modulo-admin.md` con las variables de entorno, los comandos de migración, el hecho de que la migración es de una sola vez y ya se ejecutó, y qué hacer si un despliegue falla.
+
+- [ ] **Step 6: Commit**
 
 ```bash
 git add docs package.json
