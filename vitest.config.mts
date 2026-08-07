@@ -1,8 +1,9 @@
 import { defineConfig } from "vitest/config";
-import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
-  plugins: [tsconfigPaths()],
+  // Resuelve el alias `@/` de tsconfig.json dentro de las pruebas. Vite lo
+  // soporta de forma nativa; el plugin vite-tsconfig-paths ya no hace falta.
+  resolve: { tsconfigPaths: true },
   test: {
     environment: "node",
     include: ["tests/**/*.test.ts"],
