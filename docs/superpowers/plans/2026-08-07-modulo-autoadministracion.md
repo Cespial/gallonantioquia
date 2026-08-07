@@ -994,7 +994,8 @@ Crear `tests/admin/slug.test.ts`:
 
 ```ts
 import { describe, it, expect } from "vitest";
-import { generarSlug } from "@/lib/admin/slug";
+import { generarSlug, LARGO_MAXIMO_SLUG } from "@/lib/admin/slug";
+import { esquemaSlug } from "@/lib/admin/esquemas";
 
 describe("generarSlug", () => {
   it("pasa a minúsculas y une con guiones", () => {
@@ -1022,6 +1023,30 @@ describe("generarSlug", () => {
 
   it("devuelve cadena vacía si no queda nada utilizable", () => {
     expect(generarSlug("¿¡—!?")).toBe("");
+  });
+
+  it("recorta los títulos largos al límite que acepta esquemaSlug", () => {
+    const titular =
+      "Puerto Berrío inaugura una nueva planta de tratamiento de aguas residuales " +
+      "en el corregimiento de Cristales tras dos años de retrasos en la obra";
+    const slug = generarSlug(titular);
+
+    expect(slug.length).toBeLessThanOrEqual(LARGO_MAXIMO_SLUG);
+    expect(esquemaSlug.safeParse(slug).success).toBe(true);
+  });
+
+  it("no parte una palabra ni deja un guion colgando al recortar", () => {
+    const slug = generarSlug("palabra ".repeat(40));
+
+    expect(slug.endsWith("-")).toBe(false);
+    expect(slug.split("-").every((p) => p === "palabra")).toBe(true);
+  });
+
+  it("corta en seco si una sola palabra ya pasa del límite", () => {
+    const slug = generarSlug("a".repeat(200));
+
+    expect(slug).toBe("a".repeat(LARGO_MAXIMO_SLUG));
+    expect(esquemaSlug.safeParse(slug).success).toBe(true);
   });
 });
 ```
@@ -1097,12 +1122,17 @@ npm i -D @types/sanitize-html
 Crear `src/lib/admin/slug.ts`:
 
 ```ts
+/** Tope de `esquemaSlug`. El título admite 300, así que hay que recortar. */
+export const LARGO_MAXIMO_SLUG = 120;
+
 /**
  * Convierte un título en un slug apto para URL: minúsculas, sin tildes,
- * separado por guiones. Debe producir salidas que pasen `esquemaSlug`.
+ * separado por guiones. Debe producir salidas que pasen `esquemaSlug`,
+ * incluido su límite de longitud: el slug se autogenera, así que un slug
+ * inválido deja al usuario sin poder guardar y sin saber por qué.
  */
 export function generarSlug(texto: string): string {
-  return texto
+  const base = texto
     .normalize("NFD")
     // Marcas diacríticas combinantes. Se escriben con escapes unicode a
     // propósito: los caracteres en crudo son invisibles y se corrompen al
@@ -1111,6 +1141,14 @@ export function generarSlug(texto: string): string {
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
+
+  if (base.length <= LARGO_MAXIMO_SLUG) return base;
+
+  // Cortar en el último guion anterior al tope, para no partir una palabra
+  // por la mitad ni dejar un guion colgando que el regex rechazaría.
+  const recortado = base.slice(0, LARGO_MAXIMO_SLUG);
+  const ultimoGuion = recortado.lastIndexOf("-");
+  return ultimoGuion > 0 ? recortado.slice(0, ultimoGuion) : recortado;
 }
 ```
 
