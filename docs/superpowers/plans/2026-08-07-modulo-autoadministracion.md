@@ -1991,7 +1991,7 @@ git commit -m "feat: contraseñas, autenticación y bloqueo por intentos"
 - Create: `src/app/api/auth/[...nextauth]/route.ts`
 - Create: `src/app/admin/login/page.tsx`
 - Create: `src/app/admin/login/formulario.tsx`
-- Create: `middleware.ts`
+- Create: `src/middleware.ts`
 - Create: `tests/auth/sesion.test.ts`
 - Modify: `src/app/robots.ts` (excluir `/admin`)
 
@@ -2087,7 +2087,14 @@ export async function requerirAdmin(): Promise<SesionUsuario> {
 - [ ] **Step 4: Ejecutar y verificar que pasa**
 
 Run: `npm test -- tests/auth/sesion.test.ts`
-Expected: PASS, 5 pruebas.
+Expected: FAIL todavía — `Cannot find module './config'`.
+
+`vi.mock` necesita **resolver** la ruta del módulo para sustituirlo, y
+`sesion.ts` importa `./config`, que aún no existe. El mock no llega a
+aplicarse y la suite no arranca. Esta prueba solo pasa después del paso 5;
+verificarla ahí, no aquí. (Una vez creado el archivo, el mock declarado sobre
+el alias `@/lib/auth/config` sí intercepta el import relativo `./config`:
+Vitest normaliza ambos a la misma ruta resuelta.)
 
 - [ ] **Step 5: Configurar Auth.js**
 
@@ -2095,6 +2102,16 @@ Expected: PASS, 5 pruebas.
 npm i next-auth@beta
 npx auth secret   # escribe AUTH_SECRET en .env.local
 ```
+
+Si `npx auth secret` no corre sin interacción, sirve igual
+`openssl rand -base64 33` volcado a mano en `.env.local`.
+
+Tras este paso `next build` **exige `DATABASE_URL`**: la ruta de auth importa
+`@/lib/auth/config`, que importa `@/db`, y ese módulo lanza al cargarse.
+Next.js lo evalúa al recolectar los datos de la ruta, así que el build muere
+con `Failed to collect page data for /api/auth/[...nextauth]`. La variable
+tiene que existir en Vercel **antes** de desplegar esta rama, no en la tarea 18.
+En local basta un valor de marcador con forma de cadena Postgres para compilar.
 
 Crear `src/lib/auth/config.ts`:
 
@@ -2266,7 +2283,14 @@ export default function PaginaAcceso() {
 
 - [ ] **Step 7: Middleware**
 
-Crear `middleware.ts` en la raíz del repositorio:
+Crear **`src/middleware.ts`**, no `middleware.ts` en la raíz del repositorio.
+Next.js busca el middleware al lado de la carpeta `app`, y en este proyecto
+`app` vive dentro de `src/`. Está verificado en los dos sitios: desde la raíz,
+`next build` responde `✓ Compiled successfully` sin una sola advertencia y
+`.next/server/middleware-manifest.json` queda vacío — el middleware no existe
+y `/admin` queda abierto. Desde `src/`, el build lista `ƒ Middleware` y el
+manifiesto trae el matcher de `/admin/:path*`. El fallo es silencioso, así que
+conviene confirmarlo en el manifiesto y no fiarse de que compile.
 
 ```ts
 import { NextResponse } from "next/server";
@@ -2328,7 +2352,7 @@ npm run dev
 - [ ] **Step 10: Commit**
 
 ```bash
-git add src/lib/auth src/app/admin src/app/api middleware.ts src/app/robots.ts tests/auth package.json package-lock.json
+git add src/lib/auth src/app/admin src/app/api src/middleware.ts src/app/robots.ts tests/auth package.json package-lock.json
 git commit -m "feat: sesión, pantalla de acceso y protección de /admin"
 ```
 
