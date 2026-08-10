@@ -1835,8 +1835,12 @@ Expected: FAIL — no existen los módulos.
 
 ```bash
 npm i bcryptjs
-npm i -D @types/bcryptjs
 ```
+
+**Sin `@types/bcryptjs`.** El paquete instalado es `bcryptjs@3`, que trae sus
+propios tipos (`umd/index.d.ts` en su campo `exports`). `@types/bcryptjs` quedó
+como un stub deprecado de la línea 2.x: instalarlo agrega una definición
+sombra que puede contradecir la real. `npm run typecheck` pasa sin él.
 
 Crear `src/lib/auth/password.ts`:
 
@@ -1853,8 +1857,33 @@ export async function verificarPassword(plano: string, hash: string): Promise<bo
   return bcrypt.compare(plano, hash);
 }
 
-/** Hash de descarte, para gastar el mismo tiempo cuando el correo no existe. */
+/**
+ * Hash de descarte, para gastar el mismo tiempo cuando el correo no existe.
+ * Debe ser un hash bcrypt bien formado y del mismo coste que `COSTE`: bcrypt
+ * rechaza al instante cualquier cadena que no lo sea, y esa respuesta
+ * inmediata delataría que la cuenta no existe. Ninguna contraseña coincide
+ * con él, así que la comparación siempre falla tras hacer el trabajo completo.
+ */
 export const HASH_SENUELO = "$2a$12$Ck1kX3wJz3Yy2rFqPZ9nEe4hV0gT8sJ8kLm3nOpQrStUvWxYz0aBc";
+```
+
+El señuelo de arriba está verificado: mide 60 caracteres y comparar contra él
+toma 243 ms, contra 240 ms de un hash real. Cambiarlo por una cadena
+inventada rompe la defensa en silencio, sin que falle ninguna de las pruebas
+del paso 1, así que se agregan dos que fijan la propiedad por formato —
+cronometrar sería inestable en integración continua:
+
+```ts
+describe("hash señuelo", () => {
+  it("tiene el formato de un hash bcrypt real, con el mismo coste", () => {
+    expect(HASH_SENUELO).toMatch(/^\$2[aby]\$12\$[./A-Za-z0-9]{53}$/);
+  });
+
+  it("ninguna contraseña coincide con él", async () => {
+    expect(await verificarPassword("clave-de-campana-2026", HASH_SENUELO)).toBe(false);
+    expect(await verificarPassword("", HASH_SENUELO)).toBe(false);
+  });
+});
 ```
 
 Crear `src/lib/auth/usuarios.ts`:
@@ -1943,7 +1972,7 @@ export async function autenticar(
 - [ ] **Step 4: Ejecutar y verificar que pasan**
 
 Run: `npm test -- tests/auth`
-Expected: PASS, 13 pruebas.
+Expected: PASS, 15 pruebas.
 
 - [ ] **Step 5: Commit**
 
