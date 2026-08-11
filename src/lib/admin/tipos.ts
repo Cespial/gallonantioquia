@@ -23,6 +23,8 @@ export interface ConfigTipo {
   etiqueta: string;
   /** Para textos como "Nueva columna" o "Borrar columna". */
   singular: string;
+  /** No siempre es el singular con una ese: «columnas invitadas». */
+  plural: string;
   articulo: "la" | "el";
   /** Segmento bajo /admin. */
   rutaAdmin: string;
@@ -40,6 +42,7 @@ export const TIPOS: Record<TipoContenido, ConfigTipo> = {
     tipo: "columna",
     etiqueta: "Huellas en Antioquia",
     singular: "columna",
+    plural: "columnas",
     articulo: "la",
     rutaAdmin: "columnas",
     rutaPublica: "/columnas",
@@ -61,6 +64,7 @@ export const TIPOS: Record<TipoContenido, ConfigTipo> = {
     tipo: "bitacora",
     etiqueta: "Bitácora",
     singular: "entrada",
+    plural: "entradas",
     articulo: "la",
     rutaAdmin: "bitacora",
     rutaPublica: "/bitacora",
@@ -78,6 +82,7 @@ export const TIPOS: Record<TipoContenido, ConfigTipo> = {
     tipo: "historia",
     etiqueta: "Territorio Vivo",
     singular: "historia",
+    plural: "historias",
     articulo: "la",
     rutaAdmin: "historias",
     rutaPublica: "/territorio-vivo",
@@ -105,6 +110,7 @@ export const TIPOS: Record<TipoContenido, ConfigTipo> = {
     tipo: "idea",
     etiqueta: "Antioquia Piensa",
     singular: "idea",
+    plural: "ideas",
     articulo: "la",
     rutaAdmin: "ideas",
     rutaPublica: "/antioquia-piensa",
@@ -119,6 +125,7 @@ export const TIPOS: Record<TipoContenido, ConfigTipo> = {
     tipo: "voz",
     etiqueta: "Voces",
     singular: "columna invitada",
+    plural: "columnas invitadas",
     articulo: "la",
     rutaAdmin: "voces",
     rutaPublica: "/voces",
@@ -137,6 +144,7 @@ export const TIPOS: Record<TipoContenido, ConfigTipo> = {
     tipo: "episodio",
     etiqueta: "Un Café",
     singular: "episodio",
+    plural: "episodios",
     articulo: "el",
     rutaAdmin: "un-cafe",
     rutaPublica: "/un-cafe",

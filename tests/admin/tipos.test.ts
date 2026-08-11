@@ -16,6 +16,16 @@ describe("configuración de tipos", () => {
     expect(configPorRutaAdmin("inventada")).toBeNull();
   });
 
+  it("declara el plural de cada tipo, que no siempre es el singular con una ese", () => {
+    // «columna invitada» pluraliza las dos palabras; concatenar una ese al
+    // singular daría «columna invitadas» en el panel.
+    expect(TIPOS.voz.plural).toBe("columnas invitadas");
+    expect(TIPOS.columna.plural).toBe("columnas");
+    expect(TIPOS.bitacora.plural).toBe("entradas");
+    expect(TIPOS.episodio.plural).toBe("episodios");
+    expect(LISTA_TIPOS.every((t) => t.plural.length > 0)).toBe(true);
+  });
+
   it("ordena ideas y episodios por orden, el resto por fecha", () => {
     expect(TIPOS.idea.ordenPor).toBe("orden");
     expect(TIPOS.episodio.ordenPor).toBe("orden");
