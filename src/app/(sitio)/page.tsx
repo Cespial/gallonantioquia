@@ -7,7 +7,6 @@ import PlanDeGobierno from "@/components/campana/PlanDeGobierno";
 import TeEscuchamos from "@/components/campana/TeEscuchamos";
 import Proyectos from "@/components/campana/Proyectos";
 import FranjaCifras from "@/components/campana/FranjaCifras";
-import ConstructionScreen from "@/components/home/ConstructionScreen";
 import { listarPublicados } from "@/lib/contenidos/cacheadas";
 import { aEje, aEvento, aProyecto } from "@/lib/contenidos/adaptadores";
 import { leerAjustes } from "@/lib/ajustes/cacheadas";
@@ -20,12 +19,6 @@ export const metadata: Metadata = {
 
 export default async function Home() {
   const ajustes = await leerAjustes();
-
-  // El modo construcción se enciende y se apaga desde el panel, en
-  // Ajustes → Estado del sitio. Ya no es una constante que haya que desplegar.
-  if (ajustes["sitio.enConstruccion"]) {
-    return <ConstructionScreen mensaje={ajustes["sitio.mensajeConstruccion"]} />;
-  }
 
   const [eventos, ejes, proyectos] = await Promise.all([
     listarPublicados("evento"),

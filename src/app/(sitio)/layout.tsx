@@ -1,6 +1,7 @@
 import Encabezado from "@/components/campana/Encabezado";
 import Pie from "@/components/campana/Pie";
 import BotonWhatsApp from "@/components/campana/BotonWhatsApp";
+import ConstructionScreen from "@/components/home/ConstructionScreen";
 import { leerAjustes } from "@/lib/ajustes/cacheadas";
 
 /**
@@ -13,6 +14,14 @@ export default async function LayoutSitio({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const ajustes = await leerAjustes();
+
+  // El modo construcción tapa el sitio ENTERO, no solo la portada: es lo que
+  // promete el panel («el resto del sitio queda oculto») y lo que espera quien
+  // lo enciende. Al hacerlo aquí, ninguna ruta interna queda accesible por
+  // enlace directo mientras el sitio esté cerrado.
+  if (ajustes["sitio.enConstruccion"]) {
+    return <ConstructionScreen mensaje={ajustes["sitio.mensajeConstruccion"]} />;
+  }
 
   // El menú se configura desde el panel. Solo entra lo marcado como visible,
   // para que ocultar una sección sea un clic y no un despliegue.
