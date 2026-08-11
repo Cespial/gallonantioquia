@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect } from "react";
 
 /**
@@ -33,39 +34,24 @@ export default function ConstructionScreen({ mensaje }: { mensaje: string }) {
       />
 
       <div className="relative z-10 flex flex-col items-center">
-        {/* Wordmark de marca */}
-        <div className="flex flex-col items-center">
-          <div className="flex items-baseline gap-2">
-            <span className="font-brand text-2xl tracking-wide text-white md:text-3xl">
-              GALL
-              <span className="relative inline-block">
-                O
-                <span
-                  className="absolute -top-[0.32em] left-1/2 -translate-x-1/2 text-[1.1em] leading-none text-dorado-tierra"
-                  style={{ fontFamily: "serif" }}
-                >
-                  &#769;
-                </span>
-              </span>
-              N
-            </span>
-            <span className="font-brand text-2xl tracking-wide text-dorado-tierra md:text-3xl">
-              MEMORIAS
-            </span>
-          </div>
-          <span className="mt-1 font-accent text-[8px] uppercase tracking-[0.4em] text-white/40">
-            Historias &amp; Reflexiones
-          </span>
-        </div>
+        {/* Identidad de la campaña. Antes decía «Gallón Memorias», que era
+            el sitio anterior; el logotipo se sirve desde public. */}
+        <Image
+          src="/images/campana/logo-gallon-blanco.png"
+          alt="Gallón Gobernador"
+          width={640}
+          height={411}
+          priority
+          className="h-24 w-auto md:h-28"
+        />
 
-        {/* Eyebrow */}
-        <p className="mt-14 font-ui text-[10px] uppercase tracking-[0.3em] text-dorado-tierra md:text-xs">
-          Memorias de Antioquia
+        <p className="mt-10 font-campana text-[10px] font-semibold uppercase tracking-[0.3em] text-campana-dorado md:text-xs">
+          A paso firme por Antioquia
         </p>
 
         {/* Título principal */}
-        <h1 className="mt-5 font-display text-[clamp(2.5rem,6vw,4.5rem)] leading-[0.95] tracking-tight text-white">
-          En construcci<span className="italic text-dorado-tierra">ó</span>n
+        <h1 className="mt-5 font-campana text-[clamp(2.2rem,5.5vw,3.8rem)] font-extrabold uppercase leading-[0.95] tracking-tight text-white">
+          En construcci<span className="text-campana-dorado">ó</span>n
           <span className="construction-dots" aria-hidden="true">
             <span>.</span>
             <span>.</span>
@@ -74,10 +60,10 @@ export default function ConstructionScreen({ mensaje }: { mensaje: string }) {
         </h1>
 
         {/* Divisor dorado */}
-        <div className="mt-8 h-px w-16 bg-dorado-tierra" />
+        <div className="mt-8 h-px w-16 bg-campana-dorado" />
 
         {/* Subtítulo */}
-        <p className="mt-8 max-w-md font-body text-base leading-relaxed text-white/55 md:text-lg">
+        <p className="mt-8 max-w-md font-campana text-base leading-relaxed text-white/70 md:text-lg">
           {mensaje}
         </p>
       </div>
