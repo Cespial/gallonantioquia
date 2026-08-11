@@ -12,7 +12,8 @@
     "db:generar": "drizzle-kit generate",
     "db:aplicar": "drizzle-kit migrate",
     "db:migrar-contenido": "tsx scripts/migrar-contenido.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "crear-admin": "tsx scripts/crear-admin.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
