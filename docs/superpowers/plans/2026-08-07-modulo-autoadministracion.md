@@ -3503,8 +3503,13 @@ git commit -m "feat: listado parametrizado de las seis secciones"
 - [ ] **Step 1: Instalar Tiptap**
 
 ```bash
-npm i @tiptap/react @tiptap/pm @tiptap/starter-kit @tiptap/extension-link
+npm i @tiptap/react @tiptap/pm @tiptap/starter-kit
 ```
+
+**Sin `@tiptap/extension-link`.** La versión que se instala es Tiptap 3, y su
+`StarterKit` ya incluye `Link` (junto con `Underline`, `ListKeymap` y
+`TrailingNode`). Agregarlo aparte duplica la extensión. Se configura desde el
+propio kit: `StarterKit.configure({ link: { openOnClick: false } })`.
 
 - [ ] **Step 2: Escribir el editor de texto**
 
@@ -3515,7 +3520,6 @@ Crear `src/components/admin/EditorTexto.tsx`:
 
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import Link from "@tiptap/extension-link";
 import { useEffect } from "react";
 
 interface Props {
@@ -3533,12 +3537,15 @@ export default function EditorTexto({ valorInicial, alCambiar }: Props) {
         heading: { levels: [2, 3] },
         codeBlock: false,
         horizontalRule: false,
+        link: { openOnClick: false },
       }),
-      Link.configure({ openOnClick: false }),
     ],
     content: valorInicial,
     editorProps: {
-      attributes: { class: "prose max-w-none min-h-[24rem] p-4 focus:outline-none" },
+      // `prose` viene de @tailwindcss/typography, que este proyecto no instala:
+      // sin el plugin esa clase no aplica nada y el cuerpo se ve sin formato.
+      // Las variantes arbitrarias de Tailwind sí funcionan tal cual.
+      attributes: { class: ESTILO_CUERPO },
     },
     onUpdate: ({ editor }) => alCambiar(editor.getHTML()),
   });
@@ -3618,10 +3625,10 @@ import { contenidos } from "@/db/esquema";
 import { configPorRutaAdmin } from "@/lib/admin/tipos";
 import FormularioContenido from "@/components/admin/FormularioContenido";
 
-type Props = { params: Promise<{ seccion: string; id: string }> };
+type Props = { params: { seccion: string; id: string } };
 
 export default async function PaginaEditor({ params }: Props) {
-  const { seccion, id } = await params;
+  const { seccion, id } = params;
 
   const config = configPorRutaAdmin(seccion);
   if (!config) notFound();
@@ -3734,7 +3741,13 @@ export async function consultarBorrados(conexion: any): Promise<ContenidoConImag
     .orderBy(desc(contenidos.eliminadoEn));
 }
 
-export function listarBorrados() {
+```
+
+Y `listarBorrados()` a `src/lib/contenidos/cacheadas.ts`, que es el archivo que
+importa `db`:
+
+```ts
+export function listarBorrados(): Promise<ContenidoConImagen[]> {
   return consultarBorrados(db);
 }
 ```
