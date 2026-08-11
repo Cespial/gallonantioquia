@@ -4415,12 +4415,28 @@ Crear la base en Neon y el almacén en Vercel Blob desde el panel de Vercel del 
 
 ```bash
 vercel env pull .env.local
+set -a && . ./.env.local && set +a   # los scripts no leen .env.local solos
 npm run db:aplicar
 npm run db:migrar-contenido
 npm run crear-admin -- cristian@inplux.co "Cristian" "<contraseña larga>"
 ```
 
 Verificar el resumen impreso: 32 columnas publicadas y 25 borradores.
+
+**`vercel env pull` sobrescribe `.env.local` entero**, así que borra
+`AUTH_SECRET`. Hay que volver a añadirla al archivo después de cada `pull`.
+
+**El script de migración no puede usar el cliente de `@/db`.** Ese va sobre
+`neon-http`, que responde `Error: No transactions support in neon-http driver`,
+y `migrarContenido` corre entera dentro de una transacción. Hay que construirle
+un cliente propio con `Pool` de `@neondatabase/serverless` y
+`drizzle-orm/neon-serverless`, apuntando `neonConfig.webSocketConstructor` al
+`WebSocket` nativo de Node 22.
+
+Este fallo **no lo detecta ninguna prueba**: PGlite sí soporta transacciones, así
+que la suite pasa en verde y la diferencia solo aparece contra la base real. Es
+el precio de probar contra un motor distinto del de producción; conviene tenerlo
+presente en cualquier tarea que use `db.transaction`.
 
 **Este paso va antes del despliegue.** Si se despliega primero, el sitio queda con listados vacíos hasta que se migre.
 
@@ -4460,6 +4476,35 @@ npm test && npm run typecheck && npm run build
 ```
 
 Las tres deben pasar. Comitear por separado del despliegue: `chore: retirar los datos quemados tras migrar a producción`.
+
+### Lo que solo apareció con el navegador real
+
+Los pasos 4 y 5 de la verificación —entrar al panel y publicar algo— no se
+pueden hacer con `curl`: hace falta un navegador que ejecute React. Al
+automatizarlo con Playwright salieron dos cosas que ninguna prueba ni ningún
+build habrían delatado:
+
+**1. Una fecha calculada en el render tumbaba la página entera.**
+`Header.tsx` formateaba `new Date()` durante el render. El servidor la resuelve
+en su huso y el navegador en el del visitante; cuando el texto no coincide,
+React aborta la hidratación de **toda** la página (errores #418, #423, #425 en
+la consola). El síntoma no es un mensaje de error: es que **ningún botón
+responde**. En el panel, el clic en «Publicar» no emitía ni una petición.
+La fecha se calcula ahora en un `useEffect`, después de montar.
+
+Era un defecto **preexistente** del sitio: los filtros de `/columnas` y el menú
+móvil llevaban rotos en producción desde antes de este módulo.
+
+**2. El panel heredaba el encabezado y el pie del sitio público.** Además de
+sobrar en pantalla, significaba que un fallo de hidratación del sitio dejaba el
+panel inservible, que es justo lo que pasó. El sitio público se movió a
+`src/app/(sitio)/` con su propio layout, y `/admin` quedó fuera: ahora un fallo
+en uno no alcanza al otro. El layout raíz solo monta `<html>`, `<body>` y las
+fuentes.
+
+Conviene dejar la verificación automatizada (`scripts/verificar-panel.py`):
+publica una entrada contra producción, comprueba que sale al aire y la devuelve
+a borrador.
 
 - [ ] **Step 5: Documentar el despliegue**
 
