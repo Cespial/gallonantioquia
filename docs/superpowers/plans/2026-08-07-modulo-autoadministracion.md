@@ -3773,10 +3773,10 @@ git commit -m "feat: papelera con restauración de contenido"
 ### Task 13: Acciones de la biblioteca
 
 **Files:**
+- Create: `src/lib/medios/reglas.ts`
 - Create: `src/lib/medios/acciones.ts`
-- Create: `src/lib/medios/consultas.ts`
 - Create: `src/app/api/medios/subir/route.ts`
-- Create: `tests/medios/acciones.test.ts`
+- Create: `tests/medios/reglas.test.ts`
 
 **Interfaces:**
 - Consumes: `requerirSesion`, `requerirAdmin`, tablas `medios` y `contenidos`.
@@ -3796,7 +3796,7 @@ Crear `tests/medios/acciones.test.ts`:
 import { describe, it, expect } from "vitest";
 import { crearDbPrueba } from "../ayuda/db";
 import { medios, contenidos } from "@/db/esquema";
-import { contarUsos, validarArchivo, TAMANO_MAXIMO } from "@/lib/medios/acciones";
+import { contarUsos, validarArchivo, TAMANO_MAXIMO } from "@/lib/medios/reglas";
 
 describe("validación de archivos", () => {
   it("acepta los formatos permitidos", () => {
@@ -3892,7 +3892,19 @@ export async function contarUsos(conexion: any, medioId: string): Promise<number
 `borrarMedio` llama `requerirAdmin()`, verifica `contarUsos(db, id) === 0` y devuelve
 `{ ok: false, error: "Esa foto está en uso en N contenidos. Cámbialas antes de borrarla." }` si no lo está. Si está libre, borra el objeto de Blob con `del(url)` **solo cuando la URL empieza por `https://`** — las heredadas `/images/…` viven en el repositorio y no se tocan — y luego elimina la fila.
 
-Crear `src/app/api/medios/subir/route.ts` usando `handleUpload` de `@vercel/blob/client`. En el callback `onBeforeGenerateToken`, llamar `requerirSesion()` y aplicar `validarArchivo`; en `onUploadCompleted`, llamar `registrarMedio`. Sin sesión, responder 401.
+Crear `src/app/api/medios/subir/route.ts` usando `handleUpload` de `@vercel/blob/client`. En el callback `onBeforeGenerateToken`, llamar `requerirSesion()` y declarar `allowedContentTypes` y `maximumSizeInBytes` (es Blob quien los hace cumplir, porque el archivo va del navegador al almacén sin pasar por el servidor); en `onUploadCompleted`, llamar `registrarMedio`. Sin sesión, responder 401.
+
+**`onUploadCompleted` no se dispara en `localhost`.** Vercel Blob llama ese
+callback desde fuera, y no alcanza una máquina local, así que la subida
+funciona pero la fila no se registra. Para probarlo de verdad hace falta un
+despliegue de vista previa o un túnel público. En local se comprueba lo demás:
+que sin sesión responde 401 y que el archivo que sale del navegador ya es WebP.
+
+**El reparto de archivos sigue la regla de la tarea 9:** `validarArchivo`,
+`contarUsos`, `consultarMedios` y `registrarMedio` viven en
+`src/lib/medios/reglas.ts` (puras o con conexión, importables desde una
+prueba), y `src/lib/medios/acciones.ts` guarda solo las Server Actions
+`actualizarAlt` y `borrarMedio`.
 
 - [ ] **Step 4: Ejecutar y verificar que pasa**
 
