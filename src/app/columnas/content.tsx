@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { columnas, columnaCategories } from "@/data/columnas";
+import type { ColumnaArticle } from "@/types";
 import CategoryTag from "@/components/content/CategoryTag";
 import PageHero from "@/components/layout/PageHero";
 import SectionWrapper from "@/components/layout/SectionWrapper";
@@ -11,8 +11,15 @@ import FadeIn from "@/components/animations/FadeIn";
 import { formatDate } from "@/lib/utils";
 import { getFacePosition } from "@/lib/image-positions";
 
-export default function ColumnasContent() {
+export default function ColumnasContent({ columnas }: { columnas: ColumnaArticle[] }) {
   const [activeYear, setActiveYear] = useState("Todas");
+
+  // Los años salen del propio contenido: si se publica una columna de un año
+  // nuevo, el filtro lo muestra sin tocar código.
+  const columnaCategories = [
+    "Todas",
+    ...Array.from(new Set(columnas.map((c) => c.date.slice(0, 4)))).sort().reverse(),
+  ];
 
   const filtered =
     activeYear === "Todas"

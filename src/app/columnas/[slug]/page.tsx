@@ -8,19 +8,21 @@ import ArticleNavigation from "@/components/content/ArticleNavigation";
 import NewsletterCTA from "@/components/content/NewsletterCTA";
 import Breadcrumb from "@/components/content/Breadcrumb";
 import ReadingProgress from "@/components/layout/ReadingProgress";
-import { columnas } from "@/data/columnas";
-import { columnasBodies } from "@/data/columnas-bodies";
+import { listarPublicados } from "@/lib/contenidos/cacheadas";
+import { aColumna } from "@/lib/contenidos/adaptadores";
 import { formatDate } from "@/lib/utils";
 
-type Props = { params: Promise<{ slug: string }> };
+type Props = { params: { slug: string } };
 
 export async function generateStaticParams() {
+  const columnas = await listarPublicados("columna");
   return columnas.map((col) => ({ slug: col.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
-  const col = columnas.find((c) => c.slug === slug);
+  const { slug } = params;
+  const publicadas = await listarPublicados("columna");
+  const col = publicadas.map(aColumna).find((c) => c.slug === slug);
 
   if (!col) {
     return { title: "Columna no encontrada" };
@@ -36,20 +38,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function ColumnaDetailPage({ params }: Props) {
-  const { slug } = await params;
-  const colIndex = columnas.findIndex((c) => c.slug === slug);
+  const { slug } = params;
+  const publicadas = await listarPublicados("columna");
+  const colIndex = publicadas.findIndex((c) => c.slug === slug);
 
   if (colIndex === -1) {
     notFound();
   }
 
+  const columnas = publicadas.map(aColumna);
   const col = columnas[colIndex];
   const prevCol = colIndex > 0 ? columnas[colIndex - 1] : null;
   const nextCol =
     colIndex < columnas.length - 1 ? columnas[colIndex + 1] : null;
   const { full: dateFormatted } = formatDate(col.date);
-  const body = columnasBodies[col.slug] || [];
-  const hasBody = body.length > 0;
+  // El cuerpo se sanitiza al guardarlo en el panel, así que aquí se pinta tal
+  // cual: volver a procesarlo en cada visita no agregaría seguridad.
+  const cuerpo = publicadas[colIndex].cuerpoHtml ?? "";
+  const hasBody = cuerpo.trim().length > 0;
 
   return (
     <>
@@ -109,16 +115,10 @@ export default async function ColumnaDetailPage({ params }: Props) {
 
           {/* Article body */}
           {hasBody ? (
-            <div className="prose-editorial">
-              {body.map((paragraph, i) => (
-                <p
-                  key={i}
-                  className="font-body text-texto-principal text-lg leading-relaxed mb-6"
-                >
-                  {paragraph}
-                </p>
-              ))}
-            </div>
+            <div
+              className="prose-editorial font-body text-texto-principal text-lg leading-relaxed [&_p]:mb-6 [&_h2]:font-display [&_h2]:text-2xl [&_h2]:mt-8 [&_h2]:mb-3 [&_blockquote]:border-l-4 [&_blockquote]:border-dorado-tierra [&_blockquote]:pl-4 [&_blockquote]:italic [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:list-decimal [&_ol]:pl-6 [&_a]:text-verde-antioquia [&_a]:underline"
+              dangerouslySetInnerHTML={{ __html: cuerpo }}
+            />
           ) : (
             <div className="prose-editorial">
               <p className="font-body text-texto-principal text-lg leading-relaxed mb-6">
