@@ -27,7 +27,7 @@ export default function Agenda({ eventos }: { eventos: EventoAgenda[] }) {
     if (!lista) return;
 
     const tarjeta = lista.querySelector("li");
-    const paso = tarjeta ? tarjeta.getBoundingClientRect().width + 16 : 280;
+    const paso = tarjeta ? tarjeta.getBoundingClientRect().width + 16 : 216;
     lista.scrollBy({ left: paso * direccion, behavior: "smooth" });
   }
 
@@ -35,12 +35,12 @@ export default function Agenda({ eventos }: { eventos: EventoAgenda[] }) {
     const lista = pista.current;
     if (!lista) return;
     const tarjeta = lista.querySelector("li");
-    const paso = tarjeta ? tarjeta.getBoundingClientRect().width + 16 : 280;
+    const paso = tarjeta ? tarjeta.getBoundingClientRect().width + 16 : 216;
     setIndice(Math.round(lista.scrollLeft / paso));
   }
 
   return (
-    <div className="bg-campana-hueso px-5 py-14 lg:px-12 lg:py-16">
+    <div className="bg-campana-hueso px-5 py-11 lg:px-12 lg:py-12">
       <div className="flex items-end justify-between gap-4">
         <h2 className="font-campana leading-none">
           <span className="block text-lg font-semibold uppercase tracking-wide text-campana-hoja">
@@ -65,7 +65,7 @@ export default function Agenda({ eventos }: { eventos: EventoAgenda[] }) {
           Todavía no hay eventos publicados en la agenda.
         </p>
       ) : (
-        <div className="mt-8 flex items-center gap-3">
+        <div className="mt-6 flex items-center gap-3">
           <button
             type="button"
             onClick={() => desplazar(-1)}
@@ -85,7 +85,7 @@ export default function Agenda({ eventos }: { eventos: EventoAgenda[] }) {
               return (
                 <li
                   key={evento.slug}
-                  className="w-[15.5rem] shrink-0 snap-start rounded-2xl border border-neutral-200 bg-white p-5"
+                  className="w-[12.5rem] shrink-0 snap-start rounded-2xl border border-neutral-200 bg-white p-4"
                 >
                   <p className="inline-block overflow-hidden rounded-lg text-center leading-none">
                     <span className="block bg-campana-dorado px-3 py-1 font-campana text-[11px] font-bold uppercase text-white">
@@ -96,15 +96,15 @@ export default function Agenda({ eventos }: { eventos: EventoAgenda[] }) {
                     </span>
                   </p>
 
-                  <p className="mt-3 font-campana text-lg font-bold text-neutral-800">
+                  <p className="mt-3 font-campana text-base font-bold text-neutral-800">
                     {evento.municipio || evento.titulo}
                   </p>
 
-                  <p className="mt-3 flex items-center gap-2 font-campana text-[13px] text-neutral-600">
+                  <p className="mt-2.5 flex items-center gap-2 font-campana text-xs text-neutral-600">
                     <Clock className="h-3.5 w-3.5" aria-hidden="true" />
                     {semana} · {evento.hora}
                   </p>
-                  <p className="mt-1.5 flex items-center gap-2 font-campana text-[13px] text-neutral-600">
+                  <p className="mt-1.5 flex items-center gap-2 font-campana text-xs text-neutral-600">
                     <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
                     {evento.lugar}
                   </p>
@@ -133,7 +133,7 @@ export default function Agenda({ eventos }: { eventos: EventoAgenda[] }) {
       )}
 
       {eventos.length > 1 && (
-        <ul className="mt-5 flex justify-center gap-2" aria-hidden="true">
+        <ul className="mt-4 flex justify-center gap-2" aria-hidden="true">
           {eventos.map((evento, i) => (
             <li
               key={evento.slug}

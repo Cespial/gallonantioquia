@@ -19,8 +19,11 @@ export default function Pie({
   contacto: { email: string; telefono: string; direccion: string };
   redes: { x: string; instagram: string; youtube: string; facebook: string; tiktok: string };
 }) {
-  const mitad = Math.ceil(navItems.length / 2);
-  const columnas = [navItems.slice(0, mitad), navItems.slice(mitad)];
+  // Tres columnas, como en el mockup, repartiendo de forma pareja.
+  const porColumna = Math.ceil(navItems.length / 3);
+  const columnas = [0, 1, 2].map((i) =>
+    navItems.slice(i * porColumna, (i + 1) * porColumna)
+  );
 
   const sociales = [
     { href: redes.instagram, icono: IconoInstagram, nombre: "Instagram" },
@@ -31,8 +34,8 @@ export default function Pie({
   ].filter((r) => r.href);
 
   return (
-    <footer className="bg-campana-profundo pt-14">
-      <div className="mx-auto grid max-w-[1400px] gap-10 px-5 pb-10 lg:grid-cols-[1fr_1.3fr_1fr] lg:px-10">
+    <footer className="bg-campana-profundo pt-9">
+      <div className="mx-auto grid max-w-[1400px] gap-8 px-5 pb-6 lg:grid-cols-[1fr_1.3fr_1fr] lg:px-10">
         <div>
           <Image
             src="/images/campana/logo-gallon-blanco.png"
@@ -40,11 +43,11 @@ export default function Pie({
             width={640}
             height={411}
             sizes="200px"
-            className="h-20 w-auto"
+            className="h-[4.5rem] w-auto"
           />
 
           {sociales.length > 0 && (
-            <ul className="mt-6 flex gap-3">
+            <ul className="mt-5 flex gap-3">
               {sociales.map(({ href, icono: Icono, nombre }) => (
                 <li key={nombre}>
                   <a
@@ -66,7 +69,7 @@ export default function Pie({
           <h2 className="font-campana text-sm font-bold uppercase tracking-wide text-white">
             Menú rápido
           </h2>
-          <div className="mt-4 grid grid-cols-2 gap-x-6 gap-y-2">
+          <div className="mt-4 grid grid-cols-2 gap-x-6 gap-y-2 sm:grid-cols-3">
             {columnas.map((columna, i) => (
               <ul key={i} className="space-y-2">
                 {columna.map((item) => (
@@ -116,7 +119,7 @@ export default function Pie({
       </div>
 
       <div className="border-t border-white/15">
-        <div className="mx-auto flex max-w-[1400px] flex-col gap-3 px-5 py-5 font-campana text-xs text-white/60 sm:flex-row sm:items-center sm:justify-between lg:px-10">
+        <div className="mx-auto flex max-w-[1400px] flex-col gap-3 px-5 py-4 font-campana text-xs text-white/60 sm:flex-row sm:items-center sm:justify-between lg:px-10">
           {/* El año se calcula en el servidor: este es un Server Component y
               su salida no se hidrata. Si algún día lleva "use client", hay que
               moverlo a un useEffect o volverá el fallo de hidratación que dejó

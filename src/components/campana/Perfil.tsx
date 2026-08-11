@@ -41,8 +41,8 @@ const NOTAS = [
 
 export default function Perfil({ frase }: { frase: string }) {
   return (
-    <section className="bg-white py-16 lg:py-24">
-      <div className="mx-auto grid max-w-[1400px] gap-10 px-5 lg:grid-cols-[0.9fr_1.1fr_0.9fr] lg:gap-12 lg:px-10">
+    <section className="bg-white py-12 lg:py-16">
+      <div className="mx-auto grid max-w-[1400px] gap-8 px-5 lg:grid-cols-[0.9fr_1.1fr_0.9fr] lg:gap-10 lg:px-10">
         <div className="relative mx-auto w-full max-w-sm lg:max-w-none">
           <Image
             src="/images/campana/gallon-familia.webp"
@@ -64,11 +64,11 @@ export default function Perfil({ frase }: { frase: string }) {
             Gallón
           </h2>
 
-          <blockquote className="mt-6 border-l-4 border-campana-dorado pl-4 font-campana text-[15px] leading-relaxed text-neutral-700">
+          <blockquote className="mt-5 border-l-4 border-campana-dorado pl-4 font-campana text-[15px] leading-relaxed text-neutral-700">
             {frase}
           </blockquote>
 
-          <ul className="mt-6 space-y-3">
+          <ul className="mt-5 space-y-2.5">
             {NOTAS.map((nota) => (
               <li key={nota} className="flex gap-3">
                 <span
@@ -86,13 +86,13 @@ export default function Perfil({ frase }: { frase: string }) {
 
           <Link
             href="/quien-es-gallon"
-            className="mt-7 inline-block rounded-full bg-campana-bosque px-6 py-3 font-campana text-[12px] font-bold uppercase tracking-wide text-white transition-transform hover:scale-[1.03]"
+            className="mt-6 inline-block rounded-full bg-campana-bosque px-6 py-3 font-campana text-[12px] font-bold uppercase tracking-wide text-white transition-transform hover:scale-[1.03]"
           >
             Conoce más sobre Gallón
           </Link>
         </div>
 
-        <ul className="space-y-6">
+        <ul className="space-y-5">
           {PILARES.map(({ icono: Icono, titulo, texto, destino }) => (
             <li key={titulo}>
               <Link href={destino} className="group flex items-start gap-4">

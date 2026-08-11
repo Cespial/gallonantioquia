@@ -15,7 +15,7 @@ export default function Proyectos({ proyectos }: { proyectos: ProyectoDestacado[
   if (proyectos.length === 0) return null;
 
   return (
-    <section className="bg-white py-16 lg:py-20">
+    <section className="bg-white py-12 lg:py-14">
       <div className="mx-auto max-w-[1400px] px-5 lg:px-10">
         <div className="flex items-end justify-between gap-4">
           <h2 className="font-campana leading-none">
@@ -35,14 +35,14 @@ export default function Proyectos({ proyectos }: { proyectos: ProyectoDestacado[
           </Link>
         </div>
 
-        <ul className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {proyectos.map((proyecto) => (
             <li
               key={proyecto.slug}
               className="group overflow-hidden rounded-2xl border border-neutral-200 bg-white transition-shadow hover:shadow-lg"
             >
               <Link href={`/proyectos/${proyecto.slug}`} className="block">
-                <div className="relative h-40 overflow-hidden">
+                <div className="relative h-36 overflow-hidden">
                   <Image
                     src={proyecto.imagen}
                     alt=""
@@ -52,7 +52,7 @@ export default function Proyectos({ proyectos }: { proyectos: ProyectoDestacado[
                   />
                 </div>
 
-                <div className="p-5">
+                <div className="p-4">
                   {proyecto.categoria && (
                     <span
                       className={`inline-block rounded px-2.5 py-1 font-campana text-[10px] font-bold uppercase tracking-wide text-white ${
@@ -70,7 +70,7 @@ export default function Proyectos({ proyectos }: { proyectos: ProyectoDestacado[
                     {proyecto.descripcion}
                   </p>
 
-                  <span className="mt-4 inline-flex items-center gap-1 font-campana text-[11px] font-bold uppercase tracking-wide text-campana-hoja group-hover:gap-2">
+                  <span className="mt-3 inline-flex items-center gap-1 font-campana text-[11px] font-bold uppercase tracking-wide text-campana-hoja group-hover:gap-2">
                     Conocer más
                     <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
                   </span>

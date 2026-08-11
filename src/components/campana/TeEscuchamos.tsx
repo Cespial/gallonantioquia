@@ -28,12 +28,12 @@ export default function TeEscuchamos({ municipios }: { municipios: string[] }) {
   }
 
   const campo = (nombre: string) =>
-    `w-full rounded-lg border bg-white px-4 py-3 font-campana text-sm text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-campana-dorado ${
+    `w-full rounded-lg border bg-white px-4 py-2.5 font-campana text-sm text-neutral-800 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-campana-dorado ${
       errores[nombre] ? "border-red-500" : "border-neutral-200"
     }`;
 
   return (
-    <section className="relative isolate overflow-hidden bg-campana-bosque py-16 lg:py-20">
+    <section className="relative isolate overflow-hidden bg-campana-bosque py-10 lg:py-12">
       <div className="mx-auto grid max-w-[1400px] items-center gap-10 px-5 lg:grid-cols-[0.85fr_1.15fr] lg:px-10">
         <div>
           <h2 className="font-campana leading-none">
@@ -45,7 +45,7 @@ export default function TeEscuchamos({ municipios }: { municipios: string[] }) {
             </span>
           </h2>
 
-          <div className="mt-6 flex items-start gap-5">
+          <div className="mt-5 flex items-start gap-5">
             <p className="max-w-[10rem] font-campana text-sm leading-snug text-white/85">
               Tu voz es fundamental para construir la Antioquia que soñamos.
             </p>
@@ -61,7 +61,7 @@ export default function TeEscuchamos({ municipios }: { municipios: string[] }) {
           </div>
         </div>
 
-        <div className="rounded-3xl bg-white p-6 shadow-xl lg:p-8">
+        <div className="rounded-3xl bg-white p-5 shadow-xl lg:p-7">
           {enviado ? (
             <div role="status" className="py-10 text-center">
               <p className="font-campana text-xl font-bold text-campana-bosque">
@@ -79,7 +79,7 @@ export default function TeEscuchamos({ municipios }: { municipios: string[] }) {
               </button>
             </div>
           ) : (
-            <form onSubmit={alEnviar} className="grid gap-4 sm:grid-cols-2">
+            <form onSubmit={alEnviar} className="grid gap-3 sm:grid-cols-2">
               <div>
                 <label htmlFor="nombre" className="sr-only">
                   Nombre completo
@@ -151,7 +151,7 @@ export default function TeEscuchamos({ municipios }: { municipios: string[] }) {
                 <textarea
                   id="mensaje"
                   name="mensaje"
-                  rows={4}
+                  rows={3}
                   required
                   placeholder="Cuéntanos tu propuesta, idea o solicitud…"
                   className={campo("mensaje")}
@@ -166,7 +166,7 @@ export default function TeEscuchamos({ municipios }: { municipios: string[] }) {
               <button
                 type="submit"
                 disabled={pendiente}
-                className="sm:col-span-2 flex items-center justify-center gap-2 rounded-lg bg-campana-bosque px-6 py-3.5 font-campana text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-campana-hoja disabled:opacity-60"
+                className="sm:col-span-2 flex items-center justify-center gap-2 rounded-lg bg-campana-bosque px-6 py-3 font-campana text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-campana-hoja disabled:opacity-60"
               >
                 {pendiente ? "Enviando…" : "Enviar propuesta"}
                 {!pendiente && <Send className="h-4 w-4" aria-hidden="true" />}
