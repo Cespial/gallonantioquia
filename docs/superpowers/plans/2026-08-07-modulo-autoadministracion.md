@@ -2361,6 +2361,7 @@ git commit -m "feat: sesión, pantalla de acceso y protección de /admin"
 ### Task 8: Gestión de usuarios
 
 **Files:**
+- Create: `src/lib/auth/reglas.ts`
 - Create: `src/lib/auth/acciones.ts`
 - Create: `src/app/admin/layout.tsx`
 - Create: `src/app/admin/page.tsx`
@@ -2368,7 +2369,7 @@ git commit -m "feat: sesión, pantalla de acceso y protección de /admin"
 - Create: `src/components/admin/BarraLateral.tsx`
 - Create: `src/components/admin/TablaUsuarios.tsx`
 - Create: `scripts/crear-admin.ts`
-- Create: `tests/auth/acciones.test.ts`
+- Create: `tests/auth/reglas.test.ts`
 - Modify: `package.json` (script `crear-admin`)
 
 **Interfaces:**
@@ -2377,15 +2378,29 @@ git commit -m "feat: sesión, pantalla de acceso y protección de /admin"
   - `invitarUsuario(datos: FormData)`
   - `cambiarRol(id: string, rol: "admin" | "editor")`
   - `cambiarEstado(id: string, activo: boolean)`
-  - Y la regla pura `puedeDesactivar(objetivo, actorId, adminsActivos): { ok: boolean; error?: string }`, exportada aparte para poder probarla sin base de datos.
+  - Y desde `src/lib/auth/reglas.ts`, el tipo `Resultado` y la regla pura
+    `puedeDesactivar(objetivo, actorId, adminsActivos): { ok: boolean; error?: string }`.
+
+**`puedeDesactivar` y `Resultado` van en un archivo aparte, no en `acciones.ts`.**
+Dos razones, ambas comprobadas al intentarlo ahí:
+
+1. `acciones.ts` lleva `"use server"`, y un módulo así solo puede exportar
+   funciones async. `puedeDesactivar` es sincrónica y el build muere con
+   `x Server actions must be async functions`. Tampoco vale reexportarla desde
+   `acciones.ts`: el reexport es igual de sincrónico.
+2. `acciones.ts` importa `@/db`, que lanza al cargarse si falta `DATABASE_URL`.
+   Una prueba de una regla pura no debería necesitar base de datos, y esa
+   importación la obliga: `Error: Falta la variable de entorno DATABASE_URL`.
+
+Separarlas resuelve las dos de una vez, y es lo que la palabra «aparte» pedía.
 
 - [ ] **Step 1: Escribir la prueba que falla**
 
-Crear `tests/auth/acciones.test.ts`:
+Crear `tests/auth/reglas.test.ts`:
 
 ```ts
 import { describe, it, expect } from "vitest";
-import { puedeDesactivar } from "@/lib/auth/acciones";
+import { puedeDesactivar } from "@/lib/auth/reglas";
 
 const admin = { id: "a1", rol: "admin" as const, activo: true };
 const otroAdmin = { id: "a2", rol: "admin" as const, activo: true };
@@ -2416,26 +2431,16 @@ describe("reglas de desactivación", () => {
 
 - [ ] **Step 2: Ejecutar y verificar que falla**
 
-Run: `npm test -- tests/auth/acciones.test.ts`
-Expected: FAIL — no existe `@/lib/auth/acciones`.
+Run: `npm test -- tests/auth/reglas.test.ts`
+Expected: FAIL — no existe `@/lib/auth/reglas`.
 
-- [ ] **Step 3: Implementar las acciones**
+- [ ] **Step 3: Implementar las reglas y las acciones**
 
-Crear `src/lib/auth/acciones.ts`:
+Crear `src/lib/auth/reglas.ts`:
 
 ```ts
-"use server";
-
-import { revalidatePath } from "next/cache";
-import { and, eq, count } from "drizzle-orm";
-import { db } from "@/db";
-import { usuarios } from "@/db/esquema";
-import { requerirAdmin } from "./sesion";
-import { crearUsuario } from "./usuarios";
-
 export type Resultado = { ok: true } | { ok: false; error: string };
 
-/** Regla pura, separada para poder probarla sin base de datos. */
 export function puedeDesactivar(
   objetivo: { id: string; rol: "admin" | "editor" },
   actorId: string,
@@ -2449,6 +2454,20 @@ export function puedeDesactivar(
   }
   return { ok: true };
 }
+```
+
+Crear `src/lib/auth/acciones.ts`, que solo exporta funciones async:
+
+```ts
+"use server";
+
+import { revalidatePath } from "next/cache";
+import { and, eq, count } from "drizzle-orm";
+import { db } from "@/db";
+import { usuarios } from "@/db/esquema";
+import { requerirAdmin } from "./sesion";
+import { crearUsuario } from "./usuarios";
+import { puedeDesactivar, type Resultado } from "./reglas";
 
 async function contarAdminsActivos(): Promise<number> {
   const [fila] = await db
@@ -2517,7 +2536,7 @@ export async function cambiarEstado(id: string, activo: boolean): Promise<Result
 
 - [ ] **Step 4: Ejecutar y verificar que pasa**
 
-Run: `npm test -- tests/auth/acciones.test.ts`
+Run: `npm test -- tests/auth/reglas.test.ts`
 Expected: PASS, 4 pruebas.
 
 - [ ] **Step 5: Envoltura del panel**
@@ -2704,6 +2723,12 @@ Entrar en `/admin/login`, verificar que la barra lateral muestra Ajustes y Usuar
 git add src/lib/auth src/app scripts tests/auth src/components/admin package.json
 git commit -m "feat: gestión de usuarios y envoltura del panel"
 ```
+
+Nota sobre `npm run typecheck` en esta tarea: mover el login a
+`src/app/(admin-publico)/` deja tipos huérfanos en `.next/types` apuntando a la
+ruta vieja, y `tsconfig.json` los incluye. El error
+`Cannot find module '.../src/app/admin/login/page.js'` no es del código: se
+disuelve corriendo `npm run build` (o borrando `.next`) para regenerarlos.
 
 ---
 
