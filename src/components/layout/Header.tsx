@@ -9,8 +9,24 @@ import type { NavItem } from "@/types";
 
 export default function Header({ navItems }: { navItems: NavItem[] }) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  // La fecha se calcula después de montar, nunca durante el render. El
+  // servidor la formatea en su huso y el navegador en el del visitante: si el
+  // texto no coincide, React aborta la hidratación de TODA la página y ningún
+  // botón del sitio vuelve a responder.
+  const [fechaHoy, setFechaHoy] = useState("");
   const [shrink, setShrink] = useState(false);
   const pathname = usePathname();
+
+  useEffect(() => {
+    setFechaHoy(
+      new Date().toLocaleDateString("es-CO", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+    );
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,12 +56,7 @@ export default function Header({ navItems }: { navItems: NavItem[] }) {
         <div className="hidden lg:block bg-blanco-calido border-b border-borde py-2">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
             <div className="font-ui text-[10px] uppercase tracking-widest-editorial text-texto-terciario">
-              {new Date().toLocaleDateString("es-CO", {
-                weekday: "long",
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
+{fechaHoy}
             </div>
             <div className="font-ui text-[10px] uppercase tracking-widest-editorial text-texto-terciario">
               Memorias de Antioquia
