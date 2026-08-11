@@ -2739,10 +2739,30 @@ disuelve corriendo `npm run build` (o borrando `.next`) para regenerarlos.
 El corazón del módulo. Las lecturas del sitio público se cachean por etiqueta; las escrituras del panel invalidan esa etiqueta. Así el visitante recibe HTML estático y el editor ve su cambio en segundos.
 
 **Files:**
-- Create: `src/lib/contenidos/consultas.ts`
-- Create: `src/lib/contenidos/acciones.ts`
+- Create: `src/lib/contenidos/consultas.ts` — lecturas puras, reciben la conexión.
+- Create: `src/lib/contenidos/operaciones.ts` — `prepararFila` e `intercambiarOrden`.
+- Create: `src/lib/contenidos/cacheadas.ts` — envoltorios con `db` y `unstable_cache`.
+- Create: `src/lib/contenidos/acciones.ts` — solo Server Actions.
 - Create: `tests/contenidos/consultas.test.ts`
-- Create: `tests/contenidos/acciones.test.ts`
+- Create: `tests/contenidos/preparar.test.ts`
+- Create: `tests/contenidos/orden.test.ts`
+
+**Por qué cuatro archivos y no dos.** El reparto no es estético: lo imponen
+dos reglas que ya mordieron en la tarea 8 y vuelven a morder aquí.
+
+1. Un módulo `"use server"` solo puede exportar funciones async, y **todo lo
+   que exporta queda expuesto como endpoint alcanzable desde el navegador**.
+   `prepararFila` es sincrónica: tumba el build. `intercambiarOrden` es async
+   pero no verifica sesión y recibe la conexión como primer parámetro; no
+   tiene por qué ser un endpoint. Las dos van a `operaciones.ts`.
+2. `import { db } from "@/db"` **lanza al cargarse** si falta `DATABASE_URL`.
+   Si `consultas.ts` lo importa en el nivel superior, su propia prueba muere
+   antes de la primera aserción, aunque las funciones reciban la conexión por
+   parámetro. Por eso `consultas.ts` no importa `@/db` y las versiones
+   cacheadas viven aparte, en `cacheadas.ts`.
+
+Regla que queda para el resto del plan: **lo que la prueba necesita importar
+no puede vivir en el mismo archivo que `db` ni bajo `"use server"`.**
 
 **Interfaces:**
 - Consumes: `db`, tablas, `esquemaContenido`, `sanitizarHtml`, `generarSlug`, `requerirSesion`, `requerirAdmin`.
@@ -2819,11 +2839,11 @@ describe("consultas públicas", () => {
 });
 ```
 
-Crear `tests/contenidos/acciones.test.ts`, que prueba la lógica pura de preparación de la fila, sin Next ni sesión:
+Crear `tests/contenidos/preparar.test.ts`, que prueba la lógica pura de preparación de la fila, sin Next ni sesión:
 
 ```ts
 import { describe, it, expect } from "vitest";
-import { prepararFila } from "@/lib/contenidos/acciones";
+import { prepararFila } from "@/lib/contenidos/operaciones";
 
 const FORM = {
   slug: "",
@@ -3184,7 +3204,7 @@ import { describe, it, expect } from "vitest";
 import { asc } from "drizzle-orm";
 import { crearDbPrueba } from "../ayuda/db";
 import { contenidos } from "@/db/esquema";
-import { intercambiarOrden } from "@/lib/contenidos/acciones";
+import { intercambiarOrden } from "@/lib/contenidos/operaciones";
 
 async function sembrarIdeas() {
   const ctx = await crearDbPrueba();
@@ -3246,12 +3266,12 @@ describe("reordenamiento", () => {
 });
 ```
 
-Añadir el `import { eq, isNull } from "drizzle-orm"` que usan las pruebas.
+Los `import { asc, eq, isNull } from "drizzle-orm"` van en la primera línea del archivo de prueba.
 
 Run: `npm test -- tests/contenidos/orden.test.ts`
 Expected: FAIL — `intercambiarOrden` no existe.
 
-Agregar a `src/lib/contenidos/acciones.ts`:
+Agregar a `src/lib/contenidos/operaciones.ts`:
 
 ```ts
 import { and, asc, desc, eq, isNull, lt, gt } from "drizzle-orm";
@@ -3323,6 +3343,11 @@ git commit -m "feat: consultas cacheadas y acciones de contenido"
 ```
 
 Renumerar: el commit pasa a ser el **Step 7** de esta tarea.
+
+El build termina en verde (exit 0) aunque imprima `NeonDbError: fetch failed`
+al recolectar `/admin`: con una `DATABASE_URL` de marcador, la consulta del
+resumen no conecta. La ruta es dinámica (`ƒ`), así que Next tolera el fallo y
+no rompe la compilación. Con la base real desaparece.
 
 ---
 
