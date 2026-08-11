@@ -1,21 +1,21 @@
 import type { MetadataRoute } from "next";
-import { columnas } from "@/data/columnas";
+import { LISTA_TIPOS } from "@/lib/admin/tipos";
+import { listarPublicados } from "@/lib/contenidos/cacheadas";
+import { construirSitemap, type EntradaSitemap } from "@/lib/publico/sitemap";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://gallonantioquia.vercel.app";
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  // Todas las secciones, no solo columnas: lo que se publique desde el panel
+  // entra al sitemap sin que nadie tenga que acordarse de agregarlo.
+  const porTipo = await Promise.all(
+    LISTA_TIPOS.map(async (config) => {
+      const filas = await listarPublicados(config.tipo);
+      return filas.map<EntradaSitemap>((fila) => ({
+        slug: fila.slug,
+        fecha: fila.fecha,
+        rutaPublica: config.rutaPublica,
+      }));
+    })
+  );
 
-  const staticPages = [
-    { url: baseUrl, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 1 },
-    { url: `${baseUrl}/columnas`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.9 },
-    { url: `${baseUrl}/sobre`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.8 },
-  ];
-
-  const columnaPages = columnas.map((col) => ({
-    url: `${baseUrl}/columnas/${col.slug}`,
-    lastModified: new Date(col.date),
-    changeFrequency: "monthly" as const,
-    priority: 0.6,
-  }));
-
-  return [...staticPages, ...columnaPages];
+  return construirSitemap(porTipo.flat());
 }

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { navItems } from "@/data/content";
+import type { NavItem } from "@/types";
 
 const contentLinks = [
   { label: "Huellas en Antioquia", href: "/columnas" },
@@ -17,7 +17,7 @@ const socialLinks = [
   { label: "YouTube", href: "https://youtube.com/@gallonantioquia" },
 ];
 
-export default function Footer() {
+export default function Footer({ navItems }: { navItems: NavItem[] }) {
   return (
     <footer className="relative">
       {/* Mountain Silhouette SVG */}

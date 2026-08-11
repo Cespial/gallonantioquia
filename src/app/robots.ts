@@ -5,7 +5,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
+      disallow: ["/admin", "/api/auth"],
     },
-    sitemap: "https://www.gallonantioquia.com/sitemap.xml",
+    sitemap: "https://gallonantioquia.vercel.app/sitemap.xml",
   };
 }

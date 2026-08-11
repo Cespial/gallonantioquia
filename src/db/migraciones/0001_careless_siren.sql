@@ -1,0 +1,1 @@
+ALTER TABLE "medios" ADD CONSTRAINT "medios_url_unique" UNIQUE("url");
