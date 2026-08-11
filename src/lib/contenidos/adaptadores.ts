@@ -2,9 +2,12 @@ import type {
   Article,
   BlogPost,
   ColumnaArticle,
+  EjeGobierno,
   Episode,
+  EventoAgenda,
   GuestColumn,
   IdeaTopic,
+  ProyectoDestacado,
 } from "@/types";
 import type { ContenidoConImagen } from "./consultas";
 
@@ -101,5 +104,38 @@ export function aVoz(c: ContenidoConImagen): GuestColumn {
     excerpt: c.resumen ?? "",
     date: c.fecha,
     pullQuote: texto(c.extra.pullQuote),
+  };
+}
+
+export function aEvento(c: ContenidoConImagen): EventoAgenda {
+  return {
+    slug: c.slug,
+    titulo: c.titulo,
+    municipio: texto(c.extra.municipio),
+    fecha: c.fecha,
+    hora: texto(c.extra.hora),
+    lugar: texto(c.extra.lugar),
+    enlace: texto(c.extra.enlaceInscripcion),
+  };
+}
+
+export function aEje(c: ContenidoConImagen): EjeGobierno {
+  return {
+    slug: c.slug,
+    titulo: c.titulo,
+    descripcion: c.resumen ?? "",
+    icono: texto(c.extra.icono) || "salud",
+    cuerpo: c.cuerpoHtml ?? "",
+  };
+}
+
+export function aProyecto(c: ContenidoConImagen): ProyectoDestacado {
+  return {
+    slug: c.slug,
+    titulo: c.titulo,
+    descripcion: c.resumen ?? "",
+    categoria: c.categoria ?? "",
+    imagen: imagen(c),
+    cuerpo: c.cuerpoHtml ?? "",
   };
 }

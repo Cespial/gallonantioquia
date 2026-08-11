@@ -3,11 +3,39 @@ import { TIPOS, LISTA_TIPOS, configPorRutaAdmin } from "@/lib/admin/tipos";
 import { esquemaContenido } from "@/lib/admin/esquemas";
 
 describe("configuración de tipos", () => {
-  it("declara los seis tipos", () => {
-    expect(LISTA_TIPOS).toHaveLength(6);
-    expect(LISTA_TIPOS.map((t) => t.tipo).sort()).toEqual(
-      ["bitacora", "columna", "episodio", "historia", "idea", "voz"]
-    );
+  it("declara los nueve tipos", () => {
+    expect(LISTA_TIPOS).toHaveLength(9);
+    expect(LISTA_TIPOS.map((t) => t.tipo).sort()).toEqual([
+      "bitacora",
+      "columna",
+      "eje",
+      "episodio",
+      "evento",
+      "historia",
+      "idea",
+      "proyecto",
+      "voz",
+    ]);
+  });
+
+  it("resuelve las rutas de los tipos de campaña", () => {
+    expect(configPorRutaAdmin("agenda")?.tipo).toBe("evento");
+    expect(configPorRutaAdmin("ejes")?.tipo).toBe("eje");
+    expect(configPorRutaAdmin("proyectos")?.tipo).toBe("proyecto");
+  });
+
+  it("la agenda ordena por fecha y el plan de gobierno por posición", () => {
+    expect(TIPOS.evento.ordenPor).toBe("fecha");
+    expect(TIPOS.eje.ordenPor).toBe("orden");
+  });
+
+  it("los proyectos se clasifican por la taxonomía del mockup", () => {
+    expect(TIPOS.proyecto.taxonomia?.valores).toEqual([
+      "Infraestructura",
+      "Educación",
+      "Campo",
+      "Salud",
+    ]);
   });
 
   it("resuelve la ruta del panel a su configuración", () => {
@@ -127,6 +155,42 @@ describe("validación por tipo", () => {
     expect(esquemaContenido("idea").safeParse(idea).success).toBe(true);
     expect(
       esquemaContenido("idea").safeParse({ ...idea, extra: { number: "" } }).success
+    ).toBe(false);
+  });
+
+  it("exige municipio, hora y lugar en un evento de la agenda", () => {
+    const evento = {
+      ...base,
+      categoria: null,
+      extra: {
+        municipio: "Támesis",
+        hora: "10:00 a. m.",
+        lugar: "Parque Principal",
+        enlaceInscripcion: "",
+      },
+    };
+    expect(esquemaContenido("evento").safeParse(evento).success).toBe(true);
+    expect(
+      esquemaContenido("evento").safeParse({
+        ...evento,
+        extra: { ...evento.extra, municipio: "" },
+      }).success
+    ).toBe(false);
+  });
+
+  it("exige un icono de la lista en un eje del plan de gobierno", () => {
+    const eje = { ...base, categoria: null, extra: { icono: "salud" } };
+    expect(esquemaContenido("eje").safeParse(eje).success).toBe(true);
+    expect(
+      esquemaContenido("eje").safeParse({ ...eje, extra: { icono: "inventado" } }).success
+    ).toBe(false);
+  });
+
+  it("acepta un proyecto de una categoría válida y rechaza otra", () => {
+    const proyecto = { ...base, categoria: "Infraestructura", extra: {} };
+    expect(esquemaContenido("proyecto").safeParse(proyecto).success).toBe(true);
+    expect(
+      esquemaContenido("proyecto").safeParse({ ...proyecto, categoria: "Turismo" }).success
     ).toBe(false);
   });
 

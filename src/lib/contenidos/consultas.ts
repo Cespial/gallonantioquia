@@ -40,7 +40,9 @@ export const SELECCION = {
 
 /** Cada tipo se ordena por lo suyo: las ideas y los episodios van numerados. */
 function ordenDe(tipo: TipoContenido) {
-  return TIPOS[tipo].ordenPor === "orden" ? asc(contenidos.orden) : desc(contenidos.fecha);
+  const config = TIPOS[tipo];
+  if (config.ordenPor === "orden") return asc(contenidos.orden);
+  return config.fechaAscendente ? asc(contenidos.fecha) : desc(contenidos.fecha);
 }
 
 export async function consultarPublicados(

@@ -27,9 +27,38 @@ export const CLAVES = {
   "sobre.trayectoria": { esquema: z.array(hito), porDefecto: [] },
   "navegacion.menu": { esquema: z.array(itemMenu), porDefecto: [] },
   "navegacion.redes": {
-    esquema: z.object({ x: z.string(), instagram: z.string(), youtube: z.string() }),
-    porDefecto: { x: "", instagram: "", youtube: "" },
+    esquema: z.object({
+      x: z.string(),
+      instagram: z.string(),
+      youtube: z.string(),
+      facebook: z.string(),
+      tiktok: z.string(),
+    }),
+    porDefecto: { x: "", instagram: "", youtube: "", facebook: "", tiktok: "" },
   },
+
+  // --- Campaña «A paso firme por Antioquia» ---
+  "campana.subtituloHero": {
+    esquema: z.string(),
+    porDefecto:
+      "Construyendo una Antioquia más fuerte, conectada y con oportunidades para todos.",
+  },
+  "campana.frasePerfil": {
+    esquema: z.string(),
+    porDefecto: "Todo gran café comienza con una buena semilla. Todo gran liderazgo también.",
+  },
+  "campana.mensajeCierre": {
+    esquema: z.string(),
+    porDefecto:
+      "Unidos construiremos una Antioquia más fuerte, más justa y con más oportunidades.",
+  },
+  /** Alimenta el desplegable del formulario «Te escuchamos». */
+  "campana.municipios": { esquema: z.array(z.string()), porDefecto: [] },
+  "contacto.email": { esquema: z.string(), porDefecto: "info@gallongobernador.com" },
+  "contacto.telefono": { esquema: z.string(), porDefecto: "+57 300 123 4567" },
+  "contacto.direccion": { esquema: z.string(), porDefecto: "Medellín, Antioquia, Colombia" },
+  /** Solo dígitos con indicativo, como lo pide el enlace de wa.me. */
+  "contacto.whatsapp": { esquema: z.string(), porDefecto: "573001234567" },
 } as const;
 
 export type ClaveAjuste = keyof typeof CLAVES;

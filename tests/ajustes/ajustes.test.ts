@@ -48,6 +48,40 @@ describe("ajustes", () => {
     await cerrar();
   });
 
+  it("trae los datos de contacto de la campaña con valores por defecto", async () => {
+    const { db, cerrar } = await crearDbPrueba();
+
+    expect(await consultarAjuste(db, "contacto.email")).toBe(CLAVES["contacto.email"].porDefecto);
+    expect(await consultarAjuste(db, "contacto.whatsapp")).toBe(
+      CLAVES["contacto.whatsapp"].porDefecto
+    );
+    await cerrar();
+  });
+
+  it("guarda el subtítulo del hero y el mensaje de cierre", async () => {
+    const { db, cerrar } = await crearDbPrueba();
+
+    await escribirAjuste(db, "campana.subtituloHero", "Una Antioquia conectada.");
+    await escribirAjuste(db, "campana.mensajeCierre", "Unidos construiremos.");
+
+    expect(await consultarAjuste(db, "campana.subtituloHero")).toBe("Una Antioquia conectada.");
+    expect(await consultarAjuste(db, "campana.mensajeCierre")).toBe("Unidos construiremos.");
+    await cerrar();
+  });
+
+  it("el municipio del formulario es una lista de nombres", async () => {
+    const { db, cerrar } = await crearDbPrueba();
+
+    await escribirAjuste(db, "campana.municipios", ["Támesis", "Andes", "Jardín"]);
+    expect(await consultarAjuste(db, "campana.municipios")).toEqual([
+      "Támesis",
+      "Andes",
+      "Jardín",
+    ]);
+    await expect(escribirAjuste(db, "campana.municipios", [42] as never)).rejects.toThrow();
+    await cerrar();
+  });
+
   it("valida la forma de las cifras de portada", async () => {
     const { db, cerrar } = await crearDbPrueba();
     await escribirAjuste(db, "portada.cifras", [

@@ -1,7 +1,15 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Source_Serif_4 } from "next/font/google";
+import { Playfair_Display, Poppins, Source_Serif_4 } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
+
+// La campaña usa una geométrica muy bold en los títulos, igual que el mockup.
+const poppins = Poppins({
+  subsets: ["latin"],
+  variable: "--font-poppins",
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+});
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -81,7 +89,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body
-        className={`${playfair.variable} ${sourceSerif.variable} ${jacked.variable} ${thorce.variable} ${myriadPro.variable} font-body antialiased bg-arena text-texto-principal grain-overlay`}
+        className={`${poppins.variable} ${playfair.variable} ${sourceSerif.variable} ${jacked.variable} ${thorce.variable} ${myriadPro.variable} font-body antialiased bg-white text-texto-principal`}
       >
         {children}
       </body>

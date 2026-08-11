@@ -78,3 +78,32 @@ export interface ColumnaArticle {
   sourceUrl: string;
   body: string[];
 }
+
+// --- Campaña «A paso firme por Antioquia» ---
+
+export interface EventoAgenda {
+  slug: string;
+  titulo: string;
+  municipio: string;
+  fecha: string;
+  hora: string;
+  lugar: string;
+  enlace: string;
+}
+
+export interface EjeGobierno {
+  slug: string;
+  titulo: string;
+  descripcion: string;
+  icono: string;
+  cuerpo: string;
+}
+
+export interface ProyectoDestacado {
+  slug: string;
+  titulo: string;
+  descripcion: string;
+  categoria: string;
+  imagen: string;
+  cuerpo: string;
+}

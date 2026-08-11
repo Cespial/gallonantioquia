@@ -15,6 +15,13 @@
       "when": 1786133422245,
       "tag": "0001_careless_siren",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1786462264369,
+      "tag": "0002_lucky_firebrand",
+      "breakpoints": true
     }
   ]
 }

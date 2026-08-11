@@ -26,6 +26,14 @@ export default function BarraLateral({ rol }: { rol: "admin" | "editor" }) {
       <ul className="space-y-1">
         <li>
           <Link
+            href="/admin/mensajes"
+            className="block py-1 text-sm text-texto-secundario hover:text-verde-antioquia"
+          >
+            Propuestas
+          </Link>
+        </li>
+        <li>
+          <Link
             href="/admin/medios"
             className="block py-1 text-sm text-texto-secundario hover:text-verde-antioquia"
           >

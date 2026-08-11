@@ -22,6 +22,18 @@ const config: Config = {
         borde: "var(--borde)",
         oscuro: "var(--oscuro)",
         "oscuro-verde": "var(--oscuro-verde)",
+
+        // Campaña «A paso firme por Antioquia». Los valores salen de muestrear
+        // el mockup entregado por el equipo, no de aproximar a ojo.
+        campana: {
+          profundo: "#1c321e", // pie de página y franja de cifras
+          bosque: "#205129", // bloques verdes de sección
+          hoja: "#206732", // iconos y acentos vivos
+          dorado: "#e2a712", // botones principales
+          "dorado-claro": "#f0c04a",
+          hueso: "#fbfaf9", // fondos suaves
+          cresta: "#b81f1f", // el rojo del logotipo
+        },
       },
       fontFamily: {
         display: ["var(--font-playfair)"],
@@ -31,6 +43,9 @@ const config: Config = {
         brand: ["var(--font-jacked)"],
         accent: ["var(--font-thorce)"],
         sans: ["var(--font-myriad)"],
+        // Tipografía de la campaña: una geométrica muy bold para los títulos,
+        // como en el mockup, y la misma familia en pesos suaves para el texto.
+        campana: ["var(--font-poppins)", "system-ui", "sans-serif"],
       },
       fontSize: {
         hero: ["clamp(2.5rem, 5vw, 4.5rem)", { lineHeight: "1.1", fontWeight: "900" }],

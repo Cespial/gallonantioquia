@@ -44,8 +44,20 @@ export const contenidos = pgTable(
   "contenidos",
   {
     id: uuid("id").primaryKey().defaultRandom(),
+    // La columna es `text` sin restricción en la base: esta lista solo la
+    // conoce TypeScript, así que sumar un tipo no exige migración.
     tipo: text("tipo", {
-      enum: ["columna", "bitacora", "historia", "idea", "voz", "episodio"],
+      enum: [
+        "columna",
+        "bitacora",
+        "historia",
+        "idea",
+        "voz",
+        "episodio",
+        "evento",
+        "eje",
+        "proyecto",
+      ],
     }).notNull(),
     slug: text("slug").notNull(),
     titulo: text("titulo").notNull(),
@@ -76,6 +88,28 @@ export const contenidos = pgTable(
   })
 );
 
+/**
+ * Lo que la gente envía desde «Te escuchamos». Son datos personales de
+ * ciudadanos: se guardan para responderles, se leen solo desde el panel y no
+ * salen jamás al sitio público.
+ */
+export const mensajes = pgTable(
+  "mensajes",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    nombre: text("nombre").notNull(),
+    email: text("email").notNull(),
+    telefono: text("telefono"),
+    municipio: text("municipio"),
+    mensaje: text("mensaje").notNull(),
+    leido: boolean("leido").notNull().default(false),
+    creadoEn: timestamp("creado_en", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => ({
+    porFecha: index("mensajes_creado_en").on(t.creadoEn),
+  })
+);
+
 export const ajustes = pgTable("ajustes", {
   clave: text("clave").primaryKey(),
   valor: jsonb("valor").notNull().$type<unknown>(),
@@ -89,3 +123,5 @@ export type NuevoContenido = typeof contenidos.$inferInsert;
 export type Medio = typeof medios.$inferSelect;
 export type NuevoMedio = typeof medios.$inferInsert;
 export type Ajuste = typeof ajustes.$inferSelect;
+export type Mensaje = typeof mensajes.$inferSelect;
+export type NuevoMensaje = typeof mensajes.$inferInsert;

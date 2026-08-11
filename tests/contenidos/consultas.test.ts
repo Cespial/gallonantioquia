@@ -50,6 +50,20 @@ describe("consultas públicas", () => {
     await cerrar();
   });
 
+  it("ordena la agenda del evento más próximo al más lejano", async () => {
+    const { db, cerrar } = await crearDbPrueba();
+    await db.insert(contenidos).values([
+      { tipo: "evento", slug: "e3", titulo: "E3", fecha: "2026-10-26", estado: "publicado" },
+      { tipo: "evento", slug: "e1", titulo: "E1", fecha: "2026-10-24", estado: "publicado" },
+      { tipo: "evento", slug: "e2", titulo: "E2", fecha: "2026-10-25", estado: "publicado" },
+    ]);
+
+    // Al contrario que las columnas, que van de la más nueva a la más vieja.
+    const filas = await consultarPublicados(db, "evento");
+    expect(filas.map((f) => f.slug)).toEqual(["e1", "e2", "e3"]);
+    await cerrar();
+  });
+
   it("obtiene uno por slug y devuelve null si es borrador", async () => {
     const { db, cerrar } = await sembrar();
     expect((await consultarPublicado(db, "columna", "a"))?.titulo).toBe("A");

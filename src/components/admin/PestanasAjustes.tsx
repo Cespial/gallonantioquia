@@ -258,7 +258,7 @@ export default function PestanasAjustes({
           </div>
 
           <div className="grid gap-4 sm:grid-cols-3">
-            {(["x", "instagram", "youtube"] as const).map((red) => (
+            {(["x", "instagram", "youtube", "facebook", "tiktok"] as const).map((red) => (
               <div key={red}>
                 <label htmlFor={`red-${red}`} className="block text-sm font-medium mb-1 capitalize">
                   {red === "x" ? "X (Twitter)" : red}

@@ -4,7 +4,25 @@ export type TipoContenido =
   | "historia"
   | "idea"
   | "voz"
-  | "episodio";
+  | "episodio"
+  // Tipos de la campaña «A paso firme por Antioquia»
+  | "evento"
+  | "eje"
+  | "proyecto";
+
+/**
+ * Iconos disponibles para los ejes del plan de gobierno. La lista se cierra a
+ * propósito: cada valor tiene su dibujo en el sitio, así que inventar uno
+ * dejaría la tarjeta sin icono.
+ */
+export const ICONOS_EJE = [
+  "salud",
+  "educacion",
+  "campo",
+  "infraestructura",
+  "empleo",
+  "ambiente",
+] as const;
 
 /** Un campo propio del tipo, que se guarda dentro de `extra`. */
 export interface CampoExtra {
@@ -32,6 +50,11 @@ export interface ConfigTipo {
   rutaPublica: string;
   taxonomia: { etiqueta: string; valores: string[] } | null;
   ordenPor: "fecha" | "orden";
+  /**
+   * Solo aplica a `ordenPor: "fecha"`. Lo editorial va de lo más nuevo a lo
+   * más viejo; una agenda va al revés, del evento más próximo en adelante.
+   */
+  fechaAscendente?: boolean;
   /** Si el tipo usa cuerpo largo. Ideas y episodios solo llevan descripción. */
   usaCuerpo: boolean;
   camposExtra: CampoExtra[];
@@ -164,9 +187,86 @@ export const TIPOS: Record<TipoContenido, ConfigTipo> = {
       },
     ],
   },
+  evento: {
+    tipo: "evento",
+    etiqueta: "Horario Gallón",
+    singular: "evento",
+    plural: "eventos",
+    articulo: "el",
+    rutaAdmin: "agenda",
+    rutaPublica: "/horario",
+    taxonomia: null,
+    ordenPor: "fecha",
+    fechaAscendente: true,
+    usaCuerpo: false,
+    camposExtra: [
+      { nombre: "municipio", etiqueta: "Municipio", control: "texto", obligatorio: true },
+      {
+        nombre: "hora",
+        etiqueta: "Hora",
+        control: "texto",
+        obligatorio: true,
+        ayuda: 'Como se lee en la tarjeta: "10:00 a. m.".',
+      },
+      {
+        nombre: "lugar",
+        etiqueta: "Lugar",
+        control: "texto",
+        obligatorio: true,
+        ayuda: 'Por ejemplo: "Parque Principal".',
+      },
+      {
+        nombre: "enlaceInscripcion",
+        etiqueta: "Enlace para asistir",
+        control: "url",
+        obligatorio: false,
+        ayuda: "Formulario o evento. Si lo dejas vacío, el botón lleva a Contacto.",
+      },
+    ],
+  },
+  eje: {
+    tipo: "eje",
+    etiqueta: "Plan de Gobierno",
+    singular: "eje",
+    plural: "ejes",
+    articulo: "el",
+    rutaAdmin: "ejes",
+    rutaPublica: "/plan-de-gobierno",
+    taxonomia: null,
+    ordenPor: "orden",
+    usaCuerpo: true,
+    camposExtra: [
+      {
+        nombre: "icono",
+        etiqueta: "Icono",
+        control: "opcion",
+        obligatorio: true,
+        opciones: [...ICONOS_EJE],
+      },
+    ],
+  },
+  proyecto: {
+    tipo: "proyecto",
+    etiqueta: "Proyectos Destacados",
+    singular: "proyecto",
+    plural: "proyectos",
+    articulo: "el",
+    rutaAdmin: "proyectos",
+    rutaPublica: "/proyectos",
+    taxonomia: {
+      etiqueta: "Categoría",
+      valores: ["Infraestructura", "Educación", "Campo", "Salud"],
+    },
+    ordenPor: "orden",
+    usaCuerpo: true,
+    camposExtra: [],
+  },
 };
 
 export const LISTA_TIPOS: ConfigTipo[] = Object.values(TIPOS);
+
+/** Los tipos que alimentan la página de campaña, en el orden del panel. */
+export const TIPOS_CAMPANA: ConfigTipo[] = [TIPOS.evento, TIPOS.eje, TIPOS.proyecto];
 
 export function configPorRutaAdmin(ruta: string): ConfigTipo | null {
   return LISTA_TIPOS.find((c) => c.rutaAdmin === ruta) ?? null;
