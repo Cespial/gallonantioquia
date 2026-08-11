@@ -1,4 +1,4 @@
-import { and, asc, desc, eq, isNull } from "drizzle-orm";
+import { and, asc, desc, eq, isNotNull, isNull } from "drizzle-orm";
 import { contenidos, medios, type Contenido } from "@/db/esquema";
 import { TIPOS, type TipoContenido } from "@/lib/admin/tipos";
 
@@ -80,6 +80,16 @@ export async function consultarPublicado(
     );
 
   return fila ?? null;
+}
+
+/** Lo que está en la papelera, de lo borrado más recientemente a lo más viejo. */
+export async function consultarBorrados(conexion: any): Promise<ContenidoConImagen[]> {
+  return conexion
+    .select(SELECCION)
+    .from(contenidos)
+    .leftJoin(medios, eq(contenidos.imagenId, medios.id))
+    .where(isNotNull(contenidos.eliminadoEn))
+    .orderBy(desc(contenidos.eliminadoEn));
 }
 
 /** Lectura del panel: incluye borradores, excluye lo que está en la papelera. */

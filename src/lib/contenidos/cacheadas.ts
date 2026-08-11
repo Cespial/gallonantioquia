@@ -5,6 +5,7 @@ import {
   consultarPublicados,
   consultarPublicado,
   consultarParaPanel,
+  consultarBorrados,
   etiquetaDe,
   type ContenidoConImagen,
 } from "./consultas";
@@ -27,6 +28,10 @@ export function obtenerPublicado(
   return unstable_cache(() => consultarPublicado(db, tipo, slug), ["contenido", tipo, slug], {
     tags: [etiquetaDe(tipo)],
   })();
+}
+
+export function listarBorrados(): Promise<ContenidoConImagen[]> {
+  return consultarBorrados(db);
 }
 
 /** Lectura del panel: sin caché, porque el editor debe ver su cambio ya. */
