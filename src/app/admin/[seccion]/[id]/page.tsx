@@ -3,6 +3,8 @@ import { eq } from "drizzle-orm";
 import { db } from "@/db";
 import { contenidos } from "@/db/esquema";
 import { configPorRutaAdmin } from "@/lib/admin/tipos";
+import { consultarMedios } from "@/lib/medios/reglas";
+import { auth } from "@/lib/auth/config";
 import FormularioContenido from "@/components/admin/FormularioContenido";
 
 type Props = { params: { seccion: string; id: string } };
@@ -22,6 +24,9 @@ export default async function PaginaEditor({ params }: Props) {
     contenido = fila;
   }
 
+  const [medios, sesion] = await Promise.all([consultarMedios(db), auth()]);
+  const usuario = sesion?.user as unknown as { rol: "admin" | "editor" } | undefined;
+
   return (
     <>
       <h1 className="font-display text-2xl mb-6">
@@ -29,7 +34,12 @@ export default async function PaginaEditor({ params }: Props) {
           ? `${config.articulo === "la" ? "Nueva" : "Nuevo"} ${config.singular}`
           : `Editar ${config.singular}`}
       </h1>
-      <FormularioContenido config={config} contenido={contenido} />
+      <FormularioContenido
+        config={config}
+        contenido={contenido}
+        medios={medios}
+        esAdmin={usuario?.rol === "admin"}
+      />
     </>
   );
 }

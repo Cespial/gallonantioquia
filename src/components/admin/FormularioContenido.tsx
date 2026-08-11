@@ -3,11 +3,12 @@
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import type { ConfigTipo } from "@/lib/admin/tipos";
-import type { Contenido } from "@/db/esquema";
+import type { Contenido, Medio } from "@/db/esquema";
 import { generarSlug } from "@/lib/admin/slug";
 import { guardarContenido } from "@/lib/contenidos/acciones";
 import EditorTexto from "./EditorTexto";
 import CamposExtra from "./CamposExtra";
+import SelectorImagen from "./SelectorImagen";
 
 /** Hoy, en formato AAAA-MM-DD y en hora local, para estrenar el formulario. */
 function hoy(): string {
@@ -20,9 +21,13 @@ function hoy(): string {
 export default function FormularioContenido({
   config,
   contenido,
+  medios,
+  esAdmin,
 }: {
   config: ConfigTipo;
   contenido: Contenido | null;
+  medios: Medio[];
+  esAdmin: boolean;
 }) {
   const router = useRouter();
   const [pendiente, iniciar] = useTransition();
@@ -239,19 +244,18 @@ export default function FormularioContenido({
           </div>
         )}
 
-        <div>
-          <label htmlFor="imagenId" className="block text-sm font-medium mb-1">
-            Foto de portada
-          </label>
-          <input
-            id="imagenId"
-            value={imagenId}
-            onChange={(e) => setImagenId(e.target.value)}
-            className={claseCampo("imagenId")}
+        <div className="sm:col-span-2">
+          <SelectorImagen
+            medios={medios}
+            valor={imagenId}
+            esAdmin={esAdmin}
+            alCambiar={setImagenId}
           />
-          <p className="mt-1 text-xs text-texto-terciario">
-            Pega el identificador de una foto de la biblioteca.
-          </p>
+          {errores.imagenId && (
+            <p role="alert" className="mt-1 text-xs text-red-700">
+              {errores.imagenId}
+            </p>
+          )}
         </div>
       </div>
 
