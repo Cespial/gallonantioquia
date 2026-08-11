@@ -4,7 +4,8 @@ import SectionWrapper from "@/components/layout/SectionWrapper";
 import FadeIn from "@/components/animations/FadeIn";
 import AuthorCard from "@/components/content/AuthorCard";
 import PullQuote from "@/components/content/PullQuote";
-import { guestColumns } from "@/data/content";
+import { listarPublicados } from "@/lib/contenidos/cacheadas";
+import { aVoz } from "@/lib/contenidos/adaptadores";
 
 export const metadata: Metadata = {
   title: "Voces de Antioquia — Columnas invitadas",
@@ -12,7 +13,8 @@ export const metadata: Metadata = {
     "Un espacio abierto para los lideres que piensan el futuro del departamento.",
 };
 
-export default function VocesPage() {
+export default async function VocesPage() {
+  const guestColumns = (await listarPublicados("voz")).map(aVoz);
   const firstRow = guestColumns.slice(0, 2);
   const secondRow = guestColumns.slice(2, 4);
   const pullQuoteText = guestColumns[0]?.pullQuote;

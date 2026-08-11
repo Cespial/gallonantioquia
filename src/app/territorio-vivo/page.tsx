@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
 import TerritorioVivoContent from "./content";
+import { listarPublicados } from "@/lib/contenidos/cacheadas";
+import { aHistoria } from "@/lib/contenidos/adaptadores";
 
 export const metadata: Metadata = {
-  title: "Territorio Vivo — Historias de una Antioquia que se transforma",
+  title: "Territorio Vivo — Historias de Antioquia",
   description:
-    "Historias humanas de infraestructura, desarrollo y comunidad en Antioquia.",
+    "Historias humanas de una Antioquia que se transforma.",
 };
 
-export default function TerritorioVivoPage() {
-  return <TerritorioVivoContent />;
+export default async function TerritorioVivoPage() {
+  const stories = (await listarPublicados("historia")).map(aHistoria);
+  return <TerritorioVivoContent stories={stories} />;
 }

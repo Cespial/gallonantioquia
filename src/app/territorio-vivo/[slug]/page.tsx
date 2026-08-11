@@ -9,17 +9,20 @@ import NewsletterCTA from "@/components/content/NewsletterCTA";
 import Badge from "@/components/ui/Badge";
 import Breadcrumb from "@/components/content/Breadcrumb";
 import ReadingProgress from "@/components/layout/ReadingProgress";
-import { stories } from "@/data/content";
+import { listarPublicados } from "@/lib/contenidos/cacheadas";
+import { aHistoria } from "@/lib/contenidos/adaptadores";
 import { formatDate } from "@/lib/utils";
 
-type Props = { params: Promise<{ slug: string }> };
+type Props = { params: { slug: string } };
 
 export async function generateStaticParams() {
+  const stories = (await listarPublicados("historia")).map(aHistoria);
   return stories.map((story) => ({ slug: story.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug } = params;
+  const stories = (await listarPublicados("historia")).map(aHistoria);
   const story = stories.find((s) => s.slug === slug);
 
   if (!story) {
@@ -36,7 +39,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function StoryPage({ params }: Props) {
-  const { slug } = await params;
+  const { slug } = params;
+  const stories = (await listarPublicados("historia")).map(aHistoria);
   const storyIndex = stories.findIndex((s) => s.slug === slug);
 
   if (storyIndex === -1) {

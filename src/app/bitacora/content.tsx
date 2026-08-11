@@ -6,10 +6,10 @@ import PageHero from "@/components/layout/PageHero";
 import SectionWrapper from "@/components/layout/SectionWrapper";
 import CategoryTag from "@/components/content/CategoryTag";
 import FadeIn from "@/components/animations/FadeIn";
-import { blogPosts } from "@/data/content";
+import type { BlogPost } from "@/types";
 import { formatDate } from "@/lib/utils";
 
-export default function BitacoraContent() {
+export default function BitacoraContent({ blogPosts }: { blogPosts: BlogPost[] }) {
   return (
     <>
       <PageHero

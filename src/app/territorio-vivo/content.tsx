@@ -6,10 +6,16 @@ import SectionWrapper from "@/components/layout/SectionWrapper";
 import ArticleCard from "@/components/content/ArticleCard";
 import CategoryTag from "@/components/content/CategoryTag";
 import FadeIn from "@/components/animations/FadeIn";
-import { stories, storyCategories } from "@/data/content";
+import type { Article } from "@/types";
 
-export default function TerritorioVivoContent() {
+export default function TerritorioVivoContent({ stories }: { stories: Article[] }) {
   const [activeCategory, setActiveCategory] = useState("Todas");
+
+  // Las categorías salen del contenido publicado, no de una lista fija.
+  const storyCategories = [
+    "Todas",
+    ...Array.from(new Set(stories.map((s) => s.category).filter(Boolean))),
+  ];
 
   const filteredStories =
     activeCategory === "Todas"

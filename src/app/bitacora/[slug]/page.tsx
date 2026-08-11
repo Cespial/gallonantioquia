@@ -8,17 +8,20 @@ import ArticleNavigation from "@/components/content/ArticleNavigation";
 import NewsletterCTA from "@/components/content/NewsletterCTA";
 import Breadcrumb from "@/components/content/Breadcrumb";
 import ReadingProgress from "@/components/layout/ReadingProgress";
-import { blogPosts } from "@/data/content";
+import { listarPublicados } from "@/lib/contenidos/cacheadas";
+import { aEntradaBitacora } from "@/lib/contenidos/adaptadores";
 import { formatDate } from "@/lib/utils";
 
-type Props = { params: Promise<{ slug: string }> };
+type Props = { params: { slug: string } };
 
 export async function generateStaticParams() {
+  const blogPosts = (await listarPublicados("bitacora")).map(aEntradaBitacora);
   return blogPosts.map((post) => ({ slug: post.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug } = params;
+  const blogPosts = (await listarPublicados("bitacora")).map(aEntradaBitacora);
   const post = blogPosts.find((p) => p.slug === slug);
 
   if (!post) {
@@ -35,7 +38,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function BlogPostPage({ params }: Props) {
-  const { slug } = await params;
+  const { slug } = params;
+  const blogPosts = (await listarPublicados("bitacora")).map(aEntradaBitacora);
   const postIndex = blogPosts.findIndex((p) => p.slug === slug);
 
   if (postIndex === -1) {

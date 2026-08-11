@@ -6,11 +6,10 @@ import PhotoBand from "@/components/home/PhotoBand";
 import SobreSection from "@/components/home/SobreSection";
 import NewsletterSection from "@/components/home/NewsletterSection";
 import ConstructionScreen from "@/components/home/ConstructionScreen";
+import { leerAjuste } from "@/lib/ajustes/cacheadas";
 
-// ── "En construcción" ──────────────────────────────────────────────
-// Pon esto en `false` (o borra esta constante y el bloque de abajo)
-// para que la página principal vuelva a mostrarse normal.
-const UNDER_CONSTRUCTION = true;
+// El modo construcción se enciende y se apaga desde el panel, en
+// Ajustes → Estado del sitio. Ya no es una constante que haya que desplegar.
 
 export const metadata: Metadata = {
   title: "Gallón Memorias — Memorias de Antioquia",
@@ -18,8 +17,10 @@ export const metadata: Metadata = {
     "Memorias, reflexiones y conversaciones sobre Antioquia. Columnas, historias, ideas y diálogos desde el territorio.",
 };
 
-export default function Home() {
-  if (UNDER_CONSTRUCTION) {
+export default async function Home() {
+  const enConstruccion = await leerAjuste("sitio.enConstruccion");
+
+  if (enConstruccion) {
     return <ConstructionScreen />;
   }
 

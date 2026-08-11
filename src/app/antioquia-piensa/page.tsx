@@ -4,7 +4,8 @@ import { ArrowRight } from "lucide-react";
 import PageHero from "@/components/layout/PageHero";
 import SectionWrapper from "@/components/layout/SectionWrapper";
 import FadeIn from "@/components/animations/FadeIn";
-import { ideas } from "@/data/content";
+import { listarPublicados } from "@/lib/contenidos/cacheadas";
+import { aIdea } from "@/lib/contenidos/adaptadores";
 
 export const metadata: Metadata = {
   title: "Antioquia Piensa — Ideas y proyectos para el departamento",
@@ -12,7 +13,9 @@ export const metadata: Metadata = {
     "Ideas y proyectos para el departamento que queremos construir.",
 };
 
-export default function AntioquiaPiensaPage() {
+export default async function AntioquiaPiensaPage() {
+  const ideas = (await listarPublicados("idea")).map(aIdea);
+
   return (
     <>
       <PageHero

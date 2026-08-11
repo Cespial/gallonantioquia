@@ -5,9 +5,10 @@ import SectionWrapper from "@/components/layout/SectionWrapper";
 import FadeIn from "@/components/animations/FadeIn";
 import PullQuote from "@/components/content/PullQuote";
 import Button from "@/components/ui/Button";
-import { ideas } from "@/data/content";
+import { listarPublicados } from "@/lib/contenidos/cacheadas";
+import { aIdea } from "@/lib/contenidos/adaptadores";
 
-type Props = { params: Promise<{ slug: string }> };
+type Props = { params: { slug: string } };
 
 const ideaContent: Record<string, { paragraphs: string[]; quote: string }> = {
   "infraestructura-brechas-rurales": {
@@ -79,13 +80,15 @@ const ideaContent: Record<string, { paragraphs: string[]; quote: string }> = {
 };
 
 export async function generateStaticParams() {
+  const ideas = (await listarPublicados("idea")).map(aIdea);
   return ideas.map((idea) => ({
     slug: idea.slug,
   }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug } = params;
+  const ideas = (await listarPublicados("idea")).map(aIdea);
   const idea = ideas.find((i) => i.slug === slug);
 
   if (!idea) {
@@ -99,7 +102,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function IdeaDetailPage({ params }: Props) {
-  const { slug } = await params;
+  const { slug } = params;
+  const ideas = (await listarPublicados("idea")).map(aIdea);
   const idea = ideas.find((i) => i.slug === slug);
 
   if (!idea) {

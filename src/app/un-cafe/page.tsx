@@ -4,7 +4,8 @@ import PageHero from "@/components/layout/PageHero";
 import SectionWrapper from "@/components/layout/SectionWrapper";
 import FadeIn from "@/components/animations/FadeIn";
 import EpisodeCard from "@/components/content/EpisodeCard";
-import { episodes } from "@/data/content";
+import { listarPublicados } from "@/lib/contenidos/cacheadas";
+import { aEpisodio } from "@/lib/contenidos/adaptadores";
 
 export const metadata: Metadata = {
   title: "Un Cafe para Antioquia — Entrevistas y dialogos",
@@ -12,7 +13,9 @@ export const metadata: Metadata = {
     "Conversaciones con quienes construyen el futuro del departamento.",
 };
 
-export default function UnCafePage() {
+export default async function UnCafePage() {
+  const episodes = (await listarPublicados("episodio")).map(aEpisodio);
+
   return (
     <>
       <PageHero

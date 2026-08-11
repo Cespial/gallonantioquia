@@ -5,9 +5,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { navItems } from "@/data/content";
+import type { NavItem } from "@/types";
 
-export default function Header() {
+export default function Header({ navItems }: { navItems: NavItem[] }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [shrink, setShrink] = useState(false);
   const pathname = usePathname();
