@@ -3407,19 +3407,22 @@ Crear `src/app/admin/[seccion]/page.tsx`:
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { configPorRutaAdmin } from "@/lib/admin/tipos";
-import { listarParaPanel } from "@/lib/contenidos/consultas";
+import { listarParaPanel } from "@/lib/contenidos/cacheadas";
 import ListadoContenidos from "@/components/admin/ListadoContenidos";
 
+// En Next 14.2 `params` y `searchParams` son objetos, no promesas. La firma
+// con `Promise<…>` es de Next 15: aquí compila —`PageProps` los declara como
+// `any`— y hasta funciona, porque `await` sobre un valor plano lo devuelve
+// igual, pero el tipo miente y la restricción global prohíbe APIs de Next 15+.
 type Props = {
-  params: Promise<{ seccion: string }>;
-  searchParams: Promise<{ estado?: string; q?: string }>;
+  params: { seccion: string };
+  searchParams: { estado?: string; q?: string };
 };
 
 export default async function PaginaSeccion({ params, searchParams }: Props) {
-  const { seccion } = await params;
-  const { estado, q } = await searchParams;
+  const { estado, q } = searchParams;
 
-  const config = configPorRutaAdmin(seccion);
+  const config = configPorRutaAdmin(params.seccion);
   if (!config) notFound();
 
   const filas = await listarParaPanel(config.tipo, {
@@ -3433,7 +3436,7 @@ export default async function PaginaSeccion({ params, searchParams }: Props) {
         <div>
           <h1 className="font-display text-2xl">{config.etiqueta}</h1>
           <p className="text-sm text-texto-secundario mt-1">
-            {filas.length} {filas.length === 1 ? config.singular : `${config.singular}s`}
+            {filas.length} {filas.length === 1 ? config.singular : config.plural}
           </p>
         </div>
         <Link
@@ -3457,7 +3460,12 @@ Crear `src/components/admin/ListadoContenidos.tsx` (componente cliente) con:
 - Un campo de búsqueda y un selector de estado que actualizan `searchParams` con `router.replace`.
 - Una tabla con columnas: título, taxonomía (solo si `config.taxonomia`), fecha, estado y acciones.
 - Cuando `config.ordenPor === "orden"`, los controles de subir/bajar que llaman una acción de reordenamiento; cuando es `"fecha"`, no se muestran.
-- Estado vacío con texto explícito: `No hay ${config.singular}s todavía. Crea la primera con el botón de arriba.`
+- Estado vacío con texto explícito: `No hay ${config.plural} todavía. Crea ${config.articulo} ${config.singular} con el botón de arriba.`
+
+**Se agrega `plural` a `ConfigTipo`** (tarea 3) y se usa en lugar de
+`${config.singular}s`. La concatenación falla en cuanto el singular lleva dos
+palabras: `voz.singular` es «columna invitada» y produciría «columna
+invitadas» en pantalla.
 
 Crear `src/components/admin/FilaContenido.tsx` con los botones por fila: **Editar** (enlace a `/admin/<ruta>/<id>`), **Publicar/Despublicar** (llama `cambiarEstadoContenido`) y **Borrar** (llama `borrarContenido` tras un diálogo de confirmación propio, no `window.confirm`).
 
