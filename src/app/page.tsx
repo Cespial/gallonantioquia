@@ -21,7 +21,8 @@ export default async function Home() {
   const enConstruccion = await leerAjuste("sitio.enConstruccion");
 
   if (enConstruccion) {
-    return <ConstructionScreen />;
+    const mensaje = await leerAjuste("sitio.mensajeConstruccion");
+    return <ConstructionScreen mensaje={mensaje} />;
   }
 
   return (

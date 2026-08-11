@@ -10,7 +10,7 @@ import { useEffect } from "react";
  * `const UNDER_CONSTRUCTION = false;` (o eliminar el bloque). No hace falta
  * tocar este archivo ni el resto del sitio.
  */
-export default function ConstructionScreen() {
+export default function ConstructionScreen({ mensaje }: { mensaje: string }) {
   // Bloquea el scroll del fondo mientras se muestra el splash.
   useEffect(() => {
     const prev = document.body.style.overflow;
@@ -78,8 +78,7 @@ export default function ConstructionScreen() {
 
         {/* Subtítulo */}
         <p className="mt-8 max-w-md font-body text-base leading-relaxed text-white/55 md:text-lg">
-          Estamos preparando este espacio con cuidado. Vuelve pronto para leer
-          las memorias, columnas y conversaciones de Antioquia.
+          {mensaje}
         </p>
       </div>
 
