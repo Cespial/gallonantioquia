@@ -33,19 +33,19 @@ export default function AsiConectamos() {
       className="bg-campana-hueso lg:grid lg:grid-cols-2 lg:items-stretch"
     >
       {/* Columna clara: titular, cita y la cifra de las vías. */}
-      <div className={`px-5 py-12 lg:py-8 lg:pr-12 ${CANAL_IZQ}`}>
+      <div className={`px-5 py-12 lg:py-6 lg:pr-12 ${CANAL_IZQ}`}>
         <div className="relative mx-auto max-w-[46rem] lg:ml-auto lg:mr-0">
           <h2
             id="conectamos-titulo"
             className="relative z-10 font-campana uppercase leading-[0.92]"
           >
-            <span className="block text-[1.9rem] font-normal tracking-[0.01em] text-campana-hoja sm:text-[2.6rem] lg:text-[3rem]">
+            <span className="block text-[1.9rem] font-normal tracking-[0.01em] text-campana-hoja sm:text-[2.6rem] lg:text-[3.4rem]">
               Así
             </span>
-            <span className="block text-[1.9rem] font-normal tracking-[0.01em] text-campana-hoja sm:text-[2.6rem] lg:text-[3rem]">
+            <span className="block text-[1.9rem] font-normal tracking-[0.01em] text-campana-hoja sm:text-[2.6rem] lg:text-[3.4rem]">
               Conectamos
             </span>
-            <span className="block text-[2.5rem] font-extrabold text-campana-tinta sm:text-[3.6rem] lg:text-[4.3rem]">
+            <span className="block text-[2.5rem] font-extrabold text-campana-tinta sm:text-[3.6rem] lg:text-[5.6rem]">
               Antioquia
             </span>
           </h2>
@@ -62,13 +62,13 @@ export default function AsiConectamos() {
             className="pointer-events-none absolute right-0 top-0 z-0 w-24 sm:w-40 lg:top-4 lg:w-56"
           />
 
-          <p className="relative z-10 mt-6 border-l-[3px] border-campana-dorado pl-4 font-campana text-lg leading-snug text-campana-dorado sm:text-xl lg:text-[1.5rem]">
+          <p className="relative z-10 mt-5 border-l-[3px] border-campana-dorado pl-4 font-campana text-lg leading-snug text-campana-dorado sm:text-xl lg:text-[1.5rem]">
             Las <strong className="font-bold">mejores cosechas</strong> nacen
             <br className="hidden sm:block" /> cuando se{" "}
             <strong className="font-bold">trabaja en equipo</strong>.
           </p>
 
-          <p className="relative z-10 mt-7 max-w-[34rem] font-campana text-[0.95rem] leading-relaxed text-neutral-700 lg:text-[1.05rem]">
+          <p className="relative z-10 mt-6 max-w-[34rem] font-campana text-[0.95rem] leading-relaxed text-neutral-700 lg:text-[1.05rem]">
             Dejamos contratados, en ejecución o en proceso de contratación cerca
             de 1.400 kilómetros de vías pavimentadas, lo que permitirá que
             Antioquia pase de tener el 45% al 73% de su red vial pavimentada
@@ -78,7 +78,7 @@ export default function AsiConectamos() {
       </div>
 
       {/* Columna oscura: lo que eso significa y las obras recuperadas. */}
-      <div className="bg-campana-bosque py-12 lg:py-6">
+      <div className="bg-campana-bosque py-12 lg:py-5">
         <h3
           className={`px-5 font-campana text-lg font-bold italic text-campana-hoja sm:text-xl lg:pl-12 lg:text-right lg:text-[1.6rem] ${CANAL_DER}`}
         >
@@ -87,7 +87,7 @@ export default function AsiConectamos() {
 
         {/* El panel se sale por el borde derecho de la pantalla: solo se
             redondea del lado que se ve. */}
-        <div className="ml-5 mt-4 rounded-l-[2rem] bg-campana-hoja py-7 pl-6 pr-5 sm:ml-10 lg:ml-52 lg:rounded-l-[3rem] lg:py-[1.15rem] lg:pl-14">
+        <div className="ml-5 mt-3 rounded-l-[2rem] bg-campana-hoja py-7 pl-6 pr-5 sm:ml-10 lg:ml-52 lg:rounded-l-[3rem] lg:py-[1.15rem] lg:pl-14">
           <ul
             className={`space-y-3 font-campana text-[0.95rem] font-medium italic leading-snug text-white lg:space-y-2 lg:pl-6 lg:text-[0.95rem] lg:leading-[1.35] ${CANAL_DER}`}
           >
@@ -100,16 +100,16 @@ export default function AsiConectamos() {
         </div>
 
         <div className={`px-5 lg:pl-12 lg:text-right ${CANAL_DER}`}>
-          <h3 className="mt-6 font-campana text-xl font-bold text-campana-dorado sm:text-2xl lg:text-[1.9rem]">
+          <h3 className="mt-5 font-campana text-xl font-bold text-campana-dorado sm:text-2xl lg:text-[1.75rem]">
             Logramos que las obras se hicieran.
           </h3>
-          <p className="mt-2 font-campana text-base font-bold leading-snug text-campana-hoja sm:text-lg lg:text-[1.35rem]">
+          <p className="mt-2 font-campana text-base font-bold leading-snug text-campana-hoja sm:text-lg lg:text-[1.25rem]">
             Recuperamos proyectos que estaban detenidos
             <br className="hidden lg:block" /> y que llevaban años enfrentando
             dificultades.
           </p>
 
-          <ul className="mt-4 space-y-2 font-campana text-[0.95rem] text-white lg:text-base">
+          <ul className="mt-3 space-y-1.5 font-campana text-[0.95rem] text-white lg:text-base">
             {RECUPERADAS.map((texto) => (
               <Vineta key={texto} tono="dorado" lado="derecha">
                 {texto}

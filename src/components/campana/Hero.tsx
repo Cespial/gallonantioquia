@@ -24,11 +24,11 @@ export default function Hero({ subtitulo }: { subtitulo: string }) {
           cielo de la derecha, donde va el retrato. */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-campana-bosque/45 mix-blend-multiply"
+        className="absolute inset-0 bg-campana-bosque/28 mix-blend-multiply"
       />
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/25 to-transparent"
+        className="absolute inset-0 bg-gradient-to-r from-black/45 via-black/15 to-transparent"
       />
 
       <div className="relative mx-auto grid min-h-[32rem] max-w-[1500px] grid-cols-1 gap-6 px-5 pt-10 sm:min-h-[36rem] lg:min-h-[34.5rem] lg:grid-cols-[57%_43%] lg:gap-0 lg:px-8 lg:pt-0">

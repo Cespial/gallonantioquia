@@ -36,8 +36,8 @@ export default function Encabezado({ navItems }: { navItems: NavItem[] }) {
           />
         </Link>
 
-        <nav aria-label="Principal" className="ml-auto hidden lg:block">
-          <ul className="flex items-center gap-8">
+        <nav aria-label="Principal" className="ml-auto hidden xl:block">
+          <ul className="flex items-center gap-7">
             {navItems.map((item) => {
               const activo = ruta === item.href;
               return (
@@ -61,7 +61,7 @@ export default function Encabezado({ navItems }: { navItems: NavItem[] }) {
 
         <Link
           href="/contacto"
-          className="ml-auto hidden shrink-0 rounded-full bg-campana-dorado-boton px-8 py-3 font-campana text-sm font-bold uppercase tracking-[0.04em] text-white shadow-sm transition-transform hover:scale-[1.03] lg:ml-8 lg:block"
+          className="ml-auto hidden shrink-0 rounded-full bg-campana-dorado-boton px-8 py-3 font-campana text-sm font-bold uppercase tracking-[0.04em] text-white shadow-sm transition-transform hover:scale-[1.03] xl:ml-8 xl:block"
         >
           Súmate al equipo
         </Link>
@@ -71,7 +71,7 @@ export default function Encabezado({ navItems }: { navItems: NavItem[] }) {
           onClick={() => setAbierto((v) => !v)}
           aria-expanded={abierto}
           aria-label={abierto ? "Cerrar menú" : "Abrir menú"}
-          className="ml-auto rounded p-2 text-campana-bosque lg:hidden"
+          className="ml-auto rounded p-2 text-campana-bosque xl:hidden"
         >
           {abierto ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
@@ -80,7 +80,7 @@ export default function Encabezado({ navItems }: { navItems: NavItem[] }) {
       {abierto && (
         <nav
           aria-label="Principal móvil"
-          className="border-t border-black/5 bg-white px-5 pb-6 pt-2 lg:hidden"
+          className="border-t border-black/5 bg-white px-5 pb-6 pt-2 xl:hidden"
         >
           <ul className="flex flex-col">
             {navItems.map((item) => (
