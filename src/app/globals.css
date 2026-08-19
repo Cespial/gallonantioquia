@@ -198,7 +198,11 @@
      portada de campaña los titulares deben LLENAR el ancho, como en el mockup,
      no repartirse en líneas parejas: sin esto ninguno rompe donde debe. */
   .titular-sin-balance {
-    text-wrap: normal;
+    /* `normal` NO es un valor válido de `text-wrap` —la propiedad acepta
+       wrap | nowrap | balance | stable | pretty— y el navegador lo descarta,
+       dejando en pie el `balance` heredado. El valor que sí desactiva el
+       reparto es `wrap`. */
+    text-wrap: wrap;
   }
 
   .text-balance {
