@@ -3,10 +3,10 @@ import Image from "next/image";
 export default function Caracter() {
   return (
     <section aria-labelledby="caracter-titulo" className="bg-white">
-      <div className="mx-auto max-w-[1500px] px-5 py-12 lg:px-8 lg:py-10">
+      <div className="mx-auto max-w-[1500px] px-5 py-12 lg:px-8 lg:py-9">
         <h2
           id="caracter-titulo"
-          className="mx-auto max-w-[58rem] text-center font-campana text-[1.45rem] font-extrabold leading-snug tracking-[0.01em] text-campana-tinta sm:text-[1.9rem] lg:text-[2.35rem]"
+          className="mx-auto max-w-[58rem] text-center font-campana text-[1.45rem] font-extrabold leading-snug tracking-[0.01em] text-campana-tinta sm:text-[1.9rem] lg:text-[2.3rem] lg:leading-[1.2]"
         >
           Mi carácter se ha cultivado recorriendo Antioquia, trabajando con sus
           municipios y convirtiendo proyectos en resultados.

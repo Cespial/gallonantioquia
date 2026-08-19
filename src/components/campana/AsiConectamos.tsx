@@ -33,19 +33,19 @@ export default function AsiConectamos() {
       className="bg-campana-hueso lg:grid lg:grid-cols-2 lg:items-stretch"
     >
       {/* Columna clara: titular, cita y la cifra de las vías. */}
-      <div className={`px-5 py-12 lg:py-10 lg:pr-12 ${CANAL_IZQ}`}>
+      <div className={`px-5 py-12 lg:py-8 lg:pr-12 ${CANAL_IZQ}`}>
         <div className="relative mx-auto max-w-[46rem] lg:ml-auto lg:mr-0">
           <h2
             id="conectamos-titulo"
             className="relative z-10 font-campana uppercase leading-[0.92]"
           >
-            <span className="block text-[2.1rem] font-normal tracking-[0.01em] text-campana-hoja sm:text-[2.6rem] lg:text-[3rem]">
+            <span className="block text-[1.9rem] font-normal tracking-[0.01em] text-campana-hoja sm:text-[2.6rem] lg:text-[3rem]">
               Así
             </span>
-            <span className="block text-[2.1rem] font-normal tracking-[0.01em] text-campana-hoja sm:text-[2.6rem] lg:text-[3rem]">
+            <span className="block text-[1.9rem] font-normal tracking-[0.01em] text-campana-hoja sm:text-[2.6rem] lg:text-[3rem]">
               Conectamos
             </span>
-            <span className="block text-[2.9rem] font-extrabold text-campana-tinta sm:text-[3.6rem] lg:text-[4.3rem]">
+            <span className="block text-[2.5rem] font-extrabold text-campana-tinta sm:text-[3.6rem] lg:text-[4.3rem]">
               Antioquia
             </span>
           </h2>
@@ -59,7 +59,7 @@ export default function AsiConectamos() {
             width={900}
             height={900}
             sizes="(max-width: 1024px) 40vw, 260px"
-            className="pointer-events-none absolute right-0 top-2 z-0 w-32 sm:w-40 lg:top-4 lg:w-56"
+            className="pointer-events-none absolute right-0 top-0 z-0 w-24 sm:w-40 lg:top-4 lg:w-56"
           />
 
           <p className="relative z-10 mt-6 border-l-[3px] border-campana-dorado pl-4 font-campana text-lg leading-snug text-campana-dorado sm:text-xl lg:text-[1.5rem]">
@@ -78,7 +78,7 @@ export default function AsiConectamos() {
       </div>
 
       {/* Columna oscura: lo que eso significa y las obras recuperadas. */}
-      <div className="bg-campana-bosque py-12 lg:py-10">
+      <div className="bg-campana-bosque py-12 lg:py-6">
         <h3
           className={`px-5 font-campana text-lg font-bold italic text-campana-hoja sm:text-xl lg:pl-12 lg:text-right lg:text-[1.6rem] ${CANAL_DER}`}
         >
@@ -87,9 +87,9 @@ export default function AsiConectamos() {
 
         {/* El panel se sale por el borde derecho de la pantalla: solo se
             redondea del lado que se ve. */}
-        <div className="ml-5 mt-4 rounded-l-[2rem] bg-campana-hoja py-7 pl-6 pr-5 sm:ml-10 lg:ml-16 lg:rounded-l-[3rem] lg:py-4 lg:pl-14">
+        <div className="ml-5 mt-4 rounded-l-[2rem] bg-campana-hoja py-7 pl-6 pr-5 sm:ml-10 lg:ml-52 lg:rounded-l-[3rem] lg:py-[1.15rem] lg:pl-14">
           <ul
-            className={`space-y-3 font-campana text-[0.95rem] font-medium italic leading-snug text-white lg:space-y-2.5 lg:pl-6 lg:text-base ${CANAL_DER}`}
+            className={`space-y-3 font-campana text-[0.95rem] font-medium italic leading-snug text-white lg:space-y-2 lg:pl-6 lg:text-[0.95rem] lg:leading-[1.35] ${CANAL_DER}`}
           >
             {SIGNIFICA.map((texto) => (
               <Vineta key={texto} tono="dorado" lado="derecha">
@@ -100,7 +100,7 @@ export default function AsiConectamos() {
         </div>
 
         <div className={`px-5 lg:pl-12 lg:text-right ${CANAL_DER}`}>
-          <h3 className="mt-7 font-campana text-xl font-bold text-campana-dorado sm:text-2xl lg:text-[1.9rem]">
+          <h3 className="mt-6 font-campana text-xl font-bold text-campana-dorado sm:text-2xl lg:text-[1.9rem]">
             Logramos que las obras se hicieran.
           </h3>
           <p className="mt-2 font-campana text-base font-bold leading-snug text-campana-hoja sm:text-lg lg:text-[1.35rem]">
@@ -109,7 +109,7 @@ export default function AsiConectamos() {
             dificultades.
           </p>
 
-          <ul className="mt-5 space-y-2.5 font-campana text-[0.95rem] text-white lg:text-[1.05rem]">
+          <ul className="mt-4 space-y-2 font-campana text-[0.95rem] text-white lg:text-base">
             {RECUPERADAS.map((texto) => (
               <Vineta key={texto} tono="dorado" lado="derecha">
                 {texto}

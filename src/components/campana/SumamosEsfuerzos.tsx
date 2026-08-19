@@ -43,11 +43,11 @@ export default function SumamosEsfuerzos() {
         />
       </div>
 
-      <div className="relative mx-auto max-w-[1500px] px-5 py-12 lg:px-8 lg:py-10">
+      <div className="relative mx-auto max-w-[1500px] px-5 py-12 lg:px-8 lg:py-8">
         <div className="max-w-[36rem]">
           <h2
             id="sumamos-titulo"
-            className="font-campana text-[1.7rem] font-extrabold leading-tight text-campana-tinta sm:text-[2.1rem] lg:text-[2.4rem]"
+            className="font-campana text-[1.7rem] font-extrabold leading-tight text-campana-tinta sm:text-[2.1rem] lg:text-[1.95rem] lg:leading-[1.15]"
           >
             Sumamos esfuerzos, articulamos voluntades y lideramos con propósito.
           </h2>
@@ -65,9 +65,9 @@ export default function SumamosEsfuerzos() {
             ))}
           </ul>
 
-          <hr className="my-7 border-t border-campana-hoja/70" />
+          <hr className="my-6 border-t border-campana-hoja/70" />
 
-          <h2 className="font-campana text-[1.7rem] font-extrabold leading-tight text-campana-tinta sm:text-[2.1rem] lg:text-[2.4rem]">
+          <h2 className="font-campana text-[1.7rem] font-extrabold leading-tight text-campana-tinta sm:text-[2.1rem] lg:text-[1.95rem] lg:leading-[1.15]">
             Respondimos a los llamados para buscar soluciones.
           </h2>
 
