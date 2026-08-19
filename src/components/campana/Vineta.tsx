@@ -33,8 +33,8 @@ export default function Vineta({
   const icono = (
     <CircleCheckBig
       aria-hidden="true"
-      strokeWidth={2}
-      className={`mt-[0.15em] h-[1.15em] w-[1.15em] shrink-0 ${TONOS[tono]}`}
+      strokeWidth={2.6}
+      className={`mt-[0.1em] h-[1.4em] w-[1.4em] shrink-0 ${TONOS[tono]}`}
     />
   );
 

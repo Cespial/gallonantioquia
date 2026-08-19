@@ -37,7 +37,7 @@ export default function ConstructionScreen({ mensaje }: { mensaje: string }) {
         {/* Identidad de la campaña. Antes decía «Gallón Memorias», que era
             el sitio anterior; el logotipo se sirve desde public. */}
         <Image
-          src="/images/campana/logo-gallon-blanco.png"
+          src="/images/campana/logo-gallon-blanco.webp"
           alt="Gallón Gobernador"
           width={640}
           height={411}

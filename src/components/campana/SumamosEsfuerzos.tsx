@@ -28,33 +28,46 @@ export default function SumamosEsfuerzos() {
     >
       {/* El retrato ocupa el flanco derecho y se funde con el fondo por su
           propio canal alfa. En móvil pasa a ser una franja superior. */}
-      <div className="relative h-56 w-full sm:h-72 lg:absolute lg:inset-y-0 lg:right-0 lg:h-full lg:w-[58%]">
+      {/* Escala y posición medidas por correlación contra el mockup: a 1440 px
+          la foto va a 1232 px de ancho, arranca en el 25% y sube 292 px por
+          encima del borde de la sección, que la recorta. */}
+      <div className="relative h-56 w-full sm:h-72 lg:absolute lg:inset-0 lg:h-full lg:w-full">
+        <div className="relative h-full w-full lg:hidden">
+          <Image
+            src="/images/campana/gallon-senala.webp"
+            alt="Horacio Gallón señala el valle de Aburrá desde un mirador"
+            fill
+            sizes="100vw"
+            className="object-cover object-[60%_center]"
+          />
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-gradient-to-r from-campana-nata via-campana-nata/25 to-transparent"
+          />
+        </div>
         <Image
           src="/images/campana/gallon-senala.webp"
           alt="Horacio Gallón señala el valle de Aburrá desde un mirador"
-          fill
-          sizes="(max-width: 1024px) 100vw, 58vw"
-          className="object-cover object-[60%_center] lg:object-[left_bottom]"
-        />
-        {/* Un velo que abre sitio al texto cuando la columna se estrecha. */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-r from-campana-nata via-campana-nata/25 to-transparent lg:w-1/3"
+          width={1400}
+          height={1232}
+          sizes="1232px"
+          className="absolute -top-[30.75rem] left-[20.8%] hidden w-[77rem] max-w-none lg:block"
         />
       </div>
 
-      <div className="relative mx-auto max-w-[1500px] px-5 py-12 lg:px-8 lg:py-8">
-        <div className="max-w-[36rem]">
+      <div className="relative mx-auto max-w-[1500px] px-5 py-12 lg:px-[3.1rem] lg:py-8">
+        <div className="max-w-[40rem]">
           <h2
             id="sumamos-titulo"
-            className="font-campana text-[1.7rem] font-extrabold leading-tight text-campana-tinta sm:text-[2.1rem] lg:text-[1.95rem] lg:leading-[1.15]"
+            className="[text-wrap:normal] font-campana text-[1.7rem] font-extrabold leading-tight text-campana-tinta sm:text-[2.1rem] lg:text-[1.9rem] lg:leading-[1.15]"
           >
-            Sumamos esfuerzos, articulamos voluntades y lideramos con propósito.
+            Sumamos esfuerzos, articulamos<br className="hidden lg:inline" />{" "}
+            voluntades y lideramos<br className="hidden lg:inline" /> con propósito.
           </h2>
 
           <p className="mt-5 font-campana text-base font-bold leading-snug text-campana-hoja sm:text-lg lg:text-[1.25rem]">
-            Defendimos las grandes obras estratégicas e impulsamos el desarrollo
-            de las vías terciarias.
+            Defendimos las grandes obras estratégicas<br className="hidden lg:inline" />{" "}
+            e impulsamos el desarrollo de las vías terciarias.
           </p>
 
           <ul className="mt-4 space-y-2 font-campana text-[0.95rem] text-neutral-800 lg:text-base">
@@ -67,12 +80,14 @@ export default function SumamosEsfuerzos() {
 
           <hr className="my-6 border-t border-campana-hoja/70" />
 
-          <h2 className="font-campana text-[1.7rem] font-extrabold leading-tight text-campana-tinta sm:text-[2.1rem] lg:text-[1.95rem] lg:leading-[1.15]">
-            Respondimos a los llamados para buscar soluciones.
+          <h2 className="[text-wrap:normal] font-campana text-[1.7rem] font-extrabold leading-tight text-campana-tinta sm:text-[2.1rem] lg:text-[1.9rem] lg:leading-[1.15]">
+            Respondimos a los llamados para<br className="hidden lg:inline" />{" "}
+            buscar soluciones.
           </h2>
 
           <p className="mt-4 font-campana text-base font-bold leading-snug text-campana-hoja sm:text-lg lg:text-[1.25rem]">
-            Acompañamos la gestión de las necesidades y emergencias de las vías.
+            Acompañamos la gestión de las necesidades<br className="hidden lg:inline" />{" "}
+            y emergencias de las vías.
           </p>
 
           {/* Multicolumna, no rejilla: el mockup llena la primera columna antes

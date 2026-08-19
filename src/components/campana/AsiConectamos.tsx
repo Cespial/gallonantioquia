@@ -22,7 +22,7 @@ const RECUPERADAS = [
  * monitor ancho, así que la canaleta exterior crece cuando la ventana supera
  * los 1500 px y se queda en 1,25 rem —lo que mide en el mockup— por debajo.
  */
-const CANAL_IZQ = "lg:pl-[max(1.25rem,calc((100vw-1500px)/2))]";
+const CANAL_IZQ = "lg:pl-[max(2.25rem,calc((100vw-1500px)/2))]";
 const CANAL_DER = "lg:pr-[max(1.25rem,calc((100vw-1500px)/2))]";
 
 export default function AsiConectamos() {
@@ -37,7 +37,7 @@ export default function AsiConectamos() {
         <div className="relative mx-auto max-w-[46rem] lg:ml-auto lg:mr-0">
           <h2
             id="conectamos-titulo"
-            className="relative z-10 font-campana uppercase leading-[0.92]"
+            className="relative z-10 [text-wrap:normal] font-campana uppercase leading-[0.92]"
           >
             <span className="block text-[1.9rem] font-normal tracking-[0.01em] text-campana-hoja sm:text-[2.6rem] lg:text-[3.4rem]">
               Así
@@ -59,7 +59,7 @@ export default function AsiConectamos() {
             width={900}
             height={900}
             sizes="(max-width: 1024px) 40vw, 260px"
-            className="pointer-events-none absolute right-0 top-0 z-0 w-24 sm:w-40 lg:top-4 lg:w-56"
+            className="pointer-events-none absolute right-0 top-0 z-0 w-24 sm:w-40 lg:-right-4 lg:top-[8.3rem] lg:w-[9.7rem]"
           />
 
           <p className="relative z-10 mt-5 border-l-[3px] border-campana-dorado pl-4 font-campana text-lg leading-snug text-campana-dorado sm:text-xl lg:text-[1.5rem]">
@@ -68,7 +68,7 @@ export default function AsiConectamos() {
             <strong className="font-bold">trabaja en equipo</strong>.
           </p>
 
-          <p className="relative z-10 mt-6 max-w-[34rem] font-campana text-[0.95rem] leading-relaxed text-neutral-700 lg:text-[1.05rem]">
+          <p className="relative z-10 mt-6 max-w-[36rem] font-campana text-[0.95rem] leading-relaxed text-neutral-700 lg:text-[1.05rem]">
             Dejamos contratados, en ejecución o en proceso de contratación cerca
             de 1.400 kilómetros de vías pavimentadas, lo que permitirá que
             Antioquia pase de tener el 45% al 73% de su red vial pavimentada
@@ -89,7 +89,7 @@ export default function AsiConectamos() {
             redondea del lado que se ve. */}
         <div className="ml-5 mt-3 rounded-l-[2rem] bg-campana-hoja py-7 pl-6 pr-5 sm:ml-10 lg:ml-52 lg:rounded-l-[3rem] lg:py-[1.15rem] lg:pl-14">
           <ul
-            className={`space-y-3 font-campana text-[0.95rem] font-medium italic leading-snug text-white lg:space-y-2 lg:pl-6 lg:text-[0.95rem] lg:leading-[1.35] ${CANAL_DER}`}
+            className={`space-y-3 font-campana text-[0.95rem] font-medium italic leading-snug text-white lg:space-y-2 lg:text-[0.95rem] lg:leading-[1.35] ${CANAL_DER}`}
           >
             {SIGNIFICA.map((texto) => (
               <Vineta key={texto} tono="dorado" lado="derecha">

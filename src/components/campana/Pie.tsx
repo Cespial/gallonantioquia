@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
 import {
   IconoFacebook,
   IconoInstagram,
   IconoTiktok,
+  IconoWhatsApp,
   IconoX,
   IconoYoutube,
 } from "./IconosSociales";
@@ -48,15 +49,15 @@ export default function Pie({
 
   return (
     <footer className="bg-campana-profundo pt-7">
-      <div className="mx-auto grid max-w-[1400px] gap-8 px-5 pb-5 lg:grid-cols-[0.85fr_1.7fr_1fr] lg:px-8">
+      <div className="mx-auto grid max-w-[1230px] gap-8 px-5 pb-5 lg:grid-cols-[0.85fr_1.7fr_1fr] lg:px-0">
         <div>
           <Image
-            src="/images/campana/logo-gallon-blanco.png"
+            src="/images/campana/logo-gallon-blanco.webp"
             alt="Gallón Gobernador"
-            width={640}
-            height={411}
-            sizes="200px"
-            className="h-[4.5rem] w-auto"
+            width={1000}
+            height={487}
+            sizes="220px"
+            className="w-[10.5rem]"
           />
 
           {sociales.length > 0 && (
@@ -82,7 +83,7 @@ export default function Pie({
           <h2 className="font-campana text-sm font-bold uppercase tracking-wide text-white">
             Menú rápido
           </h2>
-          <div className="mt-4 grid grid-cols-2 gap-x-8 gap-y-2 sm:grid-cols-[repeat(3,max-content)]">
+          <div className="mt-4 grid grid-cols-1 gap-x-8 gap-y-2 min-[420px]:grid-cols-2 sm:grid-cols-[repeat(3,max-content)]">
             {columnas.map((columna, i) => (
               <ul key={i} className="space-y-2">
                 {columna.map((item) => (
@@ -122,7 +123,7 @@ export default function Pie({
           </h2>
           <ul className="mt-4 space-y-3">
             <li className="flex items-center gap-3">
-              <Mail className="h-4 w-4 shrink-0 text-campana-dorado" aria-hidden="true" />
+              <Mail className="h-[1.15rem] w-[1.15rem] shrink-0 text-campana-hoja" aria-hidden="true" />
               <a
                 href={`mailto:${contacto.email}`}
                 className="font-campana text-sm text-white/75 hover:text-white"
@@ -131,7 +132,7 @@ export default function Pie({
               </a>
             </li>
             <li className="flex items-center gap-3">
-              <Phone className="h-4 w-4 shrink-0 text-campana-dorado" aria-hidden="true" />
+              <IconoWhatsApp className="h-[1.15rem] w-[1.15rem] shrink-0 text-campana-hoja" />
               <a
                 href={`tel:${contacto.telefono.replace(/\s/g, "")}`}
                 className="font-campana text-sm text-white/75 hover:text-white"
@@ -140,7 +141,7 @@ export default function Pie({
               </a>
             </li>
             <li className="flex items-center gap-3">
-              <MapPin className="h-4 w-4 shrink-0 text-campana-dorado" aria-hidden="true" />
+              <MapPin className="h-[1.15rem] w-[1.15rem] shrink-0 text-campana-hoja" aria-hidden="true" />
               <span className="font-campana text-sm text-white/75">{contacto.direccion}</span>
             </li>
           </ul>
@@ -148,7 +149,7 @@ export default function Pie({
       </div>
 
       <div className="border-t border-white/15">
-        <div className="mx-auto flex max-w-[1400px] flex-col gap-3 px-5 py-4 font-campana text-xs text-white/60 sm:flex-row sm:items-center sm:justify-between lg:px-10">
+        <div className="mx-auto flex max-w-[1230px] flex-col gap-3 px-5 py-4 font-campana text-xs text-white/60 sm:flex-row sm:items-center sm:justify-between lg:px-0">
           {/* El año se calcula en el servidor: este es un Server Component y
               su salida no se hidrata. Si algún día lleva "use client", hay que
               moverlo a un useEffect o volverá el fallo de hidratación que dejó

@@ -29,12 +29,12 @@ export default function FranjaCifras({
         aria-hidden="true"
         fill
         sizes="100vw"
-        className="object-cover opacity-30"
+        className="object-cover opacity-35"
       />
-      <div aria-hidden="true" className="absolute inset-0 bg-campana-profundo/75" />
+      <div aria-hidden="true" className="absolute inset-0 bg-campana-profundo/78" />
 
-      <div className="relative mx-auto grid max-w-[1500px] items-center gap-9 px-5 py-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 lg:px-8 lg:py-[4.6rem]">
-        <ul className="flex flex-wrap items-center gap-x-6 gap-y-7 sm:gap-x-10">
+      <div className="relative mx-auto grid max-w-[1230px] items-center gap-9 px-5 py-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10 lg:px-0 lg:py-4">
+        <ul className="flex flex-wrap items-center gap-x-6 gap-y-7 sm:gap-x-10 lg:flex-nowrap lg:gap-x-7">
           {cifras.slice(0, 2).map((cifra, i) => {
             const icono = ICONOS[i] ?? ICONOS[0];
             return (
@@ -44,7 +44,7 @@ export default function FranjaCifras({
               >
                 <span
                   aria-hidden="true"
-                  className="flex h-[4.2rem] w-[4.2rem] shrink-0 items-center justify-center rounded-2xl border-2 border-white/40 lg:h-[5.5rem] lg:w-[5.5rem]"
+                  className="flex h-[4.2rem] w-[4.2rem] shrink-0 items-center justify-center rounded-2xl border-2 border-white/40 lg:h-[6.9rem] lg:w-[7.5rem]"
                 >
                   <Image
                     src={icono.src}
@@ -52,11 +52,11 @@ export default function FranjaCifras({
                     width={icono.ancho}
                     height={icono.alto}
                     sizes="64px"
-                    className="h-9 w-auto lg:h-11"
+                    className="h-9 w-auto lg:h-[3.4rem]"
                   />
                 </span>
                 <span className="font-campana leading-none text-white">
-                  <span className="block text-[2.6rem] font-extrabold tracking-tight lg:text-[3.4rem]">
+                  <span className="block text-[2.6rem] font-extrabold tracking-tight lg:text-[3.2rem]">
                     {cifra.sufijo === "+" ? "+" : ""}
                     <CountUp end={cifra.valor} />
                   </span>
@@ -71,12 +71,12 @@ export default function FranjaCifras({
         </ul>
 
         <div>
-          <p className="font-campana text-xl font-bold leading-snug text-white lg:text-[1.6rem]">
+          <p className="font-campana text-xl font-bold leading-snug text-white lg:max-w-[27rem] lg:text-[1.35rem]">
             {mensaje}
           </p>
           <Link
             href="/contacto"
-            className="mt-5 inline-block rounded-full bg-campana-dorado-boton px-10 py-3.5 font-campana text-sm font-bold uppercase tracking-[0.04em] text-campana-profundo transition-transform hover:scale-[1.03] lg:text-base"
+            className="mt-4 inline-block rounded-full bg-campana-dorado-boton px-14 py-3 font-campana text-sm font-bold uppercase tracking-[0.04em] text-campana-profundo transition-transform hover:scale-[1.03] lg:text-base"
           >
             Súmate al equipo
           </Link>
