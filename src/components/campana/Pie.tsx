@@ -48,7 +48,7 @@ export default function Pie({
 
   return (
     <footer className="bg-campana-profundo pt-7">
-      <div className="mx-auto grid max-w-[1400px] gap-8 px-5 pb-5 lg:grid-cols-[1fr_1.3fr_1fr] lg:px-8">
+      <div className="mx-auto grid max-w-[1400px] gap-8 px-5 pb-5 lg:grid-cols-[0.85fr_1.7fr_1fr] lg:px-8">
         <div>
           <Image
             src="/images/campana/logo-gallon-blanco.png"
@@ -82,7 +82,7 @@ export default function Pie({
           <h2 className="font-campana text-sm font-bold uppercase tracking-wide text-white">
             Menú rápido
           </h2>
-          <div className="mt-4 grid grid-cols-2 gap-x-6 gap-y-2 sm:grid-cols-3">
+          <div className="mt-4 grid grid-cols-2 gap-x-8 gap-y-2 sm:grid-cols-[repeat(3,max-content)]">
             {columnas.map((columna, i) => (
               <ul key={i} className="space-y-2">
                 {columna.map((item) => (
