@@ -1,81 +1,92 @@
 import Image from "next/image";
-import Link from "next/link";
-import { ChevronDown } from "lucide-react";
+import { Mouse } from "lucide-react";
 
 export default function Hero({ subtitulo }: { subtitulo: string }) {
   return (
-    <section className="relative isolate overflow-hidden bg-campana-profundo lg:h-[560px]">
-      {/* Montañas de fondo, atenuadas para que el texto blanco no compita */}
+    <section
+      id="inicio"
+      aria-label="A paso firme por Antioquia"
+      className="relative isolate overflow-hidden bg-campana-bosque"
+    >
+      {/* Cordillera antioqueña a sangre. El `priority` es deliberado: es la
+          imagen que define el LCP de la portada. */}
       <Image
-        src="/images/campana/hero-montanas.jpg"
+        src="/images/campana/panorama-cordillera.webp"
         alt=""
         aria-hidden="true"
         fill
         priority
         sizes="100vw"
-        className="object-cover object-center opacity-90 saturate-[1.35]"
+        className="object-cover object-center"
       />
-      {/* Dos velos: el multiply lleva la foto al verde monocromo del mockup y
-          el degradado abre sitio al texto sobre el flanco izquierdo. */}
+      {/* Dos velos: el primero asienta la foto en el verde de la marca, el
+          segundo abre sitio al texto sobre el flanco izquierdo sin apagar el
+          cielo de la derecha, donde va el retrato. */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-campana-bosque/70 mix-blend-multiply"
+        className="absolute inset-0 bg-campana-bosque/45 mix-blend-multiply"
       />
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-r from-campana-profundo/90 via-campana-profundo/45 to-transparent"
+        className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/25 to-transparent"
       />
 
-      <div className="relative mx-auto grid h-full max-w-[1400px] items-end gap-6 px-5 pt-10 lg:grid-cols-[1.05fr_.95fr] lg:gap-4 lg:px-10 lg:pt-0">
-        <div className="pb-10 lg:flex lg:h-full lg:flex-col lg:justify-center lg:pb-0">
-          {/* El titular es el lockup de marca, no texto: su tipografía slab
-              itálica es parte de la identidad y ninguna fuente web la imita. */}
-          <h1>
+      <div className="relative mx-auto grid min-h-[32rem] max-w-[1500px] grid-cols-1 gap-6 px-5 pt-10 sm:min-h-[36rem] lg:min-h-[34.5rem] lg:grid-cols-[57%_43%] lg:gap-0 lg:px-8 lg:pt-0">
+        <div className="flex flex-col items-center justify-center pb-8 text-center lg:pb-14 lg:pt-16">
+          {/* El titular es el lockup de marca, no texto: esa slab itálica es
+              parte de la identidad y ninguna fuente web la imita. */}
+          <h1 className="w-full">
+            <span className="sr-only">
+              A paso firme por Antioquia — Horacio Gallón
+            </span>
             <Image
-              src="/images/campana/lockup-hero.png"
-              alt="A paso firme por Antioquia · Gallón Gobernador"
+              src="/images/campana/lockup-titulo.webp"
+              alt=""
+              aria-hidden="true"
               width={1100}
-              height={428}
+              height={316}
               priority
-              sizes="(max-width: 1024px) 88vw, 42vw"
-              className="h-auto w-full max-w-[26rem] lg:max-w-[36rem]"
+              sizes="(max-width: 1024px) 88vw, 46vw"
+              className="mx-auto h-auto w-full max-w-[22rem] sm:max-w-[26rem] lg:max-w-[34rem]"
             />
+            <span
+              aria-hidden="true"
+              className="mx-auto mt-3 block w-fit rounded-full bg-white px-6 py-1.5 font-campana text-[0.8rem] font-extrabold uppercase tracking-[0.08em] text-campana-selva sm:px-8 sm:text-[0.95rem] lg:mt-4 lg:px-10 lg:text-[1.15rem]"
+            >
+              <span className="mr-2 align-[0.15em] text-[0.7em]">●</span>
+              Horacio Gallón
+              <span className="ml-2 align-[0.15em] text-[0.7em]">●</span>
+            </span>
           </h1>
 
-          <p className="mt-5 max-w-md font-campana text-base font-semibold leading-snug text-white/95 sm:text-lg">
+          <p className="mt-7 max-w-[26rem] font-campana text-[0.95rem] font-bold leading-snug text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.45)] sm:text-base lg:mt-9 lg:max-w-[30rem] lg:text-[1.05rem]">
+            <span className="mb-1 block text-2xl font-bold lg:text-[1.9rem]">
+              Antioquia
+            </span>
             {subtitulo}
           </p>
 
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Link
-              href="/plan-de-gobierno"
-              className="rounded-full bg-campana-dorado px-7 py-3.5 font-campana text-[13px] font-bold uppercase tracking-wide text-white transition-transform hover:scale-[1.03]"
-            >
-              Conoce el plan de gobierno
-            </Link>
-            <Link
-              href="/horario"
-              className="rounded-full border-2 border-white px-8 py-3.5 font-campana text-[13px] font-bold uppercase tracking-wide text-white transition-colors hover:bg-white hover:text-campana-profundo"
-            >
-              Ver agenda
-            </Link>
-          </div>
-
-          <p className="mt-7 hidden items-center gap-2 font-campana text-xs text-white/70 lg:flex">
-            <ChevronDown className="h-4 w-4 animate-bounce" aria-hidden="true" />
+          <p className="mt-8 hidden items-center gap-3 font-campana text-sm text-white/85 lg:mt-12 lg:flex">
+            <Mouse
+              className="h-5 w-5 animate-bounce [animation-duration:2.2s]"
+              strokeWidth={1.6}
+              aria-hidden="true"
+            />
             Desliza para descubrir
           </p>
         </div>
 
-        <div className="relative mx-auto w-full max-w-[22rem] self-end lg:max-w-none">
+        {/* El retrato se apoya en el borde inferior de la franja, como en el
+            mockup: recortarlo por abajo es intencional. */}
+        <div className="relative -mb-px flex items-end justify-center lg:justify-start">
           <Image
-            src="/images/campana/gallon-hero.webp"
+            src="/images/campana/gallon-pulgar.webp"
             alt="Horacio Gallón, candidato a la Gobernación de Antioquia"
-            width={900}
-            height={1258}
+            width={1200}
+            height={1239}
             priority
-            sizes="(max-width: 1024px) 80vw, 42vw"
-            className="h-auto w-full object-contain object-bottom lg:absolute lg:bottom-0 lg:left-1/2 lg:h-[600px] lg:w-auto lg:-translate-x-1/2"
+            sizes="(max-width: 1024px) 70vw, 40vw"
+            className="h-auto w-[16rem] max-w-none object-contain object-bottom sm:w-[20rem] lg:absolute lg:bottom-0 lg:left-1/2 lg:h-[33rem] lg:w-auto lg:-translate-x-1/2"
           />
         </div>
       </div>

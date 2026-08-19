@@ -24,7 +24,7 @@ export default function Encabezado({ navItems }: { navItems: NavItem[] }) {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-black/5 bg-white">
-      <div className="mx-auto flex max-w-[1400px] items-center gap-6 px-5 py-2.5 lg:px-10">
+      <div className="mx-auto flex max-w-[1500px] items-center gap-6 px-5 py-2.5 lg:px-8 lg:py-5">
         <Link href="/" className="shrink-0" aria-label="Gallón Gobernador, ir al inicio">
           <Image
             src="/images/campana/logo-gallon.png"
@@ -32,12 +32,12 @@ export default function Encabezado({ navItems }: { navItems: NavItem[] }) {
             width={640}
             height={411}
             priority
-            className="h-10 w-auto lg:h-12"
+            className="h-11 w-auto lg:h-[4.5rem]"
           />
         </Link>
 
         <nav aria-label="Principal" className="ml-auto hidden lg:block">
-          <ul className="flex items-center gap-7">
+          <ul className="flex items-center gap-8">
             {navItems.map((item) => {
               const activo = ruta === item.href;
               return (
@@ -47,8 +47,8 @@ export default function Encabezado({ navItems }: { navItems: NavItem[] }) {
                     aria-current={activo ? "page" : undefined}
                     className={`font-campana text-[15px] transition-colors ${
                       activo
-                        ? "font-semibold text-campana-bosque"
-                        : "text-neutral-700 hover:text-campana-bosque"
+                        ? "font-semibold text-campana-hoja"
+                        : "text-neutral-800 hover:text-campana-hoja"
                     }`}
                   >
                     {item.label}
@@ -61,9 +61,9 @@ export default function Encabezado({ navItems }: { navItems: NavItem[] }) {
 
         <Link
           href="/contacto"
-          className="ml-auto hidden rounded-full bg-campana-dorado px-6 py-2.5 font-campana text-[13px] font-bold uppercase tracking-wide text-white shadow-sm transition-transform hover:scale-[1.03] lg:ml-0 lg:block"
+          className="ml-auto hidden shrink-0 rounded-full bg-campana-dorado-boton px-8 py-3 font-campana text-sm font-bold uppercase tracking-[0.04em] text-white shadow-sm transition-transform hover:scale-[1.03] lg:ml-8 lg:block"
         >
-          Únete al equipo
+          Súmate al equipo
         </Link>
 
         <button
@@ -96,9 +96,9 @@ export default function Encabezado({ navItems }: { navItems: NavItem[] }) {
           </ul>
           <Link
             href="/contacto"
-            className="mt-5 block rounded-full bg-campana-dorado px-6 py-3 text-center font-campana text-sm font-bold uppercase tracking-wide text-white"
+            className="mt-5 block rounded-full bg-campana-dorado-boton px-6 py-3 text-center font-campana text-sm font-bold uppercase tracking-[0.04em] text-white"
           >
-            Únete al equipo
+            Súmate al equipo
           </Link>
         </nav>
       )}

@@ -27,11 +27,16 @@ const config: Config = {
         // el mockup entregado por el equipo, no de aproximar a ojo.
         campana: {
           profundo: "#1c321e", // pie de página y franja de cifras
-          bosque: "#205129", // bloques verdes de sección
-          hoja: "#206732", // iconos y acentos vivos
-          dorado: "#e2a712", // botones principales
+          bosque: "#1d361f", // bloques verdes oscuros de sección
+          selva: "#2d6034", // verde medio: mitad baja del perfil
+          hoja: "#24813b", // acento vivo: antetítulos, panel interior, checks
+          tinta: "#375231", // titulares oscuros sobre fondo claro
+          dorado: "#e5a414", // texto y acentos dorados
+          "dorado-boton": "#dda014", // relleno de los botones
           "dorado-claro": "#f0c04a",
-          hueso: "#fbfaf9", // fondos suaves
+          crema: "#fefdf1", // fondo del bloque de perfil
+          hueso: "#fbfaf9", // fondo general suave
+          nata: "#fffdf2", // fondo de «Sumamos esfuerzos»
           cresta: "#b81f1f", // el rojo del logotipo
         },
       },

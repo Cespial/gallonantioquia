@@ -1,10 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Map, Users } from "lucide-react";
+import CountUp from "@/components/animations/CountUp";
 
 type Cifra = { valor: number; sufijo: string; etiqueta: string };
 
-const ICONOS = [Map, Users];
+/** Los dos pictogramas se recortaron del mockup: son trazo blanco, no iconos
+ *  de librería, y la silueta de Antioquia no existe en ninguna. */
+const ICONOS = [
+  { src: "/images/campana/icono-antioquia.webp", ancho: 179, alto: 181 },
+  { src: "/images/campana/icono-ciudadanos.webp", ancho: 174, alto: 154 },
+];
 
 export default function FranjaCifras({
   cifras,
@@ -14,35 +19,49 @@ export default function FranjaCifras({
   mensaje: string;
 }) {
   return (
-    <section className="relative isolate overflow-hidden bg-campana-profundo py-9">
+    <section
+      aria-label="La campaña en cifras"
+      className="relative isolate overflow-hidden bg-campana-profundo"
+    >
       <Image
-        src="/images/campana/hero-montanas.jpg"
+        src="/images/campana/panorama-cordillera.webp"
         alt=""
         aria-hidden="true"
         fill
         sizes="100vw"
-        className="object-cover opacity-25"
+        className="object-cover opacity-30"
       />
-      <div aria-hidden="true" className="absolute inset-0 bg-campana-profundo/80" />
+      <div aria-hidden="true" className="absolute inset-0 bg-campana-profundo/75" />
 
-      <div className="relative mx-auto grid max-w-[1400px] items-center gap-10 px-5 lg:grid-cols-[1.1fr_0.9fr] lg:px-10">
-        <ul className="flex flex-wrap items-center gap-x-12 gap-y-8">
+      <div className="relative mx-auto grid max-w-[1500px] items-center gap-9 px-5 py-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 lg:px-8 lg:py-16">
+        <ul className="flex flex-wrap items-center gap-x-6 gap-y-7 sm:gap-x-10">
           {cifras.slice(0, 2).map((cifra, i) => {
-            const Icono = ICONOS[i] ?? Map;
+            const icono = ICONOS[i] ?? ICONOS[0];
             return (
-              <li key={cifra.etiqueta} className="flex items-center gap-4">
+              <li
+                key={cifra.etiqueta}
+                className="flex items-center gap-4 sm:gap-6 [&+li]:border-l [&+li]:border-white/30 [&+li]:pl-6 sm:[&+li]:pl-10"
+              >
                 <span
                   aria-hidden="true"
-                  className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border-2 border-white/30"
+                  className="flex h-[4.2rem] w-[4.2rem] shrink-0 items-center justify-center rounded-2xl border-2 border-white/40 lg:h-[5.5rem] lg:w-[5.5rem]"
                 >
-                  <Icono className="h-8 w-8 text-white" strokeWidth={1.5} />
+                  <Image
+                    src={icono.src}
+                    alt=""
+                    width={icono.ancho}
+                    height={icono.alto}
+                    sizes="64px"
+                    className="h-9 w-auto lg:h-11"
+                  />
                 </span>
                 <span className="font-campana leading-none text-white">
-                  <span className="block text-4xl font-extrabold lg:text-[3.2rem]">
+                  <span className="block text-[2.6rem] font-extrabold tracking-tight lg:text-[3.4rem]">
                     {cifra.sufijo === "+" ? "+" : ""}
-                    {cifra.valor.toLocaleString("es-CO")}
+                    <CountUp end={cifra.valor} />
                   </span>
-                  <span className="mt-1 block text-sm font-medium text-white/80">
+                  <span className="mt-2 block h-[2px] w-full max-w-[7rem] bg-campana-dorado" />
+                  <span className="mt-2 block max-w-[7rem] text-[0.95rem] font-medium leading-tight text-white lg:text-base">
                     {cifra.etiqueta}
                   </span>
                 </span>
@@ -52,14 +71,14 @@ export default function FranjaCifras({
         </ul>
 
         <div>
-          <p className="font-campana text-xl font-bold leading-tight text-white lg:text-[1.7rem]">
+          <p className="font-campana text-xl font-bold leading-snug text-white lg:text-[1.6rem]">
             {mensaje}
           </p>
           <Link
             href="/contacto"
-            className="mt-6 inline-block rounded-full bg-campana-dorado px-8 py-3.5 font-campana text-[13px] font-bold uppercase tracking-wide text-white transition-transform hover:scale-[1.03]"
+            className="mt-5 inline-block rounded-full bg-campana-dorado-boton px-10 py-3.5 font-campana text-sm font-bold uppercase tracking-[0.04em] text-white transition-transform hover:scale-[1.03] lg:text-base"
           >
-            Únete al equipo
+            Súmate al equipo
           </Link>
         </div>
       </div>

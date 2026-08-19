@@ -1,49 +1,38 @@
 import type { Metadata } from "next";
 import Hero from "@/components/campana/Hero";
 import Perfil from "@/components/campana/Perfil";
-import Valores from "@/components/campana/Valores";
-import Agenda from "@/components/campana/Agenda";
-import PlanDeGobierno from "@/components/campana/PlanDeGobierno";
-import TeEscuchamos from "@/components/campana/TeEscuchamos";
-import Proyectos from "@/components/campana/Proyectos";
+import AsiConectamos from "@/components/campana/AsiConectamos";
+import SumamosEsfuerzos from "@/components/campana/SumamosEsfuerzos";
+import MosaicoObras from "@/components/campana/MosaicoObras";
+import Caracter from "@/components/campana/Caracter";
+import FotoEquipo from "@/components/campana/FotoEquipo";
 import FranjaCifras from "@/components/campana/FranjaCifras";
-import { listarPublicados } from "@/lib/contenidos/cacheadas";
-import { aEje, aEvento, aProyecto } from "@/lib/contenidos/adaptadores";
 import { leerAjustes } from "@/lib/ajustes/cacheadas";
 
 export const metadata: Metadata = {
   title: "Gallón Gobernador — A paso firme por Antioquia",
   description:
-    "Construyendo una Antioquia más fuerte, conectada y con oportunidades para todos. Conoce el plan de gobierno, la agenda y los proyectos de Horacio Gallón.",
+    "Antioquia es una tierra que, como el mejor café, exige paciencia, dedicación y trabajo bien hecho. Conoce a Horacio Gallón y las obras que conectan al departamento.",
 };
 
+/**
+ * La portada es la landing del mockup: una sola página, sin bloques de
+ * contenido administrado. La agenda, el plan de gobierno y los proyectos
+ * siguen publicándose desde el panel, pero viven en sus propias rutas y se
+ * alcanzan desde el pie.
+ */
 export default async function Home() {
   const ajustes = await leerAjustes();
-
-  const [eventos, ejes, proyectos] = await Promise.all([
-    listarPublicados("evento"),
-    listarPublicados("eje"),
-    listarPublicados("proyecto"),
-  ]);
-
-  // La agenda solo muestra lo que todavía no ha pasado; un acto de la semana
-  // pasada en la portada envejece la campaña.
-  const hoy = new Date().toISOString().slice(0, 10);
-  const proximos = eventos.filter((e) => e.fecha >= hoy).map(aEvento);
 
   return (
     <>
       <Hero subtitulo={ajustes["campana.subtituloHero"]} />
       <Perfil frase={ajustes["campana.frasePerfil"]} />
-      <Valores />
-
-      <section className="grid lg:grid-cols-2" aria-label="Agenda y plan de gobierno">
-        <Agenda eventos={proximos} />
-        <PlanDeGobierno ejes={ejes.map(aEje)} />
-      </section>
-
-      <TeEscuchamos municipios={ajustes["campana.municipios"]} />
-      <Proyectos proyectos={proyectos.slice(0, 4).map(aProyecto)} />
+      <AsiConectamos />
+      <SumamosEsfuerzos />
+      <MosaicoObras />
+      <Caracter />
+      <FotoEquipo />
       <FranjaCifras
         cifras={ajustes["portada.cifras"]}
         mensaje={ajustes["campana.mensajeCierre"]}

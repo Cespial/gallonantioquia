@@ -1,119 +1,93 @@
 import Image from "next/image";
-import Link from "next/link";
-import { Award, Check, FileText, Newspaper, Star } from "lucide-react";
+import Vineta from "./Vineta";
+import { resaltar } from "./resaltar";
 
-/**
- * Los cuatro pilares venían con «Lorem ipsum» en el mockup. Estos textos son
- * borradores sobrios, sin cifras ni cargos que no se puedan sustentar; el
- * equipo los ajusta desde el panel.
- */
-const PILARES = [
-  {
-    icono: Star,
-    titulo: "Experiencia",
-    texto: "Años de servicio público y gestión en el territorio antioqueño.",
-    destino: "/quien-es-gallon",
-  },
-  {
-    icono: Award,
-    titulo: "Logros",
-    texto: "Obras que conectan a las subregiones con el resto del departamento.",
-    destino: "/proyectos",
-  },
-  {
-    icono: FileText,
-    titulo: "Propuestas",
-    texto: "Seis ejes de trabajo construidos escuchando a las comunidades.",
-    destino: "/plan-de-gobierno",
-  },
-  {
-    icono: Newspaper,
-    titulo: "Medios",
-    texto: "Columnas y publicaciones sobre el futuro de Antioquia.",
-    destino: "/columnas",
-  },
+/** Los tres primeros van sobre la crema; los tres últimos, sobre el verde. */
+const SEMBLANZA_CLARA = [
+  "Nací en Andes, en el Suroeste antioqueño.",
+  "Hago parte de una familia donde la disciplina, el valor de la palabra y el compromiso con la comunidad no se negocian.",
+  "Me formé como Administrador de Empresas y especialista en Contratación Estatal. Soy experto en Formulación, Elaboración y Evaluación de Proyectos.",
 ];
 
-const NOTAS = [
-  "Nací en Andes, en el suroeste antioqueño.",
-  "Hago parte de una familia donde la disciplina, el valor de la palabra y el compromiso de comunidad no se negocian.",
+const SEMBLANZA_VERDE = [
+  "Llevo más de 30 años dedicado al servicio público y privado. Me he desempeñado, entre otros roles, como concejal, alcalde, representante a la Cámara, director de la Agencia de Desarrollo Rural y secretario de Infraestructura de Antioquia.",
+  "Fui asesor comercial y gerente de Bancafé; emprendedor; gerente de Asesorías y Arrendamientos G. A.; miembro de Consejo directivo del Plan Departamental de Aguas y de Corantioquia; presidente de la Junta Directiva del Centro de Bienestar del Anciano, Jardín – Antioquia, y presidente de la Asociación de Usuarios de Televisión por Cable de Andes.",
+  "He trabajado para impulsar proyectos que mejoren la movilidad, conecten los municipios, fortalezcan la competitividad y generen oportunidades para las familias antioqueñas.",
 ];
 
 export default function Perfil({ frase }: { frase: string }) {
   return (
-    <section className="bg-white py-12 lg:py-16">
-      <div className="mx-auto grid max-w-[1400px] gap-8 px-5 lg:grid-cols-[0.9fr_1.1fr_0.9fr] lg:gap-10 lg:px-10">
-        <div className="relative mx-auto w-full max-w-sm lg:max-w-none">
-          <Image
-            src="/images/campana/gallon-familia.webp"
-            alt="Horacio Gallón junto a su familia"
-            width={900}
-            height={788}
-            sizes="(max-width: 1024px) 90vw, 30vw"
-            className="h-auto w-full object-contain"
-          />
+    <section
+      id="soy-gallon"
+      aria-labelledby="soy-gallon-titulo"
+      className="relative isolate overflow-hidden bg-campana-crema"
+    >
+      {/* El retrato cruza el corte crema/verde y se sale por el flanco
+          izquierdo. En móvil deja de flotar y encabeza la sección. */}
+      <div className="relative h-64 sm:h-80 lg:absolute lg:inset-y-0 lg:left-0 lg:z-10 lg:h-full lg:w-1/2">
+        <Image
+          src="/images/campana/gallon-abrazo.webp"
+          alt="Horacio Gallón abraza a una mujer mayor durante un recorrido por Antioquia"
+          fill
+          sizes="(max-width: 1024px) 100vw, 50vw"
+          className="object-cover object-[30%_center] lg:object-[55%_bottom]"
+        />
+      </div>
+
+      <div className="mx-auto max-w-[1500px] px-5 lg:px-8">
+        <div className="lg:grid lg:grid-cols-2">
+          <div aria-hidden="true" className="hidden lg:block" />
+          <div className="pb-8 pt-10 lg:pb-5 lg:pt-9">
+            <h2 id="soy-gallon-titulo" className="font-campana leading-[0.95]">
+              <span className="block text-2xl font-medium uppercase tracking-[0.01em] text-campana-hoja sm:text-[1.75rem] lg:text-[2rem]">
+                Soy Horacio
+              </span>
+              <span className="mt-1 flex flex-wrap items-baseline gap-x-5 gap-y-2">
+                <span className="text-5xl font-extrabold uppercase text-campana-tinta sm:text-6xl lg:text-[4.6rem]">
+                  Gallón
+                </span>
+                <span className="border-campana-hoja font-campana text-base font-normal leading-tight text-campana-dorado sm:text-lg lg:max-w-[19rem] lg:border-l-[3px] lg:pl-5 lg:text-[1.35rem]">
+                  {resaltar(frase)}
+                </span>
+              </span>
+            </h2>
+
+            <ul className="mt-8 space-y-5 font-campana text-[0.95rem] leading-[1.5] text-neutral-700 lg:mt-9">
+              {SEMBLANZA_CLARA.map((texto) => (
+                <Vineta key={texto} tono="verde">
+                  {texto}
+                </Vineta>
+              ))}
+            </ul>
+          </div>
         </div>
+      </div>
 
-        <div className="lg:border-r lg:border-neutral-200 lg:pr-12">
-          <p className="font-campana text-2xl font-semibold uppercase leading-none text-campana-hoja lg:text-[1.7rem]">
-            Soy
-          </p>
-          <h2 className="font-campana text-4xl font-extrabold uppercase leading-[0.9] text-campana-bosque lg:text-[3.4rem]">
-            Horacio
-            <br />
-            Gallón
-          </h2>
+      {/* La ilustración de la semilla se apoya en la esquina, por encima del
+          titular, tal como en el mockup. */}
+      <Image
+        src="/images/campana/ilustracion-semilla.webp"
+        alt=""
+        aria-hidden="true"
+        width={647}
+        height={647}
+        sizes="200px"
+        className="pointer-events-none absolute right-2 top-4 hidden w-28 lg:block xl:w-36"
+      />
 
-          <blockquote className="mt-5 border-l-4 border-campana-dorado pl-4 font-campana text-[15px] leading-relaxed text-neutral-700">
-            {frase}
-          </blockquote>
-
-          <ul className="mt-5 space-y-2.5">
-            {NOTAS.map((nota) => (
-              <li key={nota} className="flex gap-3">
-                <span
-                  aria-hidden="true"
-                  className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 border-campana-hoja"
-                >
-                  <Check className="h-3 w-3 text-campana-hoja" strokeWidth={3} />
-                </span>
-                <span className="font-campana text-[15px] leading-snug text-neutral-700">
-                  {nota}
-                </span>
-              </li>
-            ))}
-          </ul>
-
-          <Link
-            href="/quien-es-gallon"
-            className="mt-6 inline-block rounded-full bg-campana-bosque px-6 py-3 font-campana text-[12px] font-bold uppercase tracking-wide text-white transition-transform hover:scale-[1.03]"
-          >
-            Conoce más sobre Gallón
-          </Link>
+      <div className="rounded-tr-[2.5rem] bg-campana-selva lg:rounded-tr-[3.5rem]">
+        <div className="mx-auto max-w-[1500px] px-5 lg:px-8">
+          <div className="lg:grid lg:grid-cols-2">
+            <div aria-hidden="true" className="hidden lg:block" />
+            <ul className="space-y-5 py-10 font-campana text-[0.95rem] leading-[1.5] text-white lg:py-6">
+              {SEMBLANZA_VERDE.map((texto) => (
+                <Vineta key={texto} tono="dorado">
+                  {texto}
+                </Vineta>
+              ))}
+            </ul>
+          </div>
         </div>
-
-        <ul className="space-y-5">
-          {PILARES.map(({ icono: Icono, titulo, texto, destino }) => (
-            <li key={titulo}>
-              <Link href={destino} className="group flex items-start gap-4">
-                <span
-                  aria-hidden="true"
-                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-campana-bosque transition-colors group-hover:bg-campana-hoja"
-                >
-                  <Icono className="h-5 w-5 text-white" />
-                </span>
-                <span>
-                  <span className="block font-campana text-lg font-bold text-campana-bosque">
-                    {titulo}
-                  </span>
-                  <span className="block font-campana text-sm leading-snug text-neutral-600">
-                    {texto}
-                  </span>
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
       </div>
     </section>
   );

@@ -10,6 +10,19 @@ import {
 } from "./IconosSociales";
 import type { NavItem } from "@/types";
 
+/**
+ * Las páginas que el equipo administra desde el panel. El menú de arriba es el
+ * del mockup —anclas de la portada— así que estas viven aquí: quedan a un clic
+ * y siguen siendo rastreables, aunque nadie las suba al menú principal.
+ */
+const PAGINAS_INTERNAS = [
+  { href: "/quien-es-gallon", label: "Quién es Gallón" },
+  { href: "/horario", label: "Agenda" },
+  { href: "/plan-de-gobierno", label: "Plan de gobierno" },
+  { href: "/proyectos", label: "Proyectos" },
+  { href: "/te-escuchamos", label: "Te escuchamos" },
+];
+
 export default function Pie({
   navItems,
   contacto,
@@ -34,8 +47,8 @@ export default function Pie({
   ].filter((r) => r.href);
 
   return (
-    <footer className="bg-campana-profundo pt-9">
-      <div className="mx-auto grid max-w-[1400px] gap-8 px-5 pb-6 lg:grid-cols-[1fr_1.3fr_1fr] lg:px-10">
+    <footer className="bg-campana-profundo pt-7">
+      <div className="mx-auto grid max-w-[1400px] gap-8 px-5 pb-5 lg:grid-cols-[1fr_1.3fr_1fr] lg:px-8">
         <div>
           <Image
             src="/images/campana/logo-gallon-blanco.png"
@@ -85,6 +98,22 @@ export default function Pie({
               </ul>
             ))}
           </div>
+
+          <h3 className="mt-7 font-campana text-xs font-semibold uppercase tracking-[0.08em] text-white/45">
+            Contenido
+          </h3>
+          <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-2">
+            {PAGINAS_INTERNAS.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className="font-campana text-sm text-white/75 transition-colors hover:text-white"
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <div>

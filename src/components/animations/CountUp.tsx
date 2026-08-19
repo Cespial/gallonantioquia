@@ -18,7 +18,10 @@ export default function CountUp({
   duration = 2000,
 }: CountUpProps) {
   const ref = useRef<HTMLSpanElement>(null);
-  const [current, setCurrent] = useState(0);
+  // Arranca en la cifra final, no en cero: así el HTML del servidor ya trae el
+  // número real. Si el JavaScript no llega —o el usuario pidió menos
+  // movimiento— la cifra queda correcta en vez de quedarse clavada en «0».
+  const [current, setCurrent] = useState(end);
   const hasAnimated = useRef(false);
 
   const animate = useCallback(() => {
@@ -43,6 +46,12 @@ export default function CountUp({
   useEffect(() => {
     const element = ref.current;
     if (!element) return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    // Ya en el cliente y con permiso de animar, se baja a cero para que la
+    // cuenta tenga de dónde subir cuando la cifra entre en pantalla.
+    setCurrent(0);
 
     const observer = new IntersectionObserver(
       ([entry]) => {
