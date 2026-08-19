@@ -76,7 +76,7 @@ export default function FranjaCifras({
           </p>
           <Link
             href="/contacto"
-            className="mt-5 inline-block rounded-full bg-campana-dorado-boton px-10 py-3.5 font-campana text-sm font-bold uppercase tracking-[0.04em] text-white transition-transform hover:scale-[1.03] lg:text-base"
+            className="mt-5 inline-block rounded-full bg-campana-dorado-boton px-10 py-3.5 font-campana text-sm font-bold uppercase tracking-[0.04em] text-campana-profundo transition-transform hover:scale-[1.03] lg:text-base"
           >
             Súmate al equipo
           </Link>

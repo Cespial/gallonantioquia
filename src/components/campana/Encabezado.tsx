@@ -61,7 +61,7 @@ export default function Encabezado({ navItems }: { navItems: NavItem[] }) {
 
         <Link
           href="/contacto"
-          className="ml-auto hidden shrink-0 rounded-full bg-campana-dorado-boton px-8 py-3 font-campana text-sm font-bold uppercase tracking-[0.04em] text-white shadow-sm transition-transform hover:scale-[1.03] xl:ml-8 xl:block"
+          className="ml-auto hidden shrink-0 rounded-full bg-campana-dorado-boton px-8 py-3 font-campana text-sm font-bold uppercase tracking-[0.04em] text-campana-profundo shadow-sm transition-transform hover:scale-[1.03] xl:ml-8 xl:block"
         >
           Súmate al equipo
         </Link>
@@ -96,7 +96,7 @@ export default function Encabezado({ navItems }: { navItems: NavItem[] }) {
           </ul>
           <Link
             href="/contacto"
-            className="mt-5 block rounded-full bg-campana-dorado-boton px-6 py-3 text-center font-campana text-sm font-bold uppercase tracking-[0.04em] text-white"
+            className="mt-5 block rounded-full bg-campana-dorado-boton px-6 py-3 text-center font-campana text-sm font-bold uppercase tracking-[0.04em] text-campana-profundo"
           >
             Súmate al equipo
           </Link>
