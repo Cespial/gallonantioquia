@@ -44,7 +44,7 @@ export default function Perfil({ frase }: { frase: string }) {
             <div className="relative z-10 flex flex-wrap items-end gap-x-5 gap-y-2">
               <h2
                 id="soy-gallon-titulo"
-                className="[text-wrap:normal] font-campana uppercase leading-[0.95]"
+                className="titular-sin-balance font-campana uppercase leading-[0.95]"
               >
                 <span className="block text-2xl font-medium tracking-[0.01em] text-campana-hoja sm:text-[1.75rem] lg:text-[2rem]">
                   Soy Horacio

@@ -193,6 +193,14 @@
 }
 
 @layer utilities {
+
+  /* `text-wrap: balance` está aplicado a todo h1-h4 en la capa base. En la
+     portada de campaña los titulares deben LLENAR el ancho, como en el mockup,
+     no repartirse en líneas parejas: sin esto ninguno rompe donde debe. */
+  .titular-sin-balance {
+    text-wrap: normal;
+  }
+
   .text-balance {
     text-wrap: balance;
   }

@@ -37,7 +37,7 @@ export default function AsiConectamos() {
         <div className="relative mx-auto max-w-[46rem] lg:ml-auto lg:mr-0">
           <h2
             id="conectamos-titulo"
-            className="relative z-10 [text-wrap:normal] font-campana uppercase leading-[0.92]"
+            className="relative z-10 titular-sin-balance font-campana uppercase leading-[0.92]"
           >
             <span className="block text-[1.9rem] font-normal tracking-[0.01em] text-campana-hoja sm:text-[2.6rem] lg:text-[3.4rem]">
               Así

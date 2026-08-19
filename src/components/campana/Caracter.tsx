@@ -6,7 +6,7 @@ export default function Caracter() {
       <div className="mx-auto max-w-[1500px] px-5 py-12 lg:px-8 lg:py-7">
         <h2
           id="caracter-titulo"
-          className="text-center [text-wrap:normal] font-campana text-[1.45rem] font-extrabold leading-snug tracking-[0.01em] text-campana-tinta sm:text-[1.9rem] lg:ml-auto lg:max-w-[71rem] lg:text-right lg:text-[2.55rem] lg:leading-[1.05] lg:tracking-[0.03em]"
+          className="text-center titular-sin-balance font-campana text-[1.45rem] font-extrabold leading-snug tracking-[0.01em] text-campana-tinta sm:text-[1.9rem] lg:ml-auto lg:max-w-[71rem] lg:text-right lg:text-[2.55rem] lg:leading-[1.05] lg:tracking-[0.03em]"
         >
           Mi carácter se ha cultivado recorriendo Antioquia, trabajando con sus
           municipios y convirtiendo proyectos en resultados.

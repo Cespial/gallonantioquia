@@ -59,7 +59,7 @@ export default function SumamosEsfuerzos() {
         <div className="max-w-[40rem]">
           <h2
             id="sumamos-titulo"
-            className="[text-wrap:normal] font-campana text-[1.7rem] font-extrabold leading-tight text-campana-tinta sm:text-[2.1rem] lg:text-[1.9rem] lg:leading-[1.15]"
+            className="titular-sin-balance font-campana text-[1.7rem] font-extrabold leading-tight text-campana-tinta sm:text-[2.1rem] lg:text-[1.9rem] lg:leading-[1.15]"
           >
             Sumamos esfuerzos, articulamos<br className="hidden lg:inline" />{" "}
             voluntades y lideramos<br className="hidden lg:inline" /> con propósito.
@@ -80,7 +80,7 @@ export default function SumamosEsfuerzos() {
 
           <hr className="my-6 border-t border-campana-hoja/70" />
 
-          <h2 className="[text-wrap:normal] font-campana text-[1.7rem] font-extrabold leading-tight text-campana-tinta sm:text-[2.1rem] lg:text-[1.9rem] lg:leading-[1.15]">
+          <h2 className="titular-sin-balance font-campana text-[1.7rem] font-extrabold leading-tight text-campana-tinta sm:text-[2.1rem] lg:text-[1.9rem] lg:leading-[1.15]">
             Respondimos a los llamados para<br className="hidden lg:inline" />{" "}
             buscar soluciones.
           </h2>
