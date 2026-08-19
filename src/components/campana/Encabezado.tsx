@@ -24,7 +24,7 @@ export default function Encabezado({ navItems }: { navItems: NavItem[] }) {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-black/5 bg-white">
-      <div className="mx-auto flex max-w-[1330px] items-center gap-6 px-5 py-2.5 lg:px-0 lg:py-3">
+      <div className="mx-auto flex max-w-[83.125rem] items-center gap-6 px-5 py-2.5 lg:px-0 lg:py-3">
         <Link href="/" className="shrink-0" aria-label="Gallón Gobernador, ir al inicio">
           <Image
             src="/images/campana/logo-gallon.webp"

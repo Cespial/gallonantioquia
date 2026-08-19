@@ -19,6 +19,21 @@
 }
 
 @layer base {
+  /* La portada de campaña replica un mockup compuesto a 1440 px. Fijarla en
+     píxeles la deja clavada a ese ancho: en un portátil de 1512 o 1728 la
+     composición se queda pequeña y flota dentro de franjas más anchas.
+     Escalando la raíz con el ancho de la ventana, TODA la portada —que está
+     expresada en `rem`— crece o encoge en bloque y se ve igual en cualquier
+     pantalla. 1,1111vw da exactamente 16 px a 1440. El `clamp` evita que el
+     texto se vuelva ilegible por debajo o desmedido por encima.
+     `#inicio` solo existe en la portada, así que ninguna otra página se ve
+     afectada. */
+  @media (min-width: 1024px) {
+    html:has(#inicio) {
+      font-size: clamp(14px, 1.1111vw, 21.33px);
+    }
+  }
+
   body {
     color: var(--texto-principal);
     background-color: var(--arena);

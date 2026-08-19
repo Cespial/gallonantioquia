@@ -33,7 +33,7 @@ export default function FranjaCifras({
       />
       <div aria-hidden="true" className="absolute inset-0 bg-campana-profundo/88" />
 
-      <div className="relative mx-auto grid max-w-[1230px] items-center gap-9 px-5 py-10 lg:grid-cols-[1.32fr_0.68fr] lg:gap-8 lg:px-0 lg:py-4">
+      <div className="relative mx-auto grid max-w-[76.875rem] items-center gap-9 px-5 py-10 lg:grid-cols-[1.32fr_0.68fr] lg:gap-8 lg:px-0 lg:py-4">
         <ul className="flex flex-wrap items-center gap-x-6 gap-y-7 sm:gap-x-10 lg:flex-nowrap lg:gap-x-7">
           {cifras.slice(0, 2).map((cifra, i) => {
             const icono = ICONOS[i] ?? ICONOS[0];

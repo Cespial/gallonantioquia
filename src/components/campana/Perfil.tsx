@@ -34,7 +34,7 @@ export default function Perfil({ frase }: { frase: string }) {
         />
       </div>
 
-      <div className="mx-auto max-w-[1440px] px-5 lg:px-8">
+      <div className="mx-auto max-w-[90rem] px-5 lg:px-8">
         <div className="lg:grid lg:grid-cols-2">
           <div aria-hidden="true" className="hidden lg:block" />
           <div className="pb-8 pt-10 lg:pb-5 lg:pt-9">
@@ -93,7 +93,7 @@ export default function Perfil({ frase }: { frase: string }) {
           sizes="260px"
           className="pointer-events-none absolute bottom-0 right-0 -z-10 hidden h-[clamp(9rem,11.3vw,13.5rem)] w-auto max-w-none lg:block"
         />
-        <div className="mx-auto max-w-[1440px] px-5 lg:px-8">
+        <div className="mx-auto max-w-[90rem] px-5 lg:px-8">
           <div className="lg:grid lg:grid-cols-2">
             <div aria-hidden="true" className="hidden lg:block" />
             <ul className="space-y-5 py-10 font-campana text-[0.95rem] leading-[1.5] text-white lg:py-6 lg:pr-6 lg:text-[0.9rem] lg:leading-[1.4]">

@@ -40,7 +40,7 @@ const OBRAS = [
 export default function MosaicoObras() {
   return (
     <section aria-label="Obras de infraestructura en Antioquia" className="bg-white">
-      <div className="mx-auto max-w-[1440px] px-5 py-10 lg:px-8 lg:py-12">
+      <div className="mx-auto max-w-[90rem] px-5 py-10 lg:px-8 lg:py-12">
         <ul className="grid grid-cols-2 gap-3 lg:grid-cols-[repeat(49,minmax(0,1fr))] lg:grid-rows-[14rem_18rem] lg:gap-4">
           {OBRAS.map((obra) => (
             <li key={obra.src} className={`relative h-40 lg:h-auto ${obra.clase}`}>

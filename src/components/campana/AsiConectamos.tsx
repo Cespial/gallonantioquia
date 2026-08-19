@@ -22,8 +22,8 @@ const RECUPERADAS = [
  * monitor ancho, así que la canaleta exterior crece cuando la ventana supera
  * los 1500 px y se queda en 1,25 rem —lo que mide en el mockup— por debajo.
  */
-const CANAL_IZQ = "lg:pl-[max(2.25rem,calc((100vw-1440px)/2))]";
-const CANAL_DER = "lg:pr-[max(1.25rem,calc((100vw-1440px)/2))]";
+const CANAL_IZQ = "lg:pl-[max(2.25rem,calc((100vw-90rem)/2))]";
+const CANAL_DER = "lg:pr-[max(1.25rem,calc((100vw-90rem)/2))]";
 
 export default function AsiConectamos() {
   return (

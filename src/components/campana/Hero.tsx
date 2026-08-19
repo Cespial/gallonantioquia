@@ -2,16 +2,14 @@ import Image from "next/image";
 import { Mouse } from "lucide-react";
 
 /**
- * El hero es una composición gráfica, no un bloque de texto: fijado en píxeles
- * a los 1440 px del mockup, en una pantalla de 1728 o 1920 la franja se
- * ensancha pero la composición se queda igual y acaba flotando en mitad del
- * fondo.
+ * Todas las medidas están calibradas al mockup a 1440 px y expresadas en
+ * `rem`. No llevan `vw` propios: la portada entera escala desde el tamaño de
+ * la raíz (ver la regla `html:has(#inicio)` en globals.css), así que la
+ * composición crece y encoge en bloque con la ventana.
  *
- * Por eso sus medidas van en `vw`, derivadas del mockup —dividir la medida a
- * 1440 px entre 14,4 da los `vw`— con `clamp` para no encogerse por debajo de
- * lo legible ni seguir creciendo más allá de 1920. Las clases van escritas
- * enteras a propósito: Tailwind no detecta nombres construidos por
- * interpolación.
+ * La escala y la posición del retrato salen de correlacionar el recorte contra
+ * el mockup: 720 × 743 px, arrancando 20 px por encima del borde de la franja,
+ * que lo recorta por abajo.
  */
 export default function Hero({ subtitulo }: { subtitulo: string }) {
   return (
@@ -43,7 +41,7 @@ export default function Hero({ subtitulo }: { subtitulo: string }) {
       {/* El retrato se apoya en el 52,2% del ancho, como en el mockup, y crece
           con la ventana igual que el resto de la composición. */}
       <div className="pointer-events-none absolute inset-0 hidden lg:block">
-        <div className="absolute -top-[1.4vw] left-[52.2%]">
+        <div className="absolute -top-[1.25rem] left-[52.2%]">
           <Image
             src="/images/campana/gallon-pulgar.webp"
             alt="Horacio Gallón, candidato a la Gobernación de Antioquia"
@@ -51,13 +49,13 @@ export default function Hero({ subtitulo }: { subtitulo: string }) {
             height={1239}
             priority
             sizes="(max-width: 1024px) 70vw, 50vw"
-            className="h-[clamp(37rem,51.6vw,61.9rem)] w-auto max-w-none object-contain"
+            className="h-[46.4rem] w-auto max-w-none object-contain"
           />
         </div>
       </div>
 
-      <div className="relative grid min-h-[32rem] grid-cols-1 gap-6 px-5 pt-10 sm:min-h-[36rem] lg:min-h-[clamp(28rem,38.33vw,46rem)] lg:grid-cols-[57%_43%] lg:gap-0 lg:px-0 lg:pt-0">
-        <div className="flex flex-col items-center justify-center pb-8 text-center lg:pb-[1.5vw] lg:pt-[4.4vw]">
+      <div className="relative grid min-h-[32rem] grid-cols-1 gap-6 px-5 pt-10 sm:min-h-[36rem] lg:min-h-[34.5rem] lg:grid-cols-[57%_43%] lg:gap-0 lg:px-0 lg:pt-0">
+        <div className="flex flex-col items-center justify-center pb-8 text-center lg:pb-6 lg:pt-16">
           {/* El titular es el lockup de marca, no texto: esa slab itálica es
               parte de la identidad y ninguna fuente web la imita. */}
           <h1 className="w-full">
@@ -72,11 +70,11 @@ export default function Hero({ subtitulo }: { subtitulo: string }) {
               height={316}
               priority
               sizes="(max-width: 1024px) 88vw, 33vw"
-              className="mx-auto h-auto w-full max-w-[22rem] sm:max-w-[26rem] lg:max-w-[clamp(20rem,32.1vw,38.5rem)]"
+              className="mx-auto h-auto w-full max-w-[22rem] sm:max-w-[26rem] lg:max-w-[28.9rem]"
             />
             <span
               aria-hidden="true"
-              className="mx-auto mt-3 block w-fit rounded-full bg-white px-6 py-1 font-campana text-[0.8rem] font-extrabold uppercase tracking-[0.06em] text-campana-selva sm:px-8 sm:text-[0.95rem] lg:mt-[0.85vw] lg:px-[2.5vw] lg:py-[0.4vw] lg:text-[clamp(0.95rem,1.39vw,1.67rem)]"
+              className="mx-auto mt-3 block w-fit rounded-full bg-white px-6 py-1 font-campana text-[0.8rem] font-extrabold uppercase tracking-[0.06em] text-campana-selva sm:px-8 sm:text-[0.95rem] lg:mt-3 lg:px-9 lg:py-1.5 lg:text-[1.25rem]"
             >
               <span className="mr-2 align-[0.18em] text-[0.55em]">●</span>
               Horacio Gallón
@@ -84,16 +82,16 @@ export default function Hero({ subtitulo }: { subtitulo: string }) {
             </span>
           </h1>
 
-          <p className="mt-7 max-w-[26rem] font-campana text-[0.95rem] font-bold leading-snug text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.45)] sm:text-base lg:mt-[1.7vw] lg:max-w-[clamp(22rem,31.3vw,37.6rem)] lg:text-[clamp(0.95rem,1.244vw,1.49rem)]">
-            <span className="mb-1 block text-2xl font-bold lg:text-[clamp(1.5rem,2.28vw,2.73rem)]">
+          <p className="mt-7 max-w-[26rem] font-campana text-[0.95rem] font-bold leading-snug text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.45)] sm:text-base lg:mt-6 lg:max-w-[28.2rem] lg:text-[1.12rem]">
+            <span className="mb-1 block text-2xl font-bold lg:text-[2.05rem]">
               Antioquia
             </span>
             {subtitulo}
           </p>
 
-          <p className="mt-8 hidden items-center gap-3 font-campana text-sm text-white/85 lg:mt-[2.5vw] lg:flex lg:text-[clamp(0.8rem,0.97vw,1.17rem)]">
+          <p className="mt-8 hidden items-center gap-3 font-campana text-sm text-white/85 lg:mt-9 lg:flex">
             <Mouse
-              className="h-[1.35em] w-[1.35em] animate-bounce [animation-duration:2.2s]"
+              className="h-5 w-5 animate-bounce [animation-duration:2.2s]"
               strokeWidth={1.6}
               aria-hidden="true"
             />

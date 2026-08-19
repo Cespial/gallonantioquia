@@ -49,7 +49,7 @@ export default function Pie({
 
   return (
     <footer className="bg-campana-profundo pt-7">
-      <div className="mx-auto grid max-w-[1230px] gap-8 px-5 pb-5 lg:grid-cols-[0.85fr_1.7fr_1fr] lg:px-0">
+      <div className="mx-auto grid max-w-[76.875rem] gap-8 px-5 pb-5 lg:grid-cols-[0.85fr_1.7fr_1fr] lg:px-0">
         <div>
           <Image
             src="/images/campana/logo-gallon-blanco.webp"
@@ -149,7 +149,7 @@ export default function Pie({
       </div>
 
       <div className="border-t border-white/15">
-        <div className="mx-auto flex max-w-[1230px] flex-col gap-3 px-5 py-4 font-campana text-xs text-white/60 sm:flex-row sm:items-center sm:justify-between lg:px-0">
+        <div className="mx-auto flex max-w-[76.875rem] flex-col gap-3 px-5 py-4 font-campana text-xs text-white/60 sm:flex-row sm:items-center sm:justify-between lg:px-0">
           {/* El año se calcula en el servidor: este es un Server Component y
               su salida no se hidrata. Si algún día lleva "use client", hay que
               moverlo a un useEffect o volverá el fallo de hidratación que dejó
