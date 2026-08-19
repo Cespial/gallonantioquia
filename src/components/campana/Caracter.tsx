@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function Caracter() {
   return (
     <section aria-labelledby="caracter-titulo" className="bg-white">
-      <div className="mx-auto max-w-[1500px] px-5 py-12 lg:px-8 lg:py-7">
+      <div className="mx-auto max-w-[1440px] px-5 py-12 lg:px-8 lg:py-7">
         <h2
           id="caracter-titulo"
           className="text-center titular-sin-balance font-campana text-[1.45rem] font-extrabold leading-snug tracking-[0.01em] text-campana-tinta sm:text-[1.9rem] lg:ml-auto lg:max-w-[71rem] lg:text-right lg:text-[2.55rem] lg:leading-[1.05] lg:tracking-[0.03em]"

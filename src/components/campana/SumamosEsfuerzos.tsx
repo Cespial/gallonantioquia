@@ -45,17 +45,21 @@ export default function SumamosEsfuerzos() {
             className="absolute inset-0 bg-gradient-to-r from-campana-nata via-campana-nata/25 to-transparent"
           />
         </div>
-        <Image
-          src="/images/campana/gallon-senala.webp"
-          alt="Horacio Gallón señala el valle de Aburrá desde un mirador"
-          width={1400}
-          height={1232}
-          sizes="1232px"
-          className="absolute -top-[30.75rem] left-[20.8%] hidden w-[77rem] max-w-none lg:block"
-        />
+        {/* Anclada a la caja de 1440 px del mockup, no al viewport: de otro
+            modo, en pantallas anchas la figura se corre hacia el centro. */}
+        <div className="absolute inset-0 mx-auto hidden max-w-[1440px] lg:block">
+          <Image
+            src="/images/campana/gallon-senala.webp"
+            alt="Horacio Gallón señala el valle de Aburrá desde un mirador"
+            width={1400}
+            height={1232}
+            sizes="1232px"
+            className="absolute -top-[30.75rem] left-[20.8%] w-[77rem] max-w-none"
+          />
+        </div>
       </div>
 
-      <div className="relative mx-auto max-w-[1500px] px-5 py-12 lg:px-[3.1rem] lg:py-8">
+      <div className="relative mx-auto max-w-[1440px] px-5 py-12 lg:px-[3.1rem] lg:py-8">
         <div className="max-w-[40rem]">
           <h2
             id="sumamos-titulo"
