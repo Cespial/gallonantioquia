@@ -24,7 +24,13 @@ export default function Encabezado({ navItems }: { navItems: NavItem[] }) {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-black/5 bg-white">
-      <div className="mx-auto flex max-w-[83.125rem] items-center gap-6 px-5 py-2.5 lg:px-0 lg:py-3">
+      {/* El ancho manda, no el relleno: con `max-w` + `lg:px-0` la caja se
+          quedaba sin canaleta en cuanto el viewport bajaba de los 83,125rem
+          —entre 1024 y ~1330 px, según el tamaño de raíz de cada página— y el
+          logotipo terminaba pegado al filo de la ventana mientras el resto de
+          la página seguía sangrando. `min()` conserva la caja calibrada del
+          mockup en pantallas anchas y garantiza 1,25rem a cada lado abajo. */}
+      <div className="mx-auto flex w-[min(83.125rem,100%_-_2.5rem)] items-center gap-6 py-2.5 lg:py-3">
         <Link href="/" className="shrink-0" aria-label="Gallón Gobernador, ir al inicio">
           <Image
             src="/images/campana/logo-gallon.webp"
