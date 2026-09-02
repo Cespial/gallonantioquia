@@ -100,7 +100,11 @@ export default async function PaginaQuienEs() {
 
       {ultimas.length > 0 && (
         <section className="mx-auto max-w-[1400px] px-5 py-14 lg:px-10">
-          <div className="flex items-end justify-between gap-4">
+          {/* `flex-wrap`: el enlace lleva `shrink-0` y el titular es una palabra
+              larga en versalitas, así que a 390 px la fila no cabía y sacaba
+              scroll horizontal. Al envolver, el enlace baja de renglón en
+              móvil y en escritorio, donde sí caben los dos, nada cambia. */}
+          <div className="flex flex-wrap items-end justify-between gap-4">
             <h2 className="font-campana leading-none">
               <span className="block text-lg font-semibold uppercase tracking-wide text-campana-dorado">
                 Sus
