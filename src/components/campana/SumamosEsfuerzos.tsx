@@ -47,6 +47,14 @@ export default function SumamosEsfuerzos() {
         </div>
         {/* Anclada a la caja de 1440 px del mockup, no al viewport: de otro
             modo, en pantallas anchas la figura se corre hacia el centro. */}
+        {/* El recorte se desvanece por arriba y por la izquierda en su propio
+            canal alfa, pero por abajo y por la derecha termina en corte recto
+            (alfa medio 198 y 184 sobre 255). Ahí no llega a salirse de la
+            sección —le sobran 135 px por abajo a 1280, y por la derecha se
+            despega del borde en cuanto la ventana pasa de la caja de 90rem—,
+            así que sin máscara la foto se lee como un rectángulo pegado sobre
+            la crema. Las dos rampas apagan esos dos filos antes de que
+            asomen. */}
         <div className="absolute inset-0 mx-auto hidden max-w-[90rem] lg:block">
           <Image
             src="/images/campana/gallon-senala.webp"
@@ -54,7 +62,7 @@ export default function SumamosEsfuerzos() {
             width={1400}
             height={1232}
             sizes="1232px"
-            className="absolute -top-[30.75rem] left-[20.8%] w-[77rem] max-w-none"
+            className="absolute -top-[30.75rem] left-[20.8%] w-[77rem] max-w-none [mask-composite:intersect] [mask-image:linear-gradient(to_bottom,#000_72%,transparent_97%),linear-gradient(to_right,#000_78%,transparent_98%)]"
           />
         </div>
       </div>
