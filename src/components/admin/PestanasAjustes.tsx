@@ -9,7 +9,13 @@ import SelectorImagen from "./SelectorImagen";
 
 type Bitacora = { id: string; titulo: string };
 
-const PESTANAS = ["Estado del sitio", "Portada", "Sobre mí", "Navegación y redes"] as const;
+const PESTANAS = [
+  "Estado del sitio",
+  "Portada",
+  "Campaña",
+  "Sobre mí",
+  "Navegación y redes",
+] as const;
 
 export default function PestanasAjustes({
   ajustes,
@@ -185,6 +191,99 @@ export default function PestanasAjustes({
                 "portada.subtituloHero",
                 "portada.reflexionDestacada",
                 "portada.cifras",
+              ])
+            }
+          />
+        </section>
+      )}
+
+      {activa === "Campaña" && (
+        <section className="space-y-6">
+          <div>
+            <label htmlFor="videoPerfil" className="block text-sm font-medium mb-1">
+              Video de «Soy Horacio Gallón»
+            </label>
+            <input
+              id="videoPerfil"
+              value={valores["campana.videoPerfil"]}
+              onChange={(e) => fijar("campana.videoPerfil", e.target.value)}
+              placeholder="https://www.youtube.com/watch?v=…"
+              className={claseCampo}
+            />
+            <p className="mt-1 text-xs text-texto-terciario">
+              Pega el enlace tal como lo copias del navegador: sirve YouTube, youtu.be,
+              un short o Vimeo. Mientras esté vacío, la portada muestra la pieza de
+              campaña con el aviso «Video en camino».
+            </p>
+          </div>
+
+          <div>
+            <label htmlFor="podcast" className="block text-sm font-medium mb-1">
+              Enlace del podcast
+            </label>
+            <input
+              id="podcast"
+              value={valores["campana.podcast"]}
+              onChange={(e) => fijar("campana.podcast", e.target.value)}
+              placeholder="https://www.youtube.com/@…"
+              className={claseCampo}
+            />
+            <p className="mt-1 text-xs text-texto-terciario">
+              Canal de YouTube, Spotify o donde vivan los episodios. Vacío = la sección
+              dice que los primeros episodios vienen en camino.
+            </p>
+          </div>
+
+          <div>
+            <label htmlFor="subtituloHeroCampana" className="block text-sm font-medium mb-1">
+              Bajada del hero
+            </label>
+            <textarea
+              id="subtituloHeroCampana"
+              rows={3}
+              value={valores["campana.subtituloHero"]}
+              onChange={(e) => fijar("campana.subtituloHero", e.target.value)}
+              className={claseCampo}
+            />
+          </div>
+
+          <div>
+            <label htmlFor="frasePerfil" className="block text-sm font-medium mb-1">
+              Frase dorada del perfil
+            </label>
+            <input
+              id="frasePerfil"
+              value={valores["campana.frasePerfil"]}
+              onChange={(e) => fijar("campana.frasePerfil", e.target.value)}
+              className={claseCampo}
+            />
+            <p className="mt-1 text-xs text-texto-terciario">
+              Lo que va entre **dobles asteriscos** sale en negrita.
+            </p>
+          </div>
+
+          <div>
+            <label htmlFor="mensajeCierre" className="block text-sm font-medium mb-1">
+              Mensaje de cierre (franja de cifras)
+            </label>
+            <textarea
+              id="mensajeCierre"
+              rows={3}
+              value={valores["campana.mensajeCierre"]}
+              onChange={(e) => fijar("campana.mensajeCierre", e.target.value)}
+              className={claseCampo}
+            />
+          </div>
+
+          <BotonGuardar
+            pendiente={pendiente}
+            onClick={() =>
+              guardar([
+                "campana.videoPerfil",
+                "campana.podcast",
+                "campana.subtituloHero",
+                "campana.frasePerfil",
+                "campana.mensajeCierre",
               ])
             }
           />

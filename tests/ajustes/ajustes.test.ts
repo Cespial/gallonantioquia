@@ -1,7 +1,13 @@
 import { describe, it, expect } from "vitest";
 import { crearDbPrueba } from "../ayuda/db";
 import { ajustes } from "@/db/esquema";
-import { CLAVES, consultarAjuste, escribirAjuste } from "@/lib/ajustes";
+import {
+  CLAVES,
+  conPorDefecto,
+  consultarAjuste,
+  escribirAjuste,
+  type TodosLosAjustes,
+} from "@/lib/ajustes";
 
 describe("ajustes", () => {
   it("devuelve el valor por defecto cuando la clave no existe", async () => {
@@ -91,5 +97,25 @@ describe("ajustes", () => {
       escribirAjuste(db, "portada.cifras", [{ valor: "treinta y cinco" }] as never)
     ).rejects.toThrow();
     await cerrar();
+  });
+});
+
+describe("conPorDefecto", () => {
+  it("rellena las claves que la caché no traía", () => {
+    // El caso real: `leerAjustes` guarda el objeto entero con `unstable_cache`
+    // y sin caducidad. Una entrada escrita antes de que existiera
+    // `campana.videoPerfil` no la trae, y sin relleno llegaría `undefined` a un
+    // componente que la declara `string`: 500 en la portada.
+    const cacheViejo = { "sitio.enConstruccion": false } as Partial<TodosLosAjustes>;
+    const completo = conPorDefecto(cacheViejo);
+
+    expect(completo["sitio.enConstruccion"]).toBe(false);
+    expect(completo["campana.videoPerfil"]).toBe(CLAVES["campana.videoPerfil"].porDefecto);
+    expect(Object.keys(completo).sort()).toEqual(Object.keys(CLAVES).sort());
+  });
+
+  it("no pisa un valor guardado que sea falsy", () => {
+    const completo = conPorDefecto({ "campana.videoPerfil": "" });
+    expect(completo["campana.videoPerfil"]).toBe("");
   });
 });

@@ -52,6 +52,15 @@ export const CLAVES = {
     porDefecto:
       "Unidos construiremos una Antioquia más fuerte, más justa y con más oportunidades.",
   },
+  /**
+   * El video de la franja «Soy Horacio Gallón». Se pega el enlace tal como se
+   * copia del navegador (YouTube, youtu.be, shorts o Vimeo): `urlIncrustable`
+   * lo traduce a la URL que acepta el iframe. Vacío = la sección muestra la
+   * pieza de campaña y anuncia que el video viene en camino.
+   */
+  "campana.videoPerfil": { esquema: z.string(), porDefecto: "" },
+  /** Enlace al podcast (canal de YouTube, Spotify…). Vacío = «en camino». */
+  "campana.podcast": { esquema: z.string(), porDefecto: "" },
   /** Alimenta el desplegable del formulario «Te escuchamos». */
   "campana.municipios": { esquema: z.array(z.string()), porDefecto: [] },
   "contacto.email": { esquema: z.string(), porDefecto: "info@gallongobernador.com" },

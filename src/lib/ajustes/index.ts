@@ -45,6 +45,27 @@ export async function escribirAjuste<K extends ClaveAjuste>(
 
 export type TodosLosAjustes = { [K in ClaveAjuste]: ValorDe<K> };
 
+/**
+ * Rellena con el valor por defecto toda clave que falte en un mapa de ajustes.
+ *
+ * Existe por la caché: `leerAjustes` guarda el objeto entero con
+ * `unstable_cache` y **sin caducidad**, así que una entrada escrita antes de
+ * que el código estrenara una clave nueva sigue viva sin ella. Sin este relleno,
+ * el primer componente que lea la clave nueva recibe `undefined` y tumba la
+ * página con un 500 —el tipo dice `string`, pero en tiempo de ejecución no
+ * está—. Con él, una clave recién añadida simplemente sale con su valor por
+ * defecto hasta que la caché rote.
+ */
+export function conPorDefecto(parciales: Partial<TodosLosAjustes>): TodosLosAjustes {
+  const claves = Object.keys(CLAVES) as ClaveAjuste[];
+  return Object.fromEntries(
+    claves.map((clave) => [
+      clave,
+      parciales[clave] === undefined ? CLAVES[clave].porDefecto : parciales[clave],
+    ])
+  ) as TodosLosAjustes;
+}
+
 export async function consultarAjustes(conexion: any): Promise<TodosLosAjustes> {
   const claves = Object.keys(CLAVES) as ClaveAjuste[];
   const valores = await Promise.all(claves.map((clave) => consultarAjuste(conexion, clave)));
