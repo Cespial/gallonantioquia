@@ -12,12 +12,15 @@ Desde ahora el contenido del sitio se publica desde el panel, con el navegador.
 No hay que abrir archivos, ni instalar nada, ni esperar a que alguien suba los
 cambios: lo que ustedes publican aparece en el sitio en menos de un minuto.
 
-> **Ojo con el contenido de muestra.** Territorio Vivo, Bitácora, Antioquia
-> Piensa, Voces y Un Café están **en borrador** porque son textos de muestra que
-> se escribieron mientras se diseñaba el sitio. Los episodios de Un Café nombran
-> invitados con los que no hay conversaciones grabadas. **Revísenlos y
-> reescríbanlos antes de publicar cualquiera de ellos.** Las 32 columnas de
-> Huellas en Antioquia sí son reales y están publicadas.
+> **El panel solo ofrece lo que de verdad sale en el sitio:** Huellas en
+> Antioquia (el blog), Horario Gallón (la agenda), Plan de Gobierno y Proyectos
+> Destacados. Territorio Vivo, Bitácora, Antioquia Piensa, Voces y Un Café
+> quedaron de una versión anterior: sus páginas ya no las enlaza nada, así que
+> se retiraron de la barra lateral. Lo que había guardado sigue ahí, intacto,
+> por si alguna vuelve.
+>
+> Las 32 columnas de Huellas en Antioquia sí son reales y están publicadas: son
+> las que salen en la franja «Blog Gallón» de la portada.
 
 ---
 
@@ -25,7 +28,16 @@ cambios: lo que ustedes publican aparece en el sitio en menos de un minuto.
 
 1. Abran **gallonantioquia.vercel.app/admin** en el navegador.
 2. Escriban su correo y su contraseña.
-3. Listo: entran al Resumen, donde se ve cuánto hay publicado en cada sección.
+3. **La primera vez, el panel les pide estrenar la contraseña.** La que
+   recibieron se la puso quien creó la cuenta, así que él también la conoce;
+   hasta que la cambien, el resto del panel queda cerrado. Escojan una de diez
+   caracteres o más que no usen en ningún otro lado. Desde ese momento, la
+   contraseña la saben solo ustedes.
+4. Listo: entran al Resumen, donde se ve cuánto hay publicado en cada sección.
+
+Para cambiarla más adelante, **Mi cuenta** en la barra de la izquierda. Pide la
+contraseña actual antes de dejar poner otra: así, un computador que quede
+abierto en la sede no le alcanza a nadie para quedarse con la cuenta.
 
 **Si se equivocan cinco veces seguidas, la cuenta se bloquea quince minutos.**
 Es una protección para que nadie ajeno entre probando contraseñas. Pueden
@@ -175,7 +187,7 @@ sitio sin que alguien lo decida.
 
 ---
 
-## 8. Invitar y dar de baja personas
+## 8. Invitar y dar de baja personas *(solo administradores)*
 
 Solo los administradores ven esta sección: **Usuarios**, en la barra izquierda.
 
@@ -198,7 +210,46 @@ administrador que queda.
 
 ---
 
-## 9. Si algo no funciona
+**Si alguien olvida su contraseña**, en la tabla de *Usuarios* hay un botón
+**Restablecer** en su fila. Pide una contraseña temporal, se la pasan a la
+persona por un medio seguro, y al entrar el panel la obliga a cambiarla. La
+columna dice «Sin estrenar» mientras eso no pase, así se ve de un vistazo quién
+todavía no ha entrado.
+
+La propia contraseña no se cambia desde ahí, sino desde **Mi cuenta**: esa sí
+pide la actual.
+
+---
+
+## 9. Ajustes: video, podcast y datos de contacto
+
+En **Ajustes** hay dos pestañas que ustedes manejan.
+
+**Campaña.** Ahí va el enlace del video que se ve en la franja «Soy Horacio
+Gallón» de la portada. Peguen el enlace tal como lo copian del navegador —sirve
+YouTube, youtu.be, un short o Vimeo— y el video aparece solo. Mientras esté
+vacío, la portada muestra la pieza gráfica con el aviso «Video en camino». Al
+lado está el enlace del podcast, que funciona igual.
+
+**Contacto y redes.** El correo, el teléfono, el WhatsApp y las redes que salen
+en el pie de todas las páginas.
+
+> 🚨 **El WhatsApp está en blanco a propósito.** Traía un número de relleno
+> (+57 300 123 4567) y el botón verde flotante estuvo semanas al aire llamando a
+> un desconocido. Se dejó vacío para que el botón no salga. **Pongan el número
+> real de la campaña** —solo dígitos, con el 57 adelante y sin espacios— y el
+> botón vuelve. Lo mismo con el correo: el que está es de relleno.
+
+Las redes que dejen en blanco no sacan icono en el pie, así que no hace falta
+llenarlas todas.
+
+Si ven menos pestañas que las que menciona esta guía, es normal: el modo
+construcción, la portada, la biografía y el menú del sitio los maneja un
+administrador.
+
+---
+
+## 10. Si algo no funciona
 
 Escríbanle a Cristian Espinal — contacto@inplux.co.
 
