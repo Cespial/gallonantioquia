@@ -2,8 +2,8 @@
 
 import { revalidateTag, revalidatePath } from "next/cache";
 import { db } from "@/db";
-import { requerirAdmin } from "@/lib/auth/sesion";
-import { escribirAjuste, type ClaveAjuste, type ValorDe } from "./index";
+import { requerirSesion } from "@/lib/auth/sesion";
+import { escribirAjuste, editorPuedeEscribir, type ClaveAjuste, type ValorDe } from "./index";
 import { ETIQUETA_AJUSTES } from "./cacheadas";
 
 export type Resultado = { ok: true } | { ok: false; error: string };
@@ -12,7 +12,13 @@ export async function guardarAjuste<K extends ClaveAjuste>(
   clave: K,
   valor: ValorDe<K>
 ): Promise<Resultado> {
-  await requerirAdmin();
+  const actor = await requerirSesion();
+
+  // El editor solo alcanza las claves de campaña y contacto. La pantalla ya le
+  // esconde el resto, pero esconder un formulario no impide mandar el POST.
+  if (actor.rol !== "admin" && !editorPuedeEscribir(clave)) {
+    return { ok: false, error: "Ese ajuste solo lo cambia un administrador." };
+  }
 
   try {
     await escribirAjuste(db, clave, valor);

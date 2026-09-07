@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { LISTA_TIPOS } from "@/lib/admin/tipos";
+import { TIPOS_VISIBLES } from "@/lib/admin/tipos";
 
 export default function BarraLateral({ rol }: { rol: "admin" | "editor" }) {
   return (
@@ -10,7 +10,7 @@ export default function BarraLateral({ rol }: { rol: "admin" | "editor" }) {
 
       <p className="text-xs uppercase tracking-wide text-texto-terciario mb-2">Contenido</p>
       <ul className="space-y-1 mb-6">
-        {LISTA_TIPOS.map((t) => (
+        {TIPOS_VISIBLES.map((t) => (
           <li key={t.tipo}>
             <Link
               href={`/admin/${t.rutaAdmin}`}
@@ -48,16 +48,24 @@ export default function BarraLateral({ rol }: { rol: "admin" | "editor" }) {
             Papelera
           </Link>
         </li>
+        <li>
+          <Link
+            href="/admin/cuenta"
+            className="block py-1 text-sm text-texto-secundario hover:text-verde-antioquia"
+          >
+            Mi cuenta
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/admin/ajustes"
+            className="block py-1 text-sm text-texto-secundario hover:text-verde-antioquia"
+          >
+            Ajustes
+          </Link>
+        </li>
         {rol === "admin" && (
           <>
-            <li>
-              <Link
-                href="/admin/ajustes"
-                className="block py-1 text-sm text-texto-secundario hover:text-verde-antioquia"
-              >
-                Ajustes
-              </Link>
-            </li>
             <li>
               <Link
                 href="/admin/usuarios"

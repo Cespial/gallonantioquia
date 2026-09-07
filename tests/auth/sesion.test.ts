@@ -3,12 +3,23 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 const obtenerSesion = vi.fn();
 vi.mock("@/lib/auth/config", () => ({ auth: () => obtenerSesion() }));
 
+// La guarda consulta si la cuenta todavía usa la clave que le pusieron. Vive en
+// su propio módulo justo para poder cambiarla aquí sin levantar una base.
+const clavePendiente = vi.fn<(id: string) => Promise<boolean>>();
+vi.mock("@/lib/auth/clave-pendiente", () => ({
+  tieneClavePendiente: (id: string) => clavePendiente(id),
+}));
+
 import { requerirSesion, requerirAdmin } from "@/lib/auth/sesion";
 
 const EDITOR = { user: { id: "u1", email: "d@c.co", nombre: "Diego", rol: "editor" } };
 const ADMIN = { user: { id: "u2", email: "c@c.co", nombre: "Cristian", rol: "admin" } };
 
-beforeEach(() => obtenerSesion.mockReset());
+beforeEach(() => {
+  obtenerSesion.mockReset();
+  clavePendiente.mockReset();
+  clavePendiente.mockResolvedValue(false);
+});
 
 describe("guardas de sesión", () => {
   it("requerirSesion devuelve el usuario cuando hay sesión", async () => {
@@ -34,5 +45,22 @@ describe("guardas de sesión", () => {
   it("requerirAdmin rechaza cuando no hay sesión", async () => {
     obtenerSesion.mockResolvedValue(null);
     await expect(requerirAdmin()).rejects.toThrow("NO_AUTENTICADO");
+  });
+
+  it("con la clave sin estrenar no pasa ninguna acción", async () => {
+    // El bloqueo va en la puerta común y no en la pantalla: esconder el
+    // formulario no impide mandar el POST a mano.
+    obtenerSesion.mockResolvedValue(EDITOR);
+    clavePendiente.mockResolvedValue(true);
+    await expect(requerirSesion()).rejects.toThrow("CLAVE_PENDIENTE");
+    await expect(requerirAdmin()).rejects.toThrow("CLAVE_PENDIENTE");
+  });
+
+  it("salvo el propio cambio de contraseña, que es quien lo levanta", async () => {
+    obtenerSesion.mockResolvedValue(EDITOR);
+    clavePendiente.mockResolvedValue(true);
+    await expect(
+      requerirSesion({ permitirClavePendiente: true })
+    ).resolves.toMatchObject({ id: "u1" });
   });
 });

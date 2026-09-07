@@ -40,6 +40,18 @@ export default async function PaginaSeccion({ params, searchParams }: Props) {
         </Link>
       </div>
 
+      {/* La ruta sigue viva aunque el tipo esté dormido: los datos no se
+          pierden y el día que la página lo reciba basta cambiar `enElSitio`.
+          Pero quien llegue aquí escribiendo la URL merece saber que lo que
+          publique no lo va a ver nadie. */}
+      {!config.enElSitio && (
+        <p className="mb-6 rounded-card border border-dorado-tierra bg-dorado-claro/40 p-4 text-sm">
+          <strong className="font-medium">Esto no sale en el sitio.</strong> Ninguna página
+          enlaza «{config.etiqueta}» hoy, así que lo que publiques aquí no lo verá ningún
+          visitante. Lo guardado sigue intacto por si la sección vuelve.
+        </p>
+      )}
+
       <ListadoContenidos
         config={config}
         filas={filas}

@@ -23,6 +23,11 @@ export const usuarios = pgTable("usuarios", {
   // el bloqueo es por cuenta y así el módulo se queda en cuatro tablas.
   intentosFallidos: integer("intentos_fallidos").notNull().default(0),
   bloqueadoHasta: timestamp("bloqueado_hasta", { withTimezone: true }),
+  // Toda cuenta nace con la clave que le puso quien la creó, así que quien la
+  // creó la conoce. Hasta que la persona la cambie, el panel no la deja hacer
+  // nada más: es lo que permite repartir credenciales sin que queden en manos
+  // de un tercero para siempre.
+  debeCambiarPassword: boolean("debe_cambiar_password").notNull().default(false),
   ultimoAcceso: timestamp("ultimo_acceso", { withTimezone: true }),
   creadoEn: timestamp("creado_en", { withTimezone: true }).notNull().defaultNow(),
 });

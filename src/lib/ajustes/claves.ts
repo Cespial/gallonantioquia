@@ -27,13 +27,24 @@ export const CLAVES = {
   "sobre.trayectoria": { esquema: z.array(hito), porDefecto: [] },
   "navegacion.menu": { esquema: z.array(itemMenu), porDefecto: [] },
   "navegacion.redes": {
+    // ⚠️ Cada red va opcional con `.catch("")`, no obligatoria. La fila que
+    // había guardada traía solo tres claves —se escribió antes de que
+    // existieran facebook y tiktok— y con el objeto estricto el `safeParse`
+    // fallaba entero: los ajustes caían al valor por defecto y el pie se
+    // quedaba sin un solo icono aunque hubiera enlaces guardados.
     esquema: z.object({
-      x: z.string(),
-      instagram: z.string(),
-      youtube: z.string(),
-      facebook: z.string(),
-      tiktok: z.string(),
-    }),
+      x: z.string().catch(""),
+      instagram: z.string().catch(""),
+      youtube: z.string().catch(""),
+      facebook: z.string().catch(""),
+      tiktok: z.string().catch(""),
+    }).partial().transform((v) => ({
+      x: v.x ?? "",
+      instagram: v.instagram ?? "",
+      youtube: v.youtube ?? "",
+      facebook: v.facebook ?? "",
+      tiktok: v.tiktok ?? "",
+    })),
     porDefecto: { x: "", instagram: "", youtube: "", facebook: "", tiktok: "" },
   },
 
@@ -71,4 +82,34 @@ export const CLAVES = {
 } as const;
 
 export type ClaveAjuste = keyof typeof CLAVES;
+
+/**
+ * Lo que un editor puede cambiar sin ser administrador.
+ *
+ * El equipo de campaña necesita mover el video, el podcast, los textos de la
+ * portada y los datos de contacto sin pedir permiso, pero no debería poder
+ * apagar el sitio, rehacer el menú ni reescribir la biografía. La lista se
+ * declara en blanco —lo que no está, no se puede— para que una clave nueva
+ * nazca cerrada y haya que abrirla a conciencia.
+ *
+ * `guardarAjuste` la hace cumplir en el servidor. Lo que la pantalla muestre o
+ * esconda es cortesía, no control de acceso.
+ */
+export const CLAVES_DE_EDITOR = [
+  "campana.videoPerfil",
+  "campana.podcast",
+  "campana.subtituloHero",
+  "campana.frasePerfil",
+  "campana.mensajeCierre",
+  "contacto.email",
+  "contacto.telefono",
+  "contacto.whatsapp",
+  "contacto.direccion",
+  "navegacion.redes",
+] as const satisfies readonly ClaveAjuste[];
+
+export function editorPuedeEscribir(clave: string): boolean {
+  return (CLAVES_DE_EDITOR as readonly string[]).includes(clave);
+}
+
 export type ValorDe<K extends ClaveAjuste> = z.infer<(typeof CLAVES)[K]["esquema"]>;

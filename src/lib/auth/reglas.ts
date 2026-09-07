@@ -21,3 +21,36 @@ export function puedeDesactivar(
   }
   return { ok: true };
 }
+
+export const LARGO_MINIMO_PASSWORD = 10;
+
+/**
+ * Revisa una contraseña nueva antes de tocar la base.
+ *
+ * Es pura y vive aquí, junto a `puedeDesactivar`, por lo mismo: `acciones.ts`
+ * abre la conexión a Postgres al cargarse y una prueba de la regla no debería
+ * necesitar base de datos.
+ *
+ * La repetición se pide en el formulario y se comprueba también en el
+ * servidor: quien manda el POST a mano se salta el campo, y una clave con un
+ * dedazo que nadie confirmó deja a la persona fuera de su propia cuenta.
+ */
+export function revisarPasswordNueva(
+  nueva: string,
+  repetida: string,
+  actual: string
+): Resultado {
+  if (nueva.length < LARGO_MINIMO_PASSWORD) {
+    return {
+      ok: false,
+      error: `La contraseña nueva debe tener al menos ${LARGO_MINIMO_PASSWORD} caracteres.`,
+    };
+  }
+  if (nueva !== repetida) {
+    return { ok: false, error: "Las dos contraseñas nuevas no coinciden." };
+  }
+  if (nueva === actual) {
+    return { ok: false, error: "La contraseña nueva tiene que ser distinta de la actual." };
+  }
+  return { ok: true };
+}

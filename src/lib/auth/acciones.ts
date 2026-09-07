@@ -4,9 +4,14 @@ import { revalidatePath } from "next/cache";
 import { and, eq, count } from "drizzle-orm";
 import { db } from "@/db";
 import { usuarios } from "@/db/esquema";
-import { requerirAdmin } from "./sesion";
-import { crearUsuario } from "./usuarios";
-import { puedeDesactivar, type Resultado } from "./reglas";
+import { requerirAdmin, requerirSesion } from "./sesion";
+import { crearUsuario, cambiarPasswordPropia, restablecerPassword } from "./usuarios";
+import {
+  puedeDesactivar,
+  revisarPasswordNueva,
+  LARGO_MINIMO_PASSWORD,
+  type Resultado,
+} from "./reglas";
 
 // Este archivo solo exporta funciones async: es la regla de un módulo
 // `"use server"`. La regla pura `puedeDesactivar` y el tipo `Resultado` viven
@@ -75,6 +80,61 @@ export async function cambiarEstado(id: string, activo: boolean): Promise<Result
     .set({ activo, intentosFallidos: 0, bloqueadoHasta: null })
     .where(eq(usuarios.id, id));
 
+  revalidatePath("/admin/usuarios");
+  return { ok: true };
+}
+
+/**
+ * El cambio de la propia contraseña, la pieza que faltaba para poder repartir
+ * credenciales: hasta ahora la clave que alguien recibía se quedaba con él y
+ * con quien se la dio, para siempre.
+ *
+ * No pide el id: lo toma de la sesión. Recibirlo del formulario dejaría que
+ * cualquiera con sesión de editor le cambiara la clave a otro mandando otro
+ * id, que es justo lo que esta pantalla no puede permitir.
+ */
+export async function cambiarMiPassword(datos: FormData): Promise<Resultado> {
+  // La única acción que se salta el bloqueo por clave pendiente: es la que lo
+  // levanta.
+  const actor = await requerirSesion({ permitirClavePendiente: true });
+
+  const actual = String(datos.get("actual") ?? "");
+  const nueva = String(datos.get("nueva") ?? "");
+  const repetida = String(datos.get("repetida") ?? "");
+
+  const revision = revisarPasswordNueva(nueva, repetida, actual);
+  if (!revision.ok) return revision;
+
+  const r = await cambiarPasswordPropia(db, actor.id, actual, nueva);
+  if (!r.ok) return r;
+
+  revalidatePath("/admin", "layout");
+  return { ok: true };
+}
+
+/**
+ * Un administrador le pone clave temporal a otra cuenta. La salida para quien
+ * la olvidó: antes había que entrar a la base a mano.
+ */
+export async function restablecerPasswordDeUsuario(
+  id: string,
+  temporal: string
+): Promise<Resultado> {
+  const actor = await requerirAdmin();
+
+  // Para la propia cuenta existe la pantalla que pide la clave actual. Dejarlo
+  // pasar por aquí sería saltarse esa comprobación desde la propia sesión.
+  if (id === actor.id) {
+    return { ok: false, error: "Tu propia contraseña se cambia en «Mi cuenta»." };
+  }
+  if (temporal.length < LARGO_MINIMO_PASSWORD) {
+    return {
+      ok: false,
+      error: `La contraseña temporal debe tener al menos ${LARGO_MINIMO_PASSWORD} caracteres.`,
+    };
+  }
+
+  await restablecerPassword(db, id, temporal);
   revalidatePath("/admin/usuarios");
   return { ok: true };
 }

@@ -1,10 +1,11 @@
 import { eq } from "drizzle-orm";
 import { usuarios, type Usuario } from "@/db/esquema";
 import { hashearPassword, verificarPassword, HASH_SENUELO } from "./password";
+import { LARGO_MINIMO_PASSWORD } from "./reglas";
 
 export const MAX_INTENTOS = 5;
 export const MINUTOS_BLOQUEO = 15;
-export const LARGO_MINIMO_PASSWORD = 10;
+export { LARGO_MINIMO_PASSWORD };
 
 export type ResultadoAuth =
   | { ok: true; usuario: Usuario }
@@ -12,7 +13,14 @@ export type ResultadoAuth =
 
 export async function crearUsuario(
   db: any,
-  datos: { email: string; nombre: string; password: string; rol?: "admin" | "editor" }
+  datos: {
+    email: string;
+    nombre: string;
+    password: string;
+    rol?: "admin" | "editor";
+    /** Solo el sembrado del primer administrador lo pone en `false`. */
+    debeCambiarPassword?: boolean;
+  }
 ): Promise<Usuario> {
   if (datos.password.length < LARGO_MINIMO_PASSWORD) {
     throw new Error(`La contraseña debe tener al menos ${LARGO_MINIMO_PASSWORD} caracteres`);
@@ -25,6 +33,9 @@ export async function crearUsuario(
       nombre: datos.nombre.trim(),
       passwordHash: await hashearPassword(datos.password),
       rol: datos.rol ?? "editor",
+      // Quien crea la cuenta escoge la primera clave, así que la conoce. El
+      // panel obliga a cambiarla antes de dejar hacer nada más.
+      debeCambiarPassword: datos.debeCambiarPassword ?? true,
     })
     .returning();
 
@@ -75,4 +86,61 @@ export async function autenticar(
     .where(eq(usuarios.id, usuario.id));
 
   return { ok: true, usuario: { ...usuario, intentosFallidos: 0 } };
+}
+
+/**
+ * Cambia la contraseña de una cuenta comprobando primero la actual.
+ *
+ * Pide la actual aunque haya sesión abierta: sin eso, un computador dejado
+ * abierto en la sede de campaña basta para que alguien se quede con la cuenta.
+ * De paso limpia el bloqueo por intentos fallidos, porque quien acaba de
+ * demostrar que sabe la clave no tiene por qué seguir castigado.
+ */
+export async function cambiarPasswordPropia(
+  db: any,
+  id: string,
+  actual: string,
+  nueva: string
+): Promise<{ ok: true } | { ok: false; error: string }> {
+  const [usuario] = await db.select().from(usuarios).where(eq(usuarios.id, id));
+  if (!usuario) return { ok: false, error: "La cuenta ya no existe." };
+
+  if (!(await verificarPassword(actual, usuario.passwordHash))) {
+    return { ok: false, error: "La contraseña actual no es correcta." };
+  }
+
+  await db
+    .update(usuarios)
+    .set({
+      passwordHash: await hashearPassword(nueva),
+      debeCambiarPassword: false,
+      intentosFallidos: 0,
+      bloqueadoHasta: null,
+    })
+    .where(eq(usuarios.id, id));
+
+  return { ok: true };
+}
+
+/**
+ * Un administrador le pone una clave temporal a otra cuenta.
+ *
+ * Es la salida para quien olvidó la suya: hasta ahora la única forma era
+ * entrar a la base a mano. Deja la cuenta obligada a cambiarla, así que la
+ * clave que el administrador escribe muere en el primer ingreso.
+ */
+export async function restablecerPassword(
+  db: any,
+  id: string,
+  temporal: string
+): Promise<void> {
+  await db
+    .update(usuarios)
+    .set({
+      passwordHash: await hashearPassword(temporal),
+      debeCambiarPassword: true,
+      intentosFallidos: 0,
+      bloqueadoHasta: null,
+    })
+    .where(eq(usuarios.id, id));
 }

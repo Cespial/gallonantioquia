@@ -2,7 +2,7 @@ import Link from "next/link";
 import { count, isNull } from "drizzle-orm";
 import { db } from "@/db";
 import { contenidos } from "@/db/esquema";
-import { LISTA_TIPOS } from "@/lib/admin/tipos";
+import { TIPOS_VISIBLES } from "@/lib/admin/tipos";
 
 /**
  * Concuerda en género y número con el tipo: «4 publicadas» para la columna,
@@ -37,7 +37,7 @@ export default async function PaginaResumen() {
       </p>
 
       <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {LISTA_TIPOS.map((tipo) => {
+        {TIPOS_VISIBLES.map((tipo) => {
           const n = conteo.get(tipo.tipo) ?? { publicado: 0, borrador: 0 };
           return (
             <li key={tipo.tipo}>

@@ -57,11 +57,23 @@ export interface ConfigTipo {
   fechaAscendente?: boolean;
   /** Si el tipo usa cuerpo largo. Ideas y episodios solo llevan descripción. */
   usaCuerpo: boolean;
+  /**
+   * Si lo que se publique aquí sale de verdad en el sitio.
+   *
+   * Cinco tipos quedaron colgando de la versión anterior del sitio: su página
+   * pública existe pero la portada de campaña no la enlaza, y el pie tampoco.
+   * Escribir ahí es escribir para nadie, así que el panel no los ofrece. Los
+   * datos siguen intactos y la ruta del panel sigue respondiendo: basta poner
+   * esto en `true` para que vuelvan a la barra lateral el día que la página
+   * los reciba.
+   */
+  enElSitio: boolean;
   camposExtra: CampoExtra[];
 }
 
 export const TIPOS: Record<TipoContenido, ConfigTipo> = {
   columna: {
+    enElSitio: true,
     tipo: "columna",
     etiqueta: "Huellas en Antioquia",
     singular: "columna",
@@ -84,6 +96,7 @@ export const TIPOS: Record<TipoContenido, ConfigTipo> = {
     ],
   },
   bitacora: {
+    enElSitio: false,
     tipo: "bitacora",
     etiqueta: "Bitácora",
     singular: "entrada",
@@ -102,6 +115,7 @@ export const TIPOS: Record<TipoContenido, ConfigTipo> = {
     ],
   },
   historia: {
+    enElSitio: false,
     tipo: "historia",
     etiqueta: "Territorio Vivo",
     singular: "historia",
@@ -130,6 +144,7 @@ export const TIPOS: Record<TipoContenido, ConfigTipo> = {
     ],
   },
   idea: {
+    enElSitio: false,
     tipo: "idea",
     etiqueta: "Antioquia Piensa",
     singular: "idea",
@@ -145,6 +160,7 @@ export const TIPOS: Record<TipoContenido, ConfigTipo> = {
     ],
   },
   voz: {
+    enElSitio: false,
     tipo: "voz",
     etiqueta: "Voces",
     singular: "columna invitada",
@@ -164,6 +180,7 @@ export const TIPOS: Record<TipoContenido, ConfigTipo> = {
     ],
   },
   episodio: {
+    enElSitio: false,
     tipo: "episodio",
     etiqueta: "Un Café",
     singular: "episodio",
@@ -188,6 +205,7 @@ export const TIPOS: Record<TipoContenido, ConfigTipo> = {
     ],
   },
   evento: {
+    enElSitio: true,
     tipo: "evento",
     etiqueta: "Horario Gallón",
     singular: "evento",
@@ -225,6 +243,7 @@ export const TIPOS: Record<TipoContenido, ConfigTipo> = {
     ],
   },
   eje: {
+    enElSitio: true,
     tipo: "eje",
     etiqueta: "Plan de Gobierno",
     singular: "eje",
@@ -246,6 +265,7 @@ export const TIPOS: Record<TipoContenido, ConfigTipo> = {
     ],
   },
   proyecto: {
+    enElSitio: true,
     tipo: "proyecto",
     etiqueta: "Proyectos Destacados",
     singular: "proyecto",
@@ -264,6 +284,15 @@ export const TIPOS: Record<TipoContenido, ConfigTipo> = {
 };
 
 export const LISTA_TIPOS: ConfigTipo[] = Object.values(TIPOS);
+
+/**
+ * Lo que el panel ofrece: solo los tipos que de verdad salen al aire.
+ *
+ * `LISTA_TIPOS` sigue completa a propósito —la papelera, las rutas del panel y
+ * el buscador tienen que reconocer también lo dormido—, pero la barra lateral y
+ * el resumen se alimentan de esta.
+ */
+export const TIPOS_VISIBLES: ConfigTipo[] = LISTA_TIPOS.filter((t) => t.enElSitio);
 
 /** Los tipos que alimentan la página de campaña, en el orden del panel. */
 export const TIPOS_CAMPANA: ConfigTipo[] = [TIPOS.evento, TIPOS.eje, TIPOS.proyecto];
