@@ -71,7 +71,7 @@ export type PortadaCafe = z.infer<typeof cafe>;
 export type PortadaBlog = z.infer<typeof blog>;
 export type PortadaPodcast = z.infer<typeof podcast>;
 export type PortadaEquipo = z.infer<typeof equipo>;
-export type PortadaCifras = z.infer<typeof cifras>;
+export type PortadaCierre = z.infer<typeof cifras>;
 
 // El panorama de la cordillera abre el hero y cierra la franja de cifras: es
 // decorativo en los dos sitios, por eso el alt vacío.
@@ -299,7 +299,7 @@ export const CLAVES_PORTADA = {
     } satisfies PortadaEquipo,
   },
 
-  "portada.cifras": {
+  "portada.cierre": {
     esquema: cifras,
     porDefecto: {
       cifras: [
@@ -308,7 +308,7 @@ export const CLAVES_PORTADA = {
       ],
       mensaje: "Unidos construiremos una Antioquia más fuerte, más justa y con más oportunidades.",
       fondo: PANORAMA,
-    } satisfies PortadaCifras,
+    } satisfies PortadaCierre,
   },
 } as const;
 
@@ -325,6 +325,6 @@ export const FRANJAS = [
   { clave: "portada.blog", etiqueta: "Blog Gallón", ancla: "#blog" },
   { clave: "portada.podcast", etiqueta: "Podcast", ancla: "#podcast" },
   { clave: "portada.equipo", etiqueta: "Foto de equipo", ancla: "#podcast" },
-  { clave: "portada.cifras", etiqueta: "Cifras y cierre", ancla: "#podcast" },
+  { clave: "portada.cierre", etiqueta: "Cifras y cierre", ancla: "#podcast" },
 ] as const;
 export type ClavePortada = (typeof FRANJAS)[number]["clave"];

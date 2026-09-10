@@ -26,11 +26,11 @@ describe("esquemas de la portada", () => {
     expect(hero.esquema.safeParse({ ...hero.porDefecto, subtitulo: "x".repeat(221) }).success).toBe(false);
   });
 
-  it("FRANJAS va en el orden de la portada y cubre las once claves", () => {
+  it("FRANJAS va en el orden de la portada y cubre las doce claves", () => {
     expect(FRANJAS.map((f) => f.clave)).toEqual([
       "portada.hero", "portada.perfil", "portada.video", "portada.conectamos", "portada.sumamos",
       "portada.mosaico", "portada.caracter", "portada.cafe", "portada.blog", "portada.podcast",
-      "portada.equipo", "portada.cifras",
+      "portada.equipo", "portada.cierre",
     ]);
   });
 });

@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { CLAVES_PORTADA, FRANJAS } from "./portada";
 
 const cifra = z.object({ valor: z.number(), sufijo: z.string(), etiqueta: z.string() });
 const hito = z.object({ anio: z.string(), titulo: z.string(), descripcion: z.string() });
@@ -81,6 +82,8 @@ export const CLAVES = {
   "contacto.direccion": { esquema: z.string(), porDefecto: "Medellín, Antioquia, Colombia" },
   /** Solo dígitos con indicativo, como lo pide el enlace de wa.me. */
   "contacto.whatsapp": { esquema: z.string(), porDefecto: "" },
+
+  ...CLAVES_PORTADA,
 } as const;
 
 export type ClaveAjuste = keyof typeof CLAVES;
@@ -108,6 +111,7 @@ export const CLAVES_DE_EDITOR = [
   "contacto.whatsapp",
   "contacto.direccion",
   "navegacion.redes",
+  ...FRANJAS.map((f) => f.clave),
 ] as const satisfies readonly ClaveAjuste[];
 
 export function editorPuedeEscribir(clave: string): boolean {

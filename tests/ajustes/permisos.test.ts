@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { CLAVES, CLAVES_DE_EDITOR, editorPuedeEscribir } from "@/lib/ajustes";
+import { FRANJAS } from "@/lib/ajustes/portada";
 
 describe("qué puede tocar un editor", () => {
   it("alcanza campaña y contacto", () => {
@@ -18,6 +19,14 @@ describe("qué puede tocar un editor", () => {
     ]) {
       expect(editorPuedeEscribir(clave), clave).toBe(false);
     }
+  });
+
+  it("el editor puede escribir cualquier franja de la portada", () => {
+    for (const f of FRANJAS) expect(editorPuedeEscribir(f.clave)).toBe(true);
+  });
+
+  it("el editor sigue sin poder apagar el sitio", () => {
+    expect(editorPuedeEscribir("sitio.enConstruccion")).toBe(false);
   });
 
   it("toda clave abierta al editor existe de verdad", () => {
