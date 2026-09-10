@@ -1,5 +1,6 @@
 import { ArrowUpRight, Mic } from "lucide-react";
 import PortadaSeccion from "./PortadaSeccion";
+import type { PortadaPodcast } from "@/lib/ajustes/portada";
 
 /**
  * El podcast «A paso firme por Antioquia».
@@ -10,8 +11,8 @@ import PortadaSeccion from "./PortadaSeccion";
  * publicarlos sería poner en boca de gente real una conversación que nunca
  * ocurrió.
  */
-export default function Podcast({ url }: { url: string }) {
-  const enlace = url.trim();
+export default function Podcast({ datos }: { datos: PortadaPodcast }) {
+  const enlace = datos.url.trim();
 
   return (
     <section id="podcast" aria-labelledby="podcast-titulo" className="bg-white">
@@ -27,9 +28,7 @@ export default function Podcast({ url }: { url: string }) {
             Conversaciones de <strong className="font-bold">taza larga</strong>.
           </p>
           <p className="mt-5 font-campana text-[0.95rem] leading-[1.6] text-neutral-700 lg:mt-6 lg:text-[1rem]">
-            Un podcast para sentarse a hablar sin afán: con quien conoce un territorio
-            palmo a palmo, con quien lleva media vida en un oficio, con quien tiene una
-            idea que a Antioquia le sirve. El mismo café de siempre, ahora grabado.
+            {datos.parrafo}
           </p>
         </div>
 

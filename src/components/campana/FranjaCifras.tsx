@@ -1,8 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import CountUp from "@/components/animations/CountUp";
-
-type Cifra = { valor: number; sufijo: string; etiqueta: string };
+import type { PortadaCierre } from "@/lib/ajustes/portada";
 
 /** Los dos pictogramas se recortaron del mockup: son trazo blanco, no iconos
  *  de librería, y la silueta de Antioquia no existe en ninguna. */
@@ -11,21 +10,15 @@ const ICONOS = [
   { src: "/images/campana/icono-ciudadanos.webp", ancho: 174, alto: 154 },
 ];
 
-export default function FranjaCifras({
-  cifras,
-  mensaje,
-}: {
-  cifras: Cifra[];
-  mensaje: string;
-}) {
+export default function FranjaCifras({ datos }: { datos: PortadaCierre }) {
   return (
     <section
       aria-label="La campaña en cifras"
       className="relative isolate overflow-hidden bg-campana-profundo"
     >
       <Image
-        src="/images/campana/panorama-cordillera.webp"
-        alt=""
+        src={datos.fondo.url}
+        alt={datos.fondo.alt}
         aria-hidden="true"
         fill
         sizes="100vw"
@@ -36,7 +29,7 @@ export default function FranjaCifras({
       {/* Ancho con canaleta mínima, no `max-w` + `lg:px-0`: ver Encabezado. */}
       <div className="relative mx-auto grid w-[min(76.875rem,100%_-_2.5rem)] items-center gap-9 py-10 lg:grid-cols-[1.32fr_0.68fr] lg:gap-8 lg:py-4">
         <ul className="flex flex-wrap items-center gap-x-6 gap-y-7 sm:gap-x-10 lg:flex-nowrap lg:gap-x-7">
-          {cifras.slice(0, 2).map((cifra, i) => {
+          {datos.cifras.slice(0, 2).map((cifra, i) => {
             const icono = ICONOS[i] ?? ICONOS[0];
             return (
               <li
@@ -73,7 +66,7 @@ export default function FranjaCifras({
 
         <div>
           <p className="font-campana text-xl font-bold leading-snug text-white lg:max-w-[27rem] lg:text-[1.35rem]">
-            {mensaje}
+            {datos.mensaje}
           </p>
           <Link
             href="/contacto"

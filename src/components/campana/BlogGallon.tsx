@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import PortadaSeccion from "./PortadaSeccion";
 import { formatDate } from "@/lib/utils";
+import type { PortadaBlog } from "@/lib/ajustes/portada";
 
 export type EntradaBlog = {
   slug: string;
@@ -18,7 +19,13 @@ export type EntradaBlog = {
  * así la portada envejece sola cuando se publica una entrada nueva desde el
  * panel, sin que nadie tenga que acordarse de venir a cambiarla aquí.
  */
-export default function BlogGallon({ entradas }: { entradas: EntradaBlog[] }) {
+export default function BlogGallon({
+  datos,
+  entradas,
+}: {
+  datos: PortadaBlog;
+  entradas: EntradaBlog[];
+}) {
   return (
     <section id="blog" aria-labelledby="blog-titulo" className="bg-white">
       <PortadaSeccion
@@ -34,10 +41,7 @@ export default function BlogGallon({ entradas }: { entradas: EntradaBlog[] }) {
               Lo que pienso, <strong className="font-bold">escrito</strong>.
             </p>
             <p className="mt-5 font-campana text-[0.95rem] leading-[1.6] text-neutral-700 lg:mt-6 lg:text-[1rem]">
-              Escribo para explicar decisiones, no para adornarlas. En estas columnas
-              están las obras que destrabamos, los debates que dimos y las razones
-              detrás de cada una: infraestructura, competitividad, territorio y la
-              Antioquia que se construye a paso firme.
+              {datos.parrafo}
             </p>
           </div>
 

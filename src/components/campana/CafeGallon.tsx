@@ -1,36 +1,17 @@
 import Image from "next/image";
 import PortadaSeccion from "./PortadaSeccion";
+import { resaltar } from "./resaltar";
+import type { PortadaCafe } from "@/lib/ajustes/portada";
 
-type Foto = {
-  src: string;
-  alt: string;
-  ancho: number;
-  alto: number;
-  /** Clase de `object-position`, cuando el recorte se lleva al protagonista. */
-  encuadre?: string;
-};
+/**
+ * La segunda foto va recortada en vertical: el centro geométrico deja a
+ * Gallón contra el filo, y el 60% lo trae al medio del cuadro. No hay dónde
+ * guardar ese encuadre en el ajuste —es geometría del layout, no del
+ * contenido—, así que se queda fijo aquí, por índice.
+ */
+const ENCUADRES: (string | undefined)[] = [undefined, "object-[60%_center]"];
 
-/** Dos fotos reales de recorrido, no ilustraciones: el café de esta sección es
- *  el de sentarse a conversar, y eso se muestra con gente, no con granos. */
-const FOTOS: Foto[] = [
-  {
-    src: "/images/gallon-parque-pueblo.jpg",
-    alt: "Horacio Gallón conversa alrededor de una mesa con tazas de café, en el parque principal de un municipio antioqueño",
-    ancho: 1920,
-    alto: 1440,
-  },
-  {
-    src: "/images/gallon-conversacion-rural.jpg",
-    alt: "Horacio Gallón habla con un grupo de personas durante un recorrido por una vereda de Antioquia",
-    ancho: 1280,
-    alto: 1176,
-    /** Recortada en vertical, el centro geométrico deja a Gallón contra el
-     *  filo; el 60% lo trae al medio del cuadro. */
-    encuadre: "object-[60%_center]",
-  },
-];
-
-export default function CafeGallon() {
+export default function CafeGallon({ datos }: { datos: PortadaCafe }) {
   return (
     <section
       id="cafe-gallon"
@@ -50,25 +31,9 @@ export default function CafeGallon() {
           </p>
 
           <div className="mt-6 space-y-5 font-campana text-[0.95rem] leading-[1.6] text-neutral-700 lg:mt-7 lg:text-[1rem]">
-            <p>
-              Café Gallón es, antes que un café, un símbolo de Antioquia. Y dentro de
-              esa taza cabe cualquier café del departamento.
-            </p>
-            <p>
-              Todos los cafés antioqueños son buenos y ninguno sabe igual. Cambian con el
-              territorio, con el clima, con la altura a la que crece la mata: son esas
-              variables las que hacen un buen café. Un café tan diverso como Antioquia, y
-              por eso la representa.
-            </p>
-            <p>
-              Y además el café es una excusa. Una taza abre una conversación, y de una
-              conversación salen las ideas que después se vuelven proyectos. Así hemos
-              recorrido el departamento:{" "}
-              <strong className="font-semibold text-campana-tinta">
-                sentándonos a hablar con quien vive cada municipio
-              </strong>
-              .
-            </p>
+            {datos.parrafos.map((parrafo, i) => (
+              <p key={i}>{resaltar(parrafo)}</p>
+            ))}
           </div>
         </div>
 
@@ -77,9 +42,9 @@ export default function CafeGallon() {
             apiladas a su tamaño natural el par medía el triple que el texto y
             dejaba media franja en blanco. */}
         <ul className="grid grid-cols-1 gap-4 sm:grid-cols-5 sm:gap-5">
-          {FOTOS.map((foto, i) => (
+          {datos.fotos.map((foto, i) => (
             <li
-              key={foto.src}
+              key={foto.url}
               className={`overflow-hidden rounded-2xl shadow-[0_0.75rem_2rem_rgba(28,50,30,0.14)] ${
                 i === 0
                   ? "aspect-[4/3] sm:col-span-3"
@@ -87,12 +52,12 @@ export default function CafeGallon() {
               }`}
             >
               <Image
-                src={foto.src}
+                src={foto.url}
                 alt={foto.alt}
-                width={foto.ancho}
-                height={foto.alto}
+                width={foto.ancho ?? (i === 0 ? 1920 : 1280)}
+                height={foto.alto ?? (i === 0 ? 1440 : 1176)}
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 45vw, 30vw"
-                className={`h-full w-full object-cover ${foto.encuadre ?? ""}`}
+                className={`h-full w-full object-cover ${ENCUADRES[i] ?? ""}`}
               />
             </li>
           ))}
