@@ -52,9 +52,9 @@ export default async function Home() {
       <Hero datos={ajustes["portada.hero"]} />
       <Perfil datos={ajustes["portada.perfil"]} />
       <VideoPerfil datos={ajustes["portada.video"]} />
-      <AsiConectamos />
-      <SumamosEsfuerzos />
-      <MosaicoObras />
+      <AsiConectamos datos={ajustes["portada.conectamos"]} />
+      <SumamosEsfuerzos datos={ajustes["portada.sumamos"]} />
+      <MosaicoObras datos={ajustes["portada.mosaico"]} />
       <Caracter datos={ajustes["portada.caracter"]} />
       <CafeGallon />
       <BlogGallon entradas={entradasBlog} />

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { PortadaMosaico } from "@/lib/ajustes/portada";
 
 /**
  * Las seis obras, en la rejilla asimétrica del mockup: dos filas de tres, con
@@ -14,62 +15,38 @@ import Image from "next/image";
  * `vw` es el ancho que ocupa cada foto sobre la caja de 90rem, para que
  * `sizes` pida a Next el recorte del tamaño correcto y no uno de 40vw para
  * todas: la cordillera ocupa la mitad de la franja y el túnel, un sexto.
+ *
+ * `src`/`alt` ya no viven aquí: cada hueco pinta la foto que le toque de
+ * `datos.fotos` en el mismo orden, y este arreglo solo guarda la geometría.
  */
 const OBRAS = [
-  {
-    src: "/images/campana/obra-placa-huella.webp",
-    alt: "Placa huella recién construida en una vía terciaria antioqueña",
-    clase: "lg:col-[span_12/span_12]",
-    vw: 25,
-  },
-  {
-    src: "/images/campana/obra-cordillera.webp",
-    alt: "Vista aérea de la cordillera antioqueña atravesada por una vía",
-    clase: "lg:col-[span_25/span_25]",
-    vw: 52,
-  },
-  {
-    src: "/images/campana/obra-metro.webp",
-    alt: "Imagen de referencia del tren del Río, creada con inteligencia artificial",
-    clase: "lg:col-[span_12/span_12]",
-    vw: 25,
-  },
-  {
-    src: "/images/campana/obra-viaducto.webp",
-    alt: "Vista aérea de una doble calzada entre montañas verdes",
-    clase: "lg:col-[span_18/span_18] lg:row-start-2",
-    vw: 37,
-  },
-  {
-    src: "/images/campana/obra-puerto.webp",
-    alt: "Grúas pórtico de un puerto marítimo en la costa antioqueña",
-    clase: "lg:col-[span_23/span_23] lg:row-start-2",
-    vw: 47,
-  },
-  {
-    src: "/images/campana/obra-tunel.webp",
-    alt: "Cuadrilla de obreros trabajando en el frente de excavación de un túnel",
-    clase: "lg:col-[span_8/span_8] lg:row-start-2",
-    vw: 17,
-  },
+  { clase: "lg:col-[span_12/span_12]", vw: 25 },
+  { clase: "lg:col-[span_25/span_25]", vw: 52 },
+  { clase: "lg:col-[span_12/span_12]", vw: 25 },
+  { clase: "lg:col-[span_18/span_18] lg:row-start-2", vw: 37 },
+  { clase: "lg:col-[span_23/span_23] lg:row-start-2", vw: 47 },
+  { clase: "lg:col-[span_8/span_8] lg:row-start-2", vw: 17 },
 ];
 
-export default function MosaicoObras() {
+export default function MosaicoObras({ datos }: { datos: PortadaMosaico }) {
   return (
     <section aria-label="Obras de infraestructura en Antioquia" className="bg-white">
       <div className="mx-auto max-w-[90rem] px-5 py-10 lg:px-8 lg:py-12">
         <ul className="grid grid-cols-2 gap-3 lg:grid-cols-[repeat(49,minmax(0,1fr))] lg:grid-rows-[14rem_18rem] lg:gap-4">
-          {OBRAS.map((obra) => (
-            <li key={obra.src} className={`relative h-40 lg:h-auto ${obra.clase}`}>
-              <Image
-                src={obra.src}
-                alt={obra.alt}
-                fill
-                sizes={`(max-width: 1024px) 50vw, ${obra.vw}vw`}
-                className="rounded-sm object-cover"
-              />
-            </li>
-          ))}
+          {OBRAS.map((obra, i) => {
+            const foto = datos.fotos[i];
+            return (
+              <li key={foto.url} className={`relative h-40 lg:h-auto ${obra.clase}`}>
+                <Image
+                  src={foto.url}
+                  alt={foto.alt}
+                  fill
+                  sizes={`(max-width: 1024px) 50vw, ${obra.vw}vw`}
+                  className="rounded-sm object-cover"
+                />
+              </li>
+            );
+          })}
         </ul>
       </div>
     </section>

@@ -1,25 +1,9 @@
 import Image from "next/image";
 import Vineta from "./Vineta";
+import { Lineas } from "./texto";
+import type { PortadaSumamos } from "@/lib/ajustes/portada";
 
-const OBRAS_ESTRATEGICAS = [
-  "Pavimentación de más de 1.400 kilómetros de vías secundarias.",
-  "Construcción de placas huella en más de 100 municipios.",
-  "Extensión del Metro hacia el Aburrá Norte.",
-  "Segunda etapa del Túnel de Oriente.",
-  "Nueva Vía al Mar - Túnel del Toyo.",
-];
-
-const EMERGENCIAS = [
-  "Atención de derrumbes",
-  "Recuperación de vías",
-  "Maquinaria amarilla",
-  "Mantenimiento",
-  "Puntos críticos",
-  "Estabilización",
-  "Puentes",
-];
-
-export default function SumamosEsfuerzos() {
+export default function SumamosEsfuerzos({ datos }: { datos: PortadaSumamos }) {
   return (
     <section
       id="por-antioquia"
@@ -34,8 +18,8 @@ export default function SumamosEsfuerzos() {
       <div className="relative h-56 w-full sm:h-72 lg:absolute lg:inset-0 lg:h-full lg:w-full">
         <div className="relative h-full w-full lg:hidden">
           <Image
-            src="/images/campana/gallon-senala.webp"
-            alt="Horacio Gallón señala el valle de Aburrá desde un mirador"
+            src={datos.retrato.url}
+            alt={datos.retrato.alt}
             fill
             sizes="100vw"
             className="object-cover object-[60%_center]"
@@ -57,10 +41,10 @@ export default function SumamosEsfuerzos() {
             asomen. */}
         <div className="absolute inset-0 mx-auto hidden max-w-[90rem] lg:block">
           <Image
-            src="/images/campana/gallon-senala.webp"
-            alt="Horacio Gallón señala el valle de Aburrá desde un mirador"
-            width={1400}
-            height={1232}
+            src={datos.retrato.url}
+            alt={datos.retrato.alt}
+            width={datos.retrato.ancho ?? 1400}
+            height={datos.retrato.alto ?? 1232}
             sizes="1232px"
             className="absolute -top-[30.75rem] left-[20.8%] w-[77rem] max-w-none [mask-composite:intersect] [mask-image:linear-gradient(to_bottom,#000_72%,transparent_97%),linear-gradient(to_right,#000_78%,transparent_98%)]"
           />
@@ -73,17 +57,15 @@ export default function SumamosEsfuerzos() {
             id="sumamos-titulo"
             className="titular-sin-balance font-campana text-[1.7rem] font-extrabold leading-tight text-campana-tinta sm:text-[2.1rem] lg:text-[1.9rem] lg:leading-[1.15]"
           >
-            Sumamos esfuerzos, articulamos<br className="hidden lg:inline" />{" "}
-            voluntades y lideramos<br className="hidden lg:inline" /> con propósito.
+            <Lineas texto={datos.titular1} />
           </h2>
 
           <p className="mt-5 font-campana text-base font-bold leading-snug text-campana-hoja sm:text-lg lg:text-[1.25rem]">
-            Defendimos las grandes obras estratégicas<br className="hidden lg:inline" />{" "}
-            e impulsamos el desarrollo de las vías terciarias.
+            <Lineas texto={datos.bajada1} />
           </p>
 
           <ul className="mt-4 space-y-2 font-campana text-[0.95rem] text-neutral-800 lg:text-base">
-            {OBRAS_ESTRATEGICAS.map((texto) => (
+            {datos.obras.map((texto) => (
               <Vineta key={texto} tono="dorado">
                 {texto}
               </Vineta>
@@ -93,13 +75,11 @@ export default function SumamosEsfuerzos() {
           <hr className="my-6 border-t border-campana-hoja/70" />
 
           <h2 className="titular-sin-balance font-campana text-[1.7rem] font-extrabold leading-tight text-campana-tinta sm:text-[2.1rem] lg:text-[1.9rem] lg:leading-[1.15]">
-            Respondimos a los llamados para<br className="hidden lg:inline" />{" "}
-            buscar soluciones.
+            <Lineas texto={datos.titular2} />
           </h2>
 
           <p className="mt-4 font-campana text-base font-bold leading-snug text-campana-hoja sm:text-lg lg:text-[1.25rem]">
-            Acompañamos la gestión de las necesidades<br className="hidden lg:inline" />{" "}
-            y emergencias de las vías.
+            <Lineas texto={datos.bajada2} />
           </p>
 
           {/* Multicolumna, no rejilla: el mockup llena la primera columna antes
@@ -107,7 +87,7 @@ export default function SumamosEsfuerzos() {
           {/* Margen por ítem, no `space-y`: `space-y` cuelga del segundo hijo en
               adelante y desalinearía la cabeza de la segunda columna. */}
           <ul className="mt-5 font-campana text-[0.95rem] text-neutral-800 [&>li]:mb-2 sm:columns-2 sm:gap-x-10 lg:text-base">
-            {EMERGENCIAS.map((texto) => (
+            {datos.emergencias.map((texto) => (
               <Vineta key={texto} tono="dorado" className="break-inside-avoid">
                 {texto}
               </Vineta>

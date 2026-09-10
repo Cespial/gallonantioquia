@@ -7,6 +7,9 @@ import Hero from "@/components/campana/Hero";
 import Perfil from "@/components/campana/Perfil";
 import VideoPerfil from "@/components/campana/VideoPerfil";
 import Caracter from "@/components/campana/Caracter";
+import AsiConectamos from "@/components/campana/AsiConectamos";
+import SumamosEsfuerzos from "@/components/campana/SumamosEsfuerzos";
+import MosaicoObras from "@/components/campana/MosaicoObras";
 
 const d = <K extends keyof typeof CLAVES_PORTADA>(k: K) => CLAVES_PORTADA[k].porDefecto as any;
 
@@ -31,5 +34,20 @@ describe("franjas con sus valores por defecto", () => {
   });
   it("Caracter pinta el titular", () => {
     expect(renderToStaticMarkup(<Caracter datos={d("portada.caracter")} />)).toContain("Mi carácter");
+  });
+
+  it("AsiConectamos pinta las seis viñetas y las tres obras", () => {
+    const html = renderToStaticMarkup(<AsiConectamos datos={d("portada.conectamos")} />);
+    expect(html).toContain("Más turismo");
+    expect(html).toContain("Túnel de Oriente");
+  });
+  it("SumamosEsfuerzos pinta las 12 viñetas", () => {
+    const html = renderToStaticMarkup(<SumamosEsfuerzos datos={d("portada.sumamos")} />);
+    expect((html.match(/Maquinaria amarilla|Puentes|Túnel del Toyo/g) ?? []).length).toBe(3);
+  });
+  it("MosaicoObras pinta seis fotos con su descripción", () => {
+    const html = renderToStaticMarkup(<MosaicoObras datos={d("portada.mosaico")} />);
+    expect((html.match(/<img/g) ?? []).length).toBe(6);
+    expect(html).toContain("Placa huella");
   });
 });
