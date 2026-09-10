@@ -27,7 +27,9 @@ const video = z.object({
   titular: texto(120),
   parrafo1: texto(400),
   parrafo2: texto(400),
-  url: z.string(),
+  // Con tope: una URL de YouTube con parámetros cabe de sobra en 500, y sin
+  // límite un pegado accidental entraría entero a la base.
+  url: texto(500),
 });
 const conectamos = z.object({
   linea1: texto(30),
@@ -54,7 +56,7 @@ const mosaico = z.object({ fotos: z.array(foto).length(6) });
 const caracter = z.object({ titular: texto(200), frase: texto(120) });
 const cafe = z.object({ parrafos: z.array(texto(500)).min(1).max(4), fotos: z.array(foto).length(2) });
 const blog = z.object({ parrafo: texto(500) });
-const podcast = z.object({ parrafo: texto(500), url: z.string() });
+const podcast = z.object({ parrafo: texto(500), url: texto(500) });
 const equipo = z.object({ foto });
 // Solo dos pictogramas en la franja (ver `ICONOS` en FranjaCifras.tsx): un
 // tercero no tiene dónde pintarse.

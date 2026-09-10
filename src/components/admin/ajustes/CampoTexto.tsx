@@ -29,6 +29,9 @@ export default function CampoTexto({
 }) {
   const quedan = max - valor.length;
   const excedido = quedan < 0;
+  // La ayuda dice dónde sale el texto y cómo se escribe: quien navega con
+  // lector de pantalla la necesita tanto como el contador.
+  const describe = ayuda ? `${id}-ayuda ${id}-cuenta` : `${id}-cuenta`;
 
   return (
     <div>
@@ -42,7 +45,7 @@ export default function CampoTexto({
           rows={3}
           value={valor}
           onChange={(e) => alCambiar(e.target.value)}
-          aria-describedby={`${id}-cuenta`}
+          aria-describedby={describe}
           className={claseCampo}
         />
       ) : (
@@ -50,12 +53,16 @@ export default function CampoTexto({
           id={id}
           value={valor}
           onChange={(e) => alCambiar(e.target.value)}
-          aria-describedby={`${id}-cuenta`}
+          aria-describedby={describe}
           className={claseCampo}
         />
       )}
 
-      {ayuda && <p className="mt-1 text-xs text-texto-terciario">{ayuda}</p>}
+      {ayuda && (
+        <p id={`${id}-ayuda`} className="mt-1 text-xs text-texto-terciario">
+          {ayuda}
+        </p>
+      )}
 
       <p
         id={`${id}-cuenta`}

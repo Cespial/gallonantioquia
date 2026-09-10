@@ -24,6 +24,12 @@ describe("esquemas de la portada", () => {
     expect(mosaico.esquema.safeParse({ fotos: mosaico.porDefecto.fotos.slice(0, 5) }).success).toBe(false);
     const hero = CLAVES_PORTADA["portada.hero"];
     expect(hero.esquema.safeParse({ ...hero.porDefecto, subtitulo: "x".repeat(221) }).success).toBe(false);
+    // Los enlaces también tienen tope: un pegado accidental no entra entero.
+    const video = CLAVES_PORTADA["portada.video"];
+    expect(video.esquema.safeParse({ ...video.porDefecto, url: "u".repeat(500) }).success).toBe(true);
+    expect(video.esquema.safeParse({ ...video.porDefecto, url: "u".repeat(501) }).success).toBe(false);
+    const pod = CLAVES_PORTADA["portada.podcast"];
+    expect(pod.esquema.safeParse({ ...pod.porDefecto, url: "u".repeat(501) }).success).toBe(false);
   });
 
   it("FRANJAS va en el orden de la portada y cubre las doce claves", () => {

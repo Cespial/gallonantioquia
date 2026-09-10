@@ -9,11 +9,19 @@ export default function SelectorImagen({
   valor,
   esAdmin,
   alCambiar,
+  etiqueta = "Foto de portada",
+  textoVacio = "Sin portada.",
+  permitirQuitar = true,
 }: {
   medios: Medio[];
   valor: string;
   esAdmin: boolean;
   alCambiar: (id: string) => void;
+  /** Las tres siguientes son para reusarlo fuera de la portada de un contenido. */
+  etiqueta?: string;
+  textoVacio?: string;
+  /** Una ranura de franja no admite vacío: la portada quedaría con un hueco. */
+  permitirQuitar?: boolean;
 }) {
   const [abierto, setAbierto] = useState(false);
   const [aviso, setAviso] = useState("");
@@ -35,7 +43,7 @@ export default function SelectorImagen({
 
   return (
     <div>
-      <span className="block text-sm font-medium mb-1">Foto de portada</span>
+      <span className="block text-sm font-medium mb-1">{etiqueta}</span>
 
       <div className="flex items-center gap-3">
         {elegida ? (
@@ -48,17 +56,19 @@ export default function SelectorImagen({
             />
             <div className="min-w-0">
               <p className="truncate text-sm">{elegida.nombre}</p>
-              <button
-                type="button"
-                onClick={() => alCambiar("")}
-                className="text-xs text-texto-secundario hover:text-red-700"
-              >
-                Quitar portada
-              </button>
+              {permitirQuitar && (
+                <button
+                  type="button"
+                  onClick={() => alCambiar("")}
+                  className="text-xs text-texto-secundario hover:text-red-700"
+                >
+                  Quitar portada
+                </button>
+              )}
             </div>
           </>
         ) : (
-          <p className="text-sm text-texto-secundario">Sin portada.</p>
+          <p className="text-sm text-texto-secundario">{textoVacio}</p>
         )}
 
         <button

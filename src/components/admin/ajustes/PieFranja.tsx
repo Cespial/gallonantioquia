@@ -34,6 +34,9 @@ export default function PieFranja({
   error: string;
 }) {
   const [confirmando, setConfirmando] = useState(false);
+  // Los puntos de la clave no sirven dentro de un `id`: un selector CSS los lee
+  // como clase y quien pruebe la pantalla no encontraría el botón.
+  const idClave = clave.replace(/\./g, "-");
 
   return (
     <div className="mt-6 border-t border-borde pt-4">
@@ -41,7 +44,7 @@ export default function PieFranja({
 
       <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
         <button
-          id={`guardar-${clave}`}
+          id={`guardar-${idClave}`}
           type="button"
           disabled={pendiente}
           onClick={alGuardar}

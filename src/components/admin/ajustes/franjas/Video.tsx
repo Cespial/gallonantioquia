@@ -57,7 +57,7 @@ export default function FranjaVideo({
         id="video-url"
         etiqueta="Enlace del video"
         valor={f.valor.url}
-        max={300}
+        max={500}
         ayuda="Pega el enlace tal como lo copias del navegador: sirve YouTube, youtu.be, un short o Vimeo. Mientras esté vacío, la portada muestra la pieza de campaña con el aviso «Video en camino»."
         alCambiar={(v) => f.fijar({ ...f.valor, url: v })}
       />

@@ -75,7 +75,7 @@ export default function FranjaPerfil({
         valor={f.valor.abrazo}
         medios={medios}
         esAdmin={esAdmin}
-        referencia="Persona recortada sobre fondo transparente (PNG o WebP con alfa), ≈1000 × 850 px."
+        referencia="Persona recortada sobre fondo transparente (PNG o WebP con alfa), ≈1000 × 850 px. Sin recorte, saldrá un rectángulo sobre la banda."
         alCambiar={(foto) => f.fijar({ ...f.valor, abrazo: foto })}
       />
 

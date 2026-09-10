@@ -189,10 +189,9 @@ async function principal() {
   ]);
 
   await escribirAjuste(db, "campana.municipios", MUNICIPIOS);
-  await escribirAjuste(db, "portada.cifras", [
-    { valor: 125, sufijo: "", etiqueta: "Municipios visitados" },
-    { valor: 10000, sufijo: "+", etiqueta: "Ciudadanos visitados" },
-  ]);
+  // Las cifras de impacto ya no son una clave suelta: viven dentro de la
+  // franja `portada.cierre`, y su valor por defecto trae justo estas dos
+  // (125 municipios y 10.000+ ciudadanos). Sembrarlas aquí sobra.
 
   console.log(`Contenido de campaña sembrado: ${n} registros.`);
   console.log(`Municipios cargados en el formulario: ${MUNICIPIOS.length}.`);

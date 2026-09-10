@@ -55,6 +55,9 @@ export default function RanuraFoto({
           medios={medios}
           valor={valor.medioId ?? ""}
           esAdmin={esAdmin}
+          etiqueta="Cambiar la foto"
+          textoVacio="Foto original del diseño."
+          permitirQuitar={false}
           alCambiar={(id) => {
             const medio = medios.find((m) => m.id === id);
             // Sin medio no hay nada que poner: la ranura no admite vacío —la
