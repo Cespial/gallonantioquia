@@ -19,6 +19,10 @@ describe("texto de la portada", () => {
     );
   });
 
+  it("resaltar acepta una clase propia para el <strong>", () => {
+    expect(renderToStaticMarkup(<>{resaltar("a **b**", "x")}</>)).toContain('class="x"');
+  });
+
   it("FraseDorada combina negrita y el salto de escritorio de la frase dorada", () => {
     const html = renderToStaticMarkup(
       <FraseDorada

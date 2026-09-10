@@ -36,7 +36,7 @@ export default function MosaicoObras({ datos }: { datos: PortadaMosaico }) {
           {OBRAS.map((obra, i) => {
             const foto = datos.fotos[i];
             return (
-              <li key={foto.url} className={`relative h-40 lg:h-auto ${obra.clase}`}>
+              <li key={i} className={`relative h-40 lg:h-auto ${obra.clase}`}>
                 <Image
                   src={foto.url}
                   alt={foto.alt}

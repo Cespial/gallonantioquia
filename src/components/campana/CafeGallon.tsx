@@ -32,7 +32,10 @@ export default function CafeGallon({ datos }: { datos: PortadaCafe }) {
 
           <div className="mt-6 space-y-5 font-campana text-[0.95rem] leading-[1.6] text-neutral-700 lg:mt-7 lg:text-[1rem]">
             {datos.parrafos.map((parrafo, i) => (
-              <p key={i}>{resaltar(parrafo)}</p>
+              // El tercer párrafo llevaba su negrita con el acento de color
+              // del diseño (`text-campana-tinta`), no el `font-bold` genérico
+              // de `resaltar`: se preserva pasándole la clase propia.
+              <p key={i}>{resaltar(parrafo, "font-semibold text-campana-tinta")}</p>
             ))}
           </div>
         </div>
@@ -44,7 +47,7 @@ export default function CafeGallon({ datos }: { datos: PortadaCafe }) {
         <ul className="grid grid-cols-1 gap-4 sm:grid-cols-5 sm:gap-5">
           {datos.fotos.map((foto, i) => (
             <li
-              key={foto.url}
+              key={i}
               className={`overflow-hidden rounded-2xl shadow-[0_0.75rem_2rem_rgba(28,50,30,0.14)] ${
                 i === 0
                   ? "aspect-[4/3] sm:col-span-3"

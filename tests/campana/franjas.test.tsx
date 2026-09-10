@@ -63,6 +63,9 @@ describe("franjas con sus valores por defecto", () => {
     expect(html).toContain("Café Gallón es");
     expect(html).toContain("gallon-parque-pueblo.jpg");
     expect(html).toContain("gallon-conversacion-rural.jpg");
+    // El tercer párrafo lleva su propio acento de color, no el `font-bold`
+    // genérico de `resaltar`: ver la ronda de arreglo 1 del reporte.
+    expect(html).toContain("text-campana-tinta");
   });
   it("FranjaCifras pinta las dos cifras y el mensaje", () => {
     const html = renderToStaticMarkup(<FranjaCifras datos={d("portada.cierre")} />);
