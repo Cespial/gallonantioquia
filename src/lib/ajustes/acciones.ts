@@ -3,7 +3,14 @@
 import { revalidateTag, revalidatePath } from "next/cache";
 import { db } from "@/db";
 import { requerirSesion } from "@/lib/auth/sesion";
-import { escribirAjuste, editorPuedeEscribir, type ClaveAjuste, type ValorDe } from "./index";
+import {
+  escribirAjuste,
+  deshacerAjuste as deshacerAjusteEnDb,
+  restaurarAjuste as restaurarAjusteEnDb,
+  editorPuedeEscribir,
+  type ClaveAjuste,
+  type ValorDe,
+} from "./index";
 import { ETIQUETA_AJUSTES } from "./cacheadas";
 
 export type Resultado = { ok: true } | { ok: false; error: string };
@@ -21,7 +28,7 @@ export async function guardarAjuste<K extends ClaveAjuste>(
   }
 
   try {
-    await escribirAjuste(db, clave, valor);
+    await escribirAjuste(db, clave, valor, actor.id);
   } catch {
     return { ok: false, error: "Ese valor no tiene la forma que espera este ajuste." };
   }
@@ -30,5 +37,38 @@ export async function guardarAjuste<K extends ClaveAjuste>(
   // Los ajustes alimentan el encabezado y el pie, que viven en el layout: sin
   // esto, el cambio solo se vería al entrar a una página nueva.
   revalidatePath("/", "layout");
+  return { ok: true };
+}
+
+/** Deshace el último cambio de una clave. Misma regla de rol que `guardarAjuste`. */
+export async function deshacerUltimoCambio(clave: ClaveAjuste): Promise<Resultado> {
+  const actor = await requerirSesion();
+
+  if (actor.rol !== "admin" && !editorPuedeEscribir(clave)) {
+    return { ok: false, error: "Ese ajuste solo lo cambia un administrador." };
+  }
+
+  const huboCambio = await deshacerAjusteEnDb(db, clave);
+  if (!huboCambio) {
+    return { ok: false, error: "No hay nada que deshacer." };
+  }
+
+  revalidateTag(ETIQUETA_AJUSTES);
+  revalidatePath("/");
+  return { ok: true };
+}
+
+/** Vuelve una clave a su valor por defecto. Misma regla de rol que `guardarAjuste`. */
+export async function volverAlOriginal(clave: ClaveAjuste): Promise<Resultado> {
+  const actor = await requerirSesion();
+
+  if (actor.rol !== "admin" && !editorPuedeEscribir(clave)) {
+    return { ok: false, error: "Ese ajuste solo lo cambia un administrador." };
+  }
+
+  await restaurarAjusteEnDb(db, clave, actor.id);
+
+  revalidateTag(ETIQUETA_AJUSTES);
+  revalidatePath("/");
   return { ok: true };
 }
