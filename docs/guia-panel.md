@@ -12,6 +12,12 @@ Desde ahora el contenido del sitio se publica desde el panel, con el navegador.
 No hay que abrir archivos, ni instalar nada, ni esperar a que alguien suba los
 cambios: lo que ustedes publican aparece en el sitio en menos de un minuto.
 
+Desde el panel también pueden cambiar los textos y las fotos de la portada:
+el Hero, «Soy Horacio Gallón», el video, las obras, el café, el podcast, las
+cifras del cierre y las demás franjas que se van bajando por la página. Está
+en **Ajustes → Portada**, y el punto 6 de esta guía explica cómo, franja por
+franja.
+
 **El sitio ya está abierto al público.** Todo lo que publiquen se ve de
 inmediato.
 
@@ -166,19 +172,83 @@ Cada mensaje se puede marcar como leído y, cuando ya se atendió, borrar.
 
 ---
 
-## 6. Ajustes: lo que ustedes manejan
+## 6. Ajustes: la portada, franja por franja
 
 En **Ajustes** hay dos pestañas para el día a día.
 
-**Campaña.** El enlace del video que se ve en la franja «Soy Horacio Gallón» de
-la portada. Peguen el enlace tal como lo copian del navegador —sirve YouTube,
-youtu.be, un short o Vimeo— y el video aparece solo. Mientras esté vacío, la
-portada muestra la pieza gráfica con el aviso «Video en camino». Al lado está
-el enlace del podcast, que funciona igual. También están el subtítulo de la
-portada, la frase de «Soy Gallón» y el mensaje de cierre.
+### Portada
 
-**Contacto y redes.** El correo, el teléfono, el WhatsApp y las redes que salen
-en el pie de todas las páginas y en la página de Contacto.
+La portada se arma con doce franjas, en el mismo orden en que se ven al bajar
+por la página. A la izquierda está la lista; al hacer clic en una, se abre su
+formulario a la derecha. Esto es lo que deja cambiar cada una:
+
+- **Hero: A paso firme** — la palabra grande, el subtítulo, la foto de fondo y
+  el retrato recortado de Horacio Gallón.
+- **Soy Horacio Gallón** — el antetítulo, el nombre, la frase dorada, las dos
+  listas de la semblanza y la foto del abrazo.
+- **Video: en sus propias palabras** — el antetítulo, el titular, los dos
+  párrafos y el enlace del video.
+- **Así conectamos Antioquia** — las tres líneas del titular, la frase dorada,
+  el párrafo y las dos listas de logros.
+- **Sumamos esfuerzos** — los dos titulares, las dos bajadas, las dos listas
+  (obras y emergencias) y el retrato.
+- **Mosaico de obras** — las seis fotos del mosaico.
+- **Mi carácter** — el titular y la frase dorada.
+- **Café Gallón** — los tres párrafos y las dos fotos.
+- **Blog Gallón** — el párrafo de presentación (las columnas mismas se manejan
+  en Huellas en Antioquia, punto 2 de esta guía).
+- **Podcast** — el párrafo de presentación y el enlace del podcast.
+- **Foto de equipo** — la foto.
+- **Cifras y cierre** — las cifras, el mensaje de cierre y la foto de fondo.
+
+Cada campo de texto muestra debajo cuántos caracteres quedan. El contador no
+bloquea —pueden pegar un párrafo largo y recortarlo después—, pero si al
+**Guardar** el texto se pasó del tope, o si queda una viñeta vacía, el panel
+avisa en español qué campo está mal y no guarda hasta que lo corrijan.
+
+Las listas —las semblanzas, «esto significa», las obras, las emergencias—
+se manejan fila por fila con cuatro botones: **Agregar** suma una fila nueva y
+se apaga al llegar al tope de esa lista; **Quitar** la elimina, aunque nunca
+deja la lista en cero —la última viñeta no se puede quitar—; **Subir** y
+**Bajar** cambian el orden.
+
+Cada ranura de foto muestra la foto de hoy, su descripción y una referencia
+con el tamaño y la orientación recomendados. **Tres fotos —el retrato del
+Hero, el abrazo de «Soy Horacio Gallón» y el retrato de «Sumamos
+esfuerzos»— tienen que ser una persona recortada sobre fondo transparente.**
+Si suben ahí una foto normal, con fondo, en el sitio aparece un rectángulo
+sobre el paisaje en vez de la persona recortada. El botón **Cambiar la foto**
+abre la biblioteca de fotos: como en cualquier otra parte del panel, si la
+foto todavía no tiene descripción, primero hay que ponérsela (punto 4 de esta
+guía).
+
+Dentro de las frases doradas, la negrita se escribe con dos asteriscos
+pegados al texto —**así**— tal como en el mockup original. Y en los campos de
+titular, un salto de línea que escriban ahí se ve como salto de línea solo en
+computador: en el celular el texto sigue fluyendo, para no dejar huecos raros
+en una pantalla angosta.
+
+Cada franja tiene su propio pie, con cuatro botones:
+
+- **Guardar** publica esa franja sola. El cambio sale en el sitio en
+  segundos, y el panel confirma con «Guardado. El sitio ya muestra el
+  cambio.»
+- **Deshacer** vuelve al valor anterior de esa franja —guarda hasta los
+  últimos 20 cambios—; si no hay nada que deshacer, el botón queda apagado.
+- **Volver al original** pide confirmación, porque descarta todo lo escrito
+  en esa franja y no solo el último cambio, y la devuelve al diseño con el
+  que se lanzó el sitio. También se puede deshacer.
+- **Ver la portada** abre el sitio justo en esa franja.
+
+Como cada franja se guarda por su cuenta, dos personas pueden trabajar en
+franjas distintas al mismo tiempo sin pisarse el trabajo. Pero **si cambian de
+franja o de pestaña sin darle Guardar, lo que hayan escrito ahí se pierde**:
+guarden antes de moverse a otro lado.
+
+### Contacto y redes
+
+El correo, el teléfono, el WhatsApp y las redes que salen en el pie de todas
+las páginas y en la página de Contacto.
 
 > **Hoy están todos vacíos, a propósito.** El sitio traía datos de relleno —un
 > número que no era de nadie— y los quitamos. Mientras un dato esté vacío,
@@ -187,9 +257,9 @@ en el pie de todas las páginas y en la página de Contacto.
 > aparece el botón verde flotante en todas las páginas. Las redes que dejen en
 > blanco no sacan icono.
 
-Las otras pestañas —**Estado del sitio**, **Portada**, **Sobre mí** y **Menú del
-sitio**— solo las ve un administrador. Si entran con una cuenta de editor y ven
-menos pestañas, es normal.
+Las otras pestañas —**Estado del sitio**, **Sobre mí** y **Menú del sitio**—
+solo las ve un administrador. Si entran con una cuenta de editor y ven menos
+pestañas, es normal.
 
 ---
 
@@ -206,9 +276,6 @@ corregir algo grande sin que nadie lo vea a medias—:
 Quien entre ve solo ese mensaje. Se vuelve a abrir igual de rápido, apagando la
 casilla.
 
-En la pestaña **Portada** hay una opción llamada «reflexión destacada» que viene
-de la versión anterior del sitio. Déjenla en *Ninguna*.
-
 ---
 
 ## 8. Invitar y dar de baja personas *(solo administradores)*
@@ -224,9 +291,9 @@ entrar, el panel la obliga a cambiarla.
 
 Hay dos roles:
 
-- **Editor**: publica y edita contenido, sube fotos, lee las propuestas y maneja
-  las pestañas Campaña y Contacto y redes. Es lo que necesitan Diego y Walter en
-  el día a día.
+- **Editor**: publica y edita contenido, sube fotos, lee las propuestas, edita
+  la portada franja por franja y maneja Contacto y redes. Es lo que necesitan
+  Diego y Walter en el día a día.
 - **Administrador**: todo lo anterior, más el resto de Ajustes, Usuarios y borrar
   fotos.
 
