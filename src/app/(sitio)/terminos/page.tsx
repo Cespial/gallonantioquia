@@ -3,72 +3,63 @@ import PageHero from "@/components/layout/PageHero";
 import SectionWrapper from "@/components/layout/SectionWrapper";
 
 export const metadata: Metadata = {
-  title: "Terminos de uso",
-  description:
-    "Terminos y condiciones de uso del sitio Gallon Memorias.",
+  title: "Términos de uso",
+  description: "Condiciones de uso del sitio de campaña Gallón Gobernador.",
 };
+
+const Titulo = ({ children }: { children: React.ReactNode }) => (
+  <h2 className="font-display text-2xl text-texto-principal mt-10 mb-4">{children}</h2>
+);
+const Parrafo = ({ children }: { children: React.ReactNode }) => (
+  <p className="font-body text-texto-secundario leading-relaxed mb-6">{children}</p>
+);
 
 export default function TerminosPage() {
   return (
     <>
-      <PageHero
-        title="Terminos de uso"
-        subtitle="Condiciones para el uso de este sitio."
-        compact
-      />
+      <PageHero title="Términos de uso" subtitle="Condiciones para el uso de este sitio." compact />
       <SectionWrapper>
         <div className="max-w-3xl mx-auto prose-custom">
-          <p className="font-body text-texto-secundario leading-relaxed mb-6">
-            Ultima actualizacion: abril 2026.
-          </p>
+          <Parrafo>Última actualización: septiembre de 2026.</Parrafo>
 
-          <h2 className="font-display text-2xl text-texto-principal mt-10 mb-4">
-            1. Naturaleza del sitio
-          </h2>
-          <p className="font-body text-texto-secundario leading-relaxed mb-6">
-            Gallon Memorias es un sitio editorial personal dedicado a columnas,
-            reflexiones y conversaciones sobre Antioquia. No es una plataforma
-            comercial ni presta servicios profesionales a traves de este medio.
-          </p>
+          <Titulo>1. Naturaleza del sitio</Titulo>
+          <Parrafo>
+            Este es el sitio de la campaña de Horacio Gallón a la Gobernación de
+            Antioquia. Publica la trayectoria del candidato, sus columnas, la
+            agenda de campaña, el plan de gobierno y las obras que impulsa. No es
+            una plataforma comercial ni presta servicios a través de este medio.
+          </Parrafo>
 
-          <h2 className="font-display text-2xl text-texto-principal mt-10 mb-4">
-            2. Propiedad intelectual
-          </h2>
-          <p className="font-body text-texto-secundario leading-relaxed mb-6">
-            Todo el contenido publicado en este sitio &mdash; textos,
-            fotografias, diseno y elementos graficos &mdash; es propiedad de su
-            autor salvo que se indique lo contrario. Puedes citar fragmentos
-            breves con la debida atribucion y enlace al articulo original. La
-            reproduccion total sin autorizacion esta prohibida.
-          </p>
+          <Titulo>2. Propiedad intelectual</Titulo>
+          <Parrafo>
+            Los textos, fotografías, videos, diseño y elementos gráficos de este
+            sitio pertenecen a la campaña o a sus autores, salvo que se indique lo
+            contrario. Puedes citar fragmentos breves con la debida atribución y
+            enlace a la página original. La reproducción total sin autorización
+            no está permitida.
+          </Parrafo>
 
-          <h2 className="font-display text-2xl text-texto-principal mt-10 mb-4">
-            3. Contenido de opinion
-          </h2>
-          <p className="font-body text-texto-secundario leading-relaxed mb-6">
-            Las columnas y reflexiones publicadas representan opiniones
-            personales del autor. No constituyen asesoria profesional de ningun
-            tipo. Las entrevistas en la seccion Voces reflejan las opiniones de
-            cada invitado.
-          </p>
+          <Titulo>3. Contenido de opinión</Titulo>
+          <Parrafo>
+            Las columnas y reflexiones publicadas expresan la opinión de su autor.
+            Las cifras de obras y gestión corresponden a la información disponible
+            en la fecha de publicación de cada pieza. Algunas imágenes de proyectos
+            en curso son ilustraciones de referencia y se identifican como tales.
+          </Parrafo>
 
-          <h2 className="font-display text-2xl text-texto-principal mt-10 mb-4">
-            4. Enlaces externos
-          </h2>
-          <p className="font-body text-texto-secundario leading-relaxed mb-6">
-            Este sitio puede contener enlaces a sitios de terceros. No somos
-            responsables del contenido, politicas de privacidad ni practicas de
-            dichos sitios externos.
-          </p>
+          <Titulo>4. Enlaces externos</Titulo>
+          <Parrafo>
+            Este sitio puede contener enlaces a sitios de terceros, entre ellos
+            medios de comunicación y plataformas de video. No somos responsables
+            del contenido, las políticas de privacidad ni las prácticas de esos
+            sitios.
+          </Parrafo>
 
-          <h2 className="font-display text-2xl text-texto-principal mt-10 mb-4">
-            5. Modificaciones
-          </h2>
-          <p className="font-body text-texto-secundario leading-relaxed mb-6">
-            Nos reservamos el derecho de modificar estos terminos en cualquier
-            momento. Los cambios seran efectivos desde su publicacion en esta
-            pagina.
-          </p>
+          <Titulo>5. Modificaciones</Titulo>
+          <Parrafo>
+            Estos términos pueden cambiar en cualquier momento. Los cambios rigen
+            desde su publicación en esta página.
+          </Parrafo>
         </div>
       </SectionWrapper>
     </>

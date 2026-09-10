@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Gallón Memorias — Memorias de Antioquia";
+export const alt = "Gallón Gobernador — A paso firme por Antioquia";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -64,7 +64,7 @@ export default function OGImage() {
               letterSpacing: "-2px",
             }}
           >
-            MEMORIAS
+            GOBERNADOR
           </span>
         </div>
 
@@ -78,7 +78,7 @@ export default function OGImage() {
             lineHeight: 1.5,
           }}
         >
-          Memorias, reflexiones y conversaciones sobre Antioquia.
+          A paso firme por Antioquia: vías, obras y trabajo bien hecho.
         </p>
 
         {/* Bottom label */}
@@ -108,7 +108,7 @@ export default function OGImage() {
               textTransform: "uppercase",
             }}
           >
-            Memorias de Antioquia
+            Horacio Gallón · Gobernación de Antioquia
           </span>
         </div>
 

@@ -15,7 +15,9 @@ import { leerAjustes } from "@/lib/ajustes/cacheadas";
 import { listarPublicados } from "@/lib/contenidos/cacheadas";
 
 export const metadata: Metadata = {
-  title: "Gallón Gobernador — A paso firme por Antioquia",
+  // `absolute`: la plantilla del layout ya termina en «| Gallón Gobernador»
+  // y aquí el nombre va al principio; con la plantilla saldría dos veces.
+  title: { absolute: "Gallón Gobernador — A paso firme por Antioquia" },
   description:
     "Antioquia es una tierra que, como el mejor café, exige paciencia, dedicación y trabajo bien hecho. Conoce a Horacio Gallón y las obras que conectan al departamento.",
 };

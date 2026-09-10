@@ -46,16 +46,17 @@ const myriadPro = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL("https://gallonantioquia.vercel.app"),
   title: {
-    default: "Gallón Memorias — Memorias de Antioquia",
-    template: "%s | Gallón Memorias",
+    default: "Gallón Gobernador — A paso firme por Antioquia",
+    template: "%s | Gallón Gobernador",
   },
   description:
-    "Memorias, reflexiones y conversaciones sobre Antioquia. Columnas, historias, ideas y diálogos desde el territorio.",
+    "Horacio Gallón, candidato a la Gobernación de Antioquia. Vías, obras y trabajo bien hecho para conectar a los municipios: a paso firme por Antioquia.",
   keywords: [
     "Antioquia",
-    "memorias Antioquia",
+    "Gallón Gobernador",
+    "Gobernación de Antioquia",
     "columnas opinión",
-    "conversaciones",
+    "vías Antioquia",
     "desarrollo rural",
     "Suroeste antioqueño",
     "líderes Antioquia",
@@ -63,19 +64,19 @@ export const metadata: Metadata = {
     "Andes Antioquia",
   ],
   openGraph: {
-    title: "Gallón Memorias — Memorias de Antioquia",
+    title: "Gallón Gobernador — A paso firme por Antioquia",
     description:
-      "Memorias, reflexiones y conversaciones sobre Antioquia.",
+      "Horacio Gallón, candidato a la Gobernación de Antioquia.",
     url: "https://gallonantioquia.vercel.app",
-    siteName: "Gallón Memorias",
+    siteName: "Gallón Gobernador",
     locale: "es_CO",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Gallón Memorias — Memorias de Antioquia",
+    title: "Gallón Gobernador — A paso firme por Antioquia",
     description:
-      "Memorias, reflexiones y conversaciones sobre Antioquia.",
+      "Horacio Gallón, candidato a la Gobernación de Antioquia.",
     creator: "@GallonHoracio",
   },
   robots: { index: true, follow: true },

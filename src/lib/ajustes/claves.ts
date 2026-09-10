@@ -10,7 +10,7 @@ export const CLAVES = {
     esquema: z.string(),
     porDefecto: "Estamos preparando este espacio. Vuelve pronto.",
   },
-  "portada.tituloHero": { esquema: z.string(), porDefecto: "Gallón Memorias" },
+  "portada.tituloHero": { esquema: z.string(), porDefecto: "Gallón Gobernador" },
   "portada.subtituloHero": {
     esquema: z.string(),
     porDefecto: "Memorias, reflexiones y conversaciones sobre Antioquia.",
@@ -74,11 +74,13 @@ export const CLAVES = {
   "campana.podcast": { esquema: z.string(), porDefecto: "" },
   /** Alimenta el desplegable del formulario «Te escuchamos». */
   "campana.municipios": { esquema: z.array(z.string()), porDefecto: [] },
-  "contacto.email": { esquema: z.string(), porDefecto: "info@gallongobernador.com" },
-  "contacto.telefono": { esquema: z.string(), porDefecto: "+57 300 123 4567" },
+  // Sin relleno: el pie y /contacto ocultan lo que esté vacío. Un dato
+  // inventado al aire manda a un desconocido cada llamada y cada correo.
+  "contacto.email": { esquema: z.string(), porDefecto: "" },
+  "contacto.telefono": { esquema: z.string(), porDefecto: "" },
   "contacto.direccion": { esquema: z.string(), porDefecto: "Medellín, Antioquia, Colombia" },
   /** Solo dígitos con indicativo, como lo pide el enlace de wa.me. */
-  "contacto.whatsapp": { esquema: z.string(), porDefecto: "573001234567" },
+  "contacto.whatsapp": { esquema: z.string(), porDefecto: "" },
 } as const;
 
 export type ClaveAjuste = keyof typeof CLAVES;

@@ -71,7 +71,7 @@ export default async function StoryPage({ params }: Props) {
               name: "Luis Horacio Gallón Arango",
               url: "https://gallonantioquia.vercel.app/sobre",
             },
-            publisher: { "@type": "Organization", name: "Gallón Memorias" },
+            publisher: { "@type": "Organization", name: "Gallón Gobernador" },
           }),
         }}
       />

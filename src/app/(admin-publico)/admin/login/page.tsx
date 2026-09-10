@@ -11,7 +11,7 @@ export default function PaginaAcceso() {
     <main className="min-h-screen flex flex-col items-center justify-center gap-8 px-4 bg-arena">
       <div className="text-center">
         <h1 className="font-display text-2xl text-texto-principal">Administración del sitio</h1>
-        <p className="mt-1 text-sm text-texto-secundario">Gallón Memorias</p>
+        <p className="mt-1 text-sm text-texto-secundario">Gallón Gobernador</p>
       </div>
       <FormularioAcceso />
     </main>
