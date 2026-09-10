@@ -1,5 +1,7 @@
 "use client";
 
+import { useId } from "react";
+
 export interface CampoLista {
   nombre: string;
   etiqueta: string;
@@ -26,6 +28,13 @@ export default function ListaEditable<T extends Record<string, unknown>>({
   agregarDeshabilitado?: boolean;
   filaNueva: () => T;
 }) {
+  // Dos `ListaVinetas` en la misma franja (p. ej. Perfil, Así conectamos,
+  // Sumamos esfuerzos) repetían `lista-${nombre}-${indice}` entre sí: HTML
+  // inválido y el `htmlFor` de la segunda lista enfocaba la fila de la
+  // primera. `useId` distingue cada instancia; se sanea el `:` que trae de
+  // fábrica porque no es válido dentro de un `id` que además se usa en CSS.
+  const prefijo = useId().replace(/:/g, "");
+
   function editar(indice: number, nombre: string, valor: unknown) {
     alCambiar(valores.map((fila, i) => (i === indice ? { ...fila, [nombre]: valor } : fila)));
   }
@@ -49,7 +58,7 @@ export default function ListaEditable<T extends Record<string, unknown>>({
         <div key={indice} className="rounded-card border border-borde p-3">
           <div className="grid gap-3 sm:grid-cols-2">
             {campos.map((campo) => {
-              const id = `lista-${campo.nombre}-${indice}`;
+              const id = `${prefijo}-${campo.nombre}-${indice}`;
               const valor = fila[campo.nombre];
 
               return (
