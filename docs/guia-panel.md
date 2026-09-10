@@ -189,12 +189,14 @@ formulario a la derecha. Esto es lo que deja cambiar cada una:
 - **Video: en sus propias palabras** — el antetítulo, el titular, los dos
   párrafos y el enlace del video.
 - **Así conectamos Antioquia** — las tres líneas del titular, la frase dorada,
-  el párrafo y las dos listas de logros.
+  el párrafo, el título de «Esto significa», la lista de beneficios, el título
+  y la bajada de «Logramos», y la lista de obras recuperadas.
 - **Sumamos esfuerzos** — los dos titulares, las dos bajadas, las dos listas
   (obras y emergencias) y el retrato.
 - **Mosaico de obras** — las seis fotos del mosaico.
 - **Mi carácter** — el titular y la frase dorada.
-- **Café Gallón** — los tres párrafos y las dos fotos.
+- **Café Gallón** — de una a cuatro párrafos, que se agregan y se quitan como
+  cualquier otra lista, y las dos fotos.
 - **Blog Gallón** — el párrafo de presentación (las columnas mismas se manejan
   en Huellas en Antioquia, punto 2 de esta guía).
 - **Podcast** — el párrafo de presentación y el enlace del podcast.
@@ -206,27 +208,31 @@ bloquea —pueden pegar un párrafo largo y recortarlo después—, pero si al
 **Guardar** el texto se pasó del tope, o si queda una viñeta vacía, el panel
 avisa en español qué campo está mal y no guarda hasta que lo corrijan.
 
-Las listas —las semblanzas, «esto significa», las obras, las emergencias—
-se manejan fila por fila con cuatro botones: **Agregar** suma una fila nueva y
-se apaga al llegar al tope de esa lista; **Quitar** la elimina, aunque nunca
-deja la lista en cero —la última viñeta no se puede quitar—; **Subir** y
-**Bajar** cambian el orden.
+Las listas —las semblanzas, «esto significa», las obras, las emergencias, los
+párrafos de Café Gallón— se manejan fila por fila con cuatro botones:
+**Agregar**, que en cada lista lleva su propio apellido («Agregar párrafo»,
+«Agregar beneficio», «Agregar obra estratégica»…), suma una fila nueva y se
+apaga al llegar al tope de esa lista; **Quitar** la elimina, aunque nunca deja
+la lista en cero —la última viñeta no se puede quitar—; y **↑ Subir** /
+**↓ Bajar** cambian el orden.
 
 Cada ranura de foto muestra la foto de hoy, su descripción y una referencia
 con el tamaño y la orientación recomendados. **Tres fotos —el retrato del
 Hero, el abrazo de «Soy Horacio Gallón» y el retrato de «Sumamos
 esfuerzos»— tienen que ser una persona recortada sobre fondo transparente.**
 Si suben ahí una foto normal, con fondo, en el sitio aparece un rectángulo
-sobre el paisaje en vez de la persona recortada. El botón **Cambiar la foto**
-abre la biblioteca de fotos: como en cualquier otra parte del panel, si la
+sobre el paisaje en vez de la persona recortada. Bajo la etiqueta *Cambiar la
+foto*, el botón **Cambiar** —o **Elegir foto** si la ranura todavía no tiene
+ninguna— abre la biblioteca: como en cualquier otra parte del panel, si la
 foto todavía no tiene descripción, primero hay que ponérsela (punto 4 de esta
 guía).
 
-Dentro de las frases doradas, la negrita se escribe con dos asteriscos
-pegados al texto —**así**— tal como en el mockup original. Y en los campos de
-titular, un salto de línea que escriban ahí se ve como salto de línea solo en
-computador: en el celular el texto sigue fluyendo, para no dejar huecos raros
-en una pantalla angosta.
+Dentro de las frases doradas y de los párrafos de Café Gallón, la negrita se
+escribe con dos asteriscos pegados al texto —**así**—; el propio campo lo
+recuerda debajo, por si se les olvida. Y en los campos de titular, un salto de
+línea que escriban ahí se ve como salto de línea solo en computador: en el
+celular el texto sigue fluyendo, para no dejar huecos raros en una pantalla
+angosta.
 
 Cada franja tiene su propio pie, con cuatro botones:
 

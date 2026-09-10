@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { FraseDorada } from "./texto";
+import { FraseDorada, Lineas } from "./texto";
 import type { PortadaCaracter } from "@/lib/ajustes/portada";
 
 export default function Caracter({ datos }: { datos: PortadaCaracter }) {
@@ -10,7 +10,7 @@ export default function Caracter({ datos }: { datos: PortadaCaracter }) {
           id="caracter-titulo"
           className="text-center titular-sin-balance font-campana text-[1.45rem] font-extrabold leading-snug tracking-[0.01em] text-campana-tinta sm:text-[1.9rem] lg:ml-auto lg:max-w-[71rem] lg:text-right lg:text-[2.55rem] lg:leading-[1.05] lg:tracking-[0.03em]"
         >
-          {datos.titular}
+          <Lineas texto={datos.titular} />
         </h2>
 
         <div className="mt-10 flex flex-col items-center justify-center gap-5 lg:mt-7 lg:flex-row lg:justify-end lg:gap-6">

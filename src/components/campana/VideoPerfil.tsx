@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Clapperboard } from "lucide-react";
 import MarcoVideo from "./MarcoVideo";
+import { Lineas } from "./texto";
 import { urlIncrustable } from "@/lib/campana/video";
 import type { PortadaVideo } from "@/lib/ajustes/portada";
 
@@ -69,7 +70,7 @@ export default function VideoPerfil({ datos }: { datos: PortadaVideo }) {
             id="video-perfil-titulo"
             className="titular-sin-balance mt-3 font-campana text-2xl font-extrabold leading-[1.12] text-white sm:text-3xl lg:text-[2.35rem]"
           >
-            {datos.titular}
+            <Lineas texto={datos.titular} />
           </h3>
 
           <p className="mt-5 font-campana text-[0.95rem] leading-relaxed text-white/85 lg:text-[1.02rem]">
