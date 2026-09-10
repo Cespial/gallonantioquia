@@ -6,7 +6,7 @@ import { upload } from "@vercel/blob/client";
 import type { Medio } from "@/db/esquema";
 import { procesarImagen } from "@/lib/medios/procesar-imagen";
 import { validarArchivo } from "@/lib/medios/reglas";
-import { actualizarAlt, borrarMedio } from "@/lib/medios/acciones";
+import { actualizarAlt, borrarMedio, anotarSubida } from "@/lib/medios/acciones";
 
 function pesoLegible(bytes: number | null): string {
   if (!bytes) return "";
@@ -47,11 +47,14 @@ export default function BibliotecaMedios({
         // Se comprime en el navegador: lo que viaja es el WebP, no el original.
         const procesado = await procesarImagen(archivo);
 
-        await upload(procesado.name, procesado, {
+        const subido = await upload(procesado.name, procesado, {
           access: "public",
           handleUploadUrl: "/api/medios/subir",
           clientPayload: archivo.name,
         });
+        // Anotar aquí, no esperar al webhook: si no, el refresco de abajo
+        // llega antes que la fila y la foto no aparece hasta recargar.
+        await anotarSubida(subido.url, archivo.name);
       }
 
       router.refresh();

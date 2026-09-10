@@ -35,7 +35,18 @@ export async function consultarMedios(conexion: any): Promise<Medio[]> {
   return conexion.select().from(medios).orderBy(desc(medios.creadoEn));
 }
 
+/**
+ * Idempotente por `url`: la subida se anota dos veces —el navegador al
+ * terminar y el webhook de Blob poco después— y la segunda debe devolver la
+ * fila que ya existe en vez de romper contra el índice único.
+ */
 export async function registrarMedio(conexion: any, datos: NuevoMedio): Promise<Medio> {
-  const [fila] = await conexion.insert(medios).values(datos).returning();
-  return fila;
+  const [fila] = await conexion
+    .insert(medios)
+    .values(datos)
+    .onConflictDoNothing({ target: medios.url })
+    .returning();
+  if (fila) return fila;
+  const [existente] = await conexion.select().from(medios).where(eq(medios.url, datos.url));
+  return existente;
 }

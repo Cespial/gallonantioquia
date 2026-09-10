@@ -6,9 +6,25 @@ import { eq } from "drizzle-orm";
 import { db } from "@/db";
 import { medios } from "@/db/esquema";
 import { requerirSesion, requerirAdmin } from "@/lib/auth/sesion";
-import { contarUsos } from "./reglas";
+import { contarUsos, registrarMedio } from "./reglas";
 
 export type Resultado = { ok: true } | { ok: false; error: string };
+
+/**
+ * Anota una subida en cuanto el navegador la termina.
+ *
+ * El webhook `onUploadCompleted` de /api/medios/subir también la anota, pero
+ * llega después del `router.refresh()` del navegador, así que la foto recién
+ * subida no salía en la lista hasta recargar a mano. Con esta acción la fila
+ * existe antes del refresco; el webhook la encuentra y no duplica.
+ */
+export async function anotarSubida(url: string, nombre: string): Promise<Resultado> {
+  const usuario = await requerirSesion();
+  if (!url.startsWith("https://")) return { ok: false, error: "Dirección de archivo no válida." };
+  await registrarMedio(db, { url, nombre, subidoPor: usuario.id });
+  revalidatePath("/admin/medios");
+  return { ok: true };
+}
 
 export async function actualizarAlt(id: string, alt: string): Promise<Resultado> {
   await requerirSesion();

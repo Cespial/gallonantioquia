@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { crearDbPrueba } from "../ayuda/db";
 import { medios, contenidos } from "@/db/esquema";
-import { contarUsos, validarArchivo, TAMANO_MAXIMO } from "@/lib/medios/reglas";
+import { contarUsos, registrarMedio, validarArchivo, TAMANO_MAXIMO } from "@/lib/medios/reglas";
 
 describe("validación de archivos", () => {
   it("acepta los formatos permitidos", () => {
@@ -61,6 +61,20 @@ describe("uso de imágenes", () => {
     });
 
     expect(await contarUsos(db, medio.id)).toBe(0);
+    await cerrar();
+  });
+});
+
+describe("registrarMedio", () => {
+  it("con la misma url dos veces deja una sola fila y devuelve la existente", async () => {
+    // El navegador anota la subida en cuanto termina y el webhook de Blob la
+    // anota otra vez después: la segunda no puede fallar ni duplicar.
+    const { db, cerrar } = await crearDbPrueba();
+    const url = "https://x.public.blob.vercel-storage.com/a-1.webp";
+    const primera = await registrarMedio(db, { url, nombre: "a.png" });
+    const segunda = await registrarMedio(db, { url, nombre: "a.png" });
+    expect(segunda.id).toBe(primera.id);
+    expect((await db.select().from(medios)).length).toBe(1);
     await cerrar();
   });
 });
