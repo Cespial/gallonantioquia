@@ -123,8 +123,9 @@ with sync_playwright() as p:
 
     paso("4. Guardar en Ajustes (pestaña Campaña, sin cambios)")
     pg.goto(f"{BASE}/admin/ajustes", wait_until="networkidle")
-    pg.get_by_role("button", name="Campaña").first.click(); pg.wait_for_timeout(800)
-    pg.get_by_role("button", name=re.compile("^Guardar")).first.click(); pg.wait_for_timeout(5000)
+    # Las pestañas son <button role="tab">: get_by_role("button") no las ve.
+    pg.locator('[role="tab"]:has-text("Campaña"), button:has-text("Campaña")').first.click(); pg.wait_for_timeout(800)
+    pg.locator('button:has-text("Guardar")').first.click(); pg.wait_for_timeout(5000)
     ok("Guardado" in pg.locator("body").inner_text(), "Ajustes confirma «Guardado. El sitio ya muestra el cambio.»")
 
     paso("5. Una propuesta del formulario público llega a Propuestas")
