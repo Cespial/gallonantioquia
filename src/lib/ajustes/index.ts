@@ -1,6 +1,9 @@
-import { eq } from "drizzle-orm";
-import { ajustes } from "@/db/esquema";
+import { and, desc, eq, notInArray, sql } from "drizzle-orm";
+import { ajustes, ajustesHistorial } from "@/db/esquema";
 import { CLAVES, type ClaveAjuste, type ValorDe } from "./claves";
+
+/** Cuántas versiones anteriores se conservan por clave. */
+const TOPE_HISTORIAL = 20;
 
 // Como en contenidos y medios: este archivo no importa `@/db`, para que las
 // pruebas lo ejerciten contra PGlite. Las lecturas cacheadas están en
@@ -28,11 +31,24 @@ export async function consultarAjuste<K extends ClaveAjuste>(
 export async function escribirAjuste<K extends ClaveAjuste>(
   conexion: any,
   clave: K,
-  valor: ValorDe<K>
+  valor: ValorDe<K>,
+  actorId?: string | null
 ): Promise<void> {
   // Aquí sí lanza: escribir basura es un error de quien llama, no un dato
   // heredado que haya que tolerar.
   const limpio = CLAVES[clave].esquema.parse(valor);
+
+  // Fila cruda, no `consultarAjuste`: necesitamos saber si YA había un valor
+  // guardado (para decidir si hay algo que archivar), no el valor por
+  // defecto que `consultarAjuste` devuelve cuando no hay fila.
+  const [previa] = await conexion.select().from(ajustes).where(eq(ajustes.clave, clave));
+  if (previa) {
+    await conexion.insert(ajustesHistorial).values({
+      clave,
+      valor: previa.valor,
+      actorId: actorId ?? null,
+    });
+  }
 
   await conexion
     .insert(ajustes)
@@ -41,6 +57,75 @@ export async function escribirAjuste<K extends ClaveAjuste>(
       target: ajustes.clave,
       set: { valor: limpio, actualizadoEn: new Date() },
     });
+
+  if (previa) await podarHistorial(conexion, clave);
+}
+
+/** Deja solo las `TOPE_HISTORIAL` filas más recientes de historial de una clave. */
+async function podarHistorial(conexion: any, clave: ClaveAjuste): Promise<void> {
+  const recientes = await conexion
+    .select({ id: ajustesHistorial.id })
+    .from(ajustesHistorial)
+    .where(eq(ajustesHistorial.clave, clave))
+    .orderBy(desc(ajustesHistorial.creadoEn))
+    .limit(TOPE_HISTORIAL);
+
+  const idsAConservar = recientes.map((f: { id: string }) => f.id);
+  if (idsAConservar.length === 0) return;
+
+  await conexion
+    .delete(ajustesHistorial)
+    .where(and(eq(ajustesHistorial.clave, clave), notInArray(ajustesHistorial.id, idsAConservar)));
+}
+
+/**
+ * Deshace el último cambio de una clave: pop de la pila de historial. Escribe
+ * el valor archivado como el actual **sin** registrar historial —si eso
+ * generara una entrada, deshacer dos veces seguidas no volvería al valor de
+ * antes— y borra esa fila.
+ *
+ * `false` cuando no hay nada que deshacer.
+ */
+export async function deshacerAjuste<K extends ClaveAjuste>(conexion: any, clave: K): Promise<boolean> {
+  const [ultima] = await conexion
+    .select()
+    .from(ajustesHistorial)
+    .where(eq(ajustesHistorial.clave, clave))
+    .orderBy(desc(ajustesHistorial.creadoEn))
+    .limit(1);
+
+  if (!ultima) return false;
+
+  await conexion
+    .insert(ajustes)
+    .values({ clave, valor: ultima.valor })
+    .onConflictDoUpdate({
+      target: ajustes.clave,
+      set: { valor: ultima.valor, actualizadoEn: new Date() },
+    });
+
+  await conexion.delete(ajustesHistorial).where(eq(ajustesHistorial.id, ultima.id));
+
+  return true;
+}
+
+/** Vuelve una clave a su valor por defecto, dejando rastro para poder deshacerlo. */
+export async function restaurarAjuste<K extends ClaveAjuste>(
+  conexion: any,
+  clave: K,
+  actorId?: string | null
+): Promise<void> {
+  await escribirAjuste(conexion, clave, CLAVES[clave].porDefecto as ValorDe<K>, actorId);
+}
+
+/** Cuántas filas de historial tiene cada clave que tenga alguna. */
+export async function contarHistorial(conexion: any): Promise<Record<string, number>> {
+  const filas = await conexion
+    .select({ clave: ajustesHistorial.clave, total: sql<number>`count(*)` })
+    .from(ajustesHistorial)
+    .groupBy(ajustesHistorial.clave);
+
+  return Object.fromEntries(filas.map((f: { clave: string; total: number | string }) => [f.clave, Number(f.total)]));
 }
 
 export type TodosLosAjustes = { [K in ClaveAjuste]: ValorDe<K> };

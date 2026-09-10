@@ -121,6 +121,25 @@ export const ajustes = pgTable("ajustes", {
   actualizadoEn: timestamp("actualizado_en", { withTimezone: true }).notNull().defaultNow(),
 });
 
+/**
+ * Historial de ajustes: una fila por cada valor que un `escribirAjuste`
+ * reemplazó (no el nuevo, el que dejó de estar vigente). Es lo que permiten
+ * `deshacerAjuste` (pila: saca la más reciente) y `restaurarAjuste`
+ * (escribe el valor por defecto, dejando también rastro para deshacer).
+ */
+export const ajustesHistorial = pgTable(
+  "ajustes_historial",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    clave: text("clave").notNull(),
+    // El valor que se reemplazó, no el nuevo: deshacer lo devuelve tal cual.
+    valor: jsonb("valor").notNull(),
+    actorId: uuid("actor_id").references(() => usuarios.id, { onDelete: "set null" }),
+    creadoEn: timestamp("creado_en", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => ({ porClave: index("ajustes_historial_clave").on(t.clave, t.creadoEn) })
+);
+
 export type Usuario = typeof usuarios.$inferSelect;
 export type NuevoUsuario = typeof usuarios.$inferInsert;
 export type Contenido = typeof contenidos.$inferSelect;
@@ -128,5 +147,6 @@ export type NuevoContenido = typeof contenidos.$inferInsert;
 export type Medio = typeof medios.$inferSelect;
 export type NuevoMedio = typeof medios.$inferInsert;
 export type Ajuste = typeof ajustes.$inferSelect;
+export type AjusteHistorial = typeof ajustesHistorial.$inferSelect;
 export type Mensaje = typeof mensajes.$inferSelect;
 export type NuevoMensaje = typeof mensajes.$inferInsert;
