@@ -1,6 +1,8 @@
 import Image from "next/image";
+import { FraseDorada, Lineas } from "./texto";
+import type { PortadaCaracter } from "@/lib/ajustes/portada";
 
-export default function Caracter() {
+export default function Caracter({ datos }: { datos: PortadaCaracter }) {
   return (
     <section aria-labelledby="caracter-titulo" className="bg-white">
       <div className="mx-auto max-w-[90rem] px-5 py-12 lg:px-8 lg:py-7">
@@ -8,15 +10,12 @@ export default function Caracter() {
           id="caracter-titulo"
           className="text-center titular-sin-balance font-campana text-[1.45rem] font-extrabold leading-snug tracking-[0.01em] text-campana-tinta sm:text-[1.9rem] lg:ml-auto lg:max-w-[71rem] lg:text-right lg:text-[2.55rem] lg:leading-[1.05] lg:tracking-[0.03em]"
         >
-          Mi carácter se ha cultivado recorriendo Antioquia, trabajando con sus
-          municipios y convirtiendo proyectos en resultados.
+          <Lineas texto={datos.titular} />
         </h2>
 
         <div className="mt-10 flex flex-col items-center justify-center gap-5 lg:mt-7 lg:flex-row lg:justify-end lg:gap-6">
           <p className="text-center font-campana text-2xl leading-tight text-campana-dorado sm:text-3xl lg:text-right lg:text-[2.8rem] lg:leading-[1.12]">
-            <strong className="font-bold">Antioquia</strong> será nuestra
-            <br className="hidden sm:block" />{" "}
-            <strong className="font-bold">mejor cosecha</strong>
+            <FraseDorada texto={datos.frase} />
           </p>
           <Image
             src="/images/campana/ilustracion-canasta.webp"

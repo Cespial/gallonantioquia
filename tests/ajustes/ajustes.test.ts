@@ -46,10 +46,10 @@ describe("ajustes", () => {
     const { db, cerrar } = await crearDbPrueba();
     // Escritura directa, saltándose la validación, como si viniera de una
     // versión anterior del esquema.
-    await db.insert(ajustes).values({ clave: "portada.cifras", valor: { roto: true } });
+    await db.insert(ajustes).values({ clave: "sobre.trayectoria", valor: { roto: true } });
 
-    expect(await consultarAjuste(db, "portada.cifras")).toEqual(
-      CLAVES["portada.cifras"].porDefecto
+    expect(await consultarAjuste(db, "sobre.trayectoria")).toEqual(
+      CLAVES["sobre.trayectoria"].porDefecto
     );
     await cerrar();
   });
@@ -67,11 +67,15 @@ describe("ajustes", () => {
   it("guarda el subtítulo del hero y el mensaje de cierre", async () => {
     const { db, cerrar } = await crearDbPrueba();
 
-    await escribirAjuste(db, "campana.subtituloHero", "Una Antioquia conectada.");
-    await escribirAjuste(db, "campana.mensajeCierre", "Unidos construiremos.");
+    // Ese copy ya no es una clave suelta: cada uno es un campo dentro de la
+    // franja donde se ve, y la franja se guarda entera.
+    const hero = { ...CLAVES["portada.hero"].porDefecto, subtitulo: "Una Antioquia conectada." };
+    const cierre = { ...CLAVES["portada.cierre"].porDefecto, mensaje: "Unidos construiremos." };
+    await escribirAjuste(db, "portada.hero", hero as never);
+    await escribirAjuste(db, "portada.cierre", cierre as never);
 
-    expect(await consultarAjuste(db, "campana.subtituloHero")).toBe("Una Antioquia conectada.");
-    expect(await consultarAjuste(db, "campana.mensajeCierre")).toBe("Unidos construiremos.");
+    expect((await consultarAjuste(db, "portada.hero")).subtitulo).toBe("Una Antioquia conectada.");
+    expect((await consultarAjuste(db, "portada.cierre")).mensaje).toBe("Unidos construiremos.");
     await cerrar();
   });
 
@@ -90,11 +94,17 @@ describe("ajustes", () => {
 
   it("valida la forma de las cifras de portada", async () => {
     const { db, cerrar } = await crearDbPrueba();
-    await escribirAjuste(db, "portada.cifras", [
-      { valor: 35, sufijo: "+", etiqueta: "años al servicio de Antioquia" },
-    ]);
+    const cierre = CLAVES["portada.cierre"].porDefecto;
+
+    await escribirAjuste(db, "portada.cierre", {
+      ...cierre,
+      cifras: [{ valor: 35, sufijo: "+", etiqueta: "años al servicio de Antioquia" }],
+    } as never);
     await expect(
-      escribirAjuste(db, "portada.cifras", [{ valor: "treinta y cinco" }] as never)
+      escribirAjuste(db, "portada.cierre", {
+        ...cierre,
+        cifras: [{ valor: "treinta y cinco" }],
+      } as never)
     ).rejects.toThrow();
     await cerrar();
   });
@@ -104,18 +114,19 @@ describe("conPorDefecto", () => {
   it("rellena las claves que la caché no traía", () => {
     // El caso real: `leerAjustes` guarda el objeto entero con `unstable_cache`
     // y sin caducidad. Una entrada escrita antes de que existiera
-    // `campana.videoPerfil` no la trae, y sin relleno llegaría `undefined` a un
+    // `contacto.email` no la trae, y sin relleno llegaría `undefined` a un
     // componente que la declara `string`: 500 en la portada.
     const cacheViejo = { "sitio.enConstruccion": false } as Partial<TodosLosAjustes>;
     const completo = conPorDefecto(cacheViejo);
 
     expect(completo["sitio.enConstruccion"]).toBe(false);
-    expect(completo["campana.videoPerfil"]).toBe(CLAVES["campana.videoPerfil"].porDefecto);
+    expect(completo["contacto.email"]).toBe(CLAVES["contacto.email"].porDefecto);
+    expect(completo["portada.hero"]).toEqual(CLAVES["portada.hero"].porDefecto);
     expect(Object.keys(completo).sort()).toEqual(Object.keys(CLAVES).sort());
   });
 
   it("no pisa un valor guardado que sea falsy", () => {
-    const completo = conPorDefecto({ "campana.videoPerfil": "" });
-    expect(completo["campana.videoPerfil"]).toBe("");
+    const completo = conPorDefecto({ "contacto.email": "" });
+    expect(completo["contacto.email"]).toBe("");
   });
 });

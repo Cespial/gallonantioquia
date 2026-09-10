@@ -14,7 +14,7 @@ ve dos pestañas).
 import io, os, re, sys, time
 from playwright.sync_api import sync_playwright
 
-BASE = "https://gallonantioquia.vercel.app"
+BASE = os.environ.get("BASE", "https://gallonantioquia.vercel.app")
 ADMIN = (os.environ.get("CORREO_ADMIN", "contacto@inplux.co"), os.environ.get("CLAVE_ADMIN", ""))
 EDITOR = ("prueba-editor@inplux.co", os.environ.get("CLAVE_EDITOR", "clave-de-prueba-2026-xy"))
 TOMAS = os.environ.get("CAPTURAS", "/tmp")
@@ -121,10 +121,11 @@ with sync_playwright() as p:
     pg.goto(f"{BASE}/admin/papelera", wait_until="networkidle")
     ok(MARCA in pg.locator("body").inner_text(), "y aparece en la Papelera")
 
-    paso("4. Guardar en Ajustes (pestaña Campaña, sin cambios)")
+    paso("4. Guardar en Ajustes (pestaña Portada, sin cambios)")
     pg.goto(f"{BASE}/admin/ajustes", wait_until="networkidle")
     # Las pestañas son <button role="tab">: get_by_role("button") no las ve.
-    pg.locator('[role="tab"]:has-text("Campaña"), button:has-text("Campaña")').first.click(); pg.wait_for_timeout(800)
+    # «Campaña» se renombró a «Portada» en esta rama.
+    pg.locator('[role="tab"]:has-text("Portada"), button:has-text("Portada")').first.click(); pg.wait_for_timeout(800)
     pg.locator('button:has-text("Guardar")').first.click(); pg.wait_for_timeout(5000)
     ok("Guardado" in pg.locator("body").inner_text(), "Ajustes confirma «Guardado. El sitio ya muestra el cambio.»")
 
@@ -172,7 +173,7 @@ with sync_playwright() as p:
     ok(not pe.url.rstrip("/").endswith("/admin/usuarios"), f"el editor no alcanza /admin/usuarios (rebotado a {pe.url.replace(BASE,'')})")
     pe.goto(f"{BASE}/admin/ajustes", wait_until="networkidle"); pe.wait_for_timeout(1000)
     pestanas = [t for t in pe.locator("button").all_inner_texts() if t.strip() in ("Estado del sitio","Portada","Sobre mí","Menú del sitio","Campaña","Contacto y redes")]
-    ok(sorted(pestanas) == ["Campaña", "Contacto y redes"], f"en Ajustes el editor ve solo Campaña y Contacto y redes (vio {pestanas})")
+    ok(sorted(pestanas) == ["Contacto y redes", "Portada"], f"en Ajustes el editor ve solo Portada y Contacto y redes (vio {pestanas})")
     pe.goto(f"{BASE}{ruta_columnas}", wait_until="networkidle")
     ok(pe.locator("tbody tr").count() > 0, "el editor sí ve las columnas")
     pg.goto(f"{BASE}/admin/usuarios", wait_until="networkidle"); fila = pg.locator("tbody tr", has_text=EDITOR[0])
@@ -180,6 +181,28 @@ with sync_playwright() as p:
     pg.reload(wait_until="networkidle")
     ok(pg.locator("tbody tr", has_text=EDITOR[0]).first.get_by_role("button", name="Reactivar").count() > 0, "el editor de prueba quedó desactivado")
     pg.screenshot(path=f"{TOMAS}/entrega-6-usuarios.png", full_page=True)
+
+    paso("7. Editar la portada desde el panel y deshacer")
+    pg.goto(f"{BASE}/admin/ajustes", wait_until="networkidle")
+    pg.locator('[role="tab"]:has-text("Portada")').first.click(); pg.wait_for_timeout(600)
+    pg.locator('nav[aria-label="Franjas de la portada"] button:has-text("Hero")').first.click(); pg.wait_for_timeout(600)
+    original = pg.input_value("#hero-subtitulo")
+    pg.fill("#hero-subtitulo", MARCA)
+    pg.locator('button:has-text("Guardar")').first.click(); pg.wait_for_timeout(5000)
+    publico.goto(f"{BASE}/", wait_until="networkidle")
+    ok(MARCA in publico.content(), "el subtítulo nuevo del hero ya sale en la portada")
+    pg.locator('button:has-text("Deshacer")').first.click(); pg.wait_for_timeout(5000)
+    publico.goto(f"{BASE}/", wait_until="networkidle")
+    contenido = publico.content()
+    deshizo = MARCA not in contenido and original[:30] in contenido
+    if not deshizo and MARCA in contenido:
+        # Red de seguridad: si Deshacer falló y la marca de prueba se quedó en
+        # la portada pública, se repone el subtítulo original a mano para no
+        # dejar el sitio en vivo con el texto de prueba.
+        pg.fill("#hero-subtitulo", original)
+        pg.locator('button:has-text("Guardar")').first.click(); pg.wait_for_timeout(5000)
+    ok(deshizo, "Deshacer devolvió el subtítulo original a la portada")
+
     nav.close()
 
 print("\n---------- RESULTADO ----------")

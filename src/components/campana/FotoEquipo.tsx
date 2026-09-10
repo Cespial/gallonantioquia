@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { PortadaEquipo } from "@/lib/ajustes/portada";
 
 /**
  * La fotografía de cierre, a sangre.
@@ -13,12 +14,12 @@ import Image from "next/image";
  * recorta arriba y abajo, no se encoge. Con un alto menor, las tazas de café
  * quedan fuera de cuadro.
  */
-export default function FotoEquipo() {
+export default function FotoEquipo({ datos }: { datos: PortadaEquipo }) {
   return (
     <div className="relative h-56 w-full bg-[linear-gradient(to_bottom,#ffffff_0%,#ffffff_74%,#1c321e_100%)] sm:h-72 lg:h-[37.5rem]">
       <Image
-        src="/images/campana/equipo-cafe.webp"
-        alt="Horacio Gallón acompañado de cuatro dirigentes antioqueños, tomando café en una finca"
+        src={datos.foto.url}
+        alt={datos.foto.alt}
         fill
         sizes="100vw"
         className="object-cover object-center"

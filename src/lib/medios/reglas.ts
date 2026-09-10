@@ -1,5 +1,12 @@
-import { and, count, desc, eq, isNull } from "drizzle-orm";
-import { contenidos, medios, type Medio, type NuevoMedio } from "@/db/esquema";
+import { and, count, desc, eq, isNull, sql } from "drizzle-orm";
+import {
+  ajustes,
+  ajustesHistorial,
+  contenidos,
+  medios,
+  type Medio,
+  type NuevoMedio,
+} from "@/db/esquema";
 
 // Reglas puras y consultas que reciben la conexión. Igual que en contenidos:
 // nada de esto vive en `./acciones`, que lleva `"use server"`.
@@ -22,13 +29,42 @@ export function validarArchivo(archivo: {
   return { ok: true };
 }
 
-/** Cuántos contenidos vivos usan esa imagen como portada. */
+/**
+ * Cuántos contenidos vivos, franjas de la portada e historiales de deshacer
+ * usan esa imagen: la suma de las tres cuentas es lo que ve el editor antes de
+ * dejarlo borrarla.
+ *
+ * Las franjas de la portada guardan la foto entera dentro de su ajuste
+ * (`{ medioId, url, alt, ancho, alto }`, ver `src/lib/ajustes/foto.ts`), así
+ * que no hay una columna que apuntar como en `contenidos.imagenId`: se busca
+ * por texto dentro del jsonb. El patrón lleva un espacio después de los dos
+ * puntos porque así serializa Postgres un jsonb al convertirlo a texto
+ * (`'{"a":1}'::jsonb::text` da `{"a": 1}`, no `{"a":1}`); el id nunca se
+ * concatena en el SQL, viaja como parámetro ligado del `sql` de drizzle.
+ *
+ * El historial cuenta igual que el valor vivo: una foto que ya salió de la
+ * portada pero sigue en la pila de deshacer no se puede borrar de la
+ * biblioteca, porque deshacer la devolvería al sitio público apuntando a un
+ * archivo que ya no existe.
+ */
 export async function contarUsos(conexion: any, medioId: string): Promise<number> {
-  const [fila] = await conexion
+  const [filaContenidos] = await conexion
     .select({ n: count() })
     .from(contenidos)
     .where(and(eq(contenidos.imagenId, medioId), isNull(contenidos.eliminadoEn)));
-  return Number(fila.n);
+
+  const patron = `%"medioId": "${medioId}"%`;
+  const [filaAjustes] = await conexion
+    .select({ n: count() })
+    .from(ajustes)
+    .where(sql`${ajustes.valor}::text like ${patron}`);
+
+  const [filaHistorial] = await conexion
+    .select({ n: count() })
+    .from(ajustesHistorial)
+    .where(sql`${ajustesHistorial.valor}::text like ${patron}`);
+
+  return Number(filaContenidos.n) + Number(filaAjustes.n) + Number(filaHistorial.n);
 }
 
 export async function consultarMedios(conexion: any): Promise<Medio[]> {

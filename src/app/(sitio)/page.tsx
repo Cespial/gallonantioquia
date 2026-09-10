@@ -49,21 +49,18 @@ export default async function Home() {
 
   return (
     <>
-      <Hero subtitulo={ajustes["campana.subtituloHero"]} />
-      <Perfil frase={ajustes["campana.frasePerfil"]} />
-      <VideoPerfil url={ajustes["campana.videoPerfil"]} />
-      <AsiConectamos />
-      <SumamosEsfuerzos />
-      <MosaicoObras />
-      <Caracter />
-      <CafeGallon />
-      <BlogGallon entradas={entradasBlog} />
-      <Podcast url={ajustes["campana.podcast"]} />
-      <FotoEquipo />
-      <FranjaCifras
-        cifras={ajustes["portada.cifras"]}
-        mensaje={ajustes["campana.mensajeCierre"]}
-      />
+      <Hero datos={ajustes["portada.hero"]} />
+      <Perfil datos={ajustes["portada.perfil"]} />
+      <VideoPerfil datos={ajustes["portada.video"]} />
+      <AsiConectamos datos={ajustes["portada.conectamos"]} />
+      <SumamosEsfuerzos datos={ajustes["portada.sumamos"]} />
+      <MosaicoObras datos={ajustes["portada.mosaico"]} />
+      <Caracter datos={ajustes["portada.caracter"]} />
+      <CafeGallon datos={ajustes["portada.cafe"]} />
+      <BlogGallon datos={ajustes["portada.blog"]} entradas={entradasBlog} />
+      <Podcast datos={ajustes["portada.podcast"]} />
+      <FotoEquipo datos={ajustes["portada.equipo"]} />
+      <FranjaCifras datos={ajustes["portada.cierre"]} />
     </>
   );
 }
