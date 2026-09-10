@@ -73,21 +73,37 @@ export function usarFranja<K extends ClavePortada>(
   const [error, setError] = useState("");
   const [pendiente, iniciar] = useTransition();
 
-  /** Lo último que se mandó al servidor, para reconocerlo cuando vuelva. */
-  const enviado = useRef<string | null>(null);
+  /**
+   * Lo que sabemos que tiene el servidor, no lo que mandamos.
+   *
+   * La diferencia importa: el formulario solo debe rendirse ante un valor del
+   * servidor que sea *nuevo* para nosotros —el que devuelve Deshacer, o el que
+   * dejó otro editor—. Si el ref guardara «lo enviado», el primer Guardar de
+   * una franja recién montada, o el primer Guardar después de un Deshacer, no
+   * tendrían con qué comparar y el valor que vuelve pisaría lo que se siga
+   * tecleando. Guardando lo que el servidor tiene, siempre hay con qué
+   * comparar, desde el primer render.
+   *
+   * Comparar con `JSON.stringify` es fiable aquí porque los dos lados salen del
+   * mismo esquema Zod y en el mismo orden: `consultarAjuste` devuelve lo que
+   * parseó el esquema de la franja, el estado local nace de ese mismo `inicial`
+   * y `RanuraFoto` arma cada `Foto` en el orden del esquema (medioId, url, alt,
+   * ancho, alto). Sin ese orden compartido, dos objetos iguales darían cadenas
+   * distintas.
+   */
+  const ultimoServidor = useRef(JSON.stringify(inicial));
 
   // Tras `router.refresh()` el servidor vuelve a renderizar la página y el
   // valor fresco llega por `inicial`. Sin esto, deshacer escribía en la base
   // pero el formulario seguía mostrando lo de antes.
   useEffect(() => {
-    // Mientras la petición viaja se sigue tecleando: pisar el formulario aquí
-    // borraría en silencio lo que se escribió esperando el guardado.
-    if (pendiente) return;
-    // Si lo que vuelve es exactamente lo que acabamos de mandar, no hay nada
-    // que traer, y respetar lo local conserva las teclas posteriores.
-    if (enviado.current !== null && enviado.current === JSON.stringify(inicial)) return;
+    const llegado = JSON.stringify(inicial);
+    // Lo mismo que ya conocíamos: no hay nada que traer, y respetar el estado
+    // local conserva lo que se haya tecleado mientras viajaba una petición.
+    if (llegado === ultimoServidor.current) return;
+    ultimoServidor.current = llegado;
     fijar(inicial);
-  }, [inicial, pendiente]);
+  }, [inicial]);
 
   // Se re-sincroniza con la identidad de `inicial`, no con el número: cada
   // `router.refresh()` estrena las props. Guardar por primera vez una franja
@@ -114,14 +130,20 @@ export function usarFranja<K extends ClavePortada>(
       return;
     }
 
-    const loQueVa = JSON.stringify(valor);
+    // El valor exacto que sale, no el estado: entre el envío y la respuesta se
+    // sigue tecleando, y el ref tiene que describir lo que quedó en la base.
+    const valorEnviado = valor;
     iniciar(async () => {
-      const r = await guardarAjuste(clave, valor);
+      const r = await guardarAjuste(clave, valorEnviado);
+      // Si falla no se toca ni el ref ni el estado: lo escrito se queda donde
+      // está y el siguiente refresco no tiene por qué pisarlo.
       if (!r.ok) {
         setError(r.error);
         return;
       }
-      enviado.current = loQueVa;
+      // Ese es el valor que el servidor tiene ahora, así que el `inicial` que
+      // llegue con el refresco ya no será noticia y no pisará el formulario.
+      ultimoServidor.current = JSON.stringify(valorEnviado);
       setMensaje("Guardado. El sitio ya muestra el cambio.");
       // Guardar archiva el valor anterior: ya hay algo que deshacer aunque el
       // servidor todavía no haya vuelto con la cuenta nueva.
@@ -140,8 +162,8 @@ export function usarFranja<K extends ClavePortada>(
         setError(r.error);
         return;
       }
-      // Lo que llegue del servidor manda: es justo el valor que se recuperó.
-      enviado.current = null;
+      // El ref no se toca a propósito: el refresco trae el valor recuperado,
+      // que difiere del que conocíamos, y por eso el efecto sí lo aplica.
       setMensaje("Deshecho. La portada volvió al valor anterior.");
       setHistorial((n) => Math.max(0, n - 1));
       router.refresh();
@@ -162,7 +184,7 @@ export function usarFranja<K extends ClavePortada>(
       // El valor por defecto es la portada tal como se lanzó; se pinta ya
       // mismo para no dejar el formulario mostrando lo que se acaba de tirar.
       fijar(original);
-      enviado.current = JSON.stringify(original);
+      ultimoServidor.current = JSON.stringify(original);
       setMensaje("La franja volvió al diseño de lanzamiento.");
       setHistorial((n) => n + 1);
       router.refresh();
