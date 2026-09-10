@@ -1,6 +1,13 @@
+import { resaltar } from "./resaltar";
+
 /**
  * El patrón de título del mockup: una primera palabra pequeña y en color, y
  * la segunda grande en verde. Se repite en todas las secciones.
+ *
+ * `descripcion` pasa por `resaltar` porque no siempre es texto escrito aquí:
+ * /quien-es-gallon le pasa `ajustes["portada.perfil"].frase`, que se edita en
+ * el panel con la convención de `**negrita**`. Sin esto los asteriscos se
+ * verían crudos en la página.
  */
 export default function TituloPagina({
   arriba,
@@ -47,7 +54,7 @@ export default function TituloPagina({
               oscuro ? "text-white/80" : "text-neutral-600"
             }`}
           >
-            {descripcion}
+            {resaltar(descripcion)}
           </p>
         )}
       </div>

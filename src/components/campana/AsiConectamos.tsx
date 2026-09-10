@@ -73,8 +73,8 @@ export default function AsiConectamos({ datos }: { datos: PortadaConectamos }) {
           <ul
             className={`space-y-3 font-campana text-[0.95rem] font-medium italic leading-snug text-white lg:space-y-2 lg:text-[0.95rem] lg:leading-[1.35] ${CANAL_DER}`}
           >
-            {datos.significa.map((texto) => (
-              <Vineta key={texto} tono="dorado" lado="derecha">
+            {datos.significa.map((texto, i) => (
+              <Vineta key={i} tono="dorado" lado="derecha">
                 {texto}
               </Vineta>
             ))}
@@ -90,8 +90,8 @@ export default function AsiConectamos({ datos }: { datos: PortadaConectamos }) {
           </p>
 
           <ul className="mt-3 space-y-1.5 font-campana text-[0.95rem] text-white lg:text-base">
-            {datos.recuperadas.map((texto) => (
-              <Vineta key={texto} tono="dorado" lado="derecha">
+            {datos.recuperadas.map((texto, i) => (
+              <Vineta key={i} tono="dorado" lado="derecha">
                 {texto}
               </Vineta>
             ))}

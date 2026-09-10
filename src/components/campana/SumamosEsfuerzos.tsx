@@ -65,8 +65,8 @@ export default function SumamosEsfuerzos({ datos }: { datos: PortadaSumamos }) {
           </p>
 
           <ul className="mt-4 space-y-2 font-campana text-[0.95rem] text-neutral-800 lg:text-base">
-            {datos.obras.map((texto) => (
-              <Vineta key={texto} tono="dorado">
+            {datos.obras.map((texto, i) => (
+              <Vineta key={i} tono="dorado">
                 {texto}
               </Vineta>
             ))}
@@ -87,8 +87,8 @@ export default function SumamosEsfuerzos({ datos }: { datos: PortadaSumamos }) {
           {/* Margen por ítem, no `space-y`: `space-y` cuelga del segundo hijo en
               adelante y desalinearía la cabeza de la segunda columna. */}
           <ul className="mt-5 font-campana text-[0.95rem] text-neutral-800 [&>li]:mb-2 sm:columns-2 sm:gap-x-10 lg:text-base">
-            {datos.emergencias.map((texto) => (
-              <Vineta key={texto} tono="dorado" className="break-inside-avoid">
+            {datos.emergencias.map((texto, i) => (
+              <Vineta key={i} tono="dorado" className="break-inside-avoid">
                 {texto}
               </Vineta>
             ))}

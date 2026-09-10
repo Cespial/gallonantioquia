@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Mouse } from "lucide-react";
 import type { PortadaHero } from "@/lib/ajustes/portada";
+import { Lineas } from "./texto";
 
 /**
  * Todas las medidas están calibradas al mockup a 1440 px y expresadas en
@@ -87,7 +88,10 @@ export default function Hero({ datos }: { datos: PortadaHero }) {
             <span className="mb-1 block text-2xl font-bold lg:text-[2.05rem]">
               {datos.palabra}
             </span>
-            {datos.subtitulo}
+            {/* Como el resto de la portada: un salto escrito en el panel corta
+                solo en escritorio. El copy por defecto no trae ninguno, así
+                que hoy se ve exactamente igual. */}
+            <Lineas texto={datos.subtitulo} />
           </p>
 
           <p className="mt-8 hidden items-center gap-3 font-campana text-sm text-white/85 lg:mt-9 lg:flex">

@@ -47,8 +47,8 @@ export default function Perfil({ datos }: { datos: PortadaPerfil }) {
             </div>
 
             <ul className="mt-8 space-y-5 font-campana text-[0.95rem] leading-[1.5] text-neutral-700 lg:mt-9 lg:pr-6 lg:text-[0.9rem] lg:leading-[1.4]">
-              {datos.semblanzaClara.map((texto) => (
-                <Vineta key={texto} tono="verde">
+              {datos.semblanzaClara.map((texto, i) => (
+                <Vineta key={i} tono="verde">
                   {texto}
                 </Vineta>
               ))}
@@ -85,8 +85,8 @@ export default function Perfil({ datos }: { datos: PortadaPerfil }) {
           <div className="lg:grid lg:grid-cols-2">
             <div aria-hidden="true" className="hidden lg:block" />
             <ul className="space-y-5 py-10 font-campana text-[0.95rem] leading-[1.5] text-white lg:py-6 lg:pr-6 lg:text-[0.9rem] lg:leading-[1.4]">
-              {datos.semblanzaVerde.map((texto) => (
-                <Vineta key={texto} tono="dorado">
+              {datos.semblanzaVerde.map((texto, i) => (
+                <Vineta key={i} tono="dorado">
                   {texto}
                 </Vineta>
               ))}
