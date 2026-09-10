@@ -1,7 +1,7 @@
 # Guía del panel de administración
 
-**Para:** el equipo de campaña (Diego y Walter)
-**Sitio:** gallonantioquia.vercel.app
+**Para:** el equipo de campaña (Diego y Walter)\
+**Sitio:** gallonantioquia.vercel.app\
 **Panel:** gallonantioquia.vercel.app/admin
 
 ---
@@ -150,14 +150,14 @@ Así nadie deja un contenido sin imagen sin darse cuenta.
 
 ---
 
-## 5. Mensajes: las propuestas que llegan del sitio
+## 5. Propuestas: los mensajes que llegan del sitio
 
 Cuando alguien llena el formulario **«Te escuchamos»** del sitio, su mensaje
-llega a **Mensajes**, en la barra de la izquierda: nombre, correo, teléfono,
+llega a **Propuestas**, en la barra de la izquierda: nombre, correo, teléfono,
 municipio y lo que escribió.
 
 > ⚠️ **El panel no avisa por correo cuando entra un mensaje.** La única forma
-> de enterarse es abrir Mensajes. Acuerden quién lo revisa y cada cuánto —una
+> de enterarse es abrir Propuestas. Acuerden quién lo revisa y cada cuánto —una
 > vez al día es razonable en campaña— y respondan desde su propio correo o
 > teléfono. Una propuesta que nadie lee es una persona que escribió y no recibió
 > respuesta.
@@ -224,7 +224,7 @@ entrar, el panel la obliga a cambiarla.
 
 Hay dos roles:
 
-- **Editor**: publica y edita contenido, sube fotos, lee los mensajes y maneja
+- **Editor**: publica y edita contenido, sube fotos, lee las propuestas y maneja
   las pestañas Campaña y Contacto y redes. Es lo que necesitan Diego y Walter en
   el día a día.
 - **Administrador**: todo lo anterior, más el resto de Ajustes, Usuarios y borrar
