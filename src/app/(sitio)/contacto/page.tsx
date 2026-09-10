@@ -28,7 +28,8 @@ export default async function PaginaContacto() {
 
       <section className="mx-auto max-w-[1400px] px-5 py-14 lg:px-10">
         <ul className="grid gap-5 sm:grid-cols-3">
-          {datos.map(({ icono: Icono, etiqueta, valor, href }) => (
+          {/* Sin dato no hay tarjeta: nada de relleno al aire. */}
+          {datos.filter((d) => d.valor).map(({ icono: Icono, etiqueta, valor, href }) => (
             <li key={etiqueta} className="rounded-2xl border border-neutral-200 p-6">
               <Icono className="h-7 w-7 text-campana-hoja" strokeWidth={1.5} aria-hidden="true" />
               <p className="mt-4 font-campana text-xs font-bold uppercase tracking-wide text-neutral-500">

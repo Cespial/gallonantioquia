@@ -123,24 +123,30 @@ export default function Pie({
             Contáctanos
           </h2>
           <ul className="mt-4 space-y-3">
-            <li className="flex items-center gap-3">
-              <Mail className="h-[1.15rem] w-[1.15rem] shrink-0 text-campana-hoja" aria-hidden="true" />
-              <a
-                href={`mailto:${contacto.email}`}
-                className="font-campana text-sm text-white/75 hover:text-white"
-              >
-                {contacto.email}
-              </a>
-            </li>
-            <li className="flex items-center gap-3">
-              <IconoWhatsApp className="h-[1.15rem] w-[1.15rem] shrink-0 text-campana-hoja" />
-              <a
-                href={`tel:${contacto.telefono.replace(/\s/g, "")}`}
-                className="font-campana text-sm text-white/75 hover:text-white"
-              >
-                {contacto.telefono}
-              </a>
-            </li>
+            {/* Cada dato sale solo si existe: hasta que la campaña cargue los
+                suyos en Ajustes → Contacto y redes, aquí no va ningún relleno. */}
+            {contacto.email && (
+              <li className="flex items-center gap-3">
+                <Mail className="h-[1.15rem] w-[1.15rem] shrink-0 text-campana-hoja" aria-hidden="true" />
+                <a
+                  href={`mailto:${contacto.email}`}
+                  className="font-campana text-sm text-white/75 hover:text-white"
+                >
+                  {contacto.email}
+                </a>
+              </li>
+            )}
+            {contacto.telefono && (
+              <li className="flex items-center gap-3">
+                <IconoWhatsApp className="h-[1.15rem] w-[1.15rem] shrink-0 text-campana-hoja" />
+                <a
+                  href={`tel:${contacto.telefono.replace(/\s/g, "")}`}
+                  className="font-campana text-sm text-white/75 hover:text-white"
+                >
+                  {contacto.telefono}
+                </a>
+              </li>
+            )}
             <li className="flex items-center gap-3">
               <MapPin className="h-[1.15rem] w-[1.15rem] shrink-0 text-campana-hoja" aria-hidden="true" />
               <span className="font-campana text-sm text-white/75">{contacto.direccion}</span>
