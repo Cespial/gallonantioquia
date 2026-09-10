@@ -1,10 +1,9 @@
 import { redirect } from "next/navigation";
 import { db } from "@/db";
 import { auth } from "@/lib/auth/config";
-import { consultarAjustes } from "@/lib/ajustes";
+import { consultarAjustes, contarHistorial } from "@/lib/ajustes";
 import { consultarMedios } from "@/lib/medios/reglas";
-import { listarParaPanel } from "@/lib/contenidos/cacheadas";
-import PestanasAjustes from "@/components/admin/PestanasAjustes";
+import PestanasAjustes from "@/components/admin/ajustes/PestanasAjustes";
 
 export default async function PaginaAjustes() {
   const sesion = await auth();
@@ -12,10 +11,12 @@ export default async function PaginaAjustes() {
   if (!actor) redirect("/admin/login");
   const esAdmin = actor.rol === "admin";
 
-  const [ajustes, medios, bitacoras] = await Promise.all([
+  // `historial` dice qué claves tienen algo que deshacer: sin él, el botón
+  // «Deshacer» de cada franja no sabría si está habilitado hasta pulsarlo.
+  const [ajustes, medios, historial] = await Promise.all([
     consultarAjustes(db),
     consultarMedios(db),
-    listarParaPanel("bitacora", { estado: "publicado" }),
+    contarHistorial(db),
   ]);
 
   return (
@@ -29,7 +30,7 @@ export default async function PaginaAjustes() {
         esAdmin={esAdmin}
         ajustes={ajustes}
         medios={medios}
-        bitacoras={bitacoras.map((b) => ({ id: b.id, titulo: b.titulo }))}
+        historial={historial}
       />
     </>
   );

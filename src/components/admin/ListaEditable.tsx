@@ -15,12 +15,15 @@ export default function ListaEditable<T extends Record<string, unknown>>({
   valores,
   alCambiar,
   etiquetaAgregar,
+  agregarDeshabilitado,
   filaNueva,
 }: {
   campos: CampoLista[];
   valores: T[];
   alCambiar: (nuevos: T[]) => void;
   etiquetaAgregar: string;
+  /** Para las listas con tope (las viñetas de una franja): apaga «agregar». */
+  agregarDeshabilitado?: boolean;
   filaNueva: () => T;
 }) {
   function editar(indice: number, nombre: string, valor: unknown) {
@@ -123,8 +126,9 @@ export default function ListaEditable<T extends Record<string, unknown>>({
 
       <button
         type="button"
+        disabled={agregarDeshabilitado}
         onClick={() => alCambiar([...valores, filaNueva()])}
-        className="rounded-lg border border-borde px-3 py-1.5 text-sm hover:border-verde-antioquia"
+        className="rounded-lg border border-borde px-3 py-1.5 text-sm hover:border-verde-antioquia disabled:opacity-40"
       >
         {etiquetaAgregar}
       </button>
