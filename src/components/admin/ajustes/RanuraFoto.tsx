@@ -31,6 +31,14 @@ export default function RanuraFoto({
   esAdmin: boolean;
   alCambiar: (f: Foto) => void;
 }) {
+  // Las 13 fotos del diseño original se sembraron en la biblioteca (ver
+  // `semilla-portada.ts`) pero la franja las guarda con `medioId` nulo, porque
+  // su valor por defecto es anterior a la siembra. Sin este rescate por url,
+  // el selector las daba por desconocidas: no mostraba la foto de hoy y el
+  // botón decía «Elegir foto» en vez de «Cambiar». El texto de respaldo queda
+  // solo para lo que de verdad no esté en la biblioteca.
+  const seleccionada = valor.medioId ?? medios.find((m) => m.url === valor.url)?.id ?? "";
+
   return (
     <div className="rounded-card border border-borde p-3">
       <span className="block text-sm font-medium mb-2">{etiqueta}</span>
@@ -53,7 +61,7 @@ export default function RanuraFoto({
       <div className="mt-3">
         <SelectorImagen
           medios={medios}
-          valor={valor.medioId ?? ""}
+          valor={seleccionada}
           esAdmin={esAdmin}
           etiqueta="Cambiar la foto"
           textoVacio="Foto original del diseño."

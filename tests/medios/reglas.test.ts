@@ -90,6 +90,26 @@ describe("uso de imágenes en los ajustes de la portada", () => {
     await cerrar();
   });
 
+  it("cuenta una foto que solo sobrevive en el historial de deshacer", async () => {
+    // La foto salió de la franja pero sigue en la pila de deshacer: si se
+    // pudiera borrar de la biblioteca, deshacer devolvería a la portada una
+    // url muerta.
+    const { db, cerrar } = await crearDbPrueba();
+    const [a] = await db.insert(medios).values({ url: "/images/a.jpg", nombre: "a.jpg", alt: "a" }).returning();
+    const [b] = await db.insert(medios).values({ url: "/images/b.jpg", nombre: "b.jpg", alt: "b" }).returning();
+
+    const conFoto = (m: typeof a) => ({
+      ...CLAVES_PORTADA["portada.hero"].porDefecto,
+      retrato: { medioId: m.id, url: m.url, alt: m.alt ?? "", ancho: 10, alto: 10 },
+    });
+    await escribirAjuste(db, "portada.hero", conFoto(a));
+    await escribirAjuste(db, "portada.hero", conFoto(b));
+
+    expect(await contarUsos(db, a.id)).toBe(1);
+    expect(await contarUsos(db, b.id)).toBe(1);
+    await cerrar();
+  });
+
   it("suma contenidos y ajustes cuando la misma foto aparece en ambos", async () => {
     const { db, cerrar } = await crearDbPrueba();
     const [medio] = await db.insert(medios).values({ url: "/images/v.jpg", nombre: "v.jpg" }).returning();

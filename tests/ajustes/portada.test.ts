@@ -32,6 +32,26 @@ describe("esquemas de la portada", () => {
     expect(pod.esquema.safeParse({ ...pod.porDefecto, url: "u".repeat(501) }).success).toBe(false);
   });
 
+  it("una foto de un dominio ajeno no entra en una franja", () => {
+    const hero = CLAVES_PORTADA["portada.hero"];
+    // Lo que hay hoy —rutas del repositorio— sigue pasando.
+    expect(hero.esquema.safeParse(hero.porDefecto).success).toBe(true);
+    const forastera = {
+      ...hero.porDefecto,
+      retrato: { ...hero.porDefecto.retrato, url: "https://example.com/x.jpg" },
+    };
+    expect(hero.esquema.safeParse(forastera).success).toBe(false);
+    // Y el Blob de la biblioteca sí, que es de donde vienen las subidas.
+    const delBlob = {
+      ...hero.porDefecto,
+      retrato: {
+        ...hero.porDefecto.retrato,
+        url: "https://abc123.public.blob.vercel-storage.com/gallon-1.webp",
+      },
+    };
+    expect(hero.esquema.safeParse(delBlob).success).toBe(true);
+  });
+
   it("FRANJAS va en el orden de la portada y cubre las doce claves", () => {
     expect(FRANJAS.map((f) => f.clave)).toEqual([
       "portada.hero", "portada.perfil", "portada.video", "portada.conectamos", "portada.sumamos",

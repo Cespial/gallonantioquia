@@ -3,6 +3,7 @@
 import { revalidateTag, revalidatePath } from "next/cache";
 import { db } from "@/db";
 import { requerirSesion } from "@/lib/auth/sesion";
+import { CLAVES } from "./claves";
 import {
   escribirAjuste,
   deshacerAjuste as deshacerAjusteEnDb,
@@ -19,6 +20,13 @@ export async function guardarAjuste<K extends ClaveAjuste>(
   clave: K,
   valor: ValorDe<K>
 ): Promise<Resultado> {
+  // Una clave que no está en CLAVES no es un ajuste: llega de un cliente
+  // desactualizado o de un POST a mano. Se corta antes de tocar la base,
+  // donde `CLAVES[clave]` reventaría al leer su esquema.
+  if (!(clave in CLAVES)) {
+    return { ok: false, error: "Ese ajuste no existe." };
+  }
+
   const actor = await requerirSesion();
 
   // El editor solo alcanza las claves de campaña y contacto. La pantalla ya le
@@ -42,6 +50,11 @@ export async function guardarAjuste<K extends ClaveAjuste>(
 
 /** Deshace el último cambio de una clave. Misma regla de rol que `guardarAjuste`. */
 export async function deshacerUltimoCambio(clave: ClaveAjuste): Promise<Resultado> {
+  // Misma guardia que en `guardarAjuste`: una clave desconocida no es un ajuste.
+  if (!(clave in CLAVES)) {
+    return { ok: false, error: "Ese ajuste no existe." };
+  }
+
   const actor = await requerirSesion();
 
   if (actor.rol !== "admin" && !editorPuedeEscribir(clave)) {
@@ -54,12 +67,17 @@ export async function deshacerUltimoCambio(clave: ClaveAjuste): Promise<Resultad
   }
 
   revalidateTag(ETIQUETA_AJUSTES);
-  revalidatePath("/");
+  revalidatePath("/", "layout");
   return { ok: true };
 }
 
 /** Vuelve una clave a su valor por defecto. Misma regla de rol que `guardarAjuste`. */
 export async function volverAlOriginal(clave: ClaveAjuste): Promise<Resultado> {
+  // Misma guardia que en `guardarAjuste`: una clave desconocida no es un ajuste.
+  if (!(clave in CLAVES)) {
+    return { ok: false, error: "Ese ajuste no existe." };
+  }
+
   const actor = await requerirSesion();
 
   if (actor.rol !== "admin" && !editorPuedeEscribir(clave)) {
@@ -69,6 +87,6 @@ export async function volverAlOriginal(clave: ClaveAjuste): Promise<Resultado> {
   await restaurarAjusteEnDb(db, clave, actor.id);
 
   revalidateTag(ETIQUETA_AJUSTES);
-  revalidatePath("/");
+  revalidatePath("/", "layout");
   return { ok: true };
 }

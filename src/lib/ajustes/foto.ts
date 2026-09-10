@@ -8,7 +8,18 @@ import { z } from "zod";
  */
 export const foto = z.object({
   medioId: z.string().uuid().nullable(),
-  url: z.string().min(1),
+  // Solo dos orígenes: una ruta del propio repositorio (`/images/…`) o el Blob
+  // de Vercel, que es donde aterriza lo que se sube desde la biblioteca. Sin
+  // este cerco, una url pegada a mano metería en la portada una imagen de un
+  // dominio ajeno —que además `next/image` no tiene autorizado y rompería el
+  // renderizado— y de paso serviría para rastrear a quien visita el sitio.
+  url: z
+    .string()
+    .min(1)
+    .refine(
+      (u) => u.startsWith("/") || /^https:\/\/[a-z0-9-]+\.public\.blob\.vercel-storage\.com\//.test(u),
+      { message: "La foto debe ser del sitio o de la biblioteca." }
+    ),
   alt: z.string(),
   ancho: z.number().int().positive().nullable(),
   alto: z.number().int().positive().nullable(),

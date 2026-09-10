@@ -96,6 +96,17 @@ export async function deshacerAjuste<K extends ClaveAjuste>(conexion: any, clave
 
   if (!ultima) return false;
 
+  // Lo archivado se revisa contra el esquema de HOY antes de devolverlo. El
+  // historial es viejo por definición: un despliegue posterior puede haber
+  // apretado un esquema —un tope nuevo, un campo que pasó a obligatorio— y
+  // entonces esa fila ya no describe algo que la portada sepa pintar.
+  // Escribirla tumbaría el sitio público, así que se descarta y se avisa que
+  // no hubo nada que deshacer; la siguiente pulsación intentará la anterior.
+  if (!CLAVES[clave].esquema.safeParse(ultima.valor).success) {
+    await conexion.delete(ajustesHistorial).where(eq(ajustesHistorial.id, ultima.id));
+    return false;
+  }
+
   await conexion
     .insert(ajustes)
     .values({ clave, valor: ultima.valor })

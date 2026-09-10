@@ -34,6 +34,20 @@ describe("historial de ajustes", () => {
     expect(await consultarAjuste(db, "sitio.mensajeConstruccion")).toBe("cambiado");
     await cerrar();
   });
+  it("no resucita un valor archivado que ya no pasa el esquema de hoy", async () => {
+    // Un despliegue posterior puede apretar un esquema y dejar inservible lo
+    // que quedó archivado. Deshacer no puede escribirlo: descarta la fila y
+    // avisa que no hubo nada que deshacer.
+    const { db, cerrar } = await crearDbPrueba();
+    await escribirAjuste(db, "sitio.mensajeConstruccion", "el bueno");
+    await db.insert(ajustesHistorial).values({ clave: "sitio.mensajeConstruccion", valor: 123 });
+
+    expect(await deshacerAjuste(db, "sitio.mensajeConstruccion")).toBe(false);
+    expect(await consultarAjuste(db, "sitio.mensajeConstruccion")).toBe("el bueno");
+    // Y la fila podrida no queda estorbando en la pila.
+    expect((await db.select().from(ajustesHistorial)).length).toBe(0);
+    await cerrar();
+  });
   it("conserva solo los 20 últimos por clave", async () => {
     const { db, cerrar } = await crearDbPrueba();
     for (let i = 0; i < 25; i++) await escribirAjuste(db, "sitio.mensajeConstruccion", `v${i}`);
