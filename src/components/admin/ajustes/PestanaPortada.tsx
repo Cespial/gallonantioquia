@@ -7,6 +7,9 @@ import { FRANJAS, type ClavePortada } from "@/lib/ajustes/portada";
 import FranjaHero from "./franjas/Hero";
 import FranjaPerfil from "./franjas/Perfil";
 import FranjaVideo from "./franjas/Video";
+import FranjaConectamos from "./franjas/Conectamos";
+import FranjaSumamos from "./franjas/Sumamos";
+import FranjaMosaico from "./franjas/Mosaico";
 import FranjaCaracter from "./franjas/Caracter";
 
 /**
@@ -29,6 +32,9 @@ const FORMULARIOS: Partial<Record<ClavePortada, ComponentType<PropsFranja>>> = {
   "portada.hero": FranjaHero,
   "portada.perfil": FranjaPerfil,
   "portada.video": FranjaVideo,
+  "portada.conectamos": FranjaConectamos,
+  "portada.sumamos": FranjaSumamos,
+  "portada.mosaico": FranjaMosaico,
   "portada.caracter": FranjaCaracter,
 };
 
