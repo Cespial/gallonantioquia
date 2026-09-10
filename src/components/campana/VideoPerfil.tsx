@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight, Clapperboard } from "lucide-react";
 import MarcoVideo from "./MarcoVideo";
 import { urlIncrustable } from "@/lib/campana/video";
+import type { PortadaVideo } from "@/lib/ajustes/portada";
 
 const CARTEL = "/images/campana/portada-soy-gallon.webp";
 const TITULO = "Soy Horacio Gallón";
@@ -18,8 +19,8 @@ const TITULO = "Soy Horacio Gallón";
  * y el bloque anuncia que el video viene en camino. No se pinta un botón de
  * play que no reproduce nada.
  */
-export default function VideoPerfil({ url }: { url: string }) {
-  const incrustable = urlIncrustable(url);
+export default function VideoPerfil({ datos }: { datos: PortadaVideo }) {
+  const incrustable = urlIncrustable(datos.url);
 
   return (
     <section
@@ -62,24 +63,20 @@ export default function VideoPerfil({ url }: { url: string }) {
 
         <div>
           <p className="font-campana text-sm font-bold uppercase tracking-[0.14em] text-campana-dorado lg:text-base">
-            En sus propias palabras
+            {datos.antetitulo}
           </p>
           <h3
             id="video-perfil-titulo"
             className="titular-sin-balance mt-3 font-campana text-2xl font-extrabold leading-[1.12] text-white sm:text-3xl lg:text-[2.35rem]"
           >
-            Una hoja de vida no alcanza a contar un recorrido.
+            {datos.titular}
           </h3>
 
           <p className="mt-5 font-campana text-[0.95rem] leading-relaxed text-white/85 lg:text-[1.02rem]">
-            Treinta años entre lo público y lo privado: concejal, alcalde, representante a
-            la Cámara, director de la Agencia de Desarrollo Rural y secretario de
-            Infraestructura de Antioquia.
+            {datos.parrafo1}
           </p>
           <p className="mt-4 font-campana text-[0.95rem] leading-relaxed text-white/85 lg:text-[1.02rem]">
-            Detrás de cada cargo hay municipios recorridos, obras destrabadas y gente
-            escuchada en su propio pueblo. Eso no cabe en un renglón:{" "}
-            {incrustable ? "aquí lo cuenta él mismo." : "pronto lo cuenta él mismo, aquí."}
+            {datos.parrafo2}
           </p>
 
           <Link

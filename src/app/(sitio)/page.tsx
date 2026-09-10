@@ -49,13 +49,13 @@ export default async function Home() {
 
   return (
     <>
-      <Hero subtitulo={ajustes["campana.subtituloHero"]} />
-      <Perfil frase={ajustes["campana.frasePerfil"]} />
-      <VideoPerfil url={ajustes["campana.videoPerfil"]} />
+      <Hero datos={ajustes["portada.hero"]} />
+      <Perfil datos={ajustes["portada.perfil"]} />
+      <VideoPerfil datos={ajustes["portada.video"]} />
       <AsiConectamos />
       <SumamosEsfuerzos />
       <MosaicoObras />
-      <Caracter />
+      <Caracter datos={ajustes["portada.caracter"]} />
       <CafeGallon />
       <BlogGallon entradas={entradasBlog} />
       <Podcast url={ajustes["campana.podcast"]} />

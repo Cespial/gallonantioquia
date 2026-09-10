@@ -34,7 +34,7 @@ export default async function PaginaQuienEs() {
       <TituloPagina
         arriba="Quién es"
         abajo="Horacio Gallón"
-        descripcion={ajustes["campana.frasePerfil"]}
+        descripcion={ajustes["portada.perfil"].frase}
       />
 
       <section className="mx-auto grid max-w-[1400px] gap-10 px-5 py-14 lg:grid-cols-[1fr_1.2fr] lg:px-10">

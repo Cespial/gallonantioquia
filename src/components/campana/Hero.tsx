@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Mouse } from "lucide-react";
+import type { PortadaHero } from "@/lib/ajustes/portada";
 
 /**
  * Todas las medidas están calibradas al mockup a 1440 px y expresadas en
@@ -11,7 +12,7 @@ import { Mouse } from "lucide-react";
  * el mockup: 720 × 743 px, arrancando 20 px por encima del borde de la franja,
  * que lo recorta por abajo.
  */
-export default function Hero({ subtitulo }: { subtitulo: string }) {
+export default function Hero({ datos }: { datos: PortadaHero }) {
   return (
     <section
       id="inicio"
@@ -19,8 +20,8 @@ export default function Hero({ subtitulo }: { subtitulo: string }) {
       className="relative isolate overflow-hidden bg-campana-bosque"
     >
       <Image
-        src="/images/campana/panorama-cordillera.webp"
-        alt=""
+        src={datos.fondo.url}
+        alt={datos.fondo.alt}
         aria-hidden="true"
         fill
         priority
@@ -43,10 +44,10 @@ export default function Hero({ subtitulo }: { subtitulo: string }) {
       <div className="pointer-events-none absolute inset-0 hidden lg:block">
         <div className="absolute -top-[1.25rem] left-[52.2%]">
           <Image
-            src="/images/campana/gallon-pulgar.webp"
-            alt="Horacio Gallón, candidato a la Gobernación de Antioquia"
-            width={1200}
-            height={1239}
+            src={datos.retrato.url}
+            alt={datos.retrato.alt}
+            width={datos.retrato.ancho ?? 1200}
+            height={datos.retrato.alto ?? 1239}
             priority
             sizes="(max-width: 1024px) 70vw, 50vw"
             className="h-[46.4rem] w-auto max-w-none object-contain"
@@ -84,9 +85,9 @@ export default function Hero({ subtitulo }: { subtitulo: string }) {
 
           <p className="mt-7 max-w-[26rem] font-campana text-[0.95rem] font-bold leading-snug text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.45)] sm:text-base lg:mt-6 lg:max-w-[28.2rem] lg:text-[1.12rem]">
             <span className="mb-1 block text-2xl font-bold lg:text-[2.05rem]">
-              Antioquia
+              {datos.palabra}
             </span>
-            {subtitulo}
+            {datos.subtitulo}
           </p>
 
           <p className="mt-8 hidden items-center gap-3 font-campana text-sm text-white/85 lg:mt-9 lg:flex">
@@ -103,10 +104,10 @@ export default function Hero({ subtitulo }: { subtitulo: string }) {
             titular, y se apoya en el borde inferior de la franja. */}
         <div className="relative -mb-px flex items-end justify-center lg:hidden">
           <Image
-            src="/images/campana/gallon-pulgar.webp"
-            alt="Horacio Gallón, candidato a la Gobernación de Antioquia"
-            width={1200}
-            height={1239}
+            src={datos.retrato.url}
+            alt={datos.retrato.alt}
+            width={datos.retrato.ancho ?? 1200}
+            height={datos.retrato.alto ?? 1239}
             priority
             sizes="(max-width: 1024px) 70vw, 1px"
             className="h-auto w-[16rem] max-w-none object-contain object-bottom sm:w-[20rem]"
