@@ -3,8 +3,8 @@ import { CLAVES, CLAVES_DE_EDITOR, editorPuedeEscribir } from "@/lib/ajustes";
 import { FRANJAS } from "@/lib/ajustes/portada";
 
 describe("qué puede tocar un editor", () => {
-  it("alcanza campaña y contacto", () => {
-    for (const clave of ["campana.videoPerfil", "contacto.whatsapp", "navegacion.redes"]) {
+  it("alcanza la portada y el contacto", () => {
+    for (const clave of ["portada.video", "contacto.whatsapp", "navegacion.redes"]) {
       expect(editorPuedeEscribir(clave), clave).toBe(true);
     }
   });
@@ -15,7 +15,7 @@ describe("qué puede tocar un editor", () => {
       "navegacion.menu",
       "sitio.enConstruccion",
       "sobre.texto",
-      "portada.cifras",
+      "campana.municipios",
     ]) {
       expect(editorPuedeEscribir(clave), clave).toBe(false);
     }

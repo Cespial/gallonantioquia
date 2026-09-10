@@ -6,6 +6,7 @@ import type { TodosLosAjustes } from "@/lib/ajustes";
 import PestanaContacto from "./PestanaContacto";
 import PestanaEstadoSitio from "./PestanaEstadoSitio";
 import PestanaMenu from "./PestanaMenu";
+import PestanaPortada from "./PestanaPortada";
 import PestanaSobreMi from "./PestanaSobreMi";
 
 /**
@@ -59,16 +60,13 @@ export default function PestanasAjustes({
         ))}
       </div>
 
-      {/*
-        La pestaña «Portada» entra en la siguiente entrega con las doce franjas;
-        aquí se enchufará `PestanaPortada` con `ajustes`, `medios`, `esAdmin` e
-        `historial`.
-      */}
       {activa === "Portada" && (
-        <p className="rounded-card border border-dashed border-borde p-6 text-sm text-texto-secundario">
-          La portada se edita franja por franja desde la próxima entrega. Hay {medios.length}{" "}
-          fotos en la biblioteca y {Object.keys(historial).length} ajustes con historial.
-        </p>
+        <PestanaPortada
+          ajustes={ajustes}
+          medios={medios}
+          esAdmin={esAdmin}
+          historial={historial}
+        />
       )}
       {activa === "Contacto y redes" && <PestanaContacto ajustes={ajustes} />}
       {activa === "Estado del sitio" && <PestanaEstadoSitio ajustes={ajustes} />}
