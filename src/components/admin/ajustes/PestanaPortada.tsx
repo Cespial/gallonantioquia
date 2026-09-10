@@ -11,6 +11,11 @@ import FranjaConectamos from "./franjas/Conectamos";
 import FranjaSumamos from "./franjas/Sumamos";
 import FranjaMosaico from "./franjas/Mosaico";
 import FranjaCaracter from "./franjas/Caracter";
+import FranjaCafe from "./franjas/Cafe";
+import FranjaBlog from "./franjas/Blog";
+import FranjaPodcast from "./franjas/Podcast";
+import FranjaEquipo from "./franjas/Equipo";
+import FranjaCierre from "./franjas/Cierre";
 
 /**
  * Lo que recibe el formulario de cualquier franja.
@@ -23,12 +28,8 @@ import FranjaCaracter from "./franjas/Caracter";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type PropsFranja = { inicial: any; medios: Medio[]; esAdmin: boolean; hayHistorial: number };
 
-/**
- * Qué franja ya tiene formulario. Las que faltan se van sumando aquí; la
- * pestaña no se rompe mientras tanto porque la lista de la izquierda sale de
- * `FRANJAS` y no de este mapa.
- */
-const FORMULARIOS: Partial<Record<ClavePortada, ComponentType<PropsFranja>>> = {
+/** Las doce franjas de la portada, cada una con su formulario. */
+const FORMULARIOS: Record<ClavePortada, ComponentType<PropsFranja>> = {
   "portada.hero": FranjaHero,
   "portada.perfil": FranjaPerfil,
   "portada.video": FranjaVideo,
@@ -36,6 +37,11 @@ const FORMULARIOS: Partial<Record<ClavePortada, ComponentType<PropsFranja>>> = {
   "portada.sumamos": FranjaSumamos,
   "portada.mosaico": FranjaMosaico,
   "portada.caracter": FranjaCaracter,
+  "portada.cafe": FranjaCafe,
+  "portada.blog": FranjaBlog,
+  "portada.podcast": FranjaPodcast,
+  "portada.equipo": FranjaEquipo,
+  "portada.cierre": FranjaCierre,
 };
 
 /**
@@ -81,21 +87,15 @@ export default function PestanaPortada({
       </nav>
 
       <div className="min-w-0 flex-1">
-        {Formulario ? (
-          // `key`: cambiar de franja tiene que estrenar el formulario, no
-          // heredar el estado del anterior.
-          <Formulario
-            key={activa}
-            inicial={ajustes[activa]}
-            medios={medios}
-            esAdmin={esAdmin}
-            hayHistorial={historial[activa] ?? 0}
-          />
-        ) : (
-          <p className="rounded-card border border-dashed border-borde p-6 text-sm text-texto-secundario">
-            Esta franja se podrá editar en la próxima entrega.
-          </p>
-        )}
+        {/* `key`: cambiar de franja tiene que estrenar el formulario, no
+            heredar el estado del anterior. */}
+        <Formulario
+          key={activa}
+          inicial={ajustes[activa]}
+          medios={medios}
+          esAdmin={esAdmin}
+          hayHistorial={historial[activa] ?? 0}
+        />
       </div>
     </div>
   );
